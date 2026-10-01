@@ -48,11 +48,11 @@ export default async function DeliveryPage() {
             <div className="mt-8 overflow-x-auto">
               <table className="w-full min-w-[560px] text-left">
                 <thead>
-                  <tr className="border-b border-[var(--line)] text-[var(--muted)]">
-                    <th className="py-3 font-medium">Zóna</th>
-                    <th className="py-3 font-medium">Oblasti</th>
-                    <th className="py-3 font-medium">Rozvoz</th>
-                    <th className="py-3 font-medium">Min. objednávka</th>
+                  <tr className="border-b border-[var(--line)] text-[var(--ink)]">
+                    <th className="py-3 font-bold">Zóna</th>
+                    <th className="py-3 font-bold">Oblasti</th>
+                    <th className="py-3 font-bold">Rozvoz</th>
+                    <th className="py-3 text-right font-bold">Min. objednávka</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -61,7 +61,7 @@ export default async function DeliveryPage() {
                       <td className="py-3 font-medium">{z.name}</td>
                       <td className="py-3 text-[var(--muted)]">{z.areas}</td>
                       <td className="py-3">{z.fee}</td>
-                      <td className="py-3">{z.min}</td>
+                      <td className="py-3 text-right">{z.min}</td>
                     </tr>
                   ))}
                 </tbody>
