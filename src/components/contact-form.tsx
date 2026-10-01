@@ -96,7 +96,9 @@ export function ContactForm({ content }: { content: SiteContent }) {
       >
         {status === "loading" ? "Odesílám…" : contact.formSubmit}
       </Button>
-      <p className="text-[var(--muted)]">{contact.formHint}</p>
+      <p className="text-sm leading-snug text-[var(--muted)] md:text-[15px]">
+        {contact.formHint}
+      </p>
       {status === "success" && (
         <p className="text-[var(--brand-green)]">{contact.formSuccess}</p>
       )}
