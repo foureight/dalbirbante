@@ -46,7 +46,7 @@ export function DeliveryMap({ className = "" }: { className?: string }) {
         data: {
           type: "FeatureCollection",
           features: ordered,
-        },
+        } as GeoJSON.FeatureCollection,
       });
 
       map.addLayer({
