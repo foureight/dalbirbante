@@ -321,11 +321,11 @@
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
 }
 
-.nav-menu > a {
+.nav-menu > a:not(.btn-green):not(.btn-brand) {
   position: relative;
 }
 
-.nav-menu > a::after {
+.nav-menu > a:not(.btn-green):not(.btn-brand)::after {
   content: "";
   position: absolute;
   left: 0;
@@ -338,7 +338,7 @@
   transition: transform 0.28s ease;
 }
 
-.nav-menu > a:hover::after {
+.nav-menu > a:not(.btn-green):not(.btn-brand):hover::after {
   transform: scaleX(1);
 }
 

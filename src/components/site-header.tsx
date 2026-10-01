@@ -75,10 +75,7 @@ export function SiteHeader({ content }: { content: SiteContent }) {
                 />
               </a>
             </div>
-            <Button
-              asChild
-              className="btn-green !min-w-0 !px-5 !py-3 !text-base"
-            >
+            <Button asChild className="btn-green">
               <a href={site.phoneHref}>{site.callLabel}</a>
             </Button>
           </nav>
