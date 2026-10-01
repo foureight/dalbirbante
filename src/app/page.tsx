@@ -60,7 +60,7 @@ export default async function HomePage() {
         </section>
 
         <section className="section-pad mx-auto max-w-6xl">
-          <div className="grid items-center gap-14 md:grid-cols-2 md:gap-20 lg:gap-24">
+          <div className="grid items-stretch gap-14 md:grid-cols-2 md:gap-20 lg:gap-24">
             <Reveal>
               <h2 className="text-[var(--brand-red)]">{home.offerTitle}</h2>
               <ul className="mt-8 space-y-4 text-[var(--ink)]">
@@ -77,8 +77,8 @@ export default async function HomePage() {
               <p className="mt-6 text-[var(--ink)]">{home.ctaLine1}</p>
               <p className="mt-3 text-[var(--ink)]">{home.ctaLine2}</p>
             </Reveal>
-            <Reveal delay={120} variant="scale">
-              <div className="img-zoom relative aspect-[4/5] overflow-hidden rounded-[6.4px]">
+            <Reveal delay={120} variant="scale" className="h-full min-h-[280px]">
+              <div className="img-zoom relative h-full min-h-[280px] overflow-hidden rounded-[6.4px] md:min-h-full">
                 <Image
                   src="/images/lifestyle-01.webp"
                   alt="Pizza z\u00A0pece Dal Birbante"
