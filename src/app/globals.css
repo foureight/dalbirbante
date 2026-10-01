@@ -431,7 +431,7 @@
   transition: transform 0.28s ease;
 }
 
-.nav-menu > a:not(.btn-green):not(.btn-brand):hover::after {
+.nav-menu > a:not(.btn-green):not(.btn-brand):not(.nav-cart):hover::after {
   transform: scaleX(1);
 }
 
