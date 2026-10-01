@@ -27,16 +27,13 @@ export default async function DailyMenuPage() {
       <main className="flex-1">
         <section className="page-wrap py-24 md:py-36">
           <Reveal>
-            <h1 className="section-title text-[var(--brand-red)]">{daily.title}</h1>
-            <p className="mt-6 max-w-none text-[var(--muted)]">{daily.intro}</p>
-            <div className="mt-10 flex flex-wrap items-baseline gap-x-6 gap-y-2">
-              <p className="text-2xl font-black uppercase tracking-wide text-[var(--brand-green)] md:text-3xl">
+            <h1 className="section-title text-[var(--brand-red)]">
+              {daily.title}
+              <span className="mt-3 block text-[var(--brand-green)] md:mt-0 md:ml-4 md:inline">
                 {daily.date}
-              </p>
-              <p className="text-lg font-semibold text-[var(--ink)] md:text-xl">
-                {daily.hours}
-              </p>
-            </div>
+              </span>
+            </h1>
+            <p className="mt-6 max-w-none text-[var(--muted)]">{daily.intro}</p>
           </Reveal>
 
           <ul className="mt-14 divide-y divide-[var(--line)] border-y border-[var(--line)]">
