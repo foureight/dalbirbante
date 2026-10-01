@@ -15,7 +15,7 @@ export function FaqAccordion({
         <details
           key={f.q}
           className="group"
-          open={index === 0 ? true : undefined}
+          defaultOpen={index === 0}
           onToggle={(e) => {
             if (!e.currentTarget.open) return;
             const root = e.currentTarget.parentElement;
