@@ -202,6 +202,15 @@
   }
 }
 
+@keyframes pan-slow-alt {
+  from {
+    transform: scale(1.06) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.1) translate3d(1.6%, -1%, 0);
+  }
+}
+
 @keyframes soft-float {
   from {
     transform: translateY(0);
@@ -228,7 +237,14 @@
 }
 
 .hero-pan {
+  will-change: transform;
   animation: pan-slow 18s ease-in-out alternate infinite;
+}
+
+/* Slightly different Ken Burns path for secondary pizza photos */
+.hero-pan-alt {
+  will-change: transform;
+  animation: pan-slow-alt 22s ease-in-out alternate infinite;
 }
 
 /* Visible by default so SSR / no-JS never blanks the page.
@@ -352,6 +368,7 @@
   .reveal.reveal-ready,
   .reveal.reveal-ready:not(.is-visible),
   .hero-pan,
+  .hero-pan-alt,
   .animate-rise,
   .animate-rise-delay,
   .animate-rise-delay-2,

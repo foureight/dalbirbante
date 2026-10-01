@@ -83,12 +83,12 @@ export default async function HomePage() {
               variant="fade"
               className="relative min-h-[320px] md:min-h-0"
             >
-              <div className="img-zoom absolute inset-0 overflow-hidden rounded-[6.4px]">
+              <div className="absolute inset-0 overflow-hidden rounded-[6.4px]">
                 <Image
                   src="/images/lifestyle-01.webp"
                   alt="Pizza z\u00A0pece Dal Birbante"
                   fill
-                  className="img-zoom-media object-cover"
+                  className="hero-pan-alt object-cover"
                   sizes="(max-width:768px) 100vw, 50vw"
                 />
               </div>
