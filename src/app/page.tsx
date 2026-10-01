@@ -38,14 +38,6 @@ export default async function HomePage() {
             <div className="absolute inset-0 bg-black/45" />
           </div>
           <div className="relative mx-auto flex min-h-[70svh] max-w-6xl flex-col justify-end px-4 pb-14 pt-24 md:min-h-[85svh] md:justify-center md:px-6 md:pb-20">
-            <Image
-              src="/images/logo-white.webp"
-              alt={site.brandName}
-              width={420}
-              height={52}
-              className="animate-rise mb-6 h-10 w-auto md:h-14"
-              priority
-            />
             <h1 className="animate-rise-delay font-display max-w-4xl text-3xl uppercase leading-tight md:text-5xl lg:text-6xl">
               {home.introTitle}
             </h1>

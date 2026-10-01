@@ -197,6 +197,15 @@
   @apply mt-4 max-w-2xl text-base leading-relaxed text-[var(--muted)] md:text-lg;
 }
 
+.nav-menu {
+  font-family: "Omnes", sans-serif;
+  font-weight: 900;
+  font-size: 23px;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
 .btn-brand {
   background: var(--brand-red);
   color: #fff;

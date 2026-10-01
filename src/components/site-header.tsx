@@ -36,7 +36,7 @@ export function SiteHeader({ content }: { content: SiteContent }) {
             />
           </Link>
 
-          <nav className="hidden items-center gap-5 text-sm font-semibold uppercase tracking-wide text-[var(--ink)] lg:flex">
+          <nav className="nav-menu hidden items-center gap-5 text-[var(--ink)] lg:flex">
             {links.map((l) => (
               <Link
                 key={l.href}
