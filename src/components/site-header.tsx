@@ -66,30 +66,78 @@ export function SiteHeader({ content }: { content: SiteContent }) {
                 />
               </a>
             </div>
+            <a
+              href={site.orderUrl}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={site.orderLabel}
+              title={site.orderLabel}
+              className="nav-cart inline-flex size-12 items-center justify-center text-[var(--ink)] transition hover:text-[var(--brand-red)]"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                className="size-8"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden
+              >
+                <circle cx="9" cy="20" r="1.4" />
+                <circle cx="17" cy="20" r="1.4" />
+                <path d="M3 4h2l1.4 9.2a1.6 1.6 0 0 0 1.6 1.3h8.7a1.6 1.6 0 0 0 1.6-1.2L20 7H6.2" />
+              </svg>
+            </a>
             <Button asChild className="btn-green">
               <Link href="/kontakt">{nav.contact}</Link>
             </Button>
           </nav>
 
-          <button
-            type="button"
-            className="inline-flex h-10 w-10 items-center justify-center text-[var(--ink)] lg:hidden"
-            aria-label="Menu"
-            onClick={() => setOpen((v) => !v)}
-          >
-            <span className="sr-only">Menu</span>
-            <div className="space-y-1.5">
-              <span
-                className={`block h-0.5 w-6 bg-[var(--ink)] transition ${open ? "translate-y-2 rotate-45" : ""}`}
-              />
-              <span
-                className={`block h-0.5 w-6 bg-[var(--ink)] transition ${open ? "opacity-0" : ""}`}
-              />
-              <span
-                className={`block h-0.5 w-6 bg-[var(--ink)] transition ${open ? "-translate-y-2 -rotate-45" : ""}`}
-              />
-            </div>
-          </button>
+          <div className="flex items-center gap-1 lg:hidden">
+            <a
+              href={site.orderUrl}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={site.orderLabel}
+              title={site.orderLabel}
+              className="nav-cart inline-flex size-10 items-center justify-center text-[var(--ink)] transition hover:text-[var(--brand-red)]"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                className="size-7"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.8"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                aria-hidden
+              >
+                <circle cx="9" cy="20" r="1.4" />
+                <circle cx="17" cy="20" r="1.4" />
+                <path d="M3 4h2l1.4 9.2a1.6 1.6 0 0 0 1.6 1.3h8.7a1.6 1.6 0 0 0 1.6-1.2L20 7H6.2" />
+              </svg>
+            </a>
+            <button
+              type="button"
+              className="inline-flex h-10 w-10 items-center justify-center text-[var(--ink)]"
+              aria-label="Menu"
+              onClick={() => setOpen((v) => !v)}
+            >
+              <span className="sr-only">Menu</span>
+              <div className="space-y-1.5">
+                <span
+                  className={`block h-0.5 w-6 bg-[var(--ink)] transition ${open ? "translate-y-2 rotate-45" : ""}`}
+                />
+                <span
+                  className={`block h-0.5 w-6 bg-[var(--ink)] transition ${open ? "opacity-0" : ""}`}
+                />
+                <span
+                  className={`block h-0.5 w-6 bg-[var(--ink)] transition ${open ? "-translate-y-2 -rotate-45" : ""}`}
+                />
+              </div>
+            </button>
+          </div>
         </div>
 
         {open && (
@@ -100,6 +148,15 @@ export function SiteHeader({ content }: { content: SiteContent }) {
                   {l.label}
                 </Link>
               ))}
+              <a
+                href={site.orderUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="font-semibold text-[var(--brand-green)]"
+                onClick={() => setOpen(false)}
+              >
+                {site.orderLabel}
+              </a>
               <Link
                 href="/kontakt"
                 className="btn-green inline-flex w-fit"

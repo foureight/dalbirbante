@@ -414,11 +414,11 @@
   box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
 }
 
-.nav-menu > a:not(.btn-green):not(.btn-brand) {
+.nav-menu > a:not(.btn-green):not(.btn-brand):not(.nav-cart) {
   position: relative;
 }
 
-.nav-menu > a:not(.btn-green):not(.btn-brand)::after {
+.nav-menu > a:not(.btn-green):not(.btn-brand):not(.nav-cart)::after {
   content: "";
   position: absolute;
   left: 0;
