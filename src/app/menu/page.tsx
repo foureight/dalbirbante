@@ -53,7 +53,7 @@ export default async function MenuPage() {
                   {cat.items.map((item) => (
                     <li
                       key={`${cat.id}-${item.name}`}
-                      className="menu-row grid gap-4 py-7 sm:grid-cols-[auto_1fr_auto] sm:items-start"
+                      className="menu-row grid gap-4 py-8 sm:grid-cols-[auto_1fr_auto] sm:items-center"
                     >
                       {item.image ? (
                         <div className="img-zoom relative h-20 w-20 overflow-hidden rounded-[6.4px] sm:h-24 sm:w-24">
@@ -76,9 +76,23 @@ export default async function MenuPage() {
                           </p>
                         ) : null}
                       </div>
-                      <p className="shrink-0 text-sm font-semibold tracking-wide text-[var(--ink)] sm:pt-1">
-                        {item.price}
-                      </p>
+                      <div className="flex flex-col items-start gap-3 sm:items-end">
+                        <p className="text-3xl font-black leading-none text-[var(--brand-red)] md:text-4xl">
+                          {item.price}
+                        </p>
+                        <Button
+                          asChild
+                          className="btn-green !px-6 !py-3 !text-base"
+                        >
+                          <a
+                            href={site.orderUrl}
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            Objednat
+                          </a>
+                        </Button>
+                      </div>
                     </li>
                   ))}
                 </ul>

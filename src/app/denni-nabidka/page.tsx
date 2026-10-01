@@ -42,7 +42,7 @@ export default async function DailyMenuPage() {
           <ul className="mt-14 divide-y divide-[var(--line)] border-y border-[var(--line)]">
             {daily.items.map((item, i) => (
               <Reveal key={item.name} delay={(i % 3) * 50}>
-                <li className="grid gap-3 py-7 sm:grid-cols-[1fr_auto] sm:items-start">
+                <li className="grid gap-5 py-8 sm:grid-cols-[1fr_auto] sm:items-center">
                   <div>
                     <h2 className="text-[clamp(1.35rem,2vw,1.75rem)] normal-case tracking-normal text-[var(--ink)]">
                       <span className="font-black uppercase">
@@ -59,9 +59,16 @@ export default async function DailyMenuPage() {
                       <p className="mt-2 text-sm text-[var(--muted)]">{item.note}</p>
                     ) : null}
                   </div>
-                  <p className="shrink-0 text-lg font-bold text-[var(--brand-red)] sm:pt-1">
-                    {item.price}
-                  </p>
+                  <div className="flex flex-col items-start gap-3 sm:items-end">
+                    <p className="text-3xl font-black leading-none text-[var(--brand-red)] md:text-4xl">
+                      {item.price}
+                    </p>
+                    <Button asChild className="btn-green !px-6 !py-3 !text-base">
+                      <a href={site.orderUrl} target="_blank" rel="noreferrer">
+                        Objednat
+                      </a>
+                    </Button>
+                  </div>
                 </li>
               </Reveal>
             ))}
@@ -72,6 +79,11 @@ export default async function DailyMenuPage() {
               {daily.note}
             </p>
             <div className="mt-12 flex flex-wrap gap-4">
+              <Button asChild className="btn-green">
+                <a href={site.orderUrl} target="_blank" rel="noreferrer">
+                  {site.orderLabel}
+                </a>
+              </Button>
               <Button asChild className="btn-brand">
                 <a href={site.phoneHref}>{site.callLabel}</a>
               </Button>
