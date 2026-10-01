@@ -119,9 +119,12 @@ export default async function HomePage() {
                       ))}
                     </Link>
                   </h2>
+                  <p className="band-card-text mt-5 text-white/90">
+                    {block.d}
+                  </p>
                   <Link
                     href={block.href}
-                    className="btn-outline-light mt-auto inline-flex w-fit pt-8"
+                    className="btn-outline-light mt-auto inline-flex w-fit pt-10"
                   >
                     Více
                   </Link>
