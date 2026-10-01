@@ -6,53 +6,60 @@ export function SiteFooter({ content }: { content: SiteContent }) {
   const { site, nav, footer } = content;
 
   return (
-    <footer className="relative overflow-hidden bg-[var(--ink)] text-[var(--paper)]">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(212,87,42,0.18),transparent_50%)]" />
-      <div className="relative mx-auto grid max-w-6xl gap-10 px-4 py-14 md:grid-cols-[1.2fr_1fr_1fr] md:px-6">
+    <footer className="bg-[var(--brand-green)] text-white">
+      <div className="mx-auto grid max-w-6xl gap-10 px-4 py-14 md:grid-cols-[1.2fr_1fr_1fr] md:px-6">
         <div>
-          <div className="mb-4 flex items-center gap-3">
+          <div className="mb-4">
             <Image
-              src="/images/logo.webp"
-              alt=""
-              width={40}
-              height={40}
-              className="h-10 w-10 rounded-full object-cover"
+              src="/images/logo-white.webp"
+              alt={site.brandName}
+              width={280}
+              height={35}
+              className="h-9 w-auto object-contain"
             />
-            <span className="font-display text-2xl">{site.brandName}</span>
           </div>
-          <p className="max-w-sm text-sm leading-relaxed text-white/70">
+          <p className="max-w-sm text-sm leading-relaxed text-white/85">
             {footer.blurb}
           </p>
+          <p className="mt-4 font-display text-2xl uppercase tracking-wide">
+            {site.goodbye}
+          </p>
         </div>
         <div>
-          <p className="mb-3 text-xs uppercase tracking-[0.2em] text-white/50">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-white/70">
             Navigace
           </p>
-          <div className="flex flex-col gap-2 text-sm">
-            <Link href="/" className="hover:text-white">
-              {nav.home}
-            </Link>
-            <Link href="/menu" className="hover:text-white">
+          <div className="flex flex-col gap-2 text-sm uppercase tracking-wide">
+            <Link href="/menu" className="hover:text-white/80">
               {nav.menu}
             </Link>
-            <Link href="/onas" className="hover:text-white">
+            <Link href="/denni-nabidka" className="hover:text-white/80">
+              {nav.daily}
+            </Link>
+            <Link href="/rozvoz" className="hover:text-white/80">
+              {nav.delivery}
+            </Link>
+            <Link href="/onas" className="hover:text-white/80">
               {nav.about}
             </Link>
-            <Link href="/kontakt" className="hover:text-white">
+            <Link href="/kontakt" className="hover:text-white/80">
               {nav.contact}
+            </Link>
+            <Link href="/bezlepkova-pizza-vinor" className="hover:text-white/80">
+              {nav.glutenFree}
             </Link>
           </div>
         </div>
         <div>
-          <p className="mb-3 text-xs uppercase tracking-[0.2em] text-white/50">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-white/70">
             Kontakt
           </p>
-          <div className="flex flex-col gap-2 text-sm text-white/80">
+          <div className="flex flex-col gap-2 text-sm text-white/90">
             <p>{site.address}</p>
-            <a href={site.phoneHref} className="hover:text-white">
+            <a href={site.phoneHref} className="hover:underline">
               {site.phone}
             </a>
-            <a href={`mailto:${site.email}`} className="hover:text-white">
+            <a href={`mailto:${site.email}`} className="hover:underline">
               {site.email}
             </a>
             <p>
@@ -63,7 +70,7 @@ export function SiteFooter({ content }: { content: SiteContent }) {
           </div>
         </div>
       </div>
-      <div className="relative border-t border-white/10 px-4 py-5 text-center text-xs text-white/45 md:px-6">
+      <div className="border-t border-white/20 bg-[var(--brand-green-deep)] px-4 py-5 text-center text-xs uppercase tracking-wide text-white/70 md:px-6">
         {footer.rights}
       </div>
     </footer>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getContent } from "@/lib/content";
+import { JsonLd } from "@/components/json-ld";
 import "./globals.css";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -7,11 +8,20 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: content.site.metaTitle,
     description: content.site.metaDescription,
+    keywords: content.site.keywords,
     icons: { icon: "/favicon.png" },
+    openGraph: {
+      title: content.site.metaTitle,
+      description: content.site.metaDescription,
+      locale: "cs_CZ",
+      type: "website",
+      images: ["/images/logo.webp"],
+    },
   };
 }
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default async function RootLayout({ children }: LayoutProps<"/">) {
+  const content = await getContent();
   return (
     <html lang="cs" className="h-full antialiased">
       <head>
@@ -29,6 +39,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           type="font/woff"
           crossOrigin="anonymous"
         />
+        <JsonLd content={content} />
       </head>
       <body className="min-h-full flex flex-col font-sans">{children}</body>
     </html>

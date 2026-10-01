@@ -66,7 +66,9 @@ const SECTIONS: { key: keyof SiteContent; label: string }[] = [
   { key: "about", label: "O nás" },
   { key: "menuPage", label: "Stránka menu" },
   { key: "menuCategories", label: "Položky menu" },
+  { key: "daily", label: "Denní nabídka" },
   { key: "delivery", label: "Rozvoz" },
+  { key: "glutenFree", label: "Bezlepková" },
   { key: "contact", label: "Kontakt" },
   { key: "footer", label: "Patička" },
 ];
@@ -271,39 +273,17 @@ export function AdminClient({ initial, authenticated }: Props) {
       const h = content.home;
       return (
         <div className="space-y-4">
-          {(
-            [
-              "heroEyebrow",
-              "heroHeadline",
-              "heroSub",
-              "heroCtaPrimary",
-              "heroCtaSecondary",
-              "introTitle",
-              "introText",
-              "offerTitle",
-              "pizzaWeekTitle",
-              "pizzaWeekText",
-              "dailyMenuTitle",
-              "dailyMenuText",
-              "deliveryTitle",
-              "deliveryText",
-              "glutenFreeTitle",
-              "glutenFreeText",
-              "featuresTitle",
-              "ctaTitle",
-              "ctaText",
-              "galleryTitle",
-              "gallerySubtitle",
-            ] as const
-          ).map((key) => (
-            <Field
-              key={key}
-              label={key}
-              value={h[key]}
-              onChange={(v) => updateAt(["home", key], v)}
-              multiline={h[key].length > 60}
-            />
-          ))}
+          {Object.entries(h).map(([key, value]) =>
+            typeof value === "string" ? (
+              <Field
+                key={key}
+                label={key}
+                value={value}
+                onChange={(v) => updateAt(["home", key], v)}
+                multiline={value.length > 60}
+              />
+            ) : null,
+          )}
           <div className="space-y-3 border border-[var(--line)] bg-white/60 p-4">
             <p className="text-sm font-medium">Nabídka (položky seznamu)</p>
             {h.offerItems.map((item, i) => (
@@ -326,6 +306,75 @@ export function AdminClient({ initial, authenticated }: Props) {
               />
             ))}
           </div>
+        </div>
+      );
+    }
+
+    if (section === "daily") {
+      return (
+        <div className="space-y-4">
+          {Object.entries(content.daily).map(([key, value]) => (
+            <Field
+              key={key}
+              label={key}
+              value={value}
+              onChange={(v) => updateAt(["daily", key], v)}
+              multiline={value.length > 60}
+            />
+          ))}
+        </div>
+      );
+    }
+
+    if (section === "glutenFree") {
+      return (
+        <div className="space-y-4">
+          {Object.entries(content.glutenFree).map(([key, value]) =>
+            typeof value === "string" ? (
+              <Field
+                key={key}
+                label={key}
+                value={value}
+                onChange={(v) => updateAt(["glutenFree", key], v)}
+                multiline={value.length > 60}
+              />
+            ) : null,
+          )}
+          <div className="space-y-3 border border-[var(--line)] bg-white/60 p-4">
+            <p className="text-sm font-medium">Jak připravujeme</p>
+            {content.glutenFree.howItems.map((item, i) => (
+              <Field
+                key={i}
+                label={`Bod ${i + 1}`}
+                value={item}
+                onChange={(v) =>
+                  updateAt(["glutenFree", "howItems", String(i)], v)
+                }
+              />
+            ))}
+          </div>
+          {content.glutenFree.faqs.map((f, i) => (
+            <div
+              key={i}
+              className="space-y-3 border border-[var(--line)] bg-white/60 p-4"
+            >
+              <Field
+                label={`FAQ ${i + 1} – otázka`}
+                value={f.q}
+                onChange={(v) =>
+                  updateAt(["glutenFree", "faqs", String(i), "q"], v)
+                }
+              />
+              <Field
+                label="Odpověď"
+                value={f.a}
+                onChange={(v) =>
+                  updateAt(["glutenFree", "faqs", String(i), "a"], v)
+                }
+                multiline
+              />
+            </div>
+          ))}
         </div>
       );
     }
@@ -398,7 +447,7 @@ export function AdminClient({ initial, authenticated }: Props) {
           {error && <p className="text-sm text-red-700">{error}</p>}
           <Button
             type="submit"
-            className="rounded-none bg-[var(--forest)] text-white"
+            className="rounded-[6.4px] bg-[var(--forest)] text-white"
           >
             Přihlásit
           </Button>
@@ -421,14 +470,14 @@ export function AdminClient({ initial, authenticated }: Props) {
             <Button
               onClick={save}
               disabled={saving}
-              className="rounded-none bg-[var(--accent)] text-white hover:bg-[var(--accent-hover)]"
+              className="rounded-[6.4px] bg-[var(--accent)] text-white hover:bg-[var(--accent-hover)]"
             >
               {saving ? "Ukládám…" : "Uložit změny"}
             </Button>
-            <Button variant="outline" className="rounded-none" onClick={logout}>
+            <Button variant="outline" className="rounded-[6.4px]" onClick={logout}>
               Odhlásit
             </Button>
-            <Button asChild variant="ghost" className="rounded-none">
+            <Button asChild variant="ghost" className="rounded-[6.4px]">
               <a href="/" target="_blank" rel="noreferrer">
                 Otevřít web
               </a>

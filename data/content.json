@@ -1,50 +1,106 @@
 {
   "site": {
     "brandName": "Dal Birbante",
-    "tagline": "Pravá neapolská pizza ve Vinoři",
+    "tagline": "Ochutnej tu nejlepší neapolskou pizzu z Prahy",
     "phone": "+420 733 572 911",
     "phoneHref": "tel:+420733572911",
     "email": "mangio@dalbirbante.cz",
     "address": "Mladoboleslavská 1, Praha 9 – Vinoř",
+    "addressShort": "Mladoboleslavská 1, Praha – Vinoř",
     "orderUrl": "https://reservoeats.cz/58",
     "orderLabel": "Objednat online",
-    "hours": "Úterý–Sobota 11:00–20:30",
+    "callLabel": "VOLEJTE",
+    "hours": "Úterý–Sobota 11:00–20:30 hodin",
     "hoursClosed": "Neděle–Pondělí zavřeno",
     "mapEmbedUrl": "https://www.reservo.cz/reservo_web/dalbirbante.cz/system/map.php",
-    "facebookUrl": "https://facebook.com/222002334333794",
-    "metaTitle": "Dal Birbante – neapolská pizza Praha 9 Vinoř",
-    "metaDescription": "Autentická neapolská pizza, panozzo, těstoviny a italské speciality v Praze 9 – Vinoři. Rozvoz i posezení. Objednejte online."
+    "facebookUrl": "https://www.facebook.com/dalbirbantebistro",
+    "instagramUrl": "https://www.instagram.com/pizzeria_dal_birbante/",
+    "announcement": "DAL BIRBANTE – neapolská pizza v Praze!!",
+    "goodbye": "DOBROU CHUŤ!",
+    "metaTitle": "Dal Birbante! 🍕🍕🍕 Ochutnej tu nejlepší neapolskou pizzu z Prahy .",
+    "metaDescription": "Pokud hledáte pravou neapolskou pizzu v Praze, zamiřte do pizzerie Dal Birbante ve Vinoři. Nabízíme bohatý výběr pizz, těstovin a italských baget panozzo. Využijte také možnost objednání čerstvých italských surovin přímo k vašim dveřím. Přijďte a ochutnejte pravou chuť Itálie!",
+    "seoDescription": "Dal Birbante je italská pizzerie ve Vinoři v Praze 9, která připravuje pravou neapolskou pizzu z kvalitních italských surovin. V nabídce najdete také panozzo, těstoviny, lasagne, italské speciality a pečlivě vybraná italská vína včetně bio vín Pisoni. Pizzerie nabízí posezení i rozvoz po Praze 9 a okolí.",
+    "geo": {
+      "latitude": 50.143151,
+      "longitude": 14.578649,
+      "streetAddress": "Mladoboleslavská 1",
+      "addressLocality": "Praha 9 - Vinoř",
+      "postalCode": "19017",
+      "addressCountry": "CZ"
+    },
+    "keywords": [
+      "neapolská pizza Praha 9",
+      "pizza Vinoř",
+      "italská pizzerie Praha 9",
+      "rozvoz pizzy Praha 9",
+      "panozzo Praha",
+      "italská restaurace Vinoř",
+      "bezlepková pizza",
+      "pizza Kbely"
+    ],
+    "pageMeta": {
+      "menu": {
+        "title": "Menu – neapolská pizza, těstoviny a panozzo | Dal Birbante",
+        "description": "Vychutnejte si pravou chuť Neapole v srdci Prahy Vinoře v pizzerii Dal Birbante! Naše pizzerie nabízí autentickou neapolskou pizzu, připravenou z čerstvých a kvalitních surovin, které zaručují nezapomenutelný gastronomický zážitek. Na adrese Mladoboleslavská 1 vám servírujeme nejen pizzu, ale i lahodné těstoviny a panozzo."
+      },
+      "about": {
+        "title": "O nás – italské bistro a pizzerie Dal Birbante",
+        "description": "Pizzerii Dal Birbante jsme otevřeli v roce 2024 ve Vinoři. Zaměřujeme se na pravou neapolskou pizzu z italských surovin, panozzo, těstoviny, dezerty a bio vína Pisoni."
+      },
+      "contact": {
+        "title": "Kontakt – Dal Birbante Vinoř",
+        "description": "Vychutnejte si pravou chuť Neapole v srdci Prahy Vinoře v pizzerii Dal Birbante! Naše pizzerie nabízí autentickou neapolskou pizzu."
+      },
+      "daily": {
+        "title": "Denní menu – italské bistro Dal Birbante",
+        "description": "Denní menu Dal Birbante ve Vinoři. Polévky, panozzo, pizza a další italské speciality v čase oběda. Podívejte se, co pro vás dnes vaříme."
+      },
+      "delivery": {
+        "title": "Rozvoz pizzy Praha 9 – Dal Birbante",
+        "description": "Rozvoz neapolské pizzy a italských specialit z Dal Birbante. Dovážíme z Vinoře do Kbel, Satalic, Letňan, Čakovic, Brandýsa n. L. a dalších lokalit. Podívejte se na ceny rozvozu."
+      },
+      "glutenFree": {
+        "title": "Bezlepková pizza Vinoř – Dal Birbante",
+        "description": "Bezlepková pizza ve Vinoři. V Dal Birbante připravujeme bezlepkovou pizzu z kvalitního těsta, vhodnou pro celiaky a osoby s intolerancí lepku. Na místě, s sebou i na rozvoz."
+      }
+    }
   },
   "nav": {
-    "home": "Domů",
     "menu": "Menu",
+    "daily": "Denní nabídka",
+    "delivery": "Rozvoz",
     "about": "O nás",
     "contact": "Kontakt",
-    "gallery": "Galerie"
+    "glutenFree": "Bezlepková pizza"
   },
   "home": {
-    "heroEyebrow": "Praha 9 · Vinoř",
-    "heroHeadline": "Kousek Neapole přímo do Vinoře",
-    "heroSub": "Autentická neapolská pizza z italských surovin – Caputo 00, San Marzano a mozzarella fior di latte.",
-    "heroCtaPrimary": "Objednat online",
-    "heroCtaSecondary": "Zobrazit menu",
-    "introTitle": "Pravá neapolská pizza v Praze 9",
-    "introText": "V pizzerii Dal Birbante ve Vinoři připravujeme autentickou neapolskou pizzu z prvotřídních italských surovin. Používáme originální italskou mouku, kvalitní rajčata San Marzano a čerstvou mozzarellu fior di latte.",
-    "offerTitle": "Naše nabídka nekončí u pizzy",
+    "introTitle": "PRAVÁ NEAPOLSKÁ PIZZA V PRAZE 9 - VINOŘE – DAL BIRBANTE",
+    "introText": "V pizzerii Dal Birbante ve Vinoři (Praha 9) připravujeme autentickou neapolskou pizzu z prvotřídních italských surovin. Používáme originální italskou mouku, kvalitní rajčata San Marzano a čerstvou mozzarellu fior di latte, díky kterým má naše pizza typickou chuť i strukturu jako v Neapoli.",
+    "offerTitle": "Naše nabídka ale nekončí u pizzy. Ochutnat u nás můžete také:",
     "offerItems": [
       "italské bagety panozzo",
       "čerstvé těstoviny a lasagne",
-      "tradiční italské speciality",
-      "bio vína Pisoni a další vína z Itálie"
+      "tradiční italské speciality"
     ],
-    "pizzaWeekTitle": "Pizza týdne",
-    "pizzaWeekText": "Ochutnejte naši pizzu týdne. Najdete ji na prvním místě v menu v nabídce pizz.",
-    "dailyMenuTitle": "Denní menu",
-    "dailyMenuText": "Každý den pro vás připravujeme speciální nabídku na oběd, dostupnou od 11:00 do 15:00. Vyberte si, na co máte chuť, a zavolejte nebo napište.",
-    "deliveryTitle": "Rozvoz jídla",
-    "deliveryText": "Jídlo si můžete vychutnat přímo u nás v bistru, nechat zabalit s sebou, nebo vám ho rádi dovezeme po Praze 9, Vinoři a okolí.",
-    "glutenFreeTitle": "Bezlepková pizza, pasta i gnocchi",
-    "glutenFreeText": "Rádi připravíme naše produkty v bezlepkové variantě – neapolskou pizzu z ručně vyráběného těsta, těstoviny i panozzo. Italskou kuchyni si u nás vychutnáte bez starostí.",
+    "wineText": "K jídlu nabízíme pečlivě vybraná bio vína Pisoni a další vína z různých regionů Itálie.",
+    "ctaLine1": "Hledáte nejlepší pizzu v Praze nebo ve Vinoři? Zastavte se u nás osobně, nebo využijte rozvoz pizzy Praha 9, Vinoř a okolí.",
+    "ctaLine2": "Objednejte online jednoduše během pár kliknutí nebo na telefonním čísle 733 572 911.",
+    "menuCta": "CO SI DÁTE?",
+    "pizzaWeekTitle": "PIZZA TÝDNE",
+    "pizzaWeekText": "Ochutnejte naší pizzu týdne. Najdete jí na prvním místě v menu v nabídce pizz.",
+    "storyTitle": "DAL BIRBANTE",
+    "storyText": "Hledáte autentickou italskou kuchyni v Praze? Zkuste pizzu od Itala. Pizzerie Dal Birbante vám přináší kousek Neapole přímo do Vinoře! Naše menu je plné klasických neapolských pizz, které jsou pečené s láskou a tradičními metodami. Kromě pizzy nabízíme také široký výběr těstovin a italských baget panozzo, které si zamilujete na první kousnutí. A to není vše! Máme i široký sortiment čerstvých italských surovin, které vám rádi dovezeme až domů. Tak proč čekat? Přijďte a vychutnejte si pravou chuť Itálie u nás v pizzerii Dal Birbante!",
+    "dailyMenuTitle": "DENNÍ MENU",
+    "dailyMenuText": "Každy den pro Vás připravujeme speciální nabídku na oběd, která je dostupná od 11:00 do 15:00 hodin. Vyberte si na co máte chuť a zavolejte nebo napište.",
+    "deliveryTitle": "ROZVOZ JÍDLA",
+    "deliveryText": "V pizzerii Dal Birbante na adrese Mladoboleslavská 1, Praha 9 – Vinoř se zaměřujeme na pravou Neapolskou pizzu, kterou připravujeme vždy z čerstvých a kvalitních italských surovin. Můžete si u nás také vychutnat různé druhy těstovin, salátů, panini, dezertů, bio vína PISONI a další italské delikatesy, jako jsou naše speciální sýry a salámy.",
+    "deliveryText2": "Naše jídlo si můžete vychutnat přímo v našem bistru, nechat si ho zabalit sebou, nebo vám ho rádi dovezeme.",
+    "glutenFreeTitle": "BEZLEPKOVÁ PIZZA, PASTA I GNOCCHI",
+    "glutenFreeText": "Nyní Vám rádi připravíme všechny naše produkty v bezlepkové variantě. Přijďte ochutnat naši Neapolskou bezlepkovou pizzu z ručně vyráběného těsta, vyzkoušejte naše chutné bezlepkové těstoviny nebo si pochutnejte na bezlepkovém panozzu. Už žádná omezení – italskou kuchyni si u nás můžete vychutnat bez starostí.",
+    "contactTitle": "NAPIŠTE NÁM",
+    "contactText": "Máte-li nějaký dotaz, zpětnou vazbu nebo si chcete rezervovat stůl, neváhejte nám napsat.",
+    "hoursTitle": "OTEVŘENO",
+    "whereTitle": "KDE JSME?",
     "featuresTitle": "U nás najdete",
     "features": [
       "Rozvážíme",
@@ -56,28 +112,26 @@
       "Bezplatná wi-fi",
       "Mazlíčci vítáni"
     ],
-    "ctaTitle": "Hledáte nejlepší pizzu v Praze nebo ve Vinoři?",
-    "ctaText": "Zastavte se u nás osobně, nebo využijte rozvoz. Objednejte online během pár kliknutí, nebo volejte.",
     "galleryTitle": "Fotogalerie",
     "gallerySubtitle": "Pizza z pece, panozzo a atmosféra našeho bistra."
   },
   "about": {
-    "title": "O nás",
+    "title": "O NÁS",
     "lead": "Pizzerii Dal Birbante jsme otevřeli začátkem roku 2024 ve Vinoři. Jméno Dal Birbante neboli „Birba“ vychází z italského označení pro malého rošťáka – přesně takového, který má pořád hlad a chuť objevovat nové chutě.",
     "paragraphs": [
       "V našem malém italském bistru se zaměřujeme především na pravou neapolskou pizzu s tenkým těstem a nadýchanými okraji. Pizza se peče při teplotách přes 420 °C po dobu 60–90 sekund, díky čemuž je těsto lehké, křehké a okraje příjemně opálené.",
-      "Na výrobu těsta používáme mouku Caputo typu 00. Rajčata z okolí Vesuvu dodávají pizze výraznou chuť a jasně červenou barvu. Čerstvou mozzarellu fior di latte nám vozí partner Mozzarellart. Všechny klíčové suroviny pocházejí přímo z Itálie.",
-      "Kromě pizzy u nás ochutnáte i výběr italských sýrů a salámů, plněné bagety panozzo, dezerty a kvalitní bio vína Pisoni. Posezení nabízí zhruba 14 míst – jídlo vám rádi zabalíme s sebou nebo dovezeme až domů."
+      "Na výrobu těsta používáme mouku Caputo typu 00. Rajčata z okolí Vesuvu dodávají pizze výraznou chuť a jasně červenou barvu. Čerstvou mozzarellu Fior di latte nám vozí náš partner Mozzarellart. Všechny klíčové suroviny pocházejí přímo z Itálie, abychom vám mohli nabídnout co nejautentičtější chuť Neapole.",
+      "Kromě pizzy u nás ochutnáte i výběr italských sýrů a salámů, plněné bagety panozzo, dezerty a kvalitní bio vína Pisoni. Posezení nabízí zhruba 14 míst v příjemném prostředí, jídlo vám rádi zabalíme s sebou nebo dovezeme až domů."
     ]
   },
   "menuPage": {
-    "title": "Naše menu",
+    "title": "NAŠE MENU",
     "intro": "Vyberte si z nabídky neapolských pizz z pece, tradičních těstovin, italských baget panozzo, čerstvých salátů a domácích dezertů. K jídlu si můžete dát také výběrové italské sýry a salámy nebo bio vína Pisoni.",
     "orderNote": "Kompletní nabídku a online objednávku najdete také na Reservo.",
     "allergensTitle": "Seznam alergenů",
-    "allergensText": "(1) Obiloviny obsahující lepek (2) Korýši (3) Vejce (4) Ryby (5) Arašídy (6) Sója (7) Mléko (8) Skořápkové plody (9) Celer (10) Hořčice (11) Sezam (12) Oxid siřičitý a siřičitany (13) Vlčí bob (14) Měkkýši",
+    "allergensText": "(1) Obiloviny obsahující lepek (2) Korýši a výrobky z nich (3) Vejce a výrobky z nich (4) Ryby a výrobky z nich (5) Jádra podzemnice olejné (arašídy) a výrobky z nich (6) Sójové boby a výrobky z nich (7) Mléko a výrobky z něj (včetně laktózy) (8) Skořápkové plody (9) Celer a výrobky z něj (10) Hořčice a výrobky z ní (11) Sezamová semena a výrobky z nich (12) Oxid siřičitý a siřičitany (13) Vlčí bob (lupina) a výrobky z něj (14) Měkkýši a výrobky z nich",
     "extrasTitle": "Přídavky na pizzu",
-    "extrasText": "oregano, olivový olej, bazalka, chilli, česnek, pistácie 15 Kč · rukola, cibule 20 Kč · kapary, Grana Padano, pecorino romano 25 Kč · drcená rajčata, gorgonzola, uzená scamorza, ricotta 30 Kč · žampiony, artyčoky, dušená šunka 35 Kč · olivy taggiasche, lilek, cuketa, mozzarella, stracchino, stracciatella, pikantní salám, ančovičky, tuňák, mortadella 40 Kč · salsiccia 50 Kč · parmská šunka 70 Kč",
+    "extrasText": "oregano, olivový olej, bazalka, chilli, česnek, pistácie 15 Kč · rukola, cibule 20 Kč · kapary, Grana Padano, pecorino romano 25 Kč · drcená rajčata, gorgonzola, uzená scamorza, ricotta 30 Kč · žampiony, artyčoky, dušená šunka 35 Kč · olivy taggiasche, lilek, cuketa, mozzarella fior di latte, stracchino, stracciatella, pikantní salám spianata romana, ančovičky, tuňák, mortadella 40 Kč · salsiccia 50 Kč · parmská šunka 70 Kč",
     "glutenNote": "Bezlepková pizza +99 Kč · Bezlepková pasta +29 Kč"
   },
   "menuCategories": [
@@ -166,28 +220,82 @@
       ]
     }
   ],
+  "daily": {
+    "title": "DENNÍ MENU",
+    "intro": "Každy den pro Vás připravujeme speciální nabídku na oběd, která je dostupná od 11:00 do 15:00 hodin. Vyberte si na co máte chuť a zavolejte nebo napište.",
+    "note": "Aktuální denní nabídku zjistíte telefonicky nebo se zeptejte na místě. Obědové menu je dostupné úterý–sobota od 11:00 do 15:00."
+  },
   "delivery": {
-    "title": "Rozvoz jídla",
-    "intro": "Rozvážíme po Praze 9, Vinoři a okolí. Minimální objednávka a cena rozvozu podle zóny:",
+    "title": "ROZVOZ JÍDLA",
+    "intro": "V pizzerii Dal Birbante na adrese Mladoboleslavská 1, Praha 9 – Vinoř se zaměřujeme na pravou Neapolskou pizzu, kterou připravujeme vždy z čerstvých a kvalitních italských surovin. Můžete si u nás také vychutnat různé druhy těstovin, salátů, panini, dezertů, bio vína PISONI a další italské delikatesy, jako jsou naše speciální sýry a salámy.",
+    "intro2": "Naše jídlo si můžete vychutnat přímo v našem bistru, nechat si ho zabalit sebou, nebo vám ho rádi dovezeme. Níže naleznete ceny za dovoz:",
+    "pricesTitle": "Ceny rozvozu jsou následující:",
     "zones": [
-      { "name": "Zóna 1", "areas": "Vinoř, Přezletice", "fee": "19 Kč", "min": "199 Kč" },
+      { "name": "Zóna 1", "areas": "Vinoř", "fee": "19 Kč", "min": "199 Kč" },
       { "name": "Zóna 2", "areas": "Satalice, Kbely, Podolanka, Radonice, Jenštejn", "fee": "29 Kč", "min": "199 Kč" },
-      { "name": "Zóna 3", "areas": "Dehtáry, Svémyslice, Dřevčice, Miškovice", "fee": "39 Kč", "min": "299 Kč" },
+      { "name": "Zóna 3", "areas": "Dehtáry, Svémyslice, Dřevčice, Miškovice, Přezletice", "fee": "39 Kč", "min": "299 Kč" },
       { "name": "Zóna 4", "areas": "Čakovice, Letňany, Veleň, Třeboradice, Mírovice", "fee": "49 Kč", "min": "299 Kč" },
       { "name": "Zóna 6", "areas": "Černý Most, Prosek, Horní Počernice, Nový Brázdim, Brandýs n./L., Hloubětín", "fee": "69 Kč", "min": "399 Kč" }
+    ],
+    "faqTitle": "Nejčastější otázky k rozvozu?",
+    "faqs": [
+      {
+        "q": "Do jakých lokalit rozvážíte pizzu?",
+        "a": "Pizza a další jídla rozvážíme z Vinoře do okolních městských částí a obcí – například do Vinoře, Přezletic, Kbel, Satalic, Podolanky, Radonic, Jenštejna, Dehtár, Svémyslic, Dřevčic, Miškovic, Čakovic, Letňan, Veleně, Třeboradic, Mírovic, Černého Mostu, Proseka, Horních Počernic, Nového Brázdimu nebo Brandýsa nad Labem. Aktuální přehled zón a cen najdete v tabulce výše."
+      },
+      {
+        "q": "Jak dlouho trvá rozvoz pizzy?",
+        "a": "Doba doručení závisí na vzdálenosti a obsazenosti kuchyně. Ve všední dny se obvykle pohybujeme kolem 30–60 minut. V exponovaných časech (pátek, sobota večer) může být doba dodání delší."
+      },
+      {
+        "q": "Jak si můžu objednat rozvoz?",
+        "a": "Objednávat můžete telefonicky na čísle +420 733 572 911 nebo přes rozvozové platformy (například přes Foodoru). Doporučujeme mít připravenou adresu a vybranou pizzu či další jídla z našeho menu."
+      },
+      {
+        "q": "Rozvážíte i bezlepkovou pizzu?",
+        "a": "Ano, bezlepkovou pizzu rádi připravíme i na rozvoz. Zeptejte se prosím při objednávce na aktuální nabídku bezlepkových těst a upozorněte obsluhu na případnou intoleranci lepku nebo alergii."
+      }
+    ]
+  },
+  "glutenFree": {
+    "title": "BEZLEPKOVÁ PIZZA V PRAZE - VINOŘI",
+    "intro": "Chcete si dát pizzu, ale vyhýbáte se lepku? V Dal Birbante v Praze – Vinoři připravujeme také bezlepkovou pizzu. Používáme speciální bezlepkové těsto a dbáme na maximálně možnou separaci od klasického těsta, aby riziko kontaminace bylo co nejmenší.",
+    "intro2": "Bezlepkovou pizzu si můžete dát přímo v našem bistru, vzít si ji s sebou nebo objednat na rozvoz. Doporučujeme si bezlepkovou variantu ověřit při objednávce – rádi vám sdělíme aktuální možnosti a poradíme s výběrem.",
+    "howTitle": "Jak připravujeme bezlepkovou pizzu?",
+    "howItems": [
+      "používáme bezlepkové těsto od ověřeného dodavatele",
+      "pizzaiolo pracuje s bezlepkovým těstem odděleně od klasického",
+      "používáme kvalitní italské suroviny stejně jako u klasické pizzy"
+    ],
+    "faqs": [
+      {
+        "q": "Je bezlepková pizza vhodná pro celiaky?",
+        "a": "Bezlepkové těsto je vhodné pro celiaky, nicméně pizza se připravuje v prostředí, kde se pracuje i s lepkem. Přestože děláme maximum pro oddělení bezlepkového těsta, stopová kontaminace není vyloučena. Pokud máte silnou alergii nebo celiakii, vždy nám to prosím oznamte předem."
+      },
+      {
+        "q": "Musím si bezlepkovou pizzu objednat předem?",
+        "a": "Doporučujeme se předem informovat, zda je aktuálně bezlepkové těsto dostupné. Objednat pak můžete na místě, telefonicky nebo v rámci rozvozu."
+      },
+      {
+        "q": "Je možné bezlepkovou pizzu i rozvážet?",
+        "a": "Ano, bezlepkovou pizzu vám rádi dovezeme v rámci našich rozvozových zón. Stačí při objednávce nahlásit, že chcete bezlepkovou variantu."
+      }
     ]
   },
   "contact": {
-    "title": "Kde nás najdete",
-    "lead": "Máte-li nějaký dotaz, zpětnou vazbu nebo si chcete rezervovat stůl, neváhejte nám napsat nebo zavolat.",
-    "formTitle": "Napište nám",
+    "title": "KDE NÁS NAJDETE?",
+    "lead": "Mladoboleslavská 1, Praha 9 - Vinoř",
+    "openText": "Máme otevřeno Úterý-Sobota 11:00-20:30 hodin Neděle-Pondělí zavřeno",
+    "formTitle": "NAPIŠTE NÁM.",
+    "formLead": "Máte-li nějaký dotaz, zpětnou vazbu nebo pokud si chcete rezervovat stůl, neváhejte nám napsat.",
     "formNameLabel": "Jméno",
-    "formEmailLabel": "E-mail",
+    "formEmailLabel": "Email",
     "formMessageLabel": "Zpráva",
-    "formSubmit": "Odeslat zprávu",
-    "formSuccess": "Děkujeme! Ozveme se co nejdříve.",
-    "formHint": "Formulář zatím otevírá váš e-mailový klient – zprávu pošlete na mangio@dalbirbante.cz.",
-    "hoursTitle": "Otevřeno",
+    "formSubmit": "Odešli",
+    "formSuccess": "Děkujeme!",
+    "formHint": "Formulář otevře váš e-mailový klient – zprávu pošlete na mangio@dalbirbante.cz.",
+    "hoursTitle": "OTEVŘENO",
+    "whereTitle": "KDE JSME?",
     "mapTitle": "Mapa"
   },
   "footer": {

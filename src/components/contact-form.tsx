@@ -33,7 +33,7 @@ export function ContactForm({ content }: { content: SiteContent }) {
           value={name}
           onChange={(e) => setName(e.target.value)}
           required
-          className="rounded-none border-[var(--line)] bg-white/70"
+          className="rounded-[6.4px] border-[var(--line)] bg-white/70"
         />
       </div>
       <div className="space-y-2">
@@ -44,7 +44,7 @@ export function ContactForm({ content }: { content: SiteContent }) {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           required
-          className="rounded-none border-[var(--line)] bg-white/70"
+          className="rounded-[6.4px] border-[var(--line)] bg-white/70"
         />
       </div>
       <div className="space-y-2">
@@ -55,12 +55,12 @@ export function ContactForm({ content }: { content: SiteContent }) {
           onChange={(e) => setMessage(e.target.value)}
           required
           rows={5}
-          className="rounded-none border-[var(--line)] bg-white/70"
+          className="rounded-[6.4px] border-[var(--line)] bg-white/70"
         />
       </div>
       <Button
         type="submit"
-        className="rounded-none bg-[var(--accent)] px-6 text-white hover:bg-[var(--accent-hover)]"
+        className="rounded-[6.4px] bg-[var(--accent)] px-6 text-white hover:bg-[var(--accent-hover)]"
       >
         {contact.formSubmit}
       </Button>

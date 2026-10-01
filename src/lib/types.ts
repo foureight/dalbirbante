@@ -11,6 +11,11 @@ export type MenuCategory = {
   items: MenuItem[];
 };
 
+export type FaqItem = {
+  q: string;
+  a: string;
+};
+
 export type SiteContent = {
   site: {
     brandName: string;
@@ -19,44 +24,72 @@ export type SiteContent = {
     phoneHref: string;
     email: string;
     address: string;
+    addressShort: string;
     orderUrl: string;
     orderLabel: string;
+    callLabel: string;
     hours: string;
     hoursClosed: string;
     mapEmbedUrl: string;
     facebookUrl: string;
+    instagramUrl: string;
+    announcement: string;
+    goodbye: string;
     metaTitle: string;
     metaDescription: string;
+    seoDescription: string;
+    geo: {
+      latitude: number;
+      longitude: number;
+      streetAddress: string;
+      addressLocality: string;
+      postalCode: string;
+      addressCountry: string;
+    };
+    keywords: string[];
+    pageMeta: {
+      menu: { title: string; description: string };
+      about: { title: string; description: string };
+      contact: { title: string; description: string };
+      daily: { title: string; description: string };
+      delivery: { title: string; description: string };
+      glutenFree: { title: string; description: string };
+    };
   };
   nav: {
-    home: string;
     menu: string;
+    daily: string;
+    delivery: string;
     about: string;
     contact: string;
-    gallery: string;
+    glutenFree: string;
   };
   home: {
-    heroEyebrow: string;
-    heroHeadline: string;
-    heroSub: string;
-    heroCtaPrimary: string;
-    heroCtaSecondary: string;
     introTitle: string;
     introText: string;
     offerTitle: string;
     offerItems: string[];
+    wineText: string;
+    ctaLine1: string;
+    ctaLine2: string;
+    menuCta: string;
     pizzaWeekTitle: string;
     pizzaWeekText: string;
+    storyTitle: string;
+    storyText: string;
     dailyMenuTitle: string;
     dailyMenuText: string;
     deliveryTitle: string;
     deliveryText: string;
+    deliveryText2: string;
     glutenFreeTitle: string;
     glutenFreeText: string;
+    contactTitle: string;
+    contactText: string;
+    hoursTitle: string;
+    whereTitle: string;
     featuresTitle: string;
     features: string[];
-    ctaTitle: string;
-    ctaText: string;
     galleryTitle: string;
     gallerySubtitle: string;
   };
@@ -76,15 +109,34 @@ export type SiteContent = {
     glutenNote: string;
   };
   menuCategories: MenuCategory[];
+  daily: {
+    title: string;
+    intro: string;
+    note: string;
+  };
   delivery: {
     title: string;
     intro: string;
+    intro2: string;
+    pricesTitle: string;
     zones: { name: string; areas: string; fee: string; min: string }[];
+    faqTitle: string;
+    faqs: FaqItem[];
+  };
+  glutenFree: {
+    title: string;
+    intro: string;
+    intro2: string;
+    howTitle: string;
+    howItems: string[];
+    faqs: FaqItem[];
   };
   contact: {
     title: string;
     lead: string;
+    openText: string;
     formTitle: string;
+    formLead: string;
     formNameLabel: string;
     formEmailLabel: string;
     formMessageLabel: string;
@@ -92,6 +144,7 @@ export type SiteContent = {
     formSuccess: string;
     formHint: string;
     hoursTitle: string;
+    whereTitle: string;
     mapTitle: string;
   };
   footer: {
