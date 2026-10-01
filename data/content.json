@@ -12,7 +12,7 @@
     "callLabel": "VOLEJTE",
     "hours": "Úterý–Sobota 11:00–20:30 hodin",
     "hoursClosed": "Neděle–Pondělí zavřeno",
-    "mapEmbedUrl": "https://www.reservo.cz/reservo_web/dalbirbante.cz/system/map.php",
+    "mapEmbedUrl": "/map/index.html",
     "facebookUrl": "https://www.facebook.com/dalbirbantebistro",
     "instagramUrl": "https://www.instagram.com/pizzeria_dal_birbante/",
     "announcement": "Důležité sdělení: sledujte aktuální otevírací dobu a denní nabídku.",

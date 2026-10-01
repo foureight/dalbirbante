@@ -7,7 +7,7 @@ type Props = {
 export function ReservoMap({ src, title, className }: Props) {
   return (
     <div
-      className={`overflow-hidden border border-[var(--line)] bg-[var(--ink)] ${className ?? ""}`}
+      className={`overflow-hidden border border-[var(--line)] bg-[#f3f3f3] ${className ?? ""}`}
     >
       <iframe
         src={src}
