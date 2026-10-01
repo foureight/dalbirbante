@@ -321,6 +321,16 @@
   }
 }
 
+.hero-slideshow__slide {
+  opacity: 0;
+  transition: opacity 1.1s ease;
+  will-change: opacity;
+}
+
+.hero-slideshow__slide.is-active {
+  opacity: 1;
+}
+
 .hero-pan {
   will-change: transform;
   animation: pan-slow 18s ease-in-out alternate infinite;
@@ -456,6 +466,10 @@
   .reveal,
   .reveal.reveal-ready,
   .reveal.reveal-ready:not(.is-visible),
+  .hero-slideshow__slide {
+    transition: none !important;
+  }
+
   .hero-pan,
   .hero-pan-alt,
   .animate-rise,

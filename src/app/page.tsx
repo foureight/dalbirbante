@@ -7,6 +7,7 @@ import { ContactForm } from "@/components/contact-form";
 import { DeliveryMap } from "@/components/delivery-map";
 import { Reveal } from "@/components/reveal";
 import { FeatureIcon } from "@/components/feature-icon";
+import { HeroSlideshow } from "@/components/hero-slideshow";
 import { Button } from "@/components/ui/button";
 
 const gallery = [
@@ -29,17 +30,7 @@ export default async function HomePage() {
       <SiteHeader content={content} />
       <main className="flex-1">
         <section className="relative min-h-[75svh] overflow-hidden text-white md:min-h-[90svh]">
-          <div className="absolute inset-0">
-            <Image
-              src="/images/lifestyle-08.webp"
-              alt="Neapolská pizza Dal Birbante Praha Vinoř"
-              fill
-              priority
-              className="hero-pan object-cover"
-              sizes="100vw"
-            />
-            <div className="absolute inset-0 bg-black/45" />
-          </div>
+          <HeroSlideshow />
           <div className="site-max relative mx-auto flex min-h-[75svh] w-full flex-col justify-end px-5 pb-16 pt-28 md:min-h-[90svh] md:justify-center md:px-10 md:pb-24">
             <h1 className="animate-rise-delay max-w-4xl text-white">
               {home.introTitle}
