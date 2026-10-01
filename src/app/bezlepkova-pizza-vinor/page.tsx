@@ -5,6 +5,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { Button } from "@/components/ui/button";
 import { PageJsonLd } from "@/components/json-ld";
+import { FaqAccordion } from "@/components/faq-accordion";
 import { getFaqSchema, getPageSchema } from "@/lib/schema";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -68,12 +69,10 @@ export default async function GlutenFreePage() {
         <section className="border-t border-[var(--line)] bg-[var(--paper-soft)]">
           <div className="page-wrap space-y-10 py-24 md:py-32">
             <h2 className="text-[var(--brand-red)]">{glutenFree.faqTitle}</h2>
-            {glutenFree.faqs.map((f) => (
-              <div key={f.q} className="border-b border-[var(--line)] pb-8">
-                <h3 className="text-[var(--brand-red)]">{f.q}</h3>
-                <p className="mt-4 text-[var(--muted)]">{f.a}</p>
-              </div>
-            ))}
+            <FaqAccordion
+              items={glutenFree.faqs}
+              titleClassName="text-[var(--brand-red)]"
+            />
           </div>
         </section>
       </main>

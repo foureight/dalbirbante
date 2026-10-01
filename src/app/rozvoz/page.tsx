@@ -5,6 +5,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { Button } from "@/components/ui/button";
 import { PageJsonLd } from "@/components/json-ld";
+import { FaqAccordion } from "@/components/faq-accordion";
 import { getFaqSchema, getPageSchema } from "@/lib/schema";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -78,14 +79,7 @@ export default async function DeliveryPage() {
           </Button>
 
           <h2 className="mt-16 text-[var(--brand-red)]">{delivery.faqTitle}</h2>
-          <div className="mt-6 space-y-6">
-            {delivery.faqs.map((f) => (
-              <div key={f.q} className="border-b border-[var(--line)] pb-5">
-                <h3>{f.q}</h3>
-                <p className="mt-2 text-[var(--muted)]">{f.a}</p>
-              </div>
-            ))}
-          </div>
+          <FaqAccordion items={delivery.faqs} />
         </section>
       </main>
       <SiteFooter content={content} />
