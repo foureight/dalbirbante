@@ -70,16 +70,8 @@ export function AnnouncementBar({ message }: { message: string }) {
         closed ? "bg-[var(--brand-red)]" : "bg-[var(--brand-green)]"
       }`}
     >
-      <div className="site-max mx-auto flex w-full items-center gap-3 px-5 py-3 pr-12 md:gap-5 md:px-10 md:pr-14">
-        <Image
-          src="/images/logo-white.webp"
-          alt="Dal Birbante"
-          width={180}
-          height={22}
-          className="h-5 w-auto shrink-0 object-contain md:h-6"
-          priority
-        />
-        <p className="min-w-0 flex-1 text-left text-sm font-semibold uppercase tracking-[0.12em] md:text-base">
+      <div className="site-max mx-auto flex w-full items-center justify-center gap-4 px-5 py-3 pr-12 md:px-10 md:pr-14">
+        <p className="text-center text-sm font-semibold uppercase tracking-[0.12em] md:text-base">
           {activeMessage}
         </p>
       </div>
