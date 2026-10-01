@@ -11,6 +11,7 @@ import {
 import { useCart } from "@/components/cart-provider";
 import { formatPrice } from "@/lib/money";
 import { calcOrderFees, PACKAGING_FEE } from "@/lib/order-fees";
+import { AddressAutocomplete } from "@/components/address-autocomplete";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -374,6 +375,20 @@ export function CartDrawer() {
                   placeholder="733 572 911"
                 />
               </div>
+              <AddressAutocomplete
+                value={customerAddress}
+                onChange={setCustomerAddress}
+                required={fulfillment === "delivery"}
+                label="Adresa"
+                placeholder="Začněte psát ulici nebo obec…"
+                hint={
+                  fulfillment === "delivery"
+                    ? fees.deliveryZone
+                      ? `Doprava podle adresy: ${fees.deliveryZone.name} · ${formatPrice(fees.deliveryFee)} (min. ${formatPrice(fees.minOrder)})`
+                      : "Doplňte obec z rozvozové zóny — podle ní spočítáme dopravu."
+                    : "Při rozvozu podle adresy spočítáme dopravu."
+                }
+              />
               <div className="space-y-1.5">
                 <Label>Vyzvednutí / rozvoz</Label>
                 <select
@@ -389,23 +404,6 @@ export function CartDrawer() {
                   <option value="delivery">Rozvoz</option>
                 </select>
               </div>
-              {fulfillment === "delivery" ? (
-                <div className="space-y-1.5">
-                  <Label>Adresa doručení</Label>
-                  <Input
-                    required
-                    value={customerAddress}
-                    onChange={(e) => setCustomerAddress(e.target.value)}
-                    className="rounded-none"
-                    placeholder="Ulice, číslo, obec (např. Vinoř, Kbely)"
-                  />
-                  <p className="text-sm text-[var(--muted)]">
-                    {fees.deliveryZone
-                      ? `Doprava podle adresy: ${fees.deliveryZone.name} · ${formatPrice(fees.deliveryFee)} (min. ${formatPrice(fees.minOrder)})`
-                      : "Doplňte obec z rozvozové zóny — podle ní spočítáme dopravu."}
-                  </p>
-                </div>
-              ) : null}
               <div className="space-y-1.5">
                 <Label>Poznámka</Label>
                 <Textarea

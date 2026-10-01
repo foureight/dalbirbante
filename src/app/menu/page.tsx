@@ -34,7 +34,7 @@ export default async function MenuPage() {
 
         <section className="page-wrap pb-12 pt-16 md:pb-16 md:pt-24">
           <Reveal>
-            <p className="max-w-none text-justify text-[var(--muted)]">
+            <p className="max-w-none text-justify text-xl leading-relaxed text-[var(--muted)] md:text-2xl md:leading-relaxed">
               {menuPage.intro}
             </p>
           </Reveal>
@@ -70,9 +70,11 @@ export default async function MenuPage() {
                         />
                       )}
                       <div>
-                        <h3>{item.name}</h3>
+                        <h3 className="text-[1.85rem] leading-tight md:text-[2.35rem]">
+                          {item.name}
+                        </h3>
                         {item.description ? (
-                          <p className="mt-1 leading-relaxed text-[var(--muted)]">
+                          <p className="mt-2 text-xl leading-relaxed text-[var(--muted)] md:text-2xl">
                             {item.description}
                           </p>
                         ) : null}
@@ -99,16 +101,20 @@ export default async function MenuPage() {
             <section className="space-y-6 rounded-[6.4px] border border-[var(--line)] bg-[var(--paper-soft)] p-6 md:p-8">
               <div>
                 <h2 className="text-[var(--brand-green)]">{menuPage.extrasTitle}</h2>
-                <p className="mt-2 text-[var(--muted)]">{menuPage.extrasText}</p>
+                <p className="mt-2 text-xl leading-relaxed text-[var(--muted)] md:text-2xl">
+                  {menuPage.extrasText}
+                </p>
               </div>
-              <p className="font-medium text-[var(--brand-green)]">
+              <p className="text-xl font-medium text-[var(--brand-green)] md:text-2xl">
                 {menuPage.glutenNote}
               </p>
               <div>
                 <h2 className="text-[var(--brand-green)]">
                   {menuPage.allergensTitle}
                 </h2>
-                <p className="mt-2 text-[var(--muted)]">{menuPage.allergensText}</p>
+                <p className="mt-2 text-xl leading-relaxed text-[var(--muted)] md:text-2xl">
+                  {menuPage.allergensText}
+                </p>
               </div>
             </section>
           </Reveal>
@@ -123,7 +129,9 @@ export default async function MenuPage() {
               >
                 {site.orderLabel}
               </a>
-              <p className="text-[var(--muted)]">{menuPage.orderNote}</p>
+              <p className="text-xl text-[var(--muted)] md:text-2xl">
+                {menuPage.orderNote}
+              </p>
             </div>
           </Reveal>
         </div>
