@@ -3,7 +3,6 @@ import type { Metadata } from "next";
 import { getContent } from "@/lib/content";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
-import { Button } from "@/components/ui/button";
 import { OrderButton } from "@/components/order-button";
 import { PageHero } from "@/components/page-hero";
 import { PageJsonLd } from "@/components/json-ld";
@@ -38,14 +37,6 @@ export default async function MenuPage() {
             <p className="max-w-none text-justify text-[var(--muted)]">
               {menuPage.intro}
             </p>
-            <div className="mt-10 flex flex-wrap items-center gap-4">
-              <Button asChild className="btn-green">
-                <a href={site.orderUrl} target="_blank" rel="noreferrer">
-                  {site.orderLabel}
-                </a>
-              </Button>
-              <p className="text-[var(--muted)]">{menuPage.orderNote}</p>
-            </div>
           </Reveal>
         </section>
 
@@ -112,6 +103,13 @@ export default async function MenuPage() {
                 <p className="mt-2 text-[var(--muted)]">{menuPage.allergensText}</p>
               </div>
             </section>
+          </Reveal>
+
+          <Reveal delay={80}>
+            <div className="flex flex-col items-start gap-5">
+              <p className="text-[var(--muted)]">{menuPage.orderNote}</p>
+              <OrderButton href={site.orderUrl} label={site.orderLabel} />
+            </div>
           </Reveal>
         </div>
       </main>
