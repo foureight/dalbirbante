@@ -10,11 +10,7 @@ import {
 } from "@stripe/react-stripe-js";
 import { useCart } from "@/components/cart-provider";
 import { formatPrice } from "@/lib/money";
-import {
-  calcOrderFees,
-  DELIVERY_ZONES,
-  PACKAGING_FEE,
-} from "@/lib/order-fees";
+import { calcOrderFees, PACKAGING_FEE } from "@/lib/order-fees";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -107,7 +103,7 @@ export function CartDrawer() {
   const [fulfillment, setFulfillment] = useState<"pickup" | "delivery">(
     "pickup",
   );
-  const [deliveryZoneId, setDeliveryZoneId] = useState(DELIVERY_ZONES[0].id);
+  const [deliveryZoneId, setDeliveryZoneId] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [orderNumber, setOrderNumber] = useState<number | null>(null);
@@ -139,10 +135,16 @@ export function CartDrawer() {
       calcOrderFees({
         itemsTotal: total,
         fulfillment,
-        deliveryZoneId,
+        customerAddress,
       }),
-    [total, fulfillment, deliveryZoneId],
+    [total, fulfillment, customerAddress],
   );
+
+  useEffect(() => {
+    const nextId =
+      fulfillment === "delivery" ? fees.deliveryZone?.id || "" : "";
+    if (nextId !== deliveryZoneId) setDeliveryZoneId(nextId);
+  }, [fulfillment, fees.deliveryZone, deliveryZoneId]);
 
   const meta: CheckoutMeta = {
     customerName: customerName.trim(),
@@ -150,7 +152,8 @@ export function CartDrawer() {
     customerAddress: customerAddress.trim(),
     note: note.trim(),
     fulfillment,
-    deliveryZoneId: fulfillment === "delivery" ? deliveryZoneId : "",
+    deliveryZoneId:
+      fulfillment === "delivery" ? fees.deliveryZone?.id || deliveryZoneId : "",
   };
 
   async function startCheckout(e: FormEvent) {
@@ -265,25 +268,29 @@ export function CartDrawer() {
                       <p className="text-[var(--muted)]">
                         {formatPrice(item.unitPrice)}
                       </p>
-                      <div className="mt-2 flex items-center gap-2">
+                      <div className="mt-2 flex items-center gap-3">
                         <button
                           type="button"
-                          className="size-8 border border-[var(--line)]"
+                          className="inline-flex size-8 items-center justify-center text-xl leading-none"
                           onClick={() => setQty(item.key, item.qty - 1)}
+                          aria-label="Snížit počet"
                         >
                           −
                         </button>
-                        <span className="w-6 text-center">{item.qty}</span>
+                        <span className="min-w-6 text-center tabular-nums">
+                          {item.qty}
+                        </span>
                         <button
                           type="button"
-                          className="size-8 border border-[var(--line)]"
+                          className="inline-flex size-8 items-center justify-center text-xl leading-none"
                           onClick={() => setQty(item.key, item.qty + 1)}
+                          aria-label="Zvýšit počet"
                         >
                           +
                         </button>
                         <button
                           type="button"
-                          className="ml-2 text-sm text-[var(--brand-red)]"
+                          className="ml-1 text-sm text-[var(--brand-red)]"
                           onClick={() => removeItem(item.key)}
                         >
                           Odebrat
@@ -383,34 +390,21 @@ export function CartDrawer() {
                 </select>
               </div>
               {fulfillment === "delivery" ? (
-                <>
-                  <div className="space-y-1.5">
-                    <Label>Zóna rozvozu</Label>
-                    <select
-                      required
-                      className="h-10 w-full border border-[var(--line)] bg-white px-3"
-                      value={deliveryZoneId}
-                      onChange={(e) => setDeliveryZoneId(e.target.value)}
-                    >
-                      {DELIVERY_ZONES.map((zone) => (
-                        <option key={zone.id} value={zone.id}>
-                          {zone.name} · {zone.areas} · doprava{" "}
-                          {formatPrice(zone.fee)} (min. {formatPrice(zone.min)})
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  <div className="space-y-1.5">
-                    <Label>Adresa doručení</Label>
-                    <Input
-                      required
-                      value={customerAddress}
-                      onChange={(e) => setCustomerAddress(e.target.value)}
-                      className="rounded-none"
-                      placeholder="Ulice, číslo, město"
-                    />
-                  </div>
-                </>
+                <div className="space-y-1.5">
+                  <Label>Adresa doručení</Label>
+                  <Input
+                    required
+                    value={customerAddress}
+                    onChange={(e) => setCustomerAddress(e.target.value)}
+                    className="rounded-none"
+                    placeholder="Ulice, číslo, obec (např. Vinoř, Kbely)"
+                  />
+                  <p className="text-sm text-[var(--muted)]">
+                    {fees.deliveryZone
+                      ? `Doprava podle adresy: ${fees.deliveryZone.name} · ${formatPrice(fees.deliveryFee)} (min. ${formatPrice(fees.minOrder)})`
+                      : "Doplňte obec z rozvozové zóny — podle ní spočítáme dopravu."}
+                  </p>
+                </div>
               ) : null}
               <div className="space-y-1.5">
                 <Label>Poznámka</Label>
@@ -438,7 +432,9 @@ export function CartDrawer() {
                   </span>
                   <span>
                     {fulfillment === "delivery"
-                      ? formatPrice(fees.deliveryFee)
+                      ? fees.deliveryZone
+                        ? formatPrice(fees.deliveryFee)
+                        : "—"
                       : "0 Kč"}
                   </span>
                 </div>
@@ -448,6 +444,13 @@ export function CartDrawer() {
                     {formatPrice(fees.total)}
                   </span>
                 </div>
+                {fulfillment === "delivery" &&
+                customerAddress.trim() &&
+                !fees.deliveryZone ? (
+                  <p className="text-[var(--brand-red)]">
+                    Obec v adrese nepatří do rozvozových zón.
+                  </p>
+                ) : null}
                 {fulfillment === "delivery" && !fees.meetsMinOrder ? (
                   <p className="text-[var(--brand-red)]">
                     Minimální objednávka pro {fees.deliveryZone?.name} je{" "}
@@ -459,7 +462,11 @@ export function CartDrawer() {
               <Button
                 type="submit"
                 className="btn-green w-full"
-                disabled={busy || (fulfillment === "delivery" && !fees.meetsMinOrder)}
+                disabled={
+                  busy ||
+                  (fulfillment === "delivery" &&
+                    (!fees.deliveryZone || !fees.meetsMinOrder))
+                }
               >
                 {busy
                   ? "Připravuji platbu…"

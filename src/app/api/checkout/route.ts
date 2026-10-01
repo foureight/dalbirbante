@@ -33,19 +33,11 @@ export async function POST(request: Request) {
     if (!items.length) {
       return NextResponse.json({ error: "Košík je prázdný." }, { status: 400 });
     }
-    if (fulfillment === "delivery") {
-      if (!deliveryZoneId) {
-        return NextResponse.json(
-          { error: "Vyberte zónu rozvozu." },
-          { status: 400 },
-        );
-      }
-      if (customerAddress.length < 5) {
-        return NextResponse.json(
-          { error: "Zadejte adresu doručení." },
-          { status: 400 },
-        );
-      }
+    if (fulfillment === "delivery" && customerAddress.length < 5) {
+      return NextResponse.json(
+        { error: "Zadejte adresu doručení včetně obce." },
+        { status: 400 },
+      );
     }
 
     const normalized = items.map((i) => ({
@@ -73,7 +65,17 @@ export async function POST(request: Request) {
       itemsTotal,
       fulfillment,
       deliveryZoneId,
+      customerAddress,
     });
+    if (fulfillment === "delivery" && !fees.deliveryZone) {
+      return NextResponse.json(
+        {
+          error:
+            "Z adresy nepoznáme zónu rozvozu. Doplňte obec (např. Vinoř, Kbely, Letňany).",
+        },
+        { status: 400 },
+      );
+    }
 
     if (itemsTotal < 1) {
       return NextResponse.json({ error: "Neplatná částka." }, { status: 400 });

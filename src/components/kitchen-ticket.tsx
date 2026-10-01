@@ -62,9 +62,16 @@ export function KitchenTicket({ order }: { order: Order }) {
       <div className="kitchen-ticket__rule" />
       <div>
         <div className="kitchen-ticket__strong">{order.customerName}</div>
-        <div>{order.customerPhone}</div>
-        {order.customerAddress ? <div>{order.customerAddress}</div> : null}
-        {order.note ? <div className="kitchen-ticket__note">Pozn.: {order.note}</div> : null}
+        <div>Tel: {order.customerPhone || "—"}</div>
+        <div>
+          Adresa:{" "}
+          {order.fulfillment === "delivery"
+            ? order.customerAddress || "—"
+            : "Vyzvednutí na místě"}
+        </div>
+        {order.note ? (
+          <div className="kitchen-ticket__note">Pozn.: {order.note}</div>
+        ) : null}
       </div>
       <div className="kitchen-ticket__footer">Děkujeme · Buon appetito!</div>
     </div>

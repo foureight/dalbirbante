@@ -116,11 +116,27 @@ export function AdminOrdersClient({ authenticated }: { authenticated: boolean })
                     #{order.number} · {order.customerName}
                   </h2>
                   <p className="text-[var(--muted)]">
-                    {order.customerPhone} ·{" "}
-                    {order.fulfillment === "delivery" ? "Rozvoz" : "Vyzvednutí"} ·{" "}
-                    {STATUS_LABEL[order.status]}
+                    {order.fulfillment === "delivery" ? "Rozvoz" : "Vyzvednutí"}
+                    {order.deliveryZoneName ? ` · ${order.deliveryZoneName}` : ""}{" "}
+                    · {STATUS_LABEL[order.status]}
                     {order.paid ? " · Zaplaceno kartou" : ""}
                   </p>
+                  <div className="mt-2 space-y-1 text-sm">
+                    <p>
+                      <span className="font-semibold text-[var(--ink)]">
+                        Telefon:
+                      </span>{" "}
+                      {order.customerPhone || "—"}
+                    </p>
+                    <p>
+                      <span className="font-semibold text-[var(--ink)]">
+                        Adresa:
+                      </span>{" "}
+                      {order.fulfillment === "delivery"
+                        ? order.customerAddress || "—"
+                        : "Vyzvednutí na místě"}
+                    </p>
+                  </div>
                 </div>
                 <p className="text-2xl font-black text-[var(--brand-red)]">
                   {formatPrice(order.total)}
@@ -149,11 +165,6 @@ export function AdminOrdersClient({ authenticated }: { authenticated: boolean })
                   </span>
                 </li>
               </ul>
-              {order.customerAddress ? (
-                <p className="mt-3 text-sm text-[var(--muted)]">
-                  Adresa: {order.customerAddress}
-                </p>
-              ) : null}
               {order.note ? (
                 <p className="mt-3 text-sm text-[var(--brand-green)]">
                   Poznámka: {order.note}
