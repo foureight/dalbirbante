@@ -22,6 +22,14 @@
 
 @font-face {
   font-family: "Omnes";
+  src: url("/fonts/omnes-bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Omnes";
   src: url("/fonts/omnes-black.woff") format("woff");
   font-weight: 900;
   font-style: normal;
@@ -199,7 +207,7 @@
 
 .nav-menu {
   font-family: "Omnes", sans-serif;
-  font-weight: 900;
+  font-weight: 700;
   font-size: 23px;
   line-height: 1.2;
   letter-spacing: 0.02em;
