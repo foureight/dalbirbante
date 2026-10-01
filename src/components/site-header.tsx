@@ -26,7 +26,7 @@ export function SiteHeader({ content }: { content: SiteContent }) {
         <div className="site-max mx-auto flex w-full items-center justify-between gap-6 px-5 py-5 md:px-10 md:py-6">
           <Link href="/" className="flex items-center">
             <Image
-              src="/images/logo-green.webp"
+              src="/images/logo.webp"
               alt={site.brandName}
               width={320}
               height={40}
