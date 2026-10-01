@@ -69,7 +69,7 @@ export default async function DailyMenuPage() {
                     <p className="text-3xl font-black leading-none text-[var(--brand-red)] md:text-4xl">
                       {item.price}
                     </p>
-                    <OrderButton href={site.orderUrl} />
+                    <AddToCartButton name={item.name} price={item.price} />
                   </div>
                 </li>
               </Reveal>
