@@ -130,7 +130,7 @@ export default async function HomePage() {
               {
                 t: home.pizzaWeekTitle,
                 d: home.pizzaWeekText,
-                href: "/menu#pizza",
+                href: "/menu",
               },
               {
                 t: home.dailyMenuTitle,
@@ -140,7 +140,7 @@ export default async function HomePage() {
               {
                 t: home.glutenFreeTitle,
                 d: home.glutenFreeText,
-                href: "/bezlepkova-pizza-vinor",
+                href: "/menu",
               },
             ].map((block, i) => (
               <Reveal key={block.t} delay={i * 100}>
