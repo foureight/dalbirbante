@@ -139,7 +139,30 @@
       }
     ],
     "galleryTitle": "Fotogalerie",
-    "gallerySubtitle": "Pizza z pece, panozzo a atmosféra našeho bistra."
+    "gallerySubtitle": "Pizza z pece, panozzo a atmosféra našeho bistra.",
+    "faqTitle": "Nejčastější otázky",
+    "faqs": [
+      {
+        "q": "Kde najdu pizzerii Dal Birbante?",
+        "a": "Jsme na adrese Mladoboleslavská 1, Praha 9 – Vinoř. Parkování je v okolí a jídlo si můžete dát u nás, s sebou i s rozvozem do okolních lokalit."
+      },
+      {
+        "q": "Kdy máte otevřeno?",
+        "a": "Otevřeno máme úterý–sobota 11:00–20:30. V neděli a pondělí máme zavřeno. Aktuální změny sledujte v zeleném pruhu nahoře na webu."
+      },
+      {
+        "q": "Jak si u vás objednám pizzu?",
+        "a": "Objednejte přes košík na webu, zavolejte na 733 572 911, nebo se zastavte přímo ve Vinoři. Online platba kartou je dostupná v košíku; hotově i kartou platíte i na místě."
+      },
+      {
+        "q": "Rozvážíte i mimo Vinoř?",
+        "a": "Ano. Rozvážíme do okolních městských částí a obcí (Kbely, Satalice, Letňany, Čakovice, Černý Most a další). Ceny a minimální objednávky podle zón najdete na stránce Rozvoz."
+      },
+      {
+        "q": "Máte bezlepkovou variantu?",
+        "a": "Ano — připravíme bezlepkovou pizzu (+99 Kč) i vybrané bezlepkové těstoviny (+29 Kč). Při objednávce prosím vždy uveďte bezlepkovou variantu."
+      }
+    ]
   },
   "about": {
     "title": "O NÁS",

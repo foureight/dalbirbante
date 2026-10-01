@@ -97,6 +97,8 @@ export type SiteContent = {
     features: { title: string; text: string }[];
     galleryTitle: string;
     gallerySubtitle: string;
+    faqTitle: string;
+    faqs: FaqItem[];
   };
   about: {
     title: string;

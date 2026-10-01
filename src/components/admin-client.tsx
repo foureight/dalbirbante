@@ -342,6 +342,38 @@ export function AdminClient({ initial, authenticated }: Props) {
               </div>
             ))}
           </div>
+          <div className="space-y-4 rounded-[6.4px] border border-[var(--line)] bg-white p-5">
+            <p className="text-base font-extrabold text-[var(--brand-red)]">
+              FAQ
+            </p>
+            <Field
+              label="Nadpis FAQ"
+              value={h.faqTitle}
+              onChange={(v) => updateAt(["home", "faqTitle"], v)}
+            />
+            {h.faqs.map((f, i) => (
+              <div
+                key={i}
+                className="space-y-3 border-t border-[var(--line)] pt-4"
+              >
+                <Field
+                  label={`Otázka ${i + 1}`}
+                  value={f.q}
+                  onChange={(v) =>
+                    updateAt(["home", "faqs", String(i), "q"], v)
+                  }
+                />
+                <Field
+                  label="Odpověď"
+                  value={f.a}
+                  onChange={(v) =>
+                    updateAt(["home", "faqs", String(i), "a"], v)
+                  }
+                  multiline
+                />
+              </div>
+            ))}
+          </div>
         </div>
       );
     }

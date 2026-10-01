@@ -5,10 +5,13 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { ContactForm } from "@/components/contact-form";
 import { DeliveryMap } from "@/components/delivery-map";
+import { FaqAccordion } from "@/components/faq-accordion";
+import { PageJsonLd } from "@/components/json-ld";
 import { Reveal } from "@/components/reveal";
 import { FeatureIcon } from "@/components/feature-icon";
 import { HeroSlideshow } from "@/components/hero-slideshow";
 import { Button } from "@/components/ui/button";
+import { getFaqSchema } from "@/lib/schema";
 
 const gallery = [
   "/images/gallery/01.webp",
