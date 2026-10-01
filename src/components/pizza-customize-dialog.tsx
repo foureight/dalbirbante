@@ -1,6 +1,7 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { createPortal } from "react-dom";
 import { useCart } from "@/components/cart-provider";
 import {
   GLUTEN_FREE_PIZZA_SURCHARGE,
@@ -28,6 +29,26 @@ export function PizzaCustomizeDialog({
   const { addItem } = useCart();
   const [dough, setDough] = useState<"classic" | "glutenFree">("classic");
   const [selected, setSelected] = useState<Record<string, boolean>>({});
+  const [mounted, setMounted] = useState(false);
+  const [canDismiss, setCanDismiss] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!open) {
+      setCanDismiss(false);
+      return;
+    }
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const id = window.setTimeout(() => setCanDismiss(true), 120);
+    return () => {
+      document.body.style.overflow = prev;
+      window.clearTimeout(id);
+    };
+  }, [open]);
 
   const extras = useMemo(
     () => PIZZA_EXTRAS.filter((e) => selected[e.id]),
@@ -48,6 +69,7 @@ export function PizzaCustomizeDialog({
   }
 
   function handleClose() {
+    if (!canDismiss) return;
     reset();
     onClose();
   }
@@ -68,21 +90,30 @@ export function PizzaCustomizeDialog({
         extras: extras.map((e) => e.name),
       },
     });
-    handleClose();
+    reset();
+    onClose();
   }
 
-  if (!open) return null;
+  if (!open || !mounted) return null;
 
-  return (
-    <div className="fixed inset-0 z-[90]">
+  return createPortal(
+    <div
+      className="fixed inset-0 z-[200] flex items-end justify-center md:items-center md:p-6"
+      role="dialog"
+      aria-modal="true"
+      aria-label={`Upravit pizzu ${name}`}
+    >
       <button
         type="button"
         className="absolute inset-0 bg-black/50"
         aria-label="Zavřít"
         onClick={handleClose}
       />
-      <div className="absolute inset-x-0 bottom-0 max-h-[92svh] overflow-y-auto rounded-t-[12px] bg-white shadow-2xl md:inset-auto md:left-1/2 md:top-1/2 md:w-full md:max-w-xl md:-translate-x-1/2 md:-translate-y-1/2 md:rounded-[10px]">
-        <div className="sticky top-0 z-10 flex items-start justify-between gap-4 border-b border-[var(--line)] bg-white px-5 py-4">
+      <div
+        className="relative z-10 flex max-h-[92svh] w-full max-w-xl flex-col overflow-hidden rounded-t-[12px] bg-white shadow-2xl md:rounded-[10px]"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex shrink-0 items-start justify-between gap-4 border-b border-[var(--line)] px-5 py-4">
           <div>
             <p className="text-sm font-semibold uppercase tracking-wide text-[var(--brand-green)]">
               Upravit pizzu
@@ -100,7 +131,7 @@ export function PizzaCustomizeDialog({
           </button>
         </div>
 
-        <div className="space-y-8 px-5 py-6">
+        <div className="min-h-0 flex-1 space-y-8 overflow-y-auto px-5 py-6">
           <section>
             <h3 className="mb-3 text-lg font-extrabold text-[var(--brand-green)]">
               1. Těsto
@@ -116,7 +147,7 @@ export function PizzaCustomizeDialog({
                 <span className="flex items-center gap-2 font-semibold">
                   <input
                     type="radio"
-                    name="dough"
+                    name={`dough-${name}`}
                     checked={dough === "classic"}
                     onChange={() => setDough("classic")}
                   />
@@ -136,7 +167,7 @@ export function PizzaCustomizeDialog({
                 <span className="flex items-center gap-2 font-semibold">
                   <input
                     type="radio"
-                    name="dough"
+                    name={`dough-${name}`}
                     checked={dough === "glutenFree"}
                     onChange={() => setDough("glutenFree")}
                   />
@@ -156,7 +187,7 @@ export function PizzaCustomizeDialog({
             <p className="mb-4 text-sm text-[var(--muted)]">
               Zaškrtněte, co chcete přidat. Pak pokračujte do košíku.
             </p>
-            <div className="grid max-h-[40vh] gap-2 overflow-y-auto sm:grid-cols-2">
+            <div className="grid gap-2 sm:grid-cols-2">
               {PIZZA_EXTRAS.map((extra) => (
                 <label
                   key={extra.id}
@@ -183,7 +214,7 @@ export function PizzaCustomizeDialog({
           </section>
         </div>
 
-        <div className="sticky bottom-0 flex flex-wrap items-center justify-between gap-3 border-t border-[var(--line)] bg-white px-5 py-4">
+        <div className="flex shrink-0 flex-wrap items-center justify-between gap-3 border-t border-[var(--line)] bg-white px-5 py-4">
           <div>
             <p className="text-sm text-[var(--muted)]">Cena celkem</p>
             <p className="text-2xl font-black text-[var(--brand-red)]">
@@ -195,6 +226,7 @@ export function PizzaCustomizeDialog({
           </Button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }
