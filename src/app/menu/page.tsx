@@ -69,7 +69,7 @@ export default async function MenuPage() {
                       <div>
                         <h3>{item.name}</h3>
                         {item.description ? (
-                          <p className="mt-1 text-sm leading-relaxed text-[var(--muted)]">
+                          <p className="mt-1 leading-relaxed text-[var(--muted)]">
                             {item.description}
                           </p>
                         ) : null}
