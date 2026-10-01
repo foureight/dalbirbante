@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label";
 import type { SiteContent } from "@/lib/types";
 
 export function ContactForm({ content }: { content: SiteContent }) {
-  const { contact } = content;
+  const { contact, site } = content;
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
@@ -97,7 +97,14 @@ export function ContactForm({ content }: { content: SiteContent }) {
         {status === "loading" ? "Odesílám…" : contact.formSubmit}
       </Button>
       <p className="text-sm leading-snug text-[var(--muted)] md:text-[15px]">
-        {contact.formHint}
+        {contact.formHint}{" "}
+        <a
+          href={`mailto:${site.email}`}
+          className="underline underline-offset-2 transition hover:text-[var(--brand-red)]"
+        >
+          {site.email}
+        </a>
+        .
       </p>
       {status === "success" && (
         <p className="text-[var(--brand-green)]">{contact.formSuccess}</p>
