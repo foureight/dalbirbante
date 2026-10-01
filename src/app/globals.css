@@ -605,6 +605,9 @@
 }
 
 .btn-order:hover {
+  background: var(--brand-green) !important;
+  color: #fff !important;
+  border-color: var(--brand-green) !important;
   transform: translateY(-2px);
 }
 
