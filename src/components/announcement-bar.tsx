@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 const STORAGE_KEY = "dalbirbante-announcement-dismissed";
