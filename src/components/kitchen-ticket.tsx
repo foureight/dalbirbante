@@ -40,6 +40,17 @@ export function KitchenTicket({ order }: { order: Order }) {
         ))}
       </ul>
       <div className="kitchen-ticket__rule" />
+      <div className="kitchen-ticket__row">
+        <span>Balení</span>
+        <span>{formatPrice(order.packagingFee ?? 0)}</span>
+      </div>
+      <div className="kitchen-ticket__row">
+        <span>
+          Doprava
+          {order.deliveryZoneName ? ` (${order.deliveryZoneName})` : ""}
+        </span>
+        <span>{formatPrice(order.deliveryFee ?? 0)}</span>
+      </div>
       <div className="kitchen-ticket__row kitchen-ticket__strong">
         <span>CELKEM</span>
         <span>{formatPrice(order.total)}</span>
@@ -52,6 +63,7 @@ export function KitchenTicket({ order }: { order: Order }) {
       <div>
         <div className="kitchen-ticket__strong">{order.customerName}</div>
         <div>{order.customerPhone}</div>
+        {order.customerAddress ? <div>{order.customerAddress}</div> : null}
         {order.note ? <div className="kitchen-ticket__note">Pozn.: {order.note}</div> : null}
       </div>
       <div className="kitchen-ticket__footer">Děkujeme · Buon appetito!</div>

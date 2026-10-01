@@ -15,6 +15,7 @@ Otevřete [http://127.0.0.1:43123](http://127.0.0.1:43123).
 
 - V menu u pizzy: **Do košíku** → výběr klasická / bezlepková (+99 Kč) → checkboxy přísad → košík
 - Košík v hlavičce (ikona před Kontakt)
+- V objednávce je **balení (15 Kč)** a při rozvozu **doprava dle zóny** (+ adresa a min. objednávka)
 - Platba kartou přes **Stripe** (Payment Element)
 - Fronta v restauraci: [/admin/objednavky](http://127.0.0.1:43123/admin/objednavky) — tisk kuchyňského lístku
 

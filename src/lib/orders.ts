@@ -18,8 +18,14 @@ export type Order = {
   paymentMethod: "card";
   customerName: string;
   customerPhone: string;
+  customerAddress?: string;
   note: string;
   fulfillment: "pickup" | "delivery";
+  deliveryZoneId?: string;
+  deliveryZoneName?: string;
+  packagingFee: number;
+  deliveryFee: number;
+  itemsTotal: number;
   items: OrderItem[];
   total: number;
   stripePaymentIntentId?: string;

@@ -10,6 +10,11 @@ import {
 } from "@stripe/react-stripe-js";
 import { useCart } from "@/components/cart-provider";
 import { formatPrice } from "@/lib/money";
+import {
+  calcOrderFees,
+  DELIVERY_ZONES,
+  PACKAGING_FEE,
+} from "@/lib/order-fees";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -18,8 +23,10 @@ import { Textarea } from "@/components/ui/textarea";
 type CheckoutMeta = {
   customerName: string;
   customerPhone: string;
+  customerAddress: string;
   note: string;
   fulfillment: "pickup" | "delivery";
+  deliveryZoneId: string;
 };
 
 function StripePayForm({
@@ -95,16 +102,19 @@ export function CartDrawer() {
   const [step, setStep] = useState<"cart" | "checkout" | "done">("cart");
   const [customerName, setCustomerName] = useState("");
   const [customerPhone, setCustomerPhone] = useState("");
+  const [customerAddress, setCustomerAddress] = useState("");
   const [note, setNote] = useState("");
   const [fulfillment, setFulfillment] = useState<"pickup" | "delivery">(
     "pickup",
   );
+  const [deliveryZoneId, setDeliveryZoneId] = useState(DELIVERY_ZONES[0].id);
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [orderNumber, setOrderNumber] = useState<number | null>(null);
   const [mode, setMode] = useState<"stripe" | "mock" | null>(null);
   const [clientSecret, setClientSecret] = useState<string | null>(null);
   const [publishableKey, setPublishableKey] = useState("");
+  const [payTotal, setPayTotal] = useState(0);
 
   useEffect(() => {
     if (!open) {
@@ -124,11 +134,23 @@ export function CartDrawer() {
     qty: i.qty,
   }));
 
+  const fees = useMemo(
+    () =>
+      calcOrderFees({
+        itemsTotal: total,
+        fulfillment,
+        deliveryZoneId,
+      }),
+    [total, fulfillment, deliveryZoneId],
+  );
+
   const meta: CheckoutMeta = {
     customerName: customerName.trim(),
     customerPhone: customerPhone.trim(),
+    customerAddress: customerAddress.trim(),
     note: note.trim(),
     fulfillment,
+    deliveryZoneId: fulfillment === "delivery" ? deliveryZoneId : "",
   };
 
   async function startCheckout(e: FormEvent) {
@@ -147,13 +169,12 @@ export function CartDrawer() {
       return;
     }
     setMode(data.mode);
+    setPayTotal(Number(data.total) || fees.total);
     if (data.mode === "stripe") {
       setClientSecret(data.clientSecret);
       setPublishableKey(data.publishableKey || "");
-      setStep("checkout");
-    } else {
-      setStep("checkout");
     }
+    setStep("checkout");
   }
 
   async function mockPay() {
@@ -316,7 +337,9 @@ export function CartDrawer() {
                     disabled={busy}
                     onClick={mockPay}
                   >
-                    {busy ? "Odesílám…" : `Zaplatit testově ${formatPrice(total)}`}
+                    {busy
+                      ? "Odesílám…"
+                      : `Zaplatit testově ${formatPrice(payTotal || fees.total)}`}
                   </Button>
                 </div>
               ) : null}
@@ -359,6 +382,36 @@ export function CartDrawer() {
                   <option value="delivery">Rozvoz</option>
                 </select>
               </div>
+              {fulfillment === "delivery" ? (
+                <>
+                  <div className="space-y-1.5">
+                    <Label>Zóna rozvozu</Label>
+                    <select
+                      required
+                      className="h-10 w-full border border-[var(--line)] bg-white px-3"
+                      value={deliveryZoneId}
+                      onChange={(e) => setDeliveryZoneId(e.target.value)}
+                    >
+                      {DELIVERY_ZONES.map((zone) => (
+                        <option key={zone.id} value={zone.id}>
+                          {zone.name} · {zone.areas} · doprava{" "}
+                          {formatPrice(zone.fee)} (min. {formatPrice(zone.min)})
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className="space-y-1.5">
+                    <Label>Adresa doručení</Label>
+                    <Input
+                      required
+                      value={customerAddress}
+                      onChange={(e) => setCustomerAddress(e.target.value)}
+                      className="rounded-none"
+                      placeholder="Ulice, číslo, město"
+                    />
+                  </div>
+                </>
+              ) : null}
               <div className="space-y-1.5">
                 <Label>Poznámka</Label>
                 <Textarea
@@ -368,8 +421,49 @@ export function CartDrawer() {
                   rows={3}
                 />
               </div>
-              <Button type="submit" className="btn-green w-full" disabled={busy}>
-                {busy ? "Připravuji platbu…" : `K platbě · ${formatPrice(total)}`}
+
+              <div className="space-y-2 border border-[var(--line)] bg-[var(--paper-soft)] p-4 text-sm">
+                <div className="flex justify-between gap-3">
+                  <span>Položky</span>
+                  <span>{formatPrice(total)}</span>
+                </div>
+                <div className="flex justify-between gap-3">
+                  <span>Balení</span>
+                  <span>{formatPrice(fees.packagingFee || PACKAGING_FEE)}</span>
+                </div>
+                <div className="flex justify-between gap-3">
+                  <span>
+                    Doprava
+                    {fees.deliveryZone ? ` (${fees.deliveryZone.name})` : ""}
+                  </span>
+                  <span>
+                    {fulfillment === "delivery"
+                      ? formatPrice(fees.deliveryFee)
+                      : "0 Kč"}
+                  </span>
+                </div>
+                <div className="flex justify-between gap-3 border-t border-[var(--line)] pt-2 text-base font-extrabold">
+                  <span>Celkem</span>
+                  <span className="text-[var(--brand-red)]">
+                    {formatPrice(fees.total)}
+                  </span>
+                </div>
+                {fulfillment === "delivery" && !fees.meetsMinOrder ? (
+                  <p className="text-[var(--brand-red)]">
+                    Minimální objednávka pro {fees.deliveryZone?.name} je{" "}
+                    {formatPrice(fees.minOrder)}.
+                  </p>
+                ) : null}
+              </div>
+
+              <Button
+                type="submit"
+                className="btn-green w-full"
+                disabled={busy || (fulfillment === "delivery" && !fees.meetsMinOrder)}
+              >
+                {busy
+                  ? "Připravuji platbu…"
+                  : `K platbě · ${formatPrice(fees.total)}`}
               </Button>
             </form>
           ) : null}

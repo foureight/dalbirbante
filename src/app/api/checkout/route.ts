@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { getStripe, hasStripe } from "@/lib/stripe";
 import type { OrderItem } from "@/lib/orders";
+import { calcOrderFees } from "@/lib/order-fees";
 
 export const dynamic = "force-dynamic";
 
@@ -13,9 +14,11 @@ export async function POST(request: Request) {
     const body = await request.json();
     const customerName = String(body.customerName || "").trim();
     const customerPhone = String(body.customerPhone || "").trim();
+    const customerAddress = String(body.customerAddress || "").trim();
     const note = String(body.note || "").trim();
     const fulfillment =
       body.fulfillment === "delivery" ? "delivery" : "pickup";
+    const deliveryZoneId = String(body.deliveryZoneId || "");
     const items = (Array.isArray(body.items) ? body.items : []) as OrderItem[];
 
     if (!customerName || customerName.length < 2) {
@@ -30,6 +33,20 @@ export async function POST(request: Request) {
     if (!items.length) {
       return NextResponse.json({ error: "Košík je prázdný." }, { status: 400 });
     }
+    if (fulfillment === "delivery") {
+      if (!deliveryZoneId) {
+        return NextResponse.json(
+          { error: "Vyberte zónu rozvozu." },
+          { status: 400 },
+        );
+      }
+      if (customerAddress.length < 5) {
+        return NextResponse.json(
+          { error: "Zadejte adresu doručení." },
+          { status: 400 },
+        );
+      }
+    }
 
     const normalized = items.map((i) => ({
       name: String(i.name).slice(0, 120),
@@ -38,7 +55,12 @@ export async function POST(request: Request) {
     }));
 
     for (const item of normalized) {
-      if (!item.name || item.qty < 1 || item.unitPrice < 0 || Number.isNaN(item.unitPrice)) {
+      if (
+        !item.name ||
+        item.qty < 1 ||
+        item.unitPrice < 0 ||
+        Number.isNaN(item.unitPrice)
+      ) {
         return NextResponse.json(
           { error: "Neplatné položky objednávky." },
           { status: 400 },
@@ -46,42 +68,58 @@ export async function POST(request: Request) {
       }
     }
 
-    const total = normalized.reduce((s, i) => s + i.unitPrice * i.qty, 0);
-    if (total < 1) {
+    const itemsTotal = normalized.reduce((s, i) => s + i.unitPrice * i.qty, 0);
+    const fees = calcOrderFees({
+      itemsTotal,
+      fulfillment,
+      deliveryZoneId,
+    });
+
+    if (itemsTotal < 1) {
       return NextResponse.json({ error: "Neplatná částka." }, { status: 400 });
     }
-
-    const meta = {
-      customerName,
-      customerPhone,
-      note: note.slice(0, 400),
-      fulfillment,
-      items: JSON.stringify(normalized),
-    };
+    if (!fees.meetsMinOrder) {
+      return NextResponse.json(
+        {
+          error: `Minimální objednávka pro ${fees.deliveryZone?.name} je ${fees.minOrder} Kč.`,
+        },
+        { status: 400 },
+      );
+    }
 
     if (!hasStripe()) {
       return NextResponse.json({
         mode: "mock",
-        total,
-        meta,
+        itemsTotal,
+        packagingFee: fees.packagingFee,
+        deliveryFee: fees.deliveryFee,
+        total: fees.total,
       });
     }
 
     const stripe = getStripe();
     if (!stripe) {
-      return NextResponse.json({ error: "Stripe není nastavené." }, { status: 500 });
+      return NextResponse.json(
+        { error: "Stripe není nastavené." },
+        { status: 500 },
+      );
     }
 
     const intent = await stripe.paymentIntents.create({
-      amount: total * 100,
+      amount: fees.total * 100,
       currency: "czk",
       automatic_payment_methods: { enabled: true },
       metadata: {
         customerName,
         customerPhone,
+        customerAddress: customerAddress.slice(0, 200),
         note: note.slice(0, 400),
         fulfillment,
-        items: JSON.stringify(normalized).slice(0, 500),
+        deliveryZoneId,
+        packagingFee: String(fees.packagingFee),
+        deliveryFee: String(fees.deliveryFee),
+        itemsTotal: String(itemsTotal),
+        items: JSON.stringify(normalized).slice(0, 450),
       },
       description: `Dal Birbante – ${customerName}`,
     });
@@ -90,7 +128,10 @@ export async function POST(request: Request) {
       mode: "stripe",
       clientSecret: intent.client_secret,
       paymentIntentId: intent.id,
-      total,
+      itemsTotal,
+      packagingFee: fees.packagingFee,
+      deliveryFee: fees.deliveryFee,
+      total: fees.total,
       publishableKey: process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY,
     });
   } catch (err) {

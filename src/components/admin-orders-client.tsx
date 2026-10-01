@@ -135,7 +135,25 @@ export function AdminOrdersClient({ authenticated }: { authenticated: boolean })
                     </span>
                   </li>
                 ))}
+                <li>
+                  Balení{" "}
+                  <span className="text-[var(--muted)]">
+                    ({formatPrice(order.packagingFee ?? 0)})
+                  </span>
+                </li>
+                <li>
+                  Doprava
+                  {order.deliveryZoneName ? ` · ${order.deliveryZoneName}` : ""}{" "}
+                  <span className="text-[var(--muted)]">
+                    ({formatPrice(order.deliveryFee ?? 0)})
+                  </span>
+                </li>
               </ul>
+              {order.customerAddress ? (
+                <p className="mt-3 text-sm text-[var(--muted)]">
+                  Adresa: {order.customerAddress}
+                </p>
+              ) : null}
               {order.note ? (
                 <p className="mt-3 text-sm text-[var(--brand-green)]">
                   Poznámka: {order.note}

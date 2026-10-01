@@ -6,6 +6,7 @@ import {
   updateOrder,
   type OrderItem,
 } from "@/lib/orders";
+import { calcOrderFees } from "@/lib/order-fees";
 import { getStripe, hasStripe } from "@/lib/stripe";
 
 export const dynamic = "force-dynamic";
@@ -23,9 +24,11 @@ export async function POST(request: Request) {
     const body = await request.json();
     const customerName = String(body.customerName || "").trim();
     const customerPhone = String(body.customerPhone || "").trim();
+    const customerAddress = String(body.customerAddress || "").trim();
     const note = String(body.note || "").trim();
     const fulfillment =
       body.fulfillment === "delivery" ? "delivery" : "pickup";
+    const deliveryZoneId = String(body.deliveryZoneId || "");
     const items = (Array.isArray(body.items) ? body.items : []) as OrderItem[];
     const paymentIntentId = body.paymentIntentId
       ? String(body.paymentIntentId)
@@ -38,13 +41,41 @@ export async function POST(request: Request) {
         { status: 400 },
       );
     }
+    if (fulfillment === "delivery") {
+      if (!deliveryZoneId) {
+        return NextResponse.json(
+          { error: "Vyberte zónu rozvozu." },
+          { status: 400 },
+        );
+      }
+      if (customerAddress.length < 5) {
+        return NextResponse.json(
+          { error: "Zadejte adresu doručení." },
+          { status: 400 },
+        );
+      }
+    }
 
     const normalized = items.map((i) => ({
       name: String(i.name).slice(0, 120),
       unitPrice: Number(i.unitPrice),
       qty: Number(i.qty),
     }));
-    const total = normalized.reduce((s, i) => s + i.unitPrice * i.qty, 0);
+    const itemsTotal = normalized.reduce((s, i) => s + i.unitPrice * i.qty, 0);
+    const fees = calcOrderFees({
+      itemsTotal,
+      fulfillment,
+      deliveryZoneId,
+    });
+
+    if (!fees.meetsMinOrder) {
+      return NextResponse.json(
+        {
+          error: `Minimální objednávka pro ${fees.deliveryZone?.name} je ${fees.minOrder} Kč.`,
+        },
+        { status: 400 },
+      );
+    }
 
     if (hasStripe()) {
       if (!paymentIntentId) {
@@ -55,7 +86,10 @@ export async function POST(request: Request) {
       }
       const stripe = getStripe();
       if (!stripe) {
-        return NextResponse.json({ error: "Stripe není nastavené." }, { status: 500 });
+        return NextResponse.json(
+          { error: "Stripe není nastavené." },
+          { status: 500 },
+        );
       }
       const intent = await stripe.paymentIntents.retrieve(paymentIntentId);
       if (intent.status !== "succeeded") {
@@ -64,7 +98,7 @@ export async function POST(request: Request) {
           { status: 402 },
         );
       }
-      if (intent.amount !== total * 100) {
+      if (intent.amount !== fees.total * 100) {
         return NextResponse.json(
           { error: "Částka platby nesedí." },
           { status: 400 },
@@ -80,10 +114,18 @@ export async function POST(request: Request) {
     const order = await createOrder({
       customerName,
       customerPhone,
+      customerAddress: fulfillment === "delivery" ? customerAddress : undefined,
       note,
       fulfillment,
+      deliveryZoneId:
+        fulfillment === "delivery" ? fees.deliveryZone?.id : undefined,
+      deliveryZoneName:
+        fulfillment === "delivery" ? fees.deliveryZone?.name : undefined,
+      packagingFee: fees.packagingFee,
+      deliveryFee: fees.deliveryFee,
+      itemsTotal,
       items: normalized,
-      total,
+      total: fees.total,
       paymentMethod: "card",
       paid: true,
       stripePaymentIntentId: paymentIntentId || undefined,
