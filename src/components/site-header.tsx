@@ -46,24 +46,36 @@ export function SiteHeader({ content }: { content: SiteContent }) {
                 {l.label}
               </Link>
             ))}
-            <a
-              href={site.instagramUrl}
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Instagram"
-              className="inline-flex size-10 items-center justify-center text-[var(--ink)] transition hover:text-[var(--brand-red)]"
-            >
-              <Image src="/icons/instagram.svg" alt="" width={32} height={32} />
-            </a>
-            <a
-              href={site.facebookUrl}
-              target="_blank"
-              rel="noreferrer"
-              aria-label="Facebook"
-              className="inline-flex size-10 items-center justify-center text-[var(--ink)] transition hover:text-[var(--brand-red)]"
-            >
-              <Image src="/icons/facebook.svg" alt="" width={32} height={32} />
-            </a>
+            <div className="flex items-center gap-1.5">
+              <a
+                href={site.instagramUrl}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Instagram"
+                className="inline-flex size-12 items-center justify-center text-[var(--ink)] transition hover:text-[var(--brand-red)]"
+              >
+                <Image
+                  src="/icons/instagram.svg"
+                  alt=""
+                  width={40}
+                  height={40}
+                />
+              </a>
+              <a
+                href={site.facebookUrl}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Facebook"
+                className="inline-flex size-12 items-center justify-center text-[var(--ink)] transition hover:text-[var(--brand-red)]"
+              >
+                <Image
+                  src="/icons/facebook.svg"
+                  alt=""
+                  width={40}
+                  height={40}
+                />
+              </a>
+            </div>
             <Button asChild className="btn-green h-10 px-5 hover:bg-[#007a3a]">
               <a href={site.phoneHref}>{site.callLabel}</a>
             </Button>
