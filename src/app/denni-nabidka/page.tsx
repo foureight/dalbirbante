@@ -25,11 +25,11 @@ export default async function DailyMenuPage() {
       <PageJsonLd data={getPageSchema("daily", content)} />
       <SiteHeader content={content} />
       <main className="flex-1">
-        <section className="mx-auto max-w-3xl px-5 py-24 md:px-10 md:py-36">
+        <section className="page-wrap py-24 md:py-36">
           <Reveal>
             <h1 className="section-title text-[var(--brand-red)]">{daily.title}</h1>
             <p className="section-lead">{daily.intro}</p>
-            <p className="mt-8 text-[var(--muted)]">{daily.note}</p>
+            <p className="mt-8 max-w-3xl text-[var(--muted)]">{daily.note}</p>
             <div className="mt-12 flex flex-wrap gap-4">
               <Button asChild className="btn-brand">
                 <a href={site.phoneHref}>{site.callLabel}</a>
