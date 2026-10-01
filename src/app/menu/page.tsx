@@ -107,8 +107,15 @@ export default async function MenuPage() {
 
           <Reveal delay={80}>
             <div className="flex flex-col items-start gap-5">
+              <a
+                href={site.orderUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="btn-green"
+              >
+                {site.orderLabel}
+              </a>
               <p className="text-[var(--muted)]">{menuPage.orderNote}</p>
-              <OrderButton href={site.orderUrl} label={site.orderLabel} />
             </div>
           </Reveal>
         </div>
