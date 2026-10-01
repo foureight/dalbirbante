@@ -231,27 +231,36 @@
   animation: pan-slow 18s ease-in-out alternate infinite;
 }
 
+/* Visible by default so SSR / no-JS never blanks the page.
+   Only .reveal-ready:not(.is-visible) is hidden for scroll animation. */
 .reveal {
-  opacity: 0;
+  opacity: 1;
+  transform: none;
+}
+
+.reveal.reveal-ready {
   will-change: opacity, transform;
   transition:
     opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
     transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.reveal-up {
+.reveal.reveal-ready:not(.is-visible).reveal-up {
+  opacity: 0;
   transform: translateY(28px);
 }
 
-.reveal-fade {
+.reveal.reveal-ready:not(.is-visible).reveal-fade {
+  opacity: 0;
   transform: none;
 }
 
-.reveal-scale {
+.reveal.reveal-ready:not(.is-visible).reveal-scale {
+  opacity: 0;
   transform: scale(0.96);
 }
 
-.reveal.is-visible {
+.reveal.reveal-ready.is-visible {
   opacity: 1;
   transform: none;
 }
@@ -340,9 +349,8 @@
 
 @media (prefers-reduced-motion: reduce) {
   .reveal,
-  .reveal-up,
-  .reveal-scale,
-  .reveal-fade,
+  .reveal.reveal-ready,
+  .reveal.reveal-ready:not(.is-visible),
   .hero-pan,
   .animate-rise,
   .animate-rise-delay,
