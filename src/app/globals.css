@@ -443,6 +443,16 @@
   transform: translateY(-2px);
 }
 
+.band-card-title {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.15;
+  min-height: calc(1.15em * 2);
+}
+
 .band-link {
   transition:
     transform 0.25s ease,
