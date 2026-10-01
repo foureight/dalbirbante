@@ -34,6 +34,11 @@ V administraci lze upravit prakticky všechny texty webu (úvod, menu, o nás, k
 - Kontakt + mapa z Reservo (`system/map.php`) + rozvozové zóny
 - Odkaz na online objednávku Reservo Eats
 
+## Mapa rozvozových zón
+
+Na `/rozvoz` (a na homepage) je živá interaktivní mapa se zónami 1–6.
+Podklady jsou MapLibre / OpenFreeMap, polygony zón jsou v `data/delivery-zones.json`.
+
 ## Data a SEO JSON
 
 - Texty webu: `data/content.json` (editovatelné v `/admin`)

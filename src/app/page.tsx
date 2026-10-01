@@ -4,6 +4,7 @@ import { getContent } from "@/lib/content";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { ContactForm } from "@/components/contact-form";
+import { DeliveryMap } from "@/components/delivery-map";
 import { Button } from "@/components/ui/button";
 
 const gallery = [
@@ -155,15 +156,7 @@ export default async function HomePage() {
                 </Button>
               </div>
             </div>
-            <div className="relative aspect-[5/4] overflow-hidden rounded-[6.4px]">
-              <Image
-                src="/images/zony.webp"
-                alt="Rozvozové zóny Dal Birbante"
-                fill
-                className="object-contain bg-white"
-                sizes="(max-width:768px) 100vw, 50vw"
-              />
-            </div>
+            <DeliveryMap className="min-h-[320px]" />
           </div>
         </section>
 

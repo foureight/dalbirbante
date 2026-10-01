@@ -1,4 +1,3 @@
-import Image from "next/image";
 import type { Metadata } from "next";
 import { getContent } from "@/lib/content";
 import { SiteHeader } from "@/components/site-header";
@@ -6,6 +5,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { Button } from "@/components/ui/button";
 import { PageJsonLd } from "@/components/json-ld";
 import { FaqAccordion } from "@/components/faq-accordion";
+import { DeliveryMap } from "@/components/delivery-map";
 import { getFaqSchema, getPageSchema } from "@/lib/schema";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -62,14 +62,8 @@ export default async function DeliveryPage() {
             </table>
           </div>
 
-          <div className="relative mt-10 aspect-[2/1] w-full overflow-hidden rounded-[6.4px] border border-[var(--line)]">
-            <Image
-              src="/images/zony.webp"
-              alt="Mapa rozvozových zón Dal Birbante"
-              fill
-              className="object-contain bg-white"
-              sizes="100vw"
-            />
+          <div className="mt-10 w-full">
+            <DeliveryMap />
           </div>
 
           <Button asChild className="btn-brand mt-8">
