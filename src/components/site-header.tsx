@@ -3,7 +3,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
 import { AnnouncementBar } from "@/components/announcement-bar";
 import type { SiteContent } from "@/lib/types";
 
@@ -75,9 +74,6 @@ export function SiteHeader({ content }: { content: SiteContent }) {
                 />
               </a>
             </div>
-            <Button asChild className="btn-green">
-              <a href={site.phoneHref}>{site.callLabel}</a>
-            </Button>
           </nav>
 
           <button
@@ -109,9 +105,6 @@ export function SiteHeader({ content }: { content: SiteContent }) {
                   {l.label}
                 </Link>
               ))}
-              <a href={site.phoneHref} className="btn-green inline-flex w-fit">
-                {site.callLabel}
-              </a>
             </div>
           </div>
         )}
