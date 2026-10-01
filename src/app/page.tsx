@@ -154,7 +154,7 @@ export default async function HomePage() {
         </section>
 
         <section className="band-black">
-          <div className="band-inner grid items-center gap-14 md:grid-cols-2 md:gap-20">
+          <div className="band-inner grid items-start gap-14 md:grid-cols-2 md:gap-20">
             <Reveal>
               <h2 className="section-title-light">{home.deliveryTitle}</h2>
               <p className="mt-6 text-white/85">{home.deliveryText}</p>
@@ -170,7 +170,7 @@ export default async function HomePage() {
                 </Button>
               </div>
             </Reveal>
-            <Reveal delay={140} variant="scale">
+            <Reveal delay={140} variant="fade">
               <DeliveryMap className="min-h-[320px]" />
             </Reveal>
           </div>
