@@ -448,6 +448,16 @@
   min-height: calc(1.15em * 2);
 }
 
+.band-card-text {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.45;
+  min-height: calc(1.45em * 2);
+}
+
 .band-link {
   transition:
     transform 0.25s ease,
