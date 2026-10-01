@@ -1,13 +1,39 @@
 const icons = {
   delivery: (
-    <path
-      d="M3 7h11v8H3V7zm11 2h3.2L20 13.2V15h-1.1a2.2 2.2 0 0 1-4.2 0H9.3a2.2 2.2 0 0 1-4.2 0H3"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.8"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
+    <>
+      <path
+        d="M3 11.5h1.4l1.8-4.2A1.6 1.6 0 0 1 7.7 6.2h6.6c.6 0 1.1.3 1.4.9L17.6 11H20a1 1 0 0 1 1 1v4.2a1 1 0 0 1-1 1h-1.1"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M3 11.5V16a1 1 0 0 0 1 1h1.2M7.8 11.5h8.4"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <circle
+        cx="7.2"
+        cy="17"
+        r="1.7"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+      />
+      <circle
+        cx="17.2"
+        cy="17"
+        r="1.7"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+      />
+    </>
   ),
   card: (
     <>
@@ -41,16 +67,21 @@ const icons = {
       />
     </>
   ),
-  access: (
+  ingredients: (
     <>
-      <circle cx="12" cy="5" r="2" fill="currentColor" />
       <path
-        d="M8 21v-6l-2-5h12l-2 5v6M10 10v11M14 10v11"
+        d="M12 21c4-3.2 6.5-6.2 6.5-9.2A4.5 4.5 0 0 0 12 7.5 4.5 4.5 0 0 0 5.5 11.8C5.5 14.8 8 17.8 12 21z"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M12 7.5V4.5M10 5.5c1.2.6 2.8.6 4 0"
         fill="none"
         stroke="currentColor"
         strokeWidth="1.8"
         strokeLinecap="round"
-        strokeLinejoin="round"
       />
     </>
   ),
@@ -83,7 +114,7 @@ const byTitle: Record<string, FeatureIconName> = {
   "Rozvážíme": "delivery",
   "Platba kartou": "card",
   "Bereme stravenky": "voucher",
-  Bezbariérové: "access",
+  "Italské suroviny": "ingredients",
   "Bezplatná wi-fi": "wifi",
   "Mazlíčci vítáni": "pets",
 };
@@ -92,10 +123,10 @@ export function FeatureIcon({ title }: { title: string }) {
   const name = byTitle[title] ?? "delivery";
   return (
     <span
-      className="inline-flex size-12 shrink-0 items-center justify-center rounded-full bg-[var(--brand-red)] text-white"
+      className="inline-flex size-16 shrink-0 items-center justify-center rounded-full bg-[var(--brand-red)] text-white md:size-[4.5rem]"
       aria-hidden
     >
-      <svg viewBox="0 0 24 24" className="size-6" fill="none">
+      <svg viewBox="0 0 24 24" className="size-8 md:size-9" fill="none">
         {icons[name]}
       </svg>
     </span>
