@@ -443,6 +443,10 @@
   transform: translateY(-2px);
 }
 
+.band-card {
+  gap: 1.5rem;
+}
+
 .band-card-title {
   line-height: 1.15;
   min-height: calc(1.15em * 2);
@@ -456,6 +460,12 @@
   text-overflow: ellipsis;
   line-height: 1.45;
   min-height: calc(1.45em * 2);
+}
+
+/* Stejná mezera nadpis→text a text→tlačítko; zbývající výška jde pod tlačítko. */
+.band-card > .btn-outline-light {
+  margin-top: 0;
+  margin-bottom: auto;
 }
 
 .band-link {

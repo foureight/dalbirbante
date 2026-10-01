@@ -108,7 +108,7 @@ export default async function HomePage() {
               },
             ].map((block, i) => (
               <Reveal key={block.t} delay={i * 100} className="h-full">
-                <div className="flex h-full flex-col">
+                <div className="band-card flex h-full flex-col">
                   <h2 className="band-card-title">
                     <Link href={block.href} className="transition hover:opacity-90">
                       {block.t.split("\n").map((line, lineIndex) => (
@@ -119,12 +119,12 @@ export default async function HomePage() {
                       ))}
                     </Link>
                   </h2>
-                  <p className="band-card-text mt-5 text-white/90">
+                  <p className="band-card-text text-white/90">
                     {block.d}
                   </p>
                   <Link
                     href={block.href}
-                    className="btn-outline-light mt-auto inline-flex w-fit pt-10"
+                    className="btn-outline-light mt-auto inline-flex w-fit"
                   >
                     Více
                   </Link>
