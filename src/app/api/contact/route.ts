@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { verifyMathCaptcha } from "@/lib/captcha";
 import { isSmtpConfigured, sendContactEmail } from "@/lib/mail";
 
 export async function POST(request: Request) {
@@ -7,7 +8,17 @@ export async function POST(request: Request) {
       name?: string;
       email?: string;
       message?: string;
+      website?: string;
+      captchaToken?: string;
+      captchaAnswer?: string;
+      captchaA?: number;
+      captchaB?: number;
     };
+
+    // Honeypot — boti ho často vyplní.
+    if (body.website?.trim()) {
+      return NextResponse.json({ ok: true });
+    }
 
     const name = body.name?.trim() || "";
     const email = body.email?.trim() || "";
@@ -23,6 +34,19 @@ export async function POST(request: Request) {
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return NextResponse.json(
         { ok: false, error: "Zadejte platný e-mail." },
+        { status: 400 },
+      );
+    }
+
+    const captcha = verifyMathCaptcha({
+      token: body.captchaToken,
+      answer: body.captchaAnswer,
+      a: body.captchaA,
+      b: body.captchaB,
+    });
+    if (!captcha.ok) {
+      return NextResponse.json(
+        { ok: false, error: captcha.error },
         { status: 400 },
       );
     }
