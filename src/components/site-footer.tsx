@@ -31,13 +31,13 @@ export function SiteFooter({ content }: { content: SiteContent }) {
 
   return (
     <footer className="bg-[var(--brand-green)] text-white">
-      <div className="mx-auto max-w-5xl px-5 pb-20 pt-16 md:px-10 md:pb-24 md:pt-20">
+      <div className="mx-auto max-w-7xl px-5 pb-20 pt-16 md:px-10 md:pb-28 md:pt-24">
         <FooterGoodbye
           czech={site.goodbye}
           italian={site.goodbyeIt || "BUON APPETITO!"}
         />
 
-        <div className="grid gap-14 text-center md:grid-cols-3 md:items-start md:gap-12">
+        <div className="grid gap-14 text-center md:grid-cols-3 md:items-start md:gap-20 lg:gap-28">
           <div>
             <h3 className="mb-6 font-display text-2xl font-black uppercase tracking-wide text-black md:text-[1.7rem]">
               Sitemap
