@@ -51,7 +51,7 @@ export default async function DeliveryPage() {
                   <tr className="border-b border-[var(--line)] text-[var(--ink)]">
                     <th className="py-3 font-bold">Zóna</th>
                     <th className="py-3 font-bold">Oblasti</th>
-                    <th className="py-3 font-bold">Rozvoz</th>
+                    <th className="py-3 text-right font-bold">Rozvoz</th>
                     <th className="py-3 text-right font-bold">Min. objednávka</th>
                   </tr>
                 </thead>
@@ -60,7 +60,7 @@ export default async function DeliveryPage() {
                     <tr key={z.name} className="border-b border-[var(--line)]">
                       <td className="py-3 font-medium">{z.name}</td>
                       <td className="py-3 text-[var(--muted)]">{z.areas}</td>
-                      <td className="py-3">{z.fee}</td>
+                      <td className="py-3 text-right">{z.fee}</td>
                       <td className="py-3 text-right">{z.min}</td>
                     </tr>
                   ))}
