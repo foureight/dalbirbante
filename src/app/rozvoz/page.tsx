@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { PageJsonLd } from "@/components/json-ld";
 import { FaqAccordion } from "@/components/faq-accordion";
 import { DeliveryMap } from "@/components/delivery-map";
+import { Reveal } from "@/components/reveal";
 import { getFaqSchema, getPageSchema } from "@/lib/schema";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -32,51 +33,63 @@ export default async function DeliveryPage() {
       <SiteHeader content={content} />
       <main className="flex-1">
         <section className="page-wrap py-24 md:py-36">
-          <h1 className="section-title text-[var(--brand-red)]">{delivery.title}</h1>
-          <p className="section-lead">{delivery.intro}</p>
-          <p className="mt-6 max-w-3xl text-[var(--muted)]">{delivery.intro2}</p>
+          <Reveal>
+            <h1 className="section-title text-[var(--brand-red)]">
+              {delivery.title}
+            </h1>
+            <p className="section-lead">{delivery.intro}</p>
+            <p className="mt-6 max-w-3xl text-[var(--muted)]">{delivery.intro2}</p>
+          </Reveal>
 
-          <h2 className="mt-16 text-[var(--brand-green)]">
-            {delivery.pricesTitle}
-          </h2>
-          <div className="mt-8 overflow-x-auto">
-            <table className="w-full min-w-[560px] text-left">
-              <thead>
-                <tr className="border-b border-[var(--line)] text-[var(--muted)]">
-                  <th className="py-3 font-medium">Zóna</th>
-                  <th className="py-3 font-medium">Oblasti</th>
-                  <th className="py-3 font-medium">Rozvoz</th>
-                  <th className="py-3 font-medium">Min. objednávka</th>
-                </tr>
-              </thead>
-              <tbody>
-                {delivery.zones.map((z) => (
-                  <tr key={z.name} className="border-b border-[var(--line)]">
-                    <td className="py-3 font-medium">{z.name}</td>
-                    <td className="py-3 text-[var(--muted)]">{z.areas}</td>
-                    <td className="py-3">{z.fee}</td>
-                    <td className="py-3">{z.min}</td>
+          <Reveal delay={80}>
+            <h2 className="mt-16 text-[var(--brand-green)]">
+              {delivery.pricesTitle}
+            </h2>
+            <div className="mt-8 overflow-x-auto">
+              <table className="w-full min-w-[560px] text-left">
+                <thead>
+                  <tr className="border-b border-[var(--line)] text-[var(--muted)]">
+                    <th className="py-3 font-medium">Zóna</th>
+                    <th className="py-3 font-medium">Oblasti</th>
+                    <th className="py-3 font-medium">Rozvoz</th>
+                    <th className="py-3 font-medium">Min. objednávka</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                </thead>
+                <tbody>
+                  {delivery.zones.map((z) => (
+                    <tr key={z.name} className="border-b border-[var(--line)]">
+                      <td className="py-3 font-medium">{z.name}</td>
+                      <td className="py-3 text-[var(--muted)]">{z.areas}</td>
+                      <td className="py-3">{z.fee}</td>
+                      <td className="py-3">{z.min}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </Reveal>
 
-          <div className="mt-10 w-full">
-            <DeliveryMap />
-          </div>
+          <Reveal delay={120} variant="scale">
+            <div className="mt-10 w-full">
+              <DeliveryMap />
+            </div>
+          </Reveal>
 
-          <Button asChild className="btn-brand mt-8">
-            <a href={site.orderUrl} target="_blank" rel="noreferrer">
-              {site.orderLabel}
-            </a>
-          </Button>
+          <Reveal delay={160}>
+            <Button asChild className="btn-brand mt-8">
+              <a href={site.orderUrl} target="_blank" rel="noreferrer">
+                {site.orderLabel}
+              </a>
+            </Button>
+          </Reveal>
         </section>
 
         <section className="w-full border-t border-[var(--line)] bg-[var(--paper-soft)] px-5 py-16 md:px-10 md:py-24">
           <div className="mx-auto w-full max-w-7xl">
-            <h2 className="text-[var(--brand-red)]">{delivery.faqTitle}</h2>
-            <FaqAccordion items={delivery.faqs} />
+            <Reveal>
+              <h2 className="text-[var(--brand-red)]">{delivery.faqTitle}</h2>
+              <FaqAccordion items={delivery.faqs} />
+            </Reveal>
           </div>
         </section>
       </main>

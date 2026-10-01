@@ -6,6 +6,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { Button } from "@/components/ui/button";
 import { PageJsonLd } from "@/components/json-ld";
 import { FaqAccordion } from "@/components/faq-accordion";
+import { Reveal } from "@/components/reveal";
 import { getFaqSchema, getPageSchema } from "@/lib/schema";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -32,7 +33,7 @@ export default async function GlutenFreePage() {
       <SiteHeader content={content} />
       <main className="flex-1">
         <section className="page-wrap grid gap-14 py-24 md:grid-cols-2 md:gap-20 md:py-36">
-          <div>
+          <Reveal>
             <h1 className="section-title text-[var(--brand-red)]">
               {glutenFree.title}
             </h1>
@@ -43,36 +44,42 @@ export default async function GlutenFreePage() {
               {glutenFree.howTitle}
             </h2>
             <ul className="mt-6 space-y-4">
-              {glutenFree.howItems.map((item) => (
-                <li key={item} className="flex gap-4 text-[var(--ink)]">
-                  <span className="mt-4 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--brand-red)]" />
-                  <span>{item}</span>
-                </li>
+              {glutenFree.howItems.map((item, i) => (
+                <Reveal key={item} delay={70 * (i + 1)}>
+                  <li className="flex gap-4 text-[var(--ink)]">
+                    <span className="mt-4 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--brand-red)]" />
+                    <span>{item}</span>
+                  </li>
+                </Reveal>
               ))}
             </ul>
 
             <Button asChild className="btn-brand mt-10">
               <a href={site.phoneHref}>{site.callLabel}</a>
             </Button>
-          </div>
-          <div className="relative aspect-[4/5] overflow-hidden rounded-[6.4px]">
-            <Image
-              src="/images/burrata.webp"
-              alt="Bezlepková pizza Dal Birbante Vinoř"
-              fill
-              className="object-cover"
-              sizes="(max-width:768px) 100vw, 50vw"
-            />
-          </div>
+          </Reveal>
+          <Reveal delay={140} variant="scale">
+            <div className="img-zoom relative aspect-[4/5] overflow-hidden rounded-[6.4px]">
+              <Image
+                src="/images/burrata.webp"
+                alt="Bezlepková pizza Dal Birbante Vinoř"
+                fill
+                className="img-zoom-media object-cover"
+                sizes="(max-width:768px) 100vw, 50vw"
+              />
+            </div>
+          </Reveal>
         </section>
 
         <section className="border-t border-[var(--line)] bg-[var(--paper-soft)]">
           <div className="page-wrap space-y-10 py-24 md:py-32">
-            <h2 className="text-[var(--brand-red)]">{glutenFree.faqTitle}</h2>
-            <FaqAccordion
-              items={glutenFree.faqs}
-              titleClassName="text-[var(--brand-red)]"
-            />
+            <Reveal>
+              <h2 className="text-[var(--brand-red)]">{glutenFree.faqTitle}</h2>
+              <FaqAccordion
+                items={glutenFree.faqs}
+                titleClassName="text-[var(--brand-red)]"
+              />
+            </Reveal>
           </div>
         </section>
       </main>

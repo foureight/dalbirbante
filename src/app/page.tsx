@@ -5,6 +5,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { ContactForm } from "@/components/contact-form";
 import { DeliveryMap } from "@/components/delivery-map";
+import { Reveal } from "@/components/reveal";
 import { Button } from "@/components/ui/button";
 
 const gallery = [
@@ -60,29 +61,33 @@ export default async function HomePage() {
 
         <section className="section-pad mx-auto max-w-6xl">
           <div className="grid items-center gap-14 md:grid-cols-2 md:gap-20 lg:gap-24">
-            <div>
+            <Reveal>
               <h2 className="text-[var(--brand-red)]">{home.offerTitle}</h2>
               <ul className="mt-8 space-y-4 text-[var(--ink)]">
-                {home.offerItems.map((item) => (
-                  <li key={item} className="flex gap-4">
-                    <span className="mt-4 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--brand-red)]" />
-                    <span>{item}</span>
-                  </li>
+                {home.offerItems.map((item, i) => (
+                  <Reveal key={item} delay={80 * (i + 1)}>
+                    <li className="flex gap-4">
+                      <span className="mt-4 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--brand-red)]" />
+                      <span>{item}</span>
+                    </li>
+                  </Reveal>
                 ))}
               </ul>
               <p className="mt-8 text-[var(--muted)]">{home.wineText}</p>
               <p className="mt-6 text-[var(--ink)]">{home.ctaLine1}</p>
               <p className="mt-3 text-[var(--ink)]">{home.ctaLine2}</p>
-            </div>
-            <div className="relative aspect-[4/5] overflow-hidden rounded-[6.4px]">
-              <Image
-                src="/images/lifestyle-01.webp"
-                alt="Pizza z pece Dal Birbante"
-                fill
-                className="object-cover"
-                sizes="(max-width:768px) 100vw, 50vw"
-              />
-            </div>
+            </Reveal>
+            <Reveal delay={120} variant="scale">
+              <div className="img-zoom relative aspect-[4/5] overflow-hidden rounded-[6.4px]">
+                <Image
+                  src="/images/lifestyle-01.webp"
+                  alt="Pizza z pece Dal Birbante"
+                  fill
+                  className="img-zoom-media object-cover"
+                  sizes="(max-width:768px) 100vw, 50vw"
+                />
+              </div>
+            </Reveal>
           </div>
         </section>
 
@@ -104,44 +109,48 @@ export default async function HomePage() {
                 d: home.glutenFreeText,
                 href: "/bezlepkova-pizza-vinor",
               },
-            ].map((block) => (
-              <div key={block.t} className="border-t border-white/25 pt-8">
-                <h2>{block.t}</h2>
-                <p className="mt-5 text-white/80">{block.d}</p>
-                <Link
-                  href={block.href}
-                  className="mt-6 inline-block font-semibold uppercase tracking-wide text-[var(--brand-red)] hover:underline"
-                >
-                  Více
-                </Link>
-              </div>
+            ].map((block, i) => (
+              <Reveal key={block.t} delay={i * 100}>
+                <div className="border-t border-white/25 pt-8">
+                  <h2>{block.t}</h2>
+                  <p className="mt-5 text-white/80">{block.d}</p>
+                  <Link
+                    href={block.href}
+                    className="band-link mt-6 inline-block font-semibold uppercase tracking-wide text-[var(--brand-red)] hover:underline"
+                  >
+                    Více
+                  </Link>
+                </div>
+              </Reveal>
             ))}
           </div>
         </section>
 
         <section className="section-pad mx-auto max-w-6xl">
           <div className="grid items-center gap-14 md:grid-cols-2 md:gap-20">
-            <div className="relative aspect-[5/4] overflow-hidden rounded-[6.4px]">
-              <Image
-                src="/images/panozzo.webp"
-                alt="Panozzo Dal Birbante"
-                fill
-                className="object-cover"
-                sizes="(max-width:768px) 100vw, 50vw"
-              />
-            </div>
-            <div>
+            <Reveal variant="scale">
+              <div className="img-zoom relative aspect-[5/4] overflow-hidden rounded-[6.4px]">
+                <Image
+                  src="/images/panozzo.webp"
+                  alt="Panozzo Dal Birbante"
+                  fill
+                  className="img-zoom-media object-cover"
+                  sizes="(max-width:768px) 100vw, 50vw"
+                />
+              </div>
+            </Reveal>
+            <Reveal delay={120}>
               <h2 className="section-title text-[var(--brand-red)]">
                 {home.storyTitle}
               </h2>
               <p className="section-lead">{home.storyText}</p>
-            </div>
+            </Reveal>
           </div>
         </section>
 
         <section className="band-black">
           <div className="band-inner grid items-center gap-14 md:grid-cols-2 md:gap-20">
-            <div>
+            <Reveal>
               <h2 className="section-title-light">{home.deliveryTitle}</h2>
               <p className="mt-6 text-white/85">{home.deliveryText}</p>
               <p className="mt-5 text-white/85">{home.deliveryText2}</p>
@@ -155,22 +164,25 @@ export default async function HomePage() {
                   <Link href="/rozvoz">{content.nav.delivery}</Link>
                 </Button>
               </div>
-            </div>
-            <DeliveryMap className="min-h-[320px]" />
+            </Reveal>
+            <Reveal delay={140} variant="scale">
+              <DeliveryMap className="min-h-[320px]" />
+            </Reveal>
           </div>
         </section>
 
         <section className="border-y border-[var(--line)] bg-[var(--paper-soft)]">
           <div className="band-inner">
-            <h2 className="section-title text-center">{home.featuresTitle}</h2>
+            <Reveal>
+              <h2 className="section-title text-center">{home.featuresTitle}</h2>
+            </Reveal>
             <div className="mt-14 grid grid-cols-1 gap-x-10 gap-y-8 sm:grid-cols-2 md:grid-cols-4">
-              {home.features.map((f) => (
-                <p
-                  key={f}
-                  className="border-l-2 border-[var(--brand-red)] pl-5"
-                >
-                  {f}
-                </p>
+              {home.features.map((f, i) => (
+                <Reveal key={f} delay={60 * i}>
+                  <p className="feature-chip border-l-2 border-[var(--brand-red)] pl-5">
+                    {f}
+                  </p>
+                </Reveal>
               ))}
             </div>
           </div>
@@ -180,29 +192,39 @@ export default async function HomePage() {
           id="galerie"
           className="section-pad mx-auto max-w-6xl scroll-mt-28"
         >
-          <h2 className="section-title">{home.galleryTitle}</h2>
-          <p className="section-lead">{home.gallerySubtitle}</p>
+          <Reveal>
+            <h2 className="section-title">{home.galleryTitle}</h2>
+            <p className="section-lead">{home.gallerySubtitle}</p>
+          </Reveal>
           <div className="mt-14 grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
             {gallery.map((src, i) => (
-              <div
+              <Reveal
                 key={src}
-                className={`relative overflow-hidden rounded-[6.4px] ${i === 0 || i === 5 ? "md:col-span-2 md:row-span-2 aspect-square" : "aspect-square"}`}
+                delay={(i % 4) * 70}
+                variant="scale"
+                className={
+                  i === 0 || i === 5
+                    ? "md:col-span-2 md:row-span-2"
+                    : undefined
+                }
               >
-                <Image
-                  src={src}
-                  alt={`Fotogalerie Dal Birbante ${i + 1}`}
-                  fill
-                  className="object-cover transition duration-700 hover:scale-105"
-                  sizes="(max-width:768px) 50vw, 25vw"
-                />
-              </div>
+                <div className="img-zoom relative aspect-square overflow-hidden rounded-[6.4px]">
+                  <Image
+                    src={src}
+                    alt={`Fotogalerie Dal Birbante ${i + 1}`}
+                    fill
+                    className="img-zoom-media object-cover"
+                    sizes="(max-width:768px) 50vw, 25vw"
+                  />
+                </div>
+              </Reveal>
             ))}
           </div>
         </section>
 
         <section className="border-t border-[var(--line)] bg-white">
           <div className="band-inner grid gap-14 md:grid-cols-2 md:gap-20">
-            <div>
+            <Reveal>
               <h2 className="section-title text-[var(--brand-red)]">
                 {home.contactTitle}
               </h2>
@@ -234,8 +256,10 @@ export default async function HomePage() {
                   </p>
                 </div>
               </div>
-            </div>
-            <ContactForm content={content} />
+            </Reveal>
+            <Reveal delay={120}>
+              <ContactForm content={content} />
+            </Reveal>
           </div>
         </section>
       </main>

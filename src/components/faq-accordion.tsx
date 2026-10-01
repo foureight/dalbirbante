@@ -27,7 +27,9 @@ export function FaqAccordion({
               <h3 className={`pr-2 ${titleClassName}`}>{f.q}</h3>
               <span
                 aria-hidden
-                className="mt-1 inline-flex size-8 shrink-0 items-center justify-center rounded-full border border-[var(--line)] text-xl leading-none text-[var(--brand-red)]"
+                className={`mt-1 inline-flex size-8 shrink-0 items-center justify-center rounded-full border border-[var(--line)] text-xl leading-none text-[var(--brand-red)] transition-transform duration-300 ${
+                  open ? "rotate-180" : ""
+                }`}
               >
                 {open ? "−" : "+"}
               </span>
