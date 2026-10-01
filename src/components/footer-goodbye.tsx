@@ -30,21 +30,23 @@ export function FooterGoodbye({
       </div>
 
       <div className="relative mx-auto flex h-[clamp(2.8rem,7vw,4.5rem)] w-full items-center justify-center overflow-visible">
-        <p
+        <span
           className={`footer-goodbye-line ${
             showItalian ? "is-exit" : "is-active"
           }`}
+          aria-hidden={showItalian}
         >
           {czech}
-        </p>
-        <p
+        </span>
+        <span
           className={`footer-goodbye-line ${
             showItalian ? "is-active" : "is-enter"
           }`}
           aria-hidden={!showItalian}
         >
           {italian}
-        </p>
+        </span>
+        <h2 className="sr-only">{showItalian ? italian : czech}</h2>
       </div>
     </div>
   );

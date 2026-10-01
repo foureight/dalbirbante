@@ -40,7 +40,7 @@ export default async function DeliveryPage() {
           <p className="section-lead">{delivery.intro}</p>
           <p className="mt-6 max-w-3xl text-[var(--muted)]">{delivery.intro2}</p>
 
-          <h2 className="mt-16 font-display text-2xl uppercase text-[var(--brand-green)] md:text-3xl">
+          <h2 className="mt-16 text-[var(--brand-green)]">
             {delivery.pricesTitle}
           </h2>
           <div className="mt-8 overflow-x-auto">
@@ -85,13 +85,11 @@ export default async function DeliveryPage() {
             </a>
           </Button>
 
-          <h2 className="mt-16 font-display text-2xl uppercase text-[var(--brand-red)]">
-            {delivery.faqTitle}
-          </h2>
+          <h2 className="mt-16 text-[var(--brand-red)]">{delivery.faqTitle}</h2>
           <div className="mt-6 space-y-6">
             {delivery.faqs.map((f) => (
               <div key={f.q} className="border-b border-[var(--line)] pb-5">
-                <h3 className="font-display text-lg uppercase">{f.q}</h3>
+                <h3>{f.q}</h3>
                 <p className="mt-2 text-[var(--muted)]">{f.a}</p>
               </div>
             ))}

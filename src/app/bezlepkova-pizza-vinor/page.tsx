@@ -43,7 +43,7 @@ export default async function GlutenFreePage() {
             <p className="section-lead">{glutenFree.intro}</p>
             <p className="mt-6 text-[var(--muted)]">{glutenFree.intro2}</p>
 
-            <h2 className="mt-14 font-display text-2xl uppercase text-[var(--brand-green)] md:text-3xl">
+            <h2 className="mt-14 text-[var(--brand-green)]">
               {glutenFree.howTitle}
             </h2>
             <ul className="mt-6 space-y-4">
@@ -75,11 +75,10 @@ export default async function GlutenFreePage() {
 
         <section className="border-t border-[var(--line)] bg-[var(--paper-soft)]">
           <div className="page-wrap space-y-10 py-24 md:py-32">
+            <h2 className="text-[var(--brand-red)]">{glutenFree.faqTitle}</h2>
             {glutenFree.faqs.map((f) => (
               <div key={f.q} className="border-b border-[var(--line)] pb-8">
-                <h2 className="font-display text-xl uppercase text-[var(--brand-red)] md:text-2xl">
-                  {f.q}
-                </h2>
+                <h3 className="text-[var(--brand-red)]">{f.q}</h3>
                 <p className="mt-4 text-[var(--muted)]">{f.a}</p>
               </div>
             ))}

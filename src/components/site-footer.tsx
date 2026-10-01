@@ -39,9 +39,7 @@ export function SiteFooter({ content }: { content: SiteContent }) {
 
         <div className="grid gap-14 text-center md:grid-cols-3 md:items-start md:gap-20 lg:gap-28">
           <div>
-            <h3 className="mb-6 font-display text-2xl font-black uppercase tracking-wide text-black md:text-[1.7rem]">
-              Sitemap
-            </h3>
+            <h3 className="mb-6 text-black">Sitemap</h3>
             <nav className="flex flex-col items-center gap-3 text-white">
               {sitemap.map((item) => (
                 <Link
@@ -56,9 +54,7 @@ export function SiteFooter({ content }: { content: SiteContent }) {
           </div>
 
           <div>
-            <h3 className="mb-6 font-display text-2xl font-black uppercase tracking-wide text-black md:text-[1.7rem]">
-              {contact.whereTitle}
-            </h3>
+            <h3 className="mb-6 text-black">{contact.whereTitle}</h3>
             <div className="flex flex-col items-center gap-3 text-white">
               <p>{site.addressShort}</p>
               <p>
@@ -100,9 +96,7 @@ export function SiteFooter({ content }: { content: SiteContent }) {
           </div>
 
           <div>
-            <h3 className="mb-6 font-display text-2xl font-black uppercase tracking-wide text-black md:text-[1.7rem]">
-              {contact.hoursTitle}
-            </h3>
+            <h3 className="mb-6 text-black">{contact.hoursTitle}</h3>
             <div className="flex flex-col items-center gap-3 text-white">
               <p>{site.hours}</p>
               <p>{site.hoursClosed}</p>

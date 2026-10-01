@@ -129,6 +129,7 @@ export type SiteContent = {
     intro: string;
     intro2: string;
     howTitle: string;
+    faqTitle: string;
     howItems: string[];
     faqs: FaqItem[];
   };

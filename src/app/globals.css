@@ -141,6 +141,30 @@
     letter-spacing: -0.01em;
   }
 
+  h1 {
+    font-size: clamp(2.5rem, 5.5vw, 3.75rem);
+    line-height: 1.15;
+    text-transform: uppercase;
+  }
+
+  h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.2;
+    text-transform: uppercase;
+  }
+
+  h3 {
+    font-size: clamp(1.35rem, 2.4vw, 1.75rem);
+    line-height: 1.25;
+    text-transform: uppercase;
+  }
+
+  h4 {
+    font-size: 1.25rem;
+    line-height: 1.3;
+    text-transform: uppercase;
+  }
+
   button,
   .btn,
   a.btn {
@@ -211,19 +235,11 @@
 }
 
 .section-title {
-  font-family: var(--font-display);
-  font-weight: 900;
-  letter-spacing: -0.01em;
-  text-transform: uppercase;
-  @apply text-3xl md:text-5xl lg:text-6xl text-[var(--ink)];
+  color: var(--ink);
 }
 
 .section-title-light {
-  font-family: var(--font-display);
-  font-weight: 900;
-  letter-spacing: -0.01em;
-  text-transform: uppercase;
-  @apply text-3xl md:text-5xl lg:text-6xl text-white;
+  color: #fff;
 }
 
 .section-lead {

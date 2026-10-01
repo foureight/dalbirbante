@@ -35,9 +35,7 @@ export default async function ContactPage() {
             <div className="absolute inset-0 bg-black/60" />
           </div>
           <div className="relative mx-auto max-w-6xl px-5 py-24 md:px-10 md:py-36">
-            <h1 className="font-display text-5xl uppercase md:text-6xl">
-              {contact.title}
-            </h1>
+            <h1 className="text-white">{contact.title}</h1>
             <p className="mt-8 max-w-xl text-white/90">{contact.lead}</p>
             <p className="mt-5 max-w-xl text-white/80">{contact.openText}</p>
           </div>
@@ -46,9 +44,7 @@ export default async function ContactPage() {
         <section className="page-wrap grid gap-16 py-24 md:grid-cols-2 md:gap-20 md:py-36">
           <div className="space-y-12">
             <div>
-              <h2 className="font-display text-2xl uppercase text-[var(--brand-red)]">
-                {contact.hoursTitle}
-              </h2>
+              <h2 className="text-[var(--brand-red)]">{contact.hoursTitle}</h2>
               <p className="mt-3 text-[var(--muted)]">
                 {site.hours}
                 <br />
@@ -56,9 +52,7 @@ export default async function ContactPage() {
               </p>
             </div>
             <div>
-              <h2 className="font-display text-2xl uppercase text-[var(--brand-red)]">
-                {contact.whereTitle}
-              </h2>
+              <h2 className="text-[var(--brand-red)]">{contact.whereTitle}</h2>
               <p className="mt-3 text-[var(--muted)]">{site.address}</p>
               <p className="mt-2">
                 <a
@@ -78,18 +72,14 @@ export default async function ContactPage() {
               </p>
             </div>
             <div>
-              <h2 className="mb-2 font-display text-2xl uppercase text-[var(--brand-red)]">
-                {contact.formTitle}
-              </h2>
+              <h2 className="mb-2 text-[var(--brand-red)]">{contact.formTitle}</h2>
               <p className="mb-4 text-[var(--muted)]">{contact.formLead}</p>
               <ContactForm content={content} />
             </div>
           </div>
 
           <div className="space-y-6">
-            <h2 className="font-display text-2xl uppercase text-[var(--brand-red)]">
-              {contact.mapTitle}
-            </h2>
+            <h2 className="text-[var(--brand-red)]">{contact.mapTitle}</h2>
             <ReservoMap
               src={site.mapEmbedUrl}
               title={contact.mapTitle}

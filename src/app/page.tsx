@@ -38,7 +38,7 @@ export default async function HomePage() {
             <div className="absolute inset-0 bg-black/45" />
           </div>
           <div className="relative mx-auto flex min-h-[75svh] max-w-6xl flex-col justify-end px-5 pb-20 pt-28 md:min-h-[90svh] md:justify-center md:px-10 md:pb-28">
-            <h1 className="animate-rise-delay font-display max-w-4xl text-4xl uppercase leading-[1.15] md:text-5xl lg:text-6xl">
+            <h1 className="animate-rise-delay max-w-4xl text-white">
               {home.introTitle}
             </h1>
             <p className="animate-rise-delay-2 mt-8 max-w-2xl text-white/90">
@@ -67,9 +67,7 @@ export default async function HomePage() {
         <section className="section-pad mx-auto max-w-6xl">
           <div className="grid items-center gap-14 md:grid-cols-2 md:gap-20 lg:gap-24">
             <div>
-              <h2 className="font-display text-3xl uppercase text-[var(--brand-red)] md:text-4xl">
-                {home.offerTitle}
-              </h2>
+              <h2 className="text-[var(--brand-red)]">{home.offerTitle}</h2>
               <ul className="mt-8 space-y-4 text-[var(--ink)]">
                 {home.offerItems.map((item) => (
                   <li key={item} className="flex gap-4">
@@ -114,9 +112,7 @@ export default async function HomePage() {
               },
             ].map((block) => (
               <div key={block.t} className="border-t border-white/25 pt-8">
-                <h2 className="font-display text-2xl uppercase md:text-3xl">
-                  {block.t}
-                </h2>
+                <h2>{block.t}</h2>
                 <p className="mt-5 text-white/80">{block.d}</p>
                 <Link
                   href={block.href}
@@ -232,9 +228,7 @@ export default async function HomePage() {
               <p className="section-lead">{home.contactText}</p>
               <div className="mt-12 space-y-8">
                 <div>
-                  <h3 className="font-display text-xl uppercase text-[var(--brand-red)]">
-                    {home.hoursTitle}
-                  </h3>
+                  <h3 className="text-[var(--brand-red)]">{home.hoursTitle}</h3>
                   <p className="mt-3 text-[var(--muted)]">
                     {site.hours}
                     <br />
@@ -242,9 +236,7 @@ export default async function HomePage() {
                   </p>
                 </div>
                 <div>
-                  <h3 className="font-display text-xl uppercase text-[var(--brand-red)]">
-                    {home.whereTitle}
-                  </h3>
+                  <h3 className="text-[var(--brand-red)]">{home.whereTitle}</h3>
                   <p className="mt-3 text-[var(--muted)]">
                     {site.addressShort}
                     <br />

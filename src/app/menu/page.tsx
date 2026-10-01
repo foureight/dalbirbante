@@ -40,7 +40,7 @@ export default async function MenuPage() {
         <div className="page-wrap space-y-20 pb-28 md:space-y-28">
           {menuCategories.map((cat) => (
             <section key={cat.id} id={cat.id}>
-              <h2 className="font-display border-b border-[var(--line)] pb-4 text-3xl uppercase text-[var(--brand-red)] md:text-4xl">
+              <h2 className="border-b border-[var(--line)] pb-4 text-[var(--brand-red)]">
                 {cat.name}
               </h2>
               <ul className="mt-8 divide-y divide-[var(--line)]">
@@ -63,7 +63,7 @@ export default async function MenuPage() {
                       <div className="hidden h-24 w-24 sm:block" />
                     )}
                     <div>
-                      <h3 className="font-display text-xl uppercase">{item.name}</h3>
+                      <h3>{item.name}</h3>
                       {item.description ? (
                         <p className="mt-1 text-sm leading-relaxed text-[var(--muted)]">
                           {item.description}
@@ -81,23 +81,17 @@ export default async function MenuPage() {
 
           <section className="space-y-6 rounded-[6.4px] border border-[var(--line)] bg-[var(--paper-soft)] p-6 md:p-8">
             <div>
-              <h3 className="font-display text-xl uppercase text-[var(--brand-red)]">
-                {menuPage.extrasTitle}
-              </h3>
-              <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">
-                {menuPage.extrasText}
-              </p>
+              <h2 className="text-[var(--brand-red)]">{menuPage.extrasTitle}</h2>
+              <p className="mt-2 text-[var(--muted)]">{menuPage.extrasText}</p>
             </div>
-            <p className="text-sm font-medium text-[var(--brand-green)]">
+            <p className="font-medium text-[var(--brand-green)]">
               {menuPage.glutenNote}
             </p>
             <div>
-              <h3 className="font-display text-xl uppercase text-[var(--brand-red)]">
+              <h2 className="text-[var(--brand-red)]">
                 {menuPage.allergensTitle}
-              </h3>
-              <p className="mt-2 text-sm leading-relaxed text-[var(--muted)]">
-                {menuPage.allergensText}
-              </p>
+              </h2>
+              <p className="mt-2 text-[var(--muted)]">{menuPage.allergensText}</p>
             </div>
           </section>
         </div>

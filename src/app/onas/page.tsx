@@ -31,17 +31,15 @@ export default async function AboutPage() {
           />
           <div className="absolute inset-0 bg-black/50" />
           <div className="relative mx-auto flex min-h-[48vh] max-w-6xl items-end px-5 pb-16 md:px-10 md:pb-20">
-            <h1 className="font-display text-5xl uppercase md:text-6xl">
-              {about.title}
-            </h1>
+            <h1 className="text-white">{about.title}</h1>
           </div>
         </section>
 
         <section className="page-wrap grid gap-16 py-24 md:grid-cols-[1.1fr_0.9fr] md:gap-20 md:py-36">
           <div>
-            <p className="font-display text-2xl leading-snug text-[var(--brand-green)] md:text-3xl">
+            <h2 className="leading-snug text-[var(--brand-green)]">
               {about.lead}
-            </p>
+            </h2>
             <div className="mt-10 space-y-7 text-[var(--muted)]">
               {about.paragraphs.map((p) => (
                 <p key={p.slice(0, 32)}>{p}</p>
