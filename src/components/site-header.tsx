@@ -23,11 +23,11 @@ export function SiteHeader({ content }: { content: SiteContent }) {
     <header className="sticky top-0 z-50">
       <AnnouncementBar message={site.announcement} />
       <div className="border-b border-[var(--line)] bg-white">
-        <div className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-5 py-5 md:px-10 md:py-6">
+        <div className="site-max mx-auto flex w-full items-center justify-between gap-6 px-5 py-5 md:px-10 md:py-6">
           <div className="flex items-center gap-1.5 md:gap-2">
             <Link href="/" className="flex items-center">
               <Image
-                src="/images/logo.webp"
+                src="/images/logo-green.webp"
                 alt={site.brandName}
                 width={320}
                 height={40}

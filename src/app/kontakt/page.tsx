@@ -38,7 +38,7 @@ export default async function ContactPage() {
             />
             <div className="absolute inset-0 bg-black/60" />
           </div>
-          <div className="relative mx-auto max-w-6xl px-5 py-24 md:px-10 md:py-36">
+          <div className="site-max relative mx-auto w-full px-5 py-24 md:px-10 md:py-36">
             <h1 className="animate-rise-delay text-white">{contact.title}</h1>
             <p className="animate-rise-delay-2 mt-8 max-w-xl text-white/90">
               {contact.lead}

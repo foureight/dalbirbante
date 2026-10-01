@@ -31,7 +31,7 @@ export function SiteFooter({ content }: { content: SiteContent }) {
 
   return (
     <footer className="bg-[var(--brand-green)] text-white">
-      <div className="mx-auto max-w-7xl px-5 pb-20 pt-16 md:px-10 md:pb-28 md:pt-24">
+      <div className="site-max mx-auto w-full px-5 pb-20 pt-16 md:px-10 md:pb-28 md:pt-24">
         <FooterGoodbye
           czech={site.goodbye}
           italian={site.goodbyeIt || "BUON APPETITO!"}

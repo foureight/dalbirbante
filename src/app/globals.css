@@ -72,6 +72,8 @@
   --ring: var(--brand-red);
   --radius: 6.4px;
   --button-radius: 999px;
+  /* Site content width — wider full-bleed feel closer to original dalbirbante.cz */
+  --site-max: 87.5rem; /* 1400px */
 }
 
 @theme inline {
@@ -393,12 +395,18 @@
   @apply px-5 py-24 md:px-10 md:py-36 lg:py-40;
 }
 
+.site-max {
+  max-width: var(--site-max);
+}
+
 .page-wrap {
-  @apply mx-auto w-full max-w-6xl px-5 md:px-10;
+  @apply mx-auto w-full px-5 md:px-10;
+  max-width: var(--site-max);
 }
 
 .band-inner {
-  @apply mx-auto max-w-6xl px-5 py-24 md:px-10 md:py-36 lg:py-40;
+  @apply mx-auto px-5 py-24 md:px-10 md:py-36 lg:py-40;
+  max-width: var(--site-max);
 }
 
 .section-title {
@@ -664,6 +672,6 @@
 }
 
 .band-green {
-  background: var(--brand-green-deep);
+  background: var(--brand-green);
   color: #fff;
 }

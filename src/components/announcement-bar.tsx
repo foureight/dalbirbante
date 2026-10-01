@@ -33,7 +33,7 @@ export function AnnouncementBar({ message }: { message: string }) {
 
   return (
     <div className="relative bg-[var(--brand-green)] text-white">
-      <div className="mx-auto flex max-w-6xl items-center justify-center gap-4 px-5 py-3 pr-12 md:px-10 md:pr-14">
+      <div className="site-max mx-auto flex w-full items-center justify-center gap-4 px-5 py-3 pr-12 md:px-10 md:pr-14">
         <p className="text-center text-sm font-semibold uppercase tracking-[0.12em] md:text-base">
           {message}
         </p>

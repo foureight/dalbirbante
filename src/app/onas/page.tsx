@@ -34,7 +34,7 @@ export default async function AboutPage() {
             sizes="100vw"
           />
           <div className="absolute inset-0 bg-black/50" />
-          <div className="relative mx-auto flex min-h-[48vh] max-w-6xl items-end px-5 pb-16 md:px-10 md:pb-20">
+          <div className="site-max relative mx-auto flex min-h-[48vh] w-full items-end px-5 pb-16 md:px-10 md:pb-20">
             <h1 className="animate-rise-delay text-white">{about.title}</h1>
           </div>
         </section>

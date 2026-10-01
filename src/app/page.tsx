@@ -39,7 +39,7 @@ export default async function HomePage() {
             />
             <div className="absolute inset-0 bg-black/45" />
           </div>
-          <div className="relative mx-auto flex min-h-[75svh] max-w-6xl flex-col justify-end px-5 pb-20 pt-28 md:min-h-[90svh] md:justify-center md:px-10 md:pb-28">
+          <div className="site-max relative mx-auto flex min-h-[75svh] w-full flex-col justify-end px-5 pb-20 pt-28 md:min-h-[90svh] md:justify-center md:px-10 md:pb-28">
             <h1 className="animate-rise-delay max-w-4xl text-white">
               {home.introTitle}
             </h1>
@@ -59,7 +59,7 @@ export default async function HomePage() {
           </div>
         </section>
 
-        <section className="section-pad mx-auto max-w-6xl">
+        <section className="site-max section-pad mx-auto w-full">
           <div className="grid items-stretch gap-10 md:grid-cols-2 md:gap-20 lg:gap-24">
             <Reveal>
               <h2 className="text-[var(--brand-red)]">{home.offerTitle}</h2>
@@ -131,7 +131,7 @@ export default async function HomePage() {
           </div>
         </section>
 
-        <section className="section-pad mx-auto max-w-6xl">
+        <section className="site-max section-pad mx-auto w-full">
           <div className="grid items-center gap-14 md:grid-cols-2 md:gap-20">
             <Reveal variant="scale">
               <div className="img-zoom relative aspect-[5/4] overflow-hidden rounded-[6.4px]">
@@ -145,7 +145,7 @@ export default async function HomePage() {
               </div>
             </Reveal>
             <Reveal delay={120}>
-              <h2 className="section-title text-[var(--brand-red)]">
+              <h2 className="section-title text-[var(--brand-green)]">
                 {home.storyTitle}
               </h2>
               <p className="section-lead">{home.storyText}</p>
@@ -195,7 +195,7 @@ export default async function HomePage() {
 
         <section
           id="galerie"
-          className="section-pad mx-auto max-w-6xl scroll-mt-28"
+          className="site-max section-pad mx-auto w-full scroll-mt-28"
         >
           <Reveal>
             <h2 className="section-title">{home.galleryTitle}</h2>
