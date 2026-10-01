@@ -240,6 +240,53 @@
   user-select: none;
 }
 
+.footer-goodbye-line {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin: 0;
+  white-space: nowrap;
+  text-align: center;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(1.75rem, 5.5vw, 3.75rem);
+  line-height: 1;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #fff;
+  transform: translate(-50%, -50%);
+  transition:
+    opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.85s cubic-bezier(0.22, 1, 0.36, 1),
+    letter-spacing 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform, filter;
+}
+
+.footer-goodbye-line.is-active {
+  opacity: 1;
+  filter: blur(0);
+  letter-spacing: 0.04em;
+  transform: translate(-50%, -50%) scale(1);
+  pointer-events: auto;
+}
+
+.footer-goodbye-line.is-exit {
+  opacity: 0;
+  filter: blur(4px);
+  letter-spacing: 0.18em;
+  transform: translate(-50%, -62%) scale(0.92);
+  pointer-events: none;
+}
+
+.footer-goodbye-line.is-enter {
+  opacity: 0;
+  filter: blur(4px);
+  letter-spacing: 0.18em;
+  transform: translate(-50%, -38%) scale(1.06);
+  pointer-events: none;
+}
+
 @keyframes footer-wave-scroll {
   from {
     transform: translateX(0);
@@ -252,6 +299,17 @@
 @media (prefers-reduced-motion: reduce) {
   .footer-wave-track {
     animation: none;
+  }
+
+  .footer-goodbye-line {
+    transition: opacity 0.3s ease;
+  }
+
+  .footer-goodbye-line.is-exit,
+  .footer-goodbye-line.is-enter {
+    filter: none;
+    letter-spacing: 0.04em;
+    transform: translate(-50%, -50%);
   }
 }
 
