@@ -59,13 +59,15 @@ function formatPhoton(feature: PhotonFeature): AddressSuggestion | null {
     p.village ||
     p.locality ||
     "";
-  const district = (p.district || p.suburb || "").replace(/^Praha-?/i, "").trim();
+  const rawDistrict = (p.district || p.suburb || "").trim();
+  const district = rawDistrict.replace(/^Praha-?/i, "").trim();
+  const districtOk = Boolean(district) && !/^\d+$/.test(district);
 
   // Pro Prahu preferujeme čtvrť (Vinoř, Kbely…) — podle ní počítáme zónu.
   const place =
-    city.toLowerCase() === "praha" && district
+    city.toLowerCase() === "praha" && districtOk
       ? district
-      : city || district;
+      : city || (districtOk ? district : "");
 
   const streetParts = [p.street || p.name, p.housenumber].filter(Boolean);
   const street = streetParts.join(" ");
