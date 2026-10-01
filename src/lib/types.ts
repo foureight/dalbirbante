@@ -118,6 +118,15 @@ export type SiteContent = {
     title: string;
     intro: string;
     note: string;
+    date: string;
+    hours: string;
+    items: {
+      name: string;
+      price: string;
+      emoji: string;
+      description: string;
+      note: string;
+    }[];
   };
   delivery: {
     title: string;

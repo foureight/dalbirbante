@@ -29,7 +29,46 @@ export default async function DailyMenuPage() {
           <Reveal>
             <h1 className="section-title text-[var(--brand-red)]">{daily.title}</h1>
             <p className="section-lead">{daily.intro}</p>
-            <p className="mt-8 max-w-3xl text-[var(--muted)]">{daily.note}</p>
+            <div className="mt-10 flex flex-wrap items-baseline gap-x-6 gap-y-2">
+              <p className="text-2xl font-black uppercase tracking-wide text-[var(--brand-green)] md:text-3xl">
+                {daily.date}
+              </p>
+              <p className="text-lg font-semibold text-[var(--ink)] md:text-xl">
+                {daily.hours}
+              </p>
+            </div>
+          </Reveal>
+
+          <ul className="mt-14 divide-y divide-[var(--line)] border-y border-[var(--line)]">
+            {daily.items.map((item, i) => (
+              <Reveal key={item.name} delay={(i % 3) * 50}>
+                <li className="grid gap-3 py-7 sm:grid-cols-[1fr_auto] sm:items-start">
+                  <div>
+                    <h2 className="text-[clamp(1.35rem,2vw,1.75rem)] normal-case tracking-normal text-[var(--ink)]">
+                      <span className="font-black uppercase">
+                        {item.name}
+                      </span>
+                      {item.emoji ? (
+                        <span className="ml-2 font-normal" aria-hidden>
+                          {item.emoji}
+                        </span>
+                      ) : null}
+                    </h2>
+                    <p className="mt-2 text-[var(--muted)]">{item.description}</p>
+                    {item.note ? (
+                      <p className="mt-2 text-sm text-[var(--muted)]">{item.note}</p>
+                    ) : null}
+                  </div>
+                  <p className="shrink-0 text-lg font-bold text-[var(--brand-red)] sm:pt-1">
+                    {item.price}
+                  </p>
+                </li>
+              </Reveal>
+            ))}
+          </ul>
+
+          <Reveal delay={120}>
+            <p className="mt-10 max-w-3xl text-[var(--muted)]">{daily.note}</p>
             <div className="mt-12 flex flex-wrap gap-4">
               <Button asChild className="btn-brand">
                 <a href={site.phoneHref}>{site.callLabel}</a>

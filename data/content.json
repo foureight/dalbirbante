@@ -470,7 +470,53 @@
   "daily": {
     "title": "DENNÍ MENU",
     "intro": "Každy den pro Vás připravujeme speciální nabídku na oběd, která je dostupná od 11:00 do 15:00 hodin. Vyberte si na co máte chuť a zavolejte nebo napište.",
-    "note": "Aktuální denní nabídku zjistíte telefonicky nebo se zeptejte na místě. Obědové menu je dostupné úterý–sobota od 11:00 do 15:00."
+    "note": "Obědové menu je dostupné úterý–sobota. Objednejte telefonicky, online nebo přímo na místě.",
+    "date": "1. 10. 2026",
+    "hours": "11–15 hod.",
+    "items": [
+      {
+        "name": "CREMA AL POMODORO",
+        "price": "59 Kč",
+        "emoji": "🍅",
+        "description": "rajčatový krém, Grana Padano, bazalka, extra panenský olivový olej",
+        "note": "(s italskou bagetou panozzo + 20 Kč)"
+      },
+      {
+        "name": "PANOZZO CAPRESE",
+        "price": "109 Kč",
+        "emoji": "🥖",
+        "description": "rajčata, mozzarella fior di latte, domácí bazalkové pesto, extra panenský olivový olej",
+        "note": ""
+      },
+      {
+        "name": "SPAGHETTI AI GAMBERETTI",
+        "price": "199 Kč",
+        "emoji": "🍝",
+        "description": "těstoviny s krevetami na bílém víně, cherry rajčátky confit a čerstvou bazalkou",
+        "note": ""
+      },
+      {
+        "name": "GNOCCHI PANNA E PROSCIUTTO",
+        "price": "189 Kč",
+        "emoji": "🥔",
+        "description": "krémové gnocchi ve smetanové omáčce s dušenou šunkou a Grana Padano",
+        "note": ""
+      },
+      {
+        "name": "PIZZA QUATTRO FORMAGGI",
+        "price": "189 Kč",
+        "emoji": "🍕",
+        "description": "drcená rajčata, mozzarella fior di latte, gorgonzola, uzená scamorza, Grana Padano",
+        "note": ""
+      },
+      {
+        "name": "PIZZA DOLCE DIAVOLA",
+        "price": "199 Kč",
+        "emoji": "🍕",
+        "description": "drcená rajčata, mozzarella fior di latte, pikantní kalábrijská klobása ’nduja, ricotta, bazalka, pepř",
+        "note": ""
+      }
+    ]
   },
   "delivery": {
     "title": "ROZVOZ JÍDLA",

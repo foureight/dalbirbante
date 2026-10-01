@@ -321,9 +321,18 @@ export function AdminClient({ initial, authenticated }: Props) {
     }
 
     if (section === "daily") {
+      const d = content.daily;
       return (
         <div className="space-y-4">
-          {Object.entries(content.daily).map(([key, value]) => (
+          {(
+            [
+              ["title", d.title],
+              ["intro", d.intro],
+              ["note", d.note],
+              ["date", d.date],
+              ["hours", d.hours],
+            ] as const
+          ).map(([key, value]) => (
             <Field
               key={key}
               label={key}
@@ -332,6 +341,35 @@ export function AdminClient({ initial, authenticated }: Props) {
               multiline={value.length > 60}
             />
           ))}
+          <div className="space-y-4 border border-[var(--line)] bg-white/60 p-4">
+            <p className="text-sm font-medium">Položky denního menu</p>
+            {d.items.map((item, i) => (
+              <div
+                key={i}
+                className="space-y-2 border-t border-[var(--line)] pt-3"
+              >
+                {(
+                  [
+                    ["name", "Název"],
+                    ["price", "Cena"],
+                    ["emoji", "Emoji"],
+                    ["description", "Popis"],
+                    ["note", "Poznámka"],
+                  ] as const
+                ).map(([key, label]) => (
+                  <Field
+                    key={key}
+                    label={`${label} ${i + 1}`}
+                    value={item[key]}
+                    onChange={(v) =>
+                      updateAt(["daily", "items", String(i), key], v)
+                    }
+                    multiline={key === "description"}
+                  />
+                ))}
+              </div>
+            ))}
+          </div>
         </div>
       );
     }
