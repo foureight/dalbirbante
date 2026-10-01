@@ -625,12 +625,16 @@ export function AdminClient({ initial, authenticated }: Props) {
             </p>
           </div>
           <div className="ml-auto flex flex-wrap items-center justify-end gap-2">
-            <Button asChild variant="outline" className="rounded-full text-base">
+            <Button
+              asChild
+              variant="outline"
+              className="rounded-full text-base transition hover:border-[var(--brand-red)] hover:bg-[var(--brand-red)] hover:text-white"
+            >
               <a href="/admin/objednavky">Fronta objednávek</a>
             </Button>
             <Button
               variant="outline"
-              className="rounded-full text-base"
+              className="rounded-full text-base transition hover:border-[var(--brand-red)] hover:bg-[var(--brand-red)] hover:text-white"
               onClick={logout}
             >
               Odhlásit
