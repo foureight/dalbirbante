@@ -32,7 +32,7 @@ export default async function DailyMenuPage() {
             >
               <a href={site.phoneHref}>{site.callLabel}</a>
             </Button>
-            <Button asChild variant="outline" className="h-11 rounded-[6.4px]">
+            <Button asChild variant="outline" className="h-11 rounded-full">
               <Link href="/menu">{content.nav.menu}</Link>
             </Button>
           </div>

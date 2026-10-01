@@ -61,7 +61,7 @@
   --input: var(--line);
   --ring: var(--brand-red);
   --radius: 6.4px;
-  --button-radius: 6.4px;
+  --button-radius: 999px;
 }
 
 @theme inline {
@@ -209,6 +209,35 @@
 
 .btn-brand:hover {
   background: var(--brand-red-hover);
+}
+
+.btn-green {
+  background: var(--brand-green);
+  color: #fff;
+  font-family: var(--font-display);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-radius: var(--button-radius);
+}
+
+.btn-green:hover {
+  background: #007a3a;
+}
+
+.wave-divider {
+  display: block;
+  width: 4.5rem;
+  height: 0.85rem;
+  margin-bottom: 0.75rem;
+  background:
+    radial-gradient(circle at 10% 60%, transparent 0 35%, #9a9a9a 36% 55%, transparent 56%),
+    radial-gradient(circle at 50% 60%, transparent 0 35%, #9a9a9a 36% 55%, transparent 56%),
+    radial-gradient(circle at 90% 60%, transparent 0 35%, #9a9a9a 36% 55%, transparent 56%);
+  background-size: 33% 100%;
+  background-repeat: no-repeat;
+  background-position: 0 0, 50% 0, 100% 0;
+  opacity: 0.7;
 }
 
 .band-black {

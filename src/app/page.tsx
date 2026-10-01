@@ -64,7 +64,7 @@ export default async function HomePage() {
               <Button
                 asChild
                 variant="outline"
-                className="h-11 rounded-[6.4px] border-white/50 bg-transparent px-6 text-white hover:bg-white/10 hover:text-white"
+                className="h-11 rounded-full border-white/50 bg-transparent px-6 text-white hover:bg-white/10 hover:text-white"
               >
                 <Link href="/menu">{home.menuCta}</Link>
               </Button>
@@ -177,7 +177,7 @@ export default async function HomePage() {
                 <Button
                   asChild
                   variant="outline"
-                  className="h-11 rounded-[6.4px] border-white/40 bg-transparent text-white hover:bg-white/10 hover:text-white"
+                  className="h-11 rounded-full border-white/40 bg-transparent text-white hover:bg-white/10 hover:text-white"
                 >
                   <Link href="/rozvoz">{content.nav.delivery}</Link>
                 </Button>

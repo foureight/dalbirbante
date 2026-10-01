@@ -46,10 +46,29 @@ export function SiteHeader({ content }: { content: SiteContent }) {
                 {l.label}
               </Link>
             ))}
-            <Button
-              asChild
-              className="btn-brand h-10 px-5 hover:bg-[var(--brand-red-hover)]"
+            <a
+              href={site.instagramUrl}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Instagram"
+              className="text-[var(--ink)] hover:text-[var(--brand-red)]"
             >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+                <path d="M7 2h10a5 5 0 0 1 5 5v10a5 5 0 0 1-5 5H7a5 5 0 0 1-5-5V7a5 5 0 0 1 5-5zm0 2a3 3 0 0 0-3 3v10a3 3 0 0 0 3 3h10a3 3 0 0 0 3-3V7a3 3 0 0 0-3-3H7zm11 1.5a1 1 0 1 1 0 2 1 1 0 0 1 0-2zM12 7a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 2a3 3 0 1 0 0 6 3 3 0 0 0 0-6z" />
+              </svg>
+            </a>
+            <a
+              href={site.facebookUrl}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Facebook"
+              className="text-[var(--ink)] hover:text-[var(--brand-red)]"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden>
+                <path d="M13.5 22v-8h2.7l.4-3h-3.1V9.1c0-.9.3-1.5 1.6-1.5H17V5.1C16.6 5 15.5 5 14.3 5c-2.5 0-4.2 1.5-4.2 4.3V11H7.5v3h2.6v8h3.4z" />
+              </svg>
+            </a>
+            <Button asChild className="btn-green h-10 px-5 hover:bg-[#007a3a]">
               <a href={site.phoneHref}>{site.callLabel}</a>
             </Button>
           </nav>
@@ -85,7 +104,7 @@ export function SiteHeader({ content }: { content: SiteContent }) {
               ))}
               <a
                 href={site.phoneHref}
-                className="btn-brand inline-flex w-fit px-4 py-2 text-xs"
+                className="btn-green inline-flex w-fit px-4 py-2 text-xs"
               >
                 {site.callLabel}
               </a>

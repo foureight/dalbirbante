@@ -447,7 +447,7 @@ export function AdminClient({ initial, authenticated }: Props) {
           {error && <p className="text-sm text-red-700">{error}</p>}
           <Button
             type="submit"
-            className="rounded-[6.4px] bg-[var(--forest)] text-white"
+            className="rounded-full bg-[var(--forest)] text-white"
           >
             Přihlásit
           </Button>
@@ -470,14 +470,14 @@ export function AdminClient({ initial, authenticated }: Props) {
             <Button
               onClick={save}
               disabled={saving}
-              className="rounded-[6.4px] bg-[var(--accent)] text-white hover:bg-[var(--accent-hover)]"
+              className="rounded-full bg-[var(--accent)] text-white hover:bg-[var(--accent-hover)]"
             >
               {saving ? "Ukládám…" : "Uložit změny"}
             </Button>
-            <Button variant="outline" className="rounded-[6.4px]" onClick={logout}>
+            <Button variant="outline" className="rounded-full" onClick={logout}>
               Odhlásit
             </Button>
-            <Button asChild variant="ghost" className="rounded-[6.4px]">
+            <Button asChild variant="ghost" className="rounded-full">
               <a href="/" target="_blank" rel="noreferrer">
                 Otevřít web
               </a>

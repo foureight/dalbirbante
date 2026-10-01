@@ -60,7 +60,7 @@ export function ContactForm({ content }: { content: SiteContent }) {
       </div>
       <Button
         type="submit"
-        className="rounded-[6.4px] bg-[var(--accent)] px-6 text-white hover:bg-[var(--accent-hover)]"
+        className="rounded-full bg-[var(--accent)] px-6 text-white hover:bg-[var(--accent-hover)]"
       >
         {contact.formSubmit}
       </Button>
