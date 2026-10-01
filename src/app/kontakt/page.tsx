@@ -41,50 +41,53 @@ export default async function ContactPage() {
           </div>
         </section>
 
-        <section className="page-wrap grid gap-16 py-24 md:grid-cols-2 md:gap-20 md:py-36">
-          <div className="space-y-12">
-            <div>
-              <h2 className="text-[var(--brand-red)]">{contact.hoursTitle}</h2>
-              <p className="mt-3 text-[var(--muted)]">
-                {site.hours}
-                <br />
-                {site.hoursClosed}
-              </p>
+        <section className="page-wrap py-24 md:py-36">
+          <div className="grid items-start gap-16 md:grid-cols-2 md:gap-20">
+            <div className="space-y-12">
+              <div>
+                <h2 className="text-[var(--brand-red)]">{contact.hoursTitle}</h2>
+                <p className="mt-3 text-[var(--muted)]">
+                  {site.hours}
+                  <br />
+                  {site.hoursClosed}
+                </p>
+              </div>
+              <div>
+                <h2 className="text-[var(--brand-red)]">{contact.whereTitle}</h2>
+                <p className="mt-3 text-[var(--muted)]">{site.address}</p>
+                <p className="mt-2">
+                  <a
+                    href={site.phoneHref}
+                    className="text-[var(--brand-red)] hover:underline"
+                  >
+                    {site.phone}
+                  </a>
+                </p>
+                <p>
+                  <a
+                    href={`mailto:${site.email}`}
+                    className="text-[var(--brand-red)] hover:underline"
+                  >
+                    {site.email}
+                  </a>
+                </p>
+              </div>
             </div>
-            <div>
-              <h2 className="text-[var(--brand-red)]">{contact.whereTitle}</h2>
-              <p className="mt-3 text-[var(--muted)]">{site.address}</p>
-              <p className="mt-2">
-                <a
-                  href={site.phoneHref}
-                  className="text-[var(--brand-red)] hover:underline"
-                >
-                  {site.phone}
-                </a>
-              </p>
-              <p>
-                <a
-                  href={`mailto:${site.email}`}
-                  className="text-[var(--brand-red)] hover:underline"
-                >
-                  {site.email}
-                </a>
-              </p>
-            </div>
-            <div>
-              <h2 className="mb-4 text-[var(--brand-red)]">{contact.formTitle}</h2>
-              <p className="mb-8 text-[var(--muted)]">{contact.formLead}</p>
-              <ContactForm content={content} />
+
+            <div className="space-y-6 md:-mt-2">
+              <h2 className="text-[var(--brand-red)]">{contact.mapTitle}</h2>
+              <ReservoMap
+                src={site.mapEmbedUrl}
+                title={contact.mapTitle}
+                className="rounded-[6.4px]"
+              />
             </div>
           </div>
 
-          <div className="space-y-6">
-            <h2 className="text-[var(--brand-red)]">{contact.mapTitle}</h2>
-            <ReservoMap
-              src={site.mapEmbedUrl}
-              title={contact.mapTitle}
-              className="rounded-[6.4px]"
-            />
+          <div className="mt-20 max-w-3xl md:mt-28">
+            <h2 className="mb-4 text-[var(--brand-red)]">{contact.formTitle}</h2>
+            <p className="mb-8 text-[var(--muted)]">{contact.formLead}</p>
+            <ContactForm content={content} />
           </div>
         </section>
       </main>
