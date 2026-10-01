@@ -16,7 +16,6 @@ export function SiteHeader({ content }: { content: SiteContent }) {
     { href: "/denni-nabidka", label: nav.daily },
     { href: "/rozvoz", label: nav.delivery },
     { href: "/onas", label: nav.about },
-    { href: "/kontakt", label: nav.contact },
   ];
 
   return (
