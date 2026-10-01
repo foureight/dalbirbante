@@ -109,14 +109,14 @@ export default async function HomePage() {
             ].map((block, i) => (
               <Reveal key={block.t} delay={i * 100} className="h-full">
                 <div className="flex h-full flex-col">
-                  <h2>
+                  <h2 className="band-card-title">
                     <Link href={block.href} className="transition hover:opacity-90">
                       {block.t}
                     </Link>
                   </h2>
                   <Link
                     href={block.href}
-                    className="btn-outline-light mt-8 inline-flex w-fit"
+                    className="btn-outline-light mt-auto inline-flex w-fit pt-8"
                   >
                     Více
                   </Link>
