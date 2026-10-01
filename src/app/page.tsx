@@ -241,7 +241,7 @@ export default async function HomePage() {
         <section className="border-t border-[var(--line)] bg-white">
           <div className="band-inner grid gap-14 md:grid-cols-2 md:gap-20">
             <Reveal>
-              <h2 className="section-title text-[var(--brand-red)]">
+              <h2 className="section-title text-[var(--brand-green)]">
                 {home.contactTitle}
               </h2>
               <p className="section-lead">{home.contactText}</p>
