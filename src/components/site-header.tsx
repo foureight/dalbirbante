@@ -24,16 +24,48 @@ export function SiteHeader({ content }: { content: SiteContent }) {
       <AnnouncementBar message={site.announcement} />
       <div className="border-b border-[var(--line)] bg-white">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-5 py-5 md:px-10 md:py-6">
-          <Link href="/" className="flex items-center">
-            <Image
-              src="/images/logo.webp"
-              alt={site.brandName}
-              width={320}
-              height={40}
-              className="h-9 w-auto object-contain md:h-11"
-              priority
-            />
-          </Link>
+          <div className="flex items-center gap-1.5 md:gap-2">
+            <Link href="/" className="flex items-center">
+              <Image
+                src="/images/logo.webp"
+                alt={site.brandName}
+                width={320}
+                height={40}
+                className="h-9 w-auto object-contain md:h-11"
+                priority
+              />
+            </Link>
+            <div className="flex items-center -space-x-0.5">
+              <a
+                href={site.instagramUrl}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Instagram"
+                className="inline-flex size-9 items-center justify-center text-[var(--ink)] transition hover:text-[var(--brand-red)] md:size-10"
+              >
+                <Image
+                  src="/icons/instagram.svg"
+                  alt=""
+                  width={32}
+                  height={32}
+                />
+              </a>
+              <a
+                href={site.facebookUrl}
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Facebook"
+                className="inline-flex size-9 items-center justify-center text-[var(--ink)] transition hover:text-[var(--brand-red)] md:size-10"
+              >
+                <Image
+                  src="/icons/facebook.svg"
+                  alt=""
+                  width={32}
+                  height={32}
+                />
+              </a>
+            </div>
+          </div>
 
           <nav className="nav-menu hidden items-center gap-3 text-[var(--ink)] lg:flex xl:gap-4">
             {links.map((l) => (
@@ -45,36 +77,6 @@ export function SiteHeader({ content }: { content: SiteContent }) {
                 {l.label}
               </Link>
             ))}
-            <div className="ml-1 flex items-center gap-0">
-              <a
-                href={site.instagramUrl}
-                target="_blank"
-                rel="noreferrer"
-                aria-label="Instagram"
-                className="inline-flex size-10 items-center justify-center text-[var(--ink)] transition hover:text-[var(--brand-red)]"
-              >
-                <Image
-                  src="/icons/instagram.svg"
-                  alt=""
-                  width={36}
-                  height={36}
-                />
-              </a>
-              <a
-                href={site.facebookUrl}
-                target="_blank"
-                rel="noreferrer"
-                aria-label="Facebook"
-                className="inline-flex size-10 items-center justify-center text-[var(--ink)] transition hover:text-[var(--brand-red)]"
-              >
-                <Image
-                  src="/icons/facebook.svg"
-                  alt=""
-                  width={36}
-                  height={36}
-                />
-              </a>
-            </div>
             <Button asChild className="btn-green !py-3 !px-5 !text-base">
               <a href={site.phoneHref}>{site.callLabel}</a>
             </Button>
