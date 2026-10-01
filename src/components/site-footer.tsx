@@ -24,6 +24,38 @@ export function SiteFooter({ content }: { content: SiteContent }) {
           <p className="mt-4 font-display text-2xl uppercase tracking-wide">
             {site.goodbye}
           </p>
+          <div className="mt-5 flex gap-3">
+            <a
+              href={site.instagramUrl}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Instagram"
+              className="inline-flex size-9 items-center justify-center rounded-full bg-white/15 p-2 hover:bg-white/25"
+            >
+              <Image
+                src="/icons/instagram.svg"
+                alt=""
+                width={20}
+                height={20}
+                className="brightness-0 invert"
+              />
+            </a>
+            <a
+              href={site.facebookUrl}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Facebook"
+              className="inline-flex size-9 items-center justify-center rounded-full bg-white/15 p-2 hover:bg-white/25"
+            >
+              <Image
+                src="/icons/facebook.svg"
+                alt=""
+                width={20}
+                height={20}
+                className="brightness-0 invert"
+              />
+            </a>
+          </div>
         </div>
         <div>
           <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-white/70">
