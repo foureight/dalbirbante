@@ -13,7 +13,7 @@ export function BrandLogo({ brandName }: Props) {
       <Image
         src="/images/logo-wordmark.webp"
         alt=""
-        width={240}
+        width={256}
         height={40}
         className="brand-logo__word"
         priority
