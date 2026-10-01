@@ -64,7 +64,7 @@ export default async function HomePage() {
               {[
                 {
                   t: home.pizzaWeekTitle,
-                  href: "/menu#pizza",
+                  href: "/menu",
                 },
                 {
                   t: home.dailyMenuTitle,
@@ -72,11 +72,11 @@ export default async function HomePage() {
                 },
                 {
                   t: home.glutenFreeTitle,
-                  href: "/bezlepkova-pizza-vinor",
+                  href: "/menu",
                 },
               ].map((item) => (
                 <Link
-                  key={item.href}
+                  key={item.t}
                   href={item.href}
                   className="text-sm font-extrabold uppercase tracking-wide text-white underline-offset-4 transition hover:underline md:text-base"
                 >
@@ -130,7 +130,7 @@ export default async function HomePage() {
               {
                 t: home.pizzaWeekTitle,
                 d: home.pizzaWeekText,
-                href: "/menu",
+                href: "/menu#pizza",
               },
               {
                 t: home.dailyMenuTitle,
@@ -145,7 +145,11 @@ export default async function HomePage() {
             ].map((block, i) => (
               <Reveal key={block.t} delay={i * 100}>
                 <div className="border-t border-white/25 pt-8">
-                  <h2>{block.t}</h2>
+                  <h2>
+                    <Link href={block.href} className="transition hover:opacity-90">
+                      {block.t}
+                    </Link>
+                  </h2>
                   <p className="mt-5 text-white/80">{block.d}</p>
                   <Link
                     href={block.href}
