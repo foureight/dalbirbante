@@ -109,10 +109,7 @@ export function SiteHeader({ content }: { content: SiteContent }) {
                   {l.label}
                 </Link>
               ))}
-              <a
-                href={site.phoneHref}
-                className="btn-green inline-flex w-fit !min-w-0 !px-5 !py-3 !text-base"
-              >
+              <a href={site.phoneHref} className="btn-green inline-flex w-fit">
                 {site.callLabel}
               </a>
             </div>
