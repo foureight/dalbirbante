@@ -60,7 +60,7 @@ export default async function ContactPage() {
                   </p>
                 </div>
                 <div>
-                  <h2 className="text-[var(--brand-red)]">{contact.whereTitle}</h2>
+                  <h2 className="text-[var(--brand-green)]">{contact.whereTitle}</h2>
                   <p className="mt-3 text-[var(--muted)]">{site.address}</p>
                   <p className="mt-2">
                     <a
@@ -84,7 +84,7 @@ export default async function ContactPage() {
 
             <Reveal delay={120} variant="scale">
               <div className="space-y-6 md:-mt-2">
-                <h2 className="text-[var(--brand-red)]">{contact.mapTitle}</h2>
+                <h2 className="text-[var(--brand-green)]">{contact.mapTitle}</h2>
                 <ReservoMap
                   src={site.mapEmbedUrl}
                   title={contact.mapTitle}
@@ -96,7 +96,7 @@ export default async function ContactPage() {
 
           <Reveal delay={80}>
             <div className="mt-20 max-w-3xl md:mt-28">
-              <h2 className="mb-4 text-[var(--brand-red)]">{contact.formTitle}</h2>
+              <h2 className="mb-4 text-[var(--brand-green)]">{contact.formTitle}</h2>
               <p className="mb-8 text-[var(--muted)]">{contact.formLead}</p>
               <ContactForm content={content} />
             </div>
