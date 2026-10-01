@@ -347,7 +347,7 @@ export function AdminClient({ initial, authenticated }: Props) {
       return (
         <div className="space-y-8">
           <div className="rounded-[6.4px] border border-[var(--brand-green)]/30 bg-white p-5 shadow-sm md:p-7">
-            <h2 className="text-2xl font-extrabold text-[var(--brand-green)]">
+            <h2 className="text-2xl font-extrabold text-[var(--brand-red)]">
               Denní nabídka — texty stránky
             </h2>
             <p className="mt-2 text-base text-[var(--muted)]">
@@ -400,15 +400,15 @@ export function AdminClient({ initial, authenticated }: Props) {
           </div>
 
           <div className="space-y-5">
-            <h2 className="text-2xl font-extrabold text-[var(--ink)]">
+            <h2 className="text-2xl font-extrabold text-[var(--brand-red)]">
               Položky denního menu
             </h2>
             {d.items.map((item, i) => (
               <div
                 key={i}
-                className="space-y-4 rounded-[6.4px] border border-[var(--line)] border-l-4 border-l-[var(--brand-green)] bg-white p-5 shadow-sm"
+                className="space-y-4 rounded-[6.4px] border border-[var(--line)] border-l-4 border-l-[var(--brand-red)] bg-white p-5 shadow-sm"
               >
-                <p className="text-lg font-extrabold text-[var(--brand-green)]">
+                <p className="text-lg font-extrabold text-[var(--brand-red)]">
                   Jídlo {i + 1}
                   {item.name ? ` · ${item.name}` : ""}
                 </p>
@@ -455,7 +455,7 @@ export function AdminClient({ initial, authenticated }: Props) {
           </div>
 
           <div className="rounded-[6.4px] border border-[var(--line)] bg-[var(--paper-soft)] p-5">
-            <h2 className="text-xl font-extrabold text-[var(--ink)]">
+            <h2 className="text-xl font-extrabold text-[var(--brand-red)]">
               Text na úvodní stránce
             </h2>
             <p className="mt-1 text-sm text-[var(--muted)]">
@@ -618,16 +618,9 @@ export function AdminClient({ initial, authenticated }: Props) {
               Upravte texty a uložte — změny se projeví okamžitě.
             </p>
           </div>
-          <div className="flex flex-wrap gap-2">
+          <div className="ml-auto flex flex-wrap items-center justify-end gap-2">
             <Button asChild variant="outline" className="rounded-full text-base">
               <a href="/admin/objednavky">Fronta objednávek</a>
-            </Button>
-            <Button
-              onClick={save}
-              disabled={saving}
-              className="btn-green rounded-full text-base"
-            >
-              {saving ? "Ukládám…" : "Uložit změny"}
             </Button>
             <Button
               variant="outline"
@@ -640,6 +633,13 @@ export function AdminClient({ initial, authenticated }: Props) {
               <a href="/" target="_blank" rel="noreferrer">
                 Otevřít web
               </a>
+            </Button>
+            <Button
+              onClick={save}
+              disabled={saving}
+              className="btn-green rounded-full text-base"
+            >
+              {saving ? "Ukládám…" : "Uložit změny"}
             </Button>
           </div>
         </div>
