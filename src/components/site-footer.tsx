@@ -88,7 +88,7 @@ export function SiteFooter({ content }: { content: SiteContent }) {
                     target="_blank"
                     rel="noreferrer"
                     aria-label="Facebook"
-                    className="inline-flex size-36 items-center justify-center rounded-full bg-white text-[var(--brand-green)] transition hover:opacity-90 md:size-[10.5rem]"
+                    className="inline-flex size-[11.25rem] items-center justify-center rounded-full bg-white text-[var(--brand-green)] transition hover:opacity-90 md:size-[13.125rem]"
                   >
                     <FacebookIcon />
                   </a>
@@ -97,7 +97,7 @@ export function SiteFooter({ content }: { content: SiteContent }) {
                     target="_blank"
                     rel="noreferrer"
                     aria-label="Instagram"
-                    className="inline-flex size-36 items-center justify-center rounded-full bg-white text-[var(--brand-green)] transition hover:opacity-90 md:size-[10.5rem]"
+                    className="inline-flex size-[11.25rem] items-center justify-center rounded-full bg-white text-[var(--brand-green)] transition hover:opacity-90 md:size-[13.125rem]"
                   >
                     <InstagramIcon />
                   </a>
