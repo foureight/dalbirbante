@@ -32,27 +32,49 @@ function Field({
   value,
   onChange,
   multiline,
+  hint,
+  emphasize,
 }: {
   label: string;
   value: string;
   onChange: (v: string) => void;
   multiline?: boolean;
+  hint?: string;
+  emphasize?: boolean;
 }) {
+  const useTextarea = multiline || value.length > 80;
   return (
-    <div className="space-y-1.5">
-      <Label className="text-xs text-[var(--muted)]">{label}</Label>
-      {multiline || value.length > 80 ? (
+    <div
+      className={
+        emphasize
+          ? "space-y-2 rounded-[6.4px] border-2 border-[var(--brand-green)] bg-[#eef8f1] p-4"
+          : "space-y-2"
+      }
+    >
+      <Label
+        className={
+          emphasize
+            ? "text-base font-bold text-[var(--brand-green)]"
+            : "text-base font-semibold text-[var(--ink)]"
+        }
+      >
+        {label}
+      </Label>
+      {hint ? (
+        <p className="text-sm leading-snug text-[var(--muted)]">{hint}</p>
+      ) : null}
+      {useTextarea ? (
         <Textarea
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          rows={Math.min(8, Math.max(3, Math.ceil(value.length / 70)))}
-          className="rounded-none bg-white"
+          rows={Math.min(10, Math.max(4, Math.ceil(value.length / 55)))}
+          className="min-h-[7rem] rounded-[6.4px] border-[var(--line)] bg-white px-4 py-3 text-lg leading-relaxed text-[var(--ink)]"
         />
       ) : (
         <Input
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className="rounded-none bg-white"
+          className="h-12 rounded-[6.4px] border-[var(--line)] bg-white px-4 text-lg text-[var(--ink)]"
         />
       )}
     </div>
@@ -78,7 +100,7 @@ export function AdminClient({ initial, authenticated }: Props) {
   const [authed, setAuthed] = useState(authenticated);
   const [password, setPassword] = useState("");
   const [content, setContent] = useState(initial);
-  const [section, setSection] = useState<keyof SiteContent>("site");
+  const [section, setSection] = useState<keyof SiteContent>("daily");
   const [status, setStatus] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -323,52 +345,132 @@ export function AdminClient({ initial, authenticated }: Props) {
     if (section === "daily") {
       const d = content.daily;
       return (
-        <div className="space-y-4">
-          {(
-            [
-              ["title", d.title],
-              ["intro", d.intro],
-              ["note", d.note],
-              ["date", d.date],
-              ["hours", d.hours],
-            ] as const
-          ).map(([key, value]) => (
-            <Field
-              key={key}
-              label={key}
-              value={value}
-              onChange={(v) => updateAt(["daily", key], v)}
-              multiline={value.length > 60}
-            />
-          ))}
-          <div className="space-y-4 border border-[var(--line)] bg-white/60 p-4">
-            <p className="text-sm font-medium">Položky denního menu</p>
+        <div className="space-y-8">
+          <div className="rounded-[6.4px] border border-[var(--brand-green)]/30 bg-white p-5 shadow-sm md:p-7">
+            <h2 className="text-2xl font-extrabold text-[var(--brand-green)]">
+              Denní nabídka — texty stránky
+            </h2>
+            <p className="mt-2 text-base text-[var(--muted)]">
+              Tyto texty se zobrazují na{" "}
+              <a
+                href="/denni-nabidka"
+                target="_blank"
+                rel="noreferrer"
+                className="font-semibold text-[var(--brand-red)] underline"
+              >
+                /denni-nabidka
+              </a>
+              . Intro pište srozumitelně — nemusí začínat „Každý den“.
+            </p>
+            <div className="mt-6 space-y-5">
+              <Field
+                label="Nadpis stránky"
+                value={d.title}
+                onChange={(v) => updateAt(["daily", "title"], v)}
+              />
+              <Field
+                label="Úvodní text (intro)"
+                value={d.intro}
+                onChange={(v) => updateAt(["daily", "intro"], v)}
+                multiline
+                emphasize
+                hint="Hlavní odstavec pod fotkou — měňte podle aktuální nabídky."
+              />
+              <Field
+                label="Poznámka pod nabídkou"
+                value={d.note}
+                onChange={(v) => updateAt(["daily", "note"], v)}
+                multiline
+              />
+              <div className="grid gap-5 sm:grid-cols-2">
+                <Field
+                  label="Datum"
+                  value={d.date}
+                  onChange={(v) => updateAt(["daily", "date"], v)}
+                  emphasize
+                  hint="Zobrazí se vedle nadpisu (např. 1. 10. 2026)."
+                />
+                <Field
+                  label="Čas podávání"
+                  value={d.hours}
+                  onChange={(v) => updateAt(["daily", "hours"], v)}
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="space-y-5">
+            <h2 className="text-2xl font-extrabold text-[var(--ink)]">
+              Položky denního menu
+            </h2>
             {d.items.map((item, i) => (
               <div
                 key={i}
-                className="space-y-2 border-t border-[var(--line)] pt-3"
+                className="space-y-4 rounded-[6.4px] border border-[var(--line)] border-l-4 border-l-[var(--brand-green)] bg-white p-5 shadow-sm"
               >
-                {(
-                  [
-                    ["name", "Název"],
-                    ["price", "Cena"],
-                    ["emoji", "Emoji"],
-                    ["description", "Popis"],
-                    ["note", "Poznámka"],
-                  ] as const
-                ).map(([key, label]) => (
+                <p className="text-lg font-extrabold text-[var(--brand-green)]">
+                  Jídlo {i + 1}
+                  {item.name ? ` · ${item.name}` : ""}
+                </p>
+                <div className="grid gap-4 sm:grid-cols-[1fr_auto_auto]">
                   <Field
-                    key={key}
-                    label={`${label} ${i + 1}`}
-                    value={item[key]}
+                    label="Název"
+                    value={item.name}
                     onChange={(v) =>
-                      updateAt(["daily", "items", String(i), key], v)
+                      updateAt(["daily", "items", String(i), "name"], v)
                     }
-                    multiline={key === "description"}
                   />
-                ))}
+                  <Field
+                    label="Cena"
+                    value={item.price}
+                    onChange={(v) =>
+                      updateAt(["daily", "items", String(i), "price"], v)
+                    }
+                  />
+                  <Field
+                    label="Emoji"
+                    value={item.emoji}
+                    onChange={(v) =>
+                      updateAt(["daily", "items", String(i), "emoji"], v)
+                    }
+                  />
+                </div>
+                <Field
+                  label="Popis"
+                  value={item.description}
+                  onChange={(v) =>
+                    updateAt(["daily", "items", String(i), "description"], v)
+                  }
+                  multiline
+                />
+                <Field
+                  label="Poznámka"
+                  value={item.note}
+                  onChange={(v) =>
+                    updateAt(["daily", "items", String(i), "note"], v)
+                  }
+                />
               </div>
             ))}
+          </div>
+
+          <div className="rounded-[6.4px] border border-[var(--line)] bg-[var(--paper-soft)] p-5">
+            <h2 className="text-xl font-extrabold text-[var(--ink)]">
+              Text na úvodní stránce
+            </h2>
+            <p className="mt-1 text-sm text-[var(--muted)]">
+              Krátký text u dlaždice „Denní menu přes poledne“ v zeleném pruhu.
+            </p>
+            <div className="mt-4">
+              <Field
+                label="Text dlaždice (home)"
+                value={content.home.dailyMenuText}
+                onChange={(v) => updateAt(["home", "dailyMenuText"], v)}
+                multiline
+                emphasize
+                hint="Měl by být jiný než intro na stránce denní nabídky."
+              />
+            </div>
           </div>
         </div>
       );
@@ -505,30 +607,36 @@ export function AdminClient({ initial, authenticated }: Props) {
   }
 
   return (
-    <div className="min-h-screen bg-[var(--paper)]">
-      <header className="sticky top-0 z-20 border-b border-[var(--line)] bg-[var(--paper)]/95 backdrop-blur">
+    <div className="min-h-screen bg-[var(--paper-soft)]">
+      <header className="sticky top-0 z-20 border-b border-[var(--line)] bg-white/95 backdrop-blur">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-4">
           <div>
-            <h1 className="font-display text-2xl">Administrace textů</h1>
-            <p className="text-xs text-[var(--muted)]">
+            <h1 className="text-3xl font-extrabold text-[var(--brand-green)]">
+              Administrace textů
+            </h1>
+            <p className="mt-1 text-base text-[var(--muted)]">
               Upravte texty a uložte — změny se projeví okamžitě.
             </p>
           </div>
-          <div className="flex gap-2">
-            <Button asChild variant="outline" className="rounded-full">
+          <div className="flex flex-wrap gap-2">
+            <Button asChild variant="outline" className="rounded-full text-base">
               <a href="/admin/objednavky">Fronta objednávek</a>
             </Button>
             <Button
               onClick={save}
               disabled={saving}
-              className="rounded-full bg-[var(--accent)] text-white hover:bg-[var(--accent-hover)]"
+              className="btn-green rounded-full text-base"
             >
               {saving ? "Ukládám…" : "Uložit změny"}
             </Button>
-            <Button variant="outline" className="rounded-full" onClick={logout}>
+            <Button
+              variant="outline"
+              className="rounded-full text-base"
+              onClick={logout}
+            >
               Odhlásit
             </Button>
-            <Button asChild variant="ghost" className="rounded-full">
+            <Button asChild variant="ghost" className="rounded-full text-base">
               <a href="/" target="_blank" rel="noreferrer">
                 Otevřít web
               </a>
@@ -536,29 +644,37 @@ export function AdminClient({ initial, authenticated }: Props) {
           </div>
         </div>
         {(status || error) && (
-          <div className="border-t border-[var(--line)] px-4 py-2 text-center text-sm">
-            {status && <span className="text-[var(--forest)]">{status}</span>}
-            {error && <span className="text-red-700">{error}</span>}
+          <div className="border-t border-[var(--line)] px-4 py-3 text-center text-base font-semibold">
+            {status && (
+              <span className="text-[var(--brand-green)]">{status}</span>
+            )}
+            {error && <span className="text-[var(--brand-red)]">{error}</span>}
           </div>
         )}
       </header>
 
-      <div className="mx-auto grid max-w-6xl gap-6 px-4 py-8 md:grid-cols-[220px_1fr]">
+      <div className="mx-auto grid max-w-6xl gap-6 px-4 py-8 md:grid-cols-[240px_1fr]">
         <aside className="flex flex-row gap-2 overflow-x-auto md:flex-col md:overflow-visible">
-          {SECTIONS.map((s) => (
-            <button
-              key={s.key}
-              type="button"
-              onClick={() => setSection(s.key)}
-              className={`whitespace-nowrap px-3 py-2 text-left text-sm transition ${
-                section === s.key
-                  ? "bg-[var(--forest)] text-white"
-                  : "bg-white/70 text-[var(--ink)] hover:bg-white"
-              }`}
-            >
-              {s.label}
-            </button>
-          ))}
+          {SECTIONS.map((s) => {
+            const active = section === s.key;
+            const isDaily = s.key === "daily";
+            return (
+              <button
+                key={s.key}
+                type="button"
+                onClick={() => setSection(s.key)}
+                className={`whitespace-nowrap rounded-[6.4px] px-4 py-3 text-left text-base font-semibold transition ${
+                  active
+                    ? "bg-[var(--brand-green)] text-white shadow-sm"
+                    : isDaily
+                      ? "border border-[var(--brand-green)] bg-[#eef8f1] text-[var(--brand-green)] hover:bg-[#dff3e6]"
+                      : "bg-white text-[var(--ink)] hover:bg-white"
+                }`}
+              >
+                {s.label}
+              </button>
+            );
+          })}
         </aside>
         <div className="min-w-0">{editor}</div>
       </div>
