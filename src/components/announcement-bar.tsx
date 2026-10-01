@@ -70,8 +70,8 @@ export function AnnouncementBar({ message }: { message: string }) {
         closed ? "bg-[var(--brand-red)]" : "bg-[var(--brand-green)]"
       }`}
     >
-      <div className="site-max mx-auto flex w-full items-center gap-4 px-5 py-3 pr-12 md:px-10 md:pr-14">
-        <p className="text-left text-sm font-semibold uppercase tracking-[0.12em] md:text-base">
+      <div className="site-max mx-auto w-full px-5 py-3 md:px-10">
+        <p className="max-w-[calc(100%-2.75rem)] text-left text-sm font-semibold uppercase tracking-[0.04em] md:text-base">
           {activeMessage}
         </p>
       </div>
@@ -79,7 +79,7 @@ export function AnnouncementBar({ message }: { message: string }) {
         type="button"
         onClick={dismiss}
         aria-label="Zavřít důležité sdělení"
-        className="absolute right-3 top-1/2 flex size-9 -translate-y-1/2 items-center justify-center rounded-full text-white transition hover:bg-white/15 md:right-5"
+        className="absolute right-5 top-1/2 flex size-9 -translate-y-1/2 items-center justify-center rounded-full text-white transition hover:bg-white/15 md:right-10"
       >
         <svg
           viewBox="0 0 24 24"
