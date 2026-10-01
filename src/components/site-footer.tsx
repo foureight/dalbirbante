@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { SiteContent } from "@/lib/types";
+import { FooterGoodbye } from "@/components/footer-goodbye";
 
 function FacebookIcon() {
   return (
@@ -31,35 +32,10 @@ export function SiteFooter({ content }: { content: SiteContent }) {
   return (
     <footer className="bg-[var(--brand-green)] text-white">
       <div className="mx-auto max-w-5xl px-4 pb-14 pt-12 md:px-6 md:pb-16 md:pt-14">
-        <div className="mb-10 flex flex-col items-center text-center md:mb-14">
-          <svg
-            className="mb-3 h-5 w-40 text-white md:h-6 md:w-52"
-            viewBox="0 0 200 24"
-            fill="none"
-            aria-hidden
-          >
-            <path
-              d="M2 14 C 18 2, 34 22, 50 12 S 82 2, 98 14 S 130 22, 146 10 S 178 2, 198 14"
-              stroke="currentColor"
-              strokeWidth="3.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-          <p className="relative font-display text-[clamp(2.4rem,6vw,3.75rem)] font-black uppercase leading-none tracking-wide text-white">
-            DOBROU CHU
-            <span className="relative inline-block">
-              Ť
-              <span
-                className="absolute -top-3 left-1/2 -translate-x-1/2 text-[0.35em] leading-none md:-top-4"
-                aria-hidden
-              >
-                ♥
-              </span>
-            </span>
-            !
-          </p>
-        </div>
+        <FooterGoodbye
+          czech={site.goodbye}
+          italian={site.goodbyeIt || "BUON APPETITO!"}
+        />
 
         <div className="grid gap-10 text-center md:grid-cols-3 md:items-start md:gap-8">
           <div>

@@ -35,6 +35,7 @@ export type SiteContent = {
     instagramUrl: string;
     announcement: string;
     goodbye: string;
+    goodbyeIt: string;
     metaTitle: string;
     metaDescription: string;
     seoDescription: string;
