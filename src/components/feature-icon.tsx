@@ -112,7 +112,7 @@ export type FeatureIconName = keyof typeof icons;
 
 const byTitle: Record<string, FeatureIconName> = {
   "Rozvážíme": "delivery",
-  "Platba kartou": "card",
+  Platba: "card",
   "Bereme stravenky": "voucher",
   "Italské suroviny": "ingredients",
   "Bezplatná wi-fi": "wifi",
