@@ -455,11 +455,12 @@
 }
 
 .menu-row {
-  transition: background-color 0.3s ease, transform 0.3s ease;
+  transition: none;
 }
 
 .menu-row:hover {
-  background-color: rgba(206, 43, 55, 0.03);
+  background-color: transparent;
+  transform: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
