@@ -383,6 +383,7 @@
   .img-zoom .img-zoom-media,
   .btn-brand,
   .btn-green,
+  .btn-order,
   .btn-outline-light,
   .feature-chip,
   .band-link,
@@ -576,6 +577,41 @@
 .btn-green:hover {
   background: #007a3a;
   color: #fff;
+}
+
+.btn-order {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  box-sizing: border-box !important;
+  min-height: 3.9rem !important;
+  min-width: 12.5rem !important;
+  padding: 1.5rem 2.2rem !important;
+  font-family: var(--font-display) !important;
+  font-size: 1.3rem !important;
+  font-weight: 800 !important;
+  line-height: 1.2 !important;
+  letter-spacing: 0 !important;
+  text-transform: uppercase !important;
+  border-radius: var(--button-radius) !important;
+  white-space: nowrap !important;
+  border: 2px solid var(--brand-green) !important;
+  background: transparent !important;
+  color: var(--brand-green) !important;
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease !important;
+}
+
+.btn-order:hover {
+  transform: translateY(-2px);
+}
+
+.btn-order.is-ordered {
+  background: var(--brand-green) !important;
+  color: #fff !important;
+  border-color: var(--brand-green) !important;
 }
 
 .btn-outline-light {

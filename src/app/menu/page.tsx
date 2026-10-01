@@ -4,6 +4,7 @@ import { getContent } from "@/lib/content";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { Button } from "@/components/ui/button";
+import { OrderButton } from "@/components/order-button";
 import { PageJsonLd } from "@/components/json-ld";
 import { Reveal } from "@/components/reveal";
 import { getPageSchema } from "@/lib/schema";
@@ -58,12 +59,12 @@ export default async function MenuPage() {
                       className="menu-row grid gap-4 py-8 sm:grid-cols-[auto_1fr_auto] sm:items-center"
                     >
                       {item.image ? (
-                        <div className="img-zoom relative h-20 w-20 overflow-hidden rounded-[6.4px] sm:h-24 sm:w-24">
+                        <div className="relative h-20 w-20 sm:h-24 sm:w-24">
                           <Image
                             src={item.image}
                             alt={item.name}
                             fill
-                            className="img-zoom-media object-cover"
+                            className="object-contain"
                             sizes="96px"
                           />
                         </div>
@@ -82,15 +83,7 @@ export default async function MenuPage() {
                         <p className="text-3xl font-black leading-none text-[var(--brand-red)] md:text-4xl">
                           {item.price}
                         </p>
-                        <Button asChild className="btn-green">
-                          <a
-                            href={site.orderUrl}
-                            target="_blank"
-                            rel="noreferrer"
-                          >
-                            Objednat
-                          </a>
-                        </Button>
+                        <OrderButton href={site.orderUrl} />
                       </div>
                     </li>
                   ))}

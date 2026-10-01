@@ -4,6 +4,7 @@ import { getContent } from "@/lib/content";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { Button } from "@/components/ui/button";
+import { OrderButton } from "@/components/order-button";
 import { PageJsonLd } from "@/components/json-ld";
 import { Reveal } from "@/components/reveal";
 import { getPageSchema } from "@/lib/schema";
@@ -60,11 +61,7 @@ export default async function DailyMenuPage() {
                     <p className="text-3xl font-black leading-none text-[var(--brand-red)] md:text-4xl">
                       {item.price}
                     </p>
-                    <Button asChild className="btn-green">
-                      <a href={site.orderUrl} target="_blank" rel="noreferrer">
-                        Objednat
-                      </a>
-                    </Button>
+                    <OrderButton href={site.orderUrl} />
                   </div>
                 </li>
               </Reveal>
