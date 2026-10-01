@@ -13,8 +13,17 @@
     "hours": "Úterý–Sobota 11:00–20:30 hodin",
     "hoursClosed": "Neděle–Pondělí zavřeno",
     "mapEmbedUrl": "/map/index.html",
-    "facebookUrl": "https://www.facebook.com/dalbirbantebistro",
+    "facebookUrl": "https://www.facebook.com/dalbirbantebistro/",
     "instagramUrl": "https://www.instagram.com/pizzeria_dal_birbante/",
+    "foodoraUrl": "https://www.foodora.cz/restaurant/cceq/dal-birbante",
+    "siteUrl": "https://www.dalbirbante.cz",
+    "priceRange": "€€",
+    "servesCuisine": [
+      "Italská",
+      "Pizza",
+      "Neapolská pizza",
+      "Pasta"
+    ],
     "announcement": "Důležité sdělení: sledujte aktuální otevírací dobu a denní nabídku.",
     "goodbye": "DOBROU CHUŤ!",
     "goodbyeIt": "BUON APPETITO!",
@@ -42,7 +51,7 @@
     "pageMeta": {
       "menu": {
         "title": "Menu – neapolská pizza, těstoviny a panozzo | Dal Birbante",
-        "description": "Vychutnejte si pravou chuť Neapole v srdci Prahy Vinoře v pizzerii Dal Birbante! Naše pizzerie nabízí autentickou neapolskou pizzu, připravenou z čerstvých a kvalitních surovin, které zaručují nezapomenutelný gastronomický zážitek. Na adrese Mladoboleslavská 1 vám servírujeme nejen pizzu, ale i lahodné těstoviny a panozzo."
+        "description": "Menu pizzerie Dal Birbante ve Vinoři – neapolská pizza z pece, italské bagety panozzo, těstoviny, saláty, dezerty a další italské speciality. Vychutnejte si pravou chuť Neapole na adrese Mladoboleslavská 1."
       },
       "about": {
         "title": "O nás – italské bistro a pizzerie Dal Birbante",
@@ -140,84 +149,305 @@
       "id": "pizza",
       "name": "Pizza",
       "items": [
-        { "name": "Marinara", "description": "drcená rajčata, česnek, oregano, bazalka, extra panenský olivový olej", "price": "189 Kč", "image": "/images/menu/marinara.webp" },
-        { "name": "Margherita", "description": "drcená rajčata, mozzarella fior di latte, pecorino romano, bazalka, extra panenský olivový olej", "price": "209 Kč", "image": "/images/menu/margherita.webp" },
-        { "name": "Prosciutto", "description": "drcená rajčata, mozzarella fior di latte, dušená šunka", "price": "229 Kč" },
-        { "name": "Salamino", "description": "drcená rajčata, mozzarella fior di latte, pikantní spianata romana", "price": "229 Kč" },
-        { "name": "Napoli", "description": "drcená rajčata, mozzarella fior di latte, ančovičky, olivy taggiasche, kapary, oregano, extra panenský olivový olej", "price": "249 Kč" },
-        { "name": "Quattro Formaggi", "description": "drcená rajčata, mozzarella fior di latte, gorgonzola, Grana Padano, uzená scamorza", "price": "249 Kč" },
-        { "name": "Melanzane e Zucchine", "description": "drcená rajčata, mozzarella fior di latte, lilek, cuketa, Grana Padano", "price": "249 Kč" },
-        { "name": "Capricciosa", "description": "drcená rajčata, mozzarella, dušená šunka, žampiony, artyčoky, olivy taggiasche", "price": "259 Kč" },
-        { "name": "Salsiccia e gorgonzola", "description": "drcená rajčata, mozzarella fior di latte, salsiccia, gorgonzola", "price": "259 Kč" },
-        { "name": "Crudo", "description": "drcená rajčata, mozzarella fior di latte, parmská šunka", "price": "269 Kč" },
-        { "name": "Pancetta", "description": "drcená rajčata, mozzarella fior di latte, pancetta", "price": "269 Kč" },
-        { "name": "Burrata", "description": "drcená rajčata, burrata, bazalka, extra panenský olivový olej", "price": "279 Kč", "image": "/images/menu/burrata.webp" },
-        { "name": "La bianca", "description": "mozzarella fior di latte, gorgonzola, stracchino, Grana Padano, uzená scamorza", "price": "279 Kč" },
-        { "name": "Prosciutto e Stracchino", "description": "mozzarella fior di latte, stracchino, Grana Padano, dušená šunka, extra panenský olivový olej", "price": "279 Kč" },
-        { "name": "Crudo e Stracchino", "description": "mozzarella fior di latte, stracchino, Grana Padano, parmská šunka, extra panenský olivový olej", "price": "299 Kč" },
-        { "name": "Mortadella e Stracciatella", "description": "mozzarella fior di latte, Grana Padano, mortadella, stracciatella, pistácie", "price": "319 Kč", "image": "/images/menu/mortadella.webp" },
-        { "name": "Tirolese", "description": "drcená rajčata, mozzarella fior di latte, pancetta, sýr Stelvio DOP, pepř", "price": "289 Kč" },
-        { "name": "Carnazza", "description": "drcená rajčata, mozzarella fior di latte, dušená šunka, pikantní spianata romana, salsiccia", "price": "289 Kč" }
+        {
+          "name": "Marinara",
+          "description": "drcená rajčata, česnek, oregano, bazalka, extra panenský olivový olej",
+          "price": "189 Kč",
+          "image": "/images/menu/marinara.webp"
+        },
+        {
+          "name": "Margherita",
+          "description": "drcená rajčata, mozzarella fior di latte, pecorino romano, bazalka, extra panenský olivový olej",
+          "price": "209 Kč",
+          "image": "/images/menu/margherita.webp"
+        },
+        {
+          "name": "Prosciutto",
+          "description": "drcená rajčata, mozzarella fior di latte, dušená šunka",
+          "price": "229 Kč"
+        },
+        {
+          "name": "Salamino",
+          "description": "drcená rajčata, mozzarella fior di latte, pikantní spianata romana",
+          "price": "229 Kč"
+        },
+        {
+          "name": "Napoli",
+          "description": "drcená rajčata, mozzarella fior di latte, ančovičky, olivy taggiasche, kapary, oregano, extra panenský olivový olej",
+          "price": "249 Kč"
+        },
+        {
+          "name": "Quattro Formaggi",
+          "description": "drcená rajčata, mozzarella fior di latte, gorgonzola, Grana Padano, uzená scamorza",
+          "price": "249 Kč"
+        },
+        {
+          "name": "Melanzane e Zucchine",
+          "description": "drcená rajčata, mozzarella fior di latte, lilek, cuketa, Grana Padano",
+          "price": "249 Kč"
+        },
+        {
+          "name": "Capricciosa",
+          "description": "drcená rajčata, mozzarella, dušená šunka, žampiony, artyčoky, olivy taggiasche",
+          "price": "259 Kč"
+        },
+        {
+          "name": "Salsiccia e gorgonzola",
+          "description": "drcená rajčata, mozzarella fior di latte, salsiccia, gorgonzola",
+          "price": "259 Kč"
+        },
+        {
+          "name": "Crudo",
+          "description": "drcená rajčata, mozzarella fior di latte, parmská šunka",
+          "price": "269 Kč"
+        },
+        {
+          "name": "Pancetta",
+          "description": "drcená rajčata, mozzarella fior di latte, pancetta",
+          "price": "269 Kč"
+        },
+        {
+          "name": "Burrata",
+          "description": "drcená rajčata, burrata, bazalka, extra panenský olivový olej",
+          "price": "279 Kč",
+          "image": "/images/menu/burrata.webp"
+        },
+        {
+          "name": "La bianca",
+          "description": "mozzarella fior di latte, gorgonzola, stracchino, Grana Padano, uzená scamorza",
+          "price": "279 Kč"
+        },
+        {
+          "name": "Prosciutto e Stracchino",
+          "description": "mozzarella fior di latte, stracchino, Grana Padano, dušená šunka, extra panenský olivový olej",
+          "price": "279 Kč"
+        },
+        {
+          "name": "Crudo e Stracchino",
+          "description": "mozzarella fior di latte, stracchino, Grana Padano, parmská šunka, extra panenský olivový olej",
+          "price": "299 Kč"
+        },
+        {
+          "name": "Mortadella e Stracciatella",
+          "description": "mozzarella fior di latte, Grana Padano, mortadella, stracciatella, pistácie",
+          "price": "319 Kč",
+          "image": "/images/menu/mortadella.webp"
+        },
+        {
+          "name": "Tirolese",
+          "description": "drcená rajčata, mozzarella fior di latte, pancetta, sýr Stelvio DOP, pepř",
+          "price": "289 Kč"
+        },
+        {
+          "name": "Carnazza",
+          "description": "drcená rajčata, mozzarella fior di latte, dušená šunka, pikantní spianata romana, salsiccia",
+          "price": "289 Kč"
+        }
       ]
     },
     {
       "id": "pasta",
       "name": "Pasta",
       "items": [
-        { "name": "Spaghetti aglio, olio e peperoncino", "description": "", "price": "199 Kč", "image": "/images/menu/pasta.webp" },
-        { "name": "Spaghetti pomodoro e basilico", "description": "", "price": "199 Kč" },
-        { "name": "Tagliatelle al ragú", "description": "", "price": "229 Kč" },
-        { "name": "Gnocchi ai quattro formaggi", "description": "", "price": "229 Kč" },
-        { "name": "Lasagne", "description": "Tradiční boloňské lasagne s hovězím ragù, bešamelem a Grana Padano", "price": "249 Kč" }
+        {
+          "name": "Spaghetti aglio, olio e peperoncino",
+          "description": "",
+          "price": "199 Kč",
+          "image": "/images/menu/pasta.webp"
+        },
+        {
+          "name": "Spaghetti pomodoro e basilico",
+          "description": "",
+          "price": "199 Kč"
+        },
+        {
+          "name": "Tagliatelle al ragú",
+          "description": "",
+          "price": "229 Kč"
+        },
+        {
+          "name": "Gnocchi ai quattro formaggi",
+          "description": "",
+          "price": "229 Kč"
+        },
+        {
+          "name": "Lasagne",
+          "description": "Tradiční boloňské lasagne s hovězím ragù, bešamelem a Grana Padano",
+          "price": "249 Kč"
+        }
       ]
     },
     {
       "id": "panozzo",
       "name": "Panozzo",
       "items": [
-        { "name": "Nutella e pistacchi", "description": "Nutella, strouhané pistácie", "price": "109 Kč" },
-        { "name": "Caprese", "description": "mozzarella fior di latte, rajčata, bazalka, extra panenský olivový olej", "price": "139 Kč" },
-        { "name": "Crudo e mozzarella", "description": "parmská šunka, mozzarella fior di latte, Grana Padano, bazalka, extra panenský olivový olej", "price": "149 Kč" },
-        { "name": "Crudo e stracchino", "description": "parmská šunka, stracchino, Grana Padano, bazalka, extra panenský olivový olej", "price": "149 Kč" },
-        { "name": "Crudo e stracciatella", "description": "parmská šunka, stracciatella, Grana Padano, bazalka, extra panenský olivový olej", "price": "149 Kč" },
-        { "name": "Prosciutto e mozzarella", "description": "dušená šunka, mozzarella fior di latte, bazalka, extra panenský olivový olej", "price": "139 Kč" },
-        { "name": "Prosciutto e stracchino", "description": "dušená šunka, stracchino, bazalka, extra panenský olivový olej", "price": "139 Kč" },
-        { "name": "Salame e mozzarella", "description": "pikantní salám, mozzarella fior di latte, bazalka, extra panenský olivový olej", "price": "139 Kč" },
-        { "name": "Salame e stracchino", "description": "pikantní salám, stracchino, bazalka, extra panenský olivový olej", "price": "139 Kč" },
-        { "name": "Salame, prosciutto e mozzarella", "description": "pikantní salám, dušená šunka, mozzarella fior di latte, bazalka, extra panenský olivový olej", "price": "149 Kč" },
-        { "name": "Salame, prosciutto e stracchino", "description": "pikantní salám, dušená šunka, stracchino, bazalka, extra panenský olivový olej", "price": "149 Kč" },
-        { "name": "Mortadella e stracciatella", "description": "mortadella, stracciatella, strouhané pistácie", "price": "149 Kč" },
-        { "name": "Mortadella e ricotta", "description": "mortadella, ricotta, strouhané pistácie", "price": "139 Kč" },
-        { "name": "Mozzarella e stracciatella", "description": "mozzarella fior di latte, stracciatella, bazalka, extra panenský olivový olej", "price": "149 Kč" }
+        {
+          "name": "Nutella e pistacchi",
+          "description": "Nutella, strouhané pistácie",
+          "price": "109 Kč"
+        },
+        {
+          "name": "Caprese",
+          "description": "mozzarella fior di latte, rajčata, bazalka, extra panenský olivový olej",
+          "price": "139 Kč"
+        },
+        {
+          "name": "Crudo e mozzarella",
+          "description": "parmská šunka, mozzarella fior di latte, Grana Padano, bazalka, extra panenský olivový olej",
+          "price": "149 Kč"
+        },
+        {
+          "name": "Crudo e stracchino",
+          "description": "parmská šunka, stracchino, Grana Padano, bazalka, extra panenský olivový olej",
+          "price": "149 Kč"
+        },
+        {
+          "name": "Crudo e stracciatella",
+          "description": "parmská šunka, stracciatella, Grana Padano, bazalka, extra panenský olivový olej",
+          "price": "149 Kč"
+        },
+        {
+          "name": "Prosciutto e mozzarella",
+          "description": "dušená šunka, mozzarella fior di latte, bazalka, extra panenský olivový olej",
+          "price": "139 Kč"
+        },
+        {
+          "name": "Prosciutto e stracchino",
+          "description": "dušená šunka, stracchino, bazalka, extra panenský olivový olej",
+          "price": "139 Kč"
+        },
+        {
+          "name": "Salame e mozzarella",
+          "description": "pikantní salám, mozzarella fior di latte, bazalka, extra panenský olivový olej",
+          "price": "139 Kč"
+        },
+        {
+          "name": "Salame e stracchino",
+          "description": "pikantní salám, stracchino, bazalka, extra panenský olivový olej",
+          "price": "139 Kč"
+        },
+        {
+          "name": "Salame, prosciutto e mozzarella",
+          "description": "pikantní salám, dušená šunka, mozzarella fior di latte, bazalka, extra panenský olivový olej",
+          "price": "149 Kč"
+        },
+        {
+          "name": "Salame, prosciutto e stracchino",
+          "description": "pikantní salám, dušená šunka, stracchino, bazalka, extra panenský olivový olej",
+          "price": "149 Kč"
+        },
+        {
+          "name": "Mortadella e stracciatella",
+          "description": "mortadella, stracciatella, strouhané pistácie",
+          "price": "149 Kč"
+        },
+        {
+          "name": "Mortadella e ricotta",
+          "description": "mortadella, ricotta, strouhané pistácie",
+          "price": "139 Kč"
+        },
+        {
+          "name": "Mozzarella e stracciatella",
+          "description": "mozzarella fior di latte, stracciatella, bazalka, extra panenský olivový olej",
+          "price": "149 Kč"
+        }
       ]
     },
     {
       "id": "drinks",
       "name": "Nápoje",
       "items": [
-        { "name": "Lemonsoda", "description": "0,33 l", "price": "49 Kč" },
-        { "name": "Oransoda", "description": "0,33 l", "price": "49 Kč" },
-        { "name": "Coca Cola", "description": "0,50 l", "price": "49 Kč" },
-        { "name": "Fanta", "description": "0,50 l", "price": "49 Kč" },
-        { "name": "Sprite", "description": "0,50 l", "price": "49 Kč" },
-        { "name": "Lipton Green", "description": "0,33 l", "price": "45 Kč" },
-        { "name": "Cappy", "description": "0,33 l", "price": "49 Kč" },
-        { "name": "Red Bull", "description": "0,25 l", "price": "49 Kč" },
-        { "name": "Crodino", "description": "0,10 l", "price": "45 Kč" },
-        { "name": "Natura voda", "description": "0,50 l", "price": "39 Kč" },
-        { "name": "Birell", "description": "0,50 l", "price": "49 Kč" },
-        { "name": "Pilsner Urquell", "description": "plech 0,50 l", "price": "49 Kč" }
+        {
+          "name": "Lemonsoda",
+          "description": "0,33 l",
+          "price": "49 Kč"
+        },
+        {
+          "name": "Oransoda",
+          "description": "0,33 l",
+          "price": "49 Kč"
+        },
+        {
+          "name": "Coca Cola",
+          "description": "0,50 l",
+          "price": "49 Kč"
+        },
+        {
+          "name": "Fanta",
+          "description": "0,50 l",
+          "price": "49 Kč"
+        },
+        {
+          "name": "Sprite",
+          "description": "0,50 l",
+          "price": "49 Kč"
+        },
+        {
+          "name": "Lipton Green",
+          "description": "0,33 l",
+          "price": "45 Kč"
+        },
+        {
+          "name": "Cappy",
+          "description": "0,33 l",
+          "price": "49 Kč"
+        },
+        {
+          "name": "Red Bull",
+          "description": "0,25 l",
+          "price": "49 Kč"
+        },
+        {
+          "name": "Crodino",
+          "description": "0,10 l",
+          "price": "45 Kč"
+        },
+        {
+          "name": "Natura voda",
+          "description": "0,50 l",
+          "price": "39 Kč"
+        },
+        {
+          "name": "Birell",
+          "description": "0,50 l",
+          "price": "49 Kč"
+        },
+        {
+          "name": "Pilsner Urquell",
+          "description": "plech 0,50 l",
+          "price": "49 Kč"
+        }
       ]
     },
     {
       "id": "cheese",
       "name": "Sýry",
       "items": [
-        { "name": "Stracciatella", "description": "200 g – vláknitá mozzarella naložená ve smetaně (by MozzarellArt)", "price": "129 Kč" },
-        { "name": "Burrata", "description": "125 g – mozzarella plněná stracciatellou (by MozzarellArt)", "price": "89 Kč" },
-        { "name": "Nodini", "description": "200 g – uzlíky z mozzarelly fior di latte (by MozzarellArt)", "price": "99 Kč" },
-        { "name": "Scamorza", "description": "200 g – kuličky vysušené a uzené mozzarelly (by MozzarellArt)", "price": "89 Kč" },
-        { "name": "Pecorino romano D.O.P.", "description": "200 g – tvrdý sýr z ovčího mléka", "price": "229 Kč" }
+        {
+          "name": "Stracciatella",
+          "description": "200 g – vláknitá mozzarella naložená ve smetaně (by MozzarellArt)",
+          "price": "129 Kč"
+        },
+        {
+          "name": "Burrata",
+          "description": "125 g – mozzarella plněná stracciatellou (by MozzarellArt)",
+          "price": "89 Kč"
+        },
+        {
+          "name": "Nodini",
+          "description": "200 g – uzlíky z mozzarelly fior di latte (by MozzarellArt)",
+          "price": "99 Kč"
+        },
+        {
+          "name": "Scamorza",
+          "description": "200 g – kuličky vysušené a uzené mozzarelly (by MozzarellArt)",
+          "price": "89 Kč"
+        },
+        {
+          "name": "Pecorino romano D.O.P.",
+          "description": "200 g – tvrdý sýr z ovčího mléka",
+          "price": "229 Kč"
+        }
       ]
     }
   ],
@@ -232,29 +462,54 @@
     "intro2": "Naše jídlo si můžete vychutnat přímo v našem bistru, nechat si ho zabalit sebou, nebo vám ho rádi dovezeme. Níže naleznete ceny za dovoz:",
     "pricesTitle": "Ceny rozvozu jsou následující:",
     "zones": [
-      { "name": "Zóna 1", "areas": "Vinoř", "fee": "19 Kč", "min": "199 Kč" },
-      { "name": "Zóna 2", "areas": "Satalice, Kbely, Podolanka, Radonice, Jenštejn", "fee": "29 Kč", "min": "199 Kč" },
-      { "name": "Zóna 3", "areas": "Dehtáry, Svémyslice, Dřevčice, Miškovice, Přezletice", "fee": "39 Kč", "min": "299 Kč" },
-      { "name": "Zóna 4", "areas": "Čakovice, Letňany, Veleň, Třeboradice, Mírovice", "fee": "49 Kč", "min": "299 Kč" },
-      { "name": "Zóna 6", "areas": "Černý Most, Prosek, Horní Počernice, Nový Brázdim, Brandýs n./L., Hloubětín", "fee": "69 Kč", "min": "399 Kč" }
+      {
+        "name": "Zóna 1",
+        "areas": "Vinoř",
+        "fee": "19 Kč",
+        "min": "199 Kč"
+      },
+      {
+        "name": "Zóna 2",
+        "areas": "Satalice, Kbely, Podolanka, Radonice, Jenštejn",
+        "fee": "29 Kč",
+        "min": "199 Kč"
+      },
+      {
+        "name": "Zóna 3",
+        "areas": "Dehtáry, Svémyslice, Dřevčice, Miškovice, Přezletice",
+        "fee": "39 Kč",
+        "min": "299 Kč"
+      },
+      {
+        "name": "Zóna 4",
+        "areas": "Čakovice, Letňany, Veleň, Třeboradice, Mírovice",
+        "fee": "49 Kč",
+        "min": "299 Kč"
+      },
+      {
+        "name": "Zóna 6",
+        "areas": "Černý Most, Prosek, Horní Počernice, Nový Brázdim, Brandýs n./L., Hloubětín",
+        "fee": "69 Kč",
+        "min": "399 Kč"
+      }
     ],
     "faqTitle": "Nejčastější otázky k rozvozu?",
     "faqs": [
       {
         "q": "Do jakých lokalit rozvážíte pizzu?",
-        "a": "Pizza a další jídla rozvážíme z Vinoře do okolních městských částí a obcí – například do Vinoře, Přezletic, Kbel, Satalic, Podolanky, Radonic, Jenštejna, Dehtár, Svémyslic, Dřevčic, Miškovic, Čakovic, Letňan, Veleně, Třeboradic, Mírovic, Černého Mostu, Proseka, Horních Počernic, Nového Brázdimu nebo Brandýsa nad Labem. Aktuální přehled zón a cen najdete v tabulce výše."
+        "a": "Pizza a další jídla rozvážíme z Vinoře do okolních městských částí a obcí – například do Vinoře, Přezletic, Kbel, Satalic, Podolanky, Radonic, Jenštejna, Dehtár, Svémyslic, Dřevčic, Miškovic, Čakovic, Letňan, Veleně, Třeboradic, Mírovic, Černého Mostu, Proseka, Horních Počernic, Nového Brázdimu nebo Brandýsa nad Labem. Aktuální přehled zón a cen rozvozu je uveden v tabulce na stránce rozvozu."
       },
       {
         "q": "Jak dlouho trvá rozvoz pizzy?",
-        "a": "Doba doručení závisí na vzdálenosti a obsazenosti kuchyně. Ve všední dny se obvykle pohybujeme kolem 30–60 minut. V exponovaných časech (pátek, sobota večer) může být doba dodání delší."
+        "a": "Doba doručení závisí na vzdálenosti a obsazenosti kuchyně. Ve všední dny se obvykle pohybujeme kolem 30–60 minut, v exponovaných časech (pátek a sobota večer) může být doba doručení delší."
       },
       {
         "q": "Jak si můžu objednat rozvoz?",
-        "a": "Objednávat můžete telefonicky na čísle +420 733 572 911 nebo přes rozvozové platformy (například přes Foodoru). Doporučujeme mít připravenou adresu a vybranou pizzu či další jídla z našeho menu."
+        "a": "Objednávat můžete telefonicky na čísle +420 733 572 911 nebo přes rozvozové platformy. Při objednávce prosím uveďte jméno, adresu, telefon a vybraná jídla z našeho menu."
       },
       {
         "q": "Rozvážíte i bezlepkovou pizzu?",
-        "a": "Ano, bezlepkovou pizzu rádi připravíme i na rozvoz. Zeptejte se prosím při objednávce na aktuální nabídku bezlepkových těst a upozorněte obsluhu na případnou intoleranci lepku nebo alergii."
+        "a": "Ano, bezlepkovou pizzu vám rádi připravíme i na rozvoz. Při objednávce prosím vždy uveďte, že chcete bezlepkovou variantu, a upozorněte nás na případnou celiakii nebo alergii na lepek."
       }
     ]
   },
@@ -272,15 +527,19 @@
     "faqs": [
       {
         "q": "Je bezlepková pizza vhodná pro celiaky?",
-        "a": "Bezlepkové těsto je vhodné pro celiaky, nicméně pizza se připravuje v prostředí, kde se pracuje i s lepkem. Přestože děláme maximum pro oddělení bezlepkového těsta, stopová kontaminace není vyloučena. Pokud máte silnou alergii nebo celiakii, vždy nám to prosím oznamte předem."
+        "a": "Používáme speciální bezlepkové těsto, ale pizza se připravuje v prostředí, kde se pracuje i s klasickým lepkovým těstem. Přestože děláme maximum pro oddělení bezlepkového těsta, stopová kontaminace není zcela vyloučena. Pokud trpíte celiakií nebo silnou alergií, vždy nás na to prosím upozorněte."
       },
       {
         "q": "Musím si bezlepkovou pizzu objednat předem?",
-        "a": "Doporučujeme se předem informovat, zda je aktuálně bezlepkové těsto dostupné. Objednat pak můžete na místě, telefonicky nebo v rámci rozvozu."
+        "a": "Doporučujeme se předem informovat, zda je aktuálně bezlepkové těsto dostupné. Objednat pak můžete přímo na místě, telefonicky nebo v rámci rozvozu."
       },
       {
-        "q": "Je možné bezlepkovou pizzu i rozvážet?",
-        "a": "Ano, bezlepkovou pizzu vám rádi dovezeme v rámci našich rozvozových zón. Stačí při objednávce nahlásit, že chcete bezlepkovou variantu."
+        "q": "Rozvážíte i bezlepkovou pizzu?",
+        "a": "Ano, bezlepkovou pizzu rozvážíme ve stejných zónách jako klasickou pizzu. Stačí při objednávce nahlásit, že chcete bezlepkovou variantu."
+      },
+      {
+        "q": "Jaké suroviny používáte na bezlepkovou pizzu?",
+        "a": "Na bezlepkovou pizzu používáme stejné kvalitní suroviny jako na naši klasickou neapolskou pizzu – rajčata z okolí Vesuvu, čerstvou mozzarellu a další ingredience dovezené z Itálie. Liší se pouze složení těsta."
       }
     ]
   },

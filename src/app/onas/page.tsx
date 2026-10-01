@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import { getContent } from "@/lib/content";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { PageJsonLd } from "@/components/json-ld";
+import { getPageSchema } from "@/lib/schema";
 
 export async function generateMetadata(): Promise<Metadata> {
   const content = await getContent();
@@ -18,6 +20,7 @@ export default async function AboutPage() {
 
   return (
     <>
+      <PageJsonLd data={getPageSchema("about", content)} />
       <SiteHeader content={content} />
       <main className="flex-1">
         <section className="relative min-h-[40vh] overflow-hidden text-white">

@@ -34,6 +34,15 @@ V administraci lze upravit prakticky všechny texty webu (úvod, menu, o nás, k
 - Kontakt + mapa z Reservo (`system/map.php`) + rozvozové zóny
 - Odkaz na online objednávku Reservo Eats
 
+## Data a SEO JSON
+
+- Texty webu: `data/content.json` (editovatelné v `/admin`)
+- Schema.org data z původního webu: `data/schema.json`
+  - `Restaurant`, `WebSite`, page schemas (`WebPage`, `AboutPage`, `ContactPage`)
+  - FAQ schema se skládá z FAQ v `content.json`
+- Sitemap: `/sitemap.xml`
+- Robots: `/robots.txt`
+
 ## Kontaktní formulář (SMTP)
 
 Formulář odesílá e-maily přes SMTP. Do `.env.local` doplňte:

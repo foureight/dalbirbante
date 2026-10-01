@@ -4,6 +4,8 @@ import { getContent } from "@/lib/content";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { Button } from "@/components/ui/button";
+import { PageJsonLd } from "@/components/json-ld";
+import { getFaqSchema, getPageSchema } from "@/lib/schema";
 
 export async function generateMetadata(): Promise<Metadata> {
   const content = await getContent();
@@ -17,21 +19,14 @@ export default async function GlutenFreePage() {
   const content = await getContent();
   const { site, glutenFree } = content;
 
-  const faqLd = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    mainEntity: glutenFree.faqs.map((f) => ({
-      "@type": "Question",
-      name: f.q,
-      acceptedAnswer: { "@type": "Answer", text: f.a },
-    })),
-  };
-
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqLd) }}
+      <PageJsonLd data={getPageSchema("glutenFree", content)} />
+      <PageJsonLd
+        data={getFaqSchema(
+          "https://www.dalbirbante.cz/bezlepkova-pizza-vinor#faq",
+          glutenFree.faqs,
+        )}
       />
       <SiteHeader content={content} />
       <main className="flex-1">

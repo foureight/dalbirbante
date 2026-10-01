@@ -1,0 +1,111 @@
+{
+  "website": {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": "https://www.dalbirbante.cz/#website",
+    "url": "https://www.dalbirbante.cz",
+    "name": "DAL BIRBANTE",
+    "inLanguage": "cs-CZ",
+    "publisher": {
+      "@id": "https://www.dalbirbante.cz/#restaurant"
+    }
+  },
+  "restaurant": {
+    "@context": "https://schema.org",
+    "@type": "Restaurant",
+    "@id": "https://www.dalbirbante.cz/#restaurant",
+    "name": "Dal Birbante",
+    "url": "https://www.dalbirbante.cz/",
+    "image": "https://www.dalbirbante.cz/images/lifestyle-01.webp",
+    "telephone": "+420733572911",
+    "email": "mangio@dalbirbante.cz",
+    "priceRange": "€€",
+    "servesCuisine": ["Italská", "Pizza", "Neapolská pizza", "Pasta"],
+    "acceptsReservations": true,
+    "hasMenu": "https://www.dalbirbante.cz/menu",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Mladoboleslavská 1",
+      "addressLocality": "Praha 9 - Vinoř",
+      "postalCode": "19017",
+      "addressCountry": "CZ"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 50.143151,
+      "longitude": 14.578649
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday"
+        ],
+        "opens": "11:00",
+        "closes": "20:30"
+      }
+    ],
+    "sameAs": [
+      "https://www.facebook.com/dalbirbantebistro/",
+      "https://www.instagram.com/pizzeria_dal_birbante/",
+      "https://www.foodora.cz/restaurant/cceq/dal-birbante"
+    ],
+    "areaServed": [
+      "Praha 9",
+      "Vinoř",
+      "Kbely",
+      "Satalice",
+      "Letňany",
+      "Čakovice",
+      "Brandýs nad Labem"
+    ]
+  },
+  "pages": {
+    "menu": {
+      "@type": "WebPage",
+      "@id": "https://www.dalbirbante.cz/menu#webpage",
+      "url": "https://www.dalbirbante.cz/menu",
+      "name": "Menu – neapolská pizza, těstoviny a panozzo | Dal Birbante",
+      "description": "Menu pizzerie Dal Birbante ve Vinoři – neapolská pizza z pece, italské bagety panozzo, těstoviny, saláty, dezerty a další italské speciality."
+    },
+    "about": {
+      "@type": "AboutPage",
+      "@id": "https://www.dalbirbante.cz/onas#about",
+      "url": "https://www.dalbirbante.cz/onas",
+      "name": "O nás – italské bistro a pizzerie Dal Birbante",
+      "description": "Pizzerie a italské bistro Dal Birbante ve Vinoři. Pravá neapolská pizza z italských surovin, těstoviny, panozzo, dezerty a bio vína Pisoni."
+    },
+    "delivery": {
+      "@type": "WebPage",
+      "@id": "https://www.dalbirbante.cz/rozvoz#webpage",
+      "url": "https://www.dalbirbante.cz/rozvoz",
+      "name": "Rozvoz pizzy Praha 9 – Dal Birbante",
+      "description": "Rozvoz neapolské pizzy a italských specialit z Dal Birbante. Dovážíme z Vinoře do Kbel, Satalic, Letňan, Čakovic, Brandýsa n. L. a dalších lokalit."
+    },
+    "glutenFree": {
+      "@type": "WebPage",
+      "@id": "https://www.dalbirbante.cz/bezlepkova-pizza-vinor#webpage",
+      "url": "https://www.dalbirbante.cz/bezlepkova-pizza-vinor",
+      "name": "Bezlepková pizza Vinoř – Dal Birbante",
+      "description": "Bezlepková pizza ve Vinoři. V Dal Birbante připravujeme bezlepkovou pizzu z kvalitního těsta, vhodnou pro celiaky a osoby s intolerancí lepku."
+    },
+    "contact": {
+      "@type": "ContactPage",
+      "@id": "https://www.dalbirbante.cz/kontakt#contact",
+      "url": "https://www.dalbirbante.cz/kontakt",
+      "name": "Kontakt – Dal Birbante Vinoř",
+      "description": "Kontakt a mapa pizzerie Dal Birbante, Mladoboleslavská 1, Praha 9 – Vinoř."
+    },
+    "daily": {
+      "@type": "WebPage",
+      "@id": "https://www.dalbirbante.cz/denni-nabidka#webpage",
+      "url": "https://www.dalbirbante.cz/denni-nabidka",
+      "name": "Denní menu – italské bistro Dal Birbante",
+      "description": "Denní menu Dal Birbante ve Vinoři. Polévky, panozzo, pizza a další italské speciality v čase oběda."
+    }
+  }
+}

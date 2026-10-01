@@ -33,6 +33,10 @@ export type SiteContent = {
     mapEmbedUrl: string;
     facebookUrl: string;
     instagramUrl: string;
+    foodoraUrl: string;
+    siteUrl: string;
+    priceRange: string;
+    servesCuisine: string[];
     announcement: string;
     goodbye: string;
     goodbyeIt: string;

@@ -4,6 +4,8 @@ import { getContent } from "@/lib/content";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { Button } from "@/components/ui/button";
+import { PageJsonLd } from "@/components/json-ld";
+import { getPageSchema } from "@/lib/schema";
 
 export async function generateMetadata(): Promise<Metadata> {
   const content = await getContent();
@@ -19,6 +21,7 @@ export default async function MenuPage() {
 
   return (
     <>
+      <PageJsonLd data={getPageSchema("menu", content)} />
       <SiteHeader content={content} />
       <main className="flex-1">
         <section className="page-wrap pb-12 pt-16 md:pb-16 md:pt-24">

@@ -1,0 +1,98 @@
+{
+  "home": {
+    "title": "Dal Birbante!  🍕🍕🍕 Ochutnej tu nejlepší neapolskou pizzu z Prahy .",
+    "description": "Pokud hledáte pravou neapolskou pizzu v Praze, zamiřte do pizzerie Dal Birbante ve Vinoři. Nabízíme bohatý výběr pizz, těstovin a italských baget panozzo. Využijte také možnost objednání čerstvých italských surovin přímo k vašim dveřím. Přijďte a ochutnejte pravou chuť Itálie!",
+    "h1": [
+      "PRAVÁ NEAPOLSKÁ PIZZA V PRAZE 9 - VINOŘE – DAL BIRBANTE"
+    ],
+    "ld_types": [
+      "WebSite",
+      "LocalBusiness",
+      null
+    ]
+  },
+  "menu": {
+    "title": "Dal Birbante!  🍕🍕🍕 Ochutnej tu nejlepší neapolskou pizzu z Prahy .",
+    "description": "Vychutnejte si pravou chuť Neapole v srdci Prahy Vinoře v pizzerii Dal Birbante! Naše pizzerie nabízí autentickou neapolskou pizzu, připravenou z čerstvých a kvalitních surovin, které zaručují nezapomenutelný gastronomický zážitek. Na adrese Mladoboleslavská 1 vám servírujeme nejen pizzu, ale i lahodné těstoviny, panozzu a další italské speciality.",
+    "h1": [
+      "NAŠE MENU"
+    ],
+    "ld_types": [
+      "WebSite",
+      "LocalBusiness",
+      "WebPage",
+      "Restaurant",
+      "Restaurant"
+    ]
+  },
+  "daily": {
+    "title": "Dal Birbante!  🍕🍕🍕 Ochutnej tu nejlepší neapolskou pizzu z Prahy .",
+    "description": "Denní menu Dal Birbante ve Vinoři. Polévky, panozzo, pizza a další italské speciality v čase oběda. Podívejte se, co pro vás dnes vaříme.",
+    "h1": [
+      "DENNÍ MENU"
+    ],
+    "ld_types": [
+      "WebSite",
+      "LocalBusiness",
+      "WebPage",
+      "Restaurant",
+      "Restaurant"
+    ]
+  },
+  "delivery": {
+    "title": "Dal Birbante!  🍕🍕🍕 Ochutnej tu nejlepší neapolskou pizzu z Prahy .",
+    "description": "Rozvoz neapolské pizzy a italských specialit z Dal Birbante. Dovážíme z Vinoře do Kbel, Satalic, Letňan, Čakovic, Brandýsa n. L. a dalších lokalit. Podívejte se na ceny rozvozu.",
+    "h1": [
+      "ROZVOZ JÍDLA"
+    ],
+    "ld_types": [
+      "WebSite",
+      "LocalBusiness",
+      "FAQPage",
+      "Restaurant",
+      "FAQPage"
+    ]
+  },
+  "about": {
+    "title": "Dal Birbante!  🍕🍕🍕 Ochutnej tu nejlepší neapolskou pizzu z Prahy .",
+    "description": "Pizzerii Dal Birbante jsme otevřeli v roce 2024 ve Vinoři. Zaměřujeme se na pravou neapolskou pizzu z italských surovin, panozzo, těstoviny, dezerty a bio vína Pisoni.",
+    "h1": [
+      "O NÁS"
+    ],
+    "ld_types": [
+      "WebSite",
+      "LocalBusiness",
+      "AboutPage",
+      "Restaurant",
+      "Restaurant"
+    ]
+  },
+  "contact": {
+    "title": "Dal Birbante!  🍕🍕🍕 Ochutnej tu nejlepší neapolskou pizzu z Prahy .",
+    "description": "Vychutnejte si pravou chuť Neapole v srdci Prahy Vinoře v pizzerii Dal Birbante! Naše pizzerie nabízí autentickou neapolskou pizzu.",
+    "h1": [
+      "KDE NÁS NAJDETE?"
+    ],
+    "ld_types": [
+      "WebSite",
+      "LocalBusiness",
+      "Restaurant",
+      "Restaurant"
+    ]
+  },
+  "gluten": {
+    "title": "Dal Birbante!  🍕🍕🍕 Ochutnej tu nejlepší neapolskou pizzu z Prahy .",
+    "description": "Bezlepková pizza ve Vinoři. V Dal Birbante připravujeme bezlepkovou pizzu z kvalitního těsta, vhodnou pro celiaky a osoby s intolerancí lepku. Na místě, s sebou i na rozvoz.",
+    "h1": [
+      "BEZLEPKOVÁ PIZZAV PRAZE - VINOŘI"
+    ],
+    "ld_types": [
+      "WebSite",
+      "LocalBusiness",
+      "FAQPage",
+      "Restaurant",
+      null,
+      "FAQPage"
+    ]
+  }
+}

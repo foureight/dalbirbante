@@ -10,12 +10,14 @@ export async function generateMetadata(): Promise<Metadata> {
     description: content.site.metaDescription,
     keywords: content.site.keywords,
     icons: { icon: "/favicon.png" },
+    metadataBase: new URL(content.site.siteUrl || "https://www.dalbirbante.cz"),
     openGraph: {
       title: content.site.metaTitle,
       description: content.site.metaDescription,
       locale: "cs_CZ",
       type: "website",
-      images: ["/images/logo.webp"],
+      url: content.site.siteUrl || "https://www.dalbirbante.cz",
+      images: ["/images/lifestyle-01.webp"],
     },
   };
 }

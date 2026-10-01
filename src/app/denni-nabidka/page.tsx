@@ -4,6 +4,8 @@ import { getContent } from "@/lib/content";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { Button } from "@/components/ui/button";
+import { PageJsonLd } from "@/components/json-ld";
+import { getPageSchema } from "@/lib/schema";
 
 export async function generateMetadata(): Promise<Metadata> {
   const content = await getContent();
@@ -19,6 +21,7 @@ export default async function DailyMenuPage() {
 
   return (
     <>
+      <PageJsonLd data={getPageSchema("daily", content)} />
       <SiteHeader content={content} />
       <main className="flex-1">
         <section className="mx-auto max-w-3xl px-5 py-24 md:px-10 md:py-36">

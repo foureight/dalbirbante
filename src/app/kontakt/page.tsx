@@ -5,6 +5,8 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { ReservoMap } from "@/components/reservo-map";
 import { ContactForm } from "@/components/contact-form";
+import { PageJsonLd } from "@/components/json-ld";
+import { getPageSchema } from "@/lib/schema";
 
 export async function generateMetadata(): Promise<Metadata> {
   const content = await getContent();
@@ -20,6 +22,7 @@ export default async function ContactPage() {
 
   return (
     <>
+      <PageJsonLd data={getPageSchema("contact", content)} />
       <SiteHeader content={content} />
       <main className="flex-1">
         <section className="relative overflow-hidden text-white">
