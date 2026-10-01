@@ -35,7 +35,7 @@ export function SiteHeader({ content }: { content: SiteContent }) {
             />
           </Link>
 
-          <nav className="nav-menu hidden items-center gap-8 text-[var(--ink)] lg:flex">
+          <nav className="nav-menu hidden items-center gap-3 text-[var(--ink)] lg:flex xl:gap-4">
             {links.map((l) => (
               <Link
                 key={l.href}
@@ -45,19 +45,19 @@ export function SiteHeader({ content }: { content: SiteContent }) {
                 {l.label}
               </Link>
             ))}
-            <div className="flex items-center gap-1.5">
+            <div className="ml-1 flex items-center gap-0">
               <a
                 href={site.instagramUrl}
                 target="_blank"
                 rel="noreferrer"
                 aria-label="Instagram"
-                className="inline-flex size-12 items-center justify-center text-[var(--ink)] transition hover:text-[var(--brand-red)]"
+                className="inline-flex size-10 items-center justify-center text-[var(--ink)] transition hover:text-[var(--brand-red)]"
               >
                 <Image
                   src="/icons/instagram.svg"
                   alt=""
-                  width={40}
-                  height={40}
+                  width={36}
+                  height={36}
                 />
               </a>
               <a
@@ -65,13 +65,13 @@ export function SiteHeader({ content }: { content: SiteContent }) {
                 target="_blank"
                 rel="noreferrer"
                 aria-label="Facebook"
-                className="inline-flex size-12 items-center justify-center text-[var(--ink)] transition hover:text-[var(--brand-red)]"
+                className="inline-flex size-10 items-center justify-center text-[var(--ink)] transition hover:text-[var(--brand-red)]"
               >
                 <Image
                   src="/icons/facebook.svg"
                   alt=""
-                  width={40}
-                  height={40}
+                  width={36}
+                  height={36}
                 />
               </a>
             </div>

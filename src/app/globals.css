@@ -252,10 +252,10 @@
 
 .nav-menu {
   font-family: "Omnes", sans-serif;
-  font-weight: 400;
-  font-size: 16px;
+  font-weight: 700;
+  font-size: 20px;
   line-height: 1.2;
-  letter-spacing: 0.01em;
+  letter-spacing: 0;
   text-transform: none;
 }
 
