@@ -114,6 +114,8 @@ export type SiteContent = {
     extrasTitle: string;
     extrasText: string;
     glutenNote: string;
+    faqTitle: string;
+    faqs: FaqItem[];
   };
   menuCategories: MenuCategory[];
   daily: {

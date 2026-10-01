@@ -6,8 +6,9 @@ import { SiteFooter } from "@/components/site-footer";
 import { AddToCartButton } from "@/components/add-to-cart-button";
 import { PageHero } from "@/components/page-hero";
 import { PageJsonLd } from "@/components/json-ld";
+import { FaqAccordion } from "@/components/faq-accordion";
 import { Reveal } from "@/components/reveal";
-import { getPageSchema } from "@/lib/schema";
+import { getFaqSchema, getPageSchema } from "@/lib/schema";
 
 export async function generateMetadata(): Promise<Metadata> {
   const content = await getContent();
@@ -24,6 +25,12 @@ export default async function MenuPage() {
   return (
     <>
       <PageJsonLd data={getPageSchema("menu", content)} />
+      <PageJsonLd
+        data={getFaqSchema(
+          "https://www.dalbirbante.cz/menu#faq",
+          menuPage.faqs,
+        )}
+      />
       <SiteHeader content={content} />
       <main className="flex-1">
         <PageHero
@@ -135,6 +142,18 @@ export default async function MenuPage() {
             </div>
           </Reveal>
         </div>
+
+        <section
+          id="faq"
+          className="w-full border-t border-[var(--line)] bg-[var(--paper-soft)] px-5 py-16 md:px-10 md:py-24"
+        >
+          <div className="site-max mx-auto w-full">
+            <Reveal className="pointer-events-auto">
+              <h2 className="text-[var(--brand-green)]">{menuPage.faqTitle}</h2>
+              <FaqAccordion items={menuPage.faqs} />
+            </Reveal>
+          </div>
+        </section>
       </main>
       <SiteFooter content={content} />
     </>

@@ -181,7 +181,30 @@
     "allergensText": "(1) Obiloviny obsahující lepek (2) Korýši a výrobky z nich (3) Vejce a výrobky z nich (4) Ryby a výrobky z nich (5) Jádra podzemnice olejné (arašídy) a výrobky z nich (6) Sójové boby a výrobky z nich (7) Mléko a výrobky z něj (včetně laktózy) (8) Skořápkové plody (9) Celer a výrobky z něj (10) Hořčice a výrobky z ní (11) Sezamová semena a výrobky z nich (12) Oxid siřičitý a siřičitany (13) Vlčí bob (lupina) a výrobky z něj (14) Měkkýši a výrobky z nich",
     "extrasTitle": "Přídavky na pizzu",
     "extrasText": "oregano, olivový olej, bazalka, chilli, česnek, pistácie 15 Kč · rukola, cibule 20 Kč · kapary, Grana Padano, pecorino romano 25 Kč · drcená rajčata, gorgonzola, uzená scamorza, ricotta 30 Kč · žampiony, artyčoky, dušená šunka 35 Kč · olivy taggiasche, lilek, cuketa, mozzarella fior di latte, stracchino, stracciatella, pikantní salám spianata romana, ančovičky, tuňák, mortadella 40 Kč · salsiccia 50 Kč · parmská šunka 70 Kč",
-    "glutenNote": "Bezlepková pizza +99 Kč · Bezlepková pasta +29 Kč"
+    "glutenNote": "Bezlepková pizza +99 Kč · Bezlepková pasta +29 Kč",
+    "faqTitle": "Nejčastější otázky k menu",
+    "faqs": [
+      {
+        "q": "Jaká pizza u vás chutná nejlépe na ochutnání Neapole?",
+        "a": "Začněte klasikou – Margherita nebo Marinara ukážou chuť těsta, rajčat San Marzano a fior di latte. Pokud chcete bohatší chuť, zkuste Burratu nebo Mortadellu. Aktuální pizza týdne je vždy na začátku nabídky pizz."
+      },
+      {
+        "q": "Mohu si pizzu upravit přílohami?",
+        "a": "Ano. Při přidání do košíku si u pizzy zvolíte klasické nebo bezlepkové těsto a zaškrtnete přílohy (rukola, gorgonzola, parmská šunka a další). Ceny přídavků jsou uvedené v sekci Přídavky na pizzu."
+      },
+      {
+        "q": "Máte bezlepkovou pizzu nebo těstoviny?",
+        "a": "Ano. Bezlepková pizza je s příplatkem 99 Kč, bezlepková pasta 29 Kč. Při objednávce prosím vždy uveďte bezlepkovou variantu. Více informací najdete i na stránce Bezlepková pizza."
+      },
+      {
+        "q": "Jak si můžu z menu objednat?",
+        "a": "Přidejte položky do košíku na webu, doplňte kontakt a zvolte vyzvednutí nebo rozvoz. Objednat můžete také telefonicky na 733 572 911, případně přes Reservo. Platba kartou probíhá online před odesláním do kuchyně."
+      },
+      {
+        "q": "Kde najdu alergeny k jídlům?",
+        "a": "Seznam alergenů je přímo na této stránce pod nabídkou. Pokud máte alergii nebo intoleranci, upozorněte nás prosím při objednávce — rádi poradíme s výběrem."
+      }
+    ]
   },
   "menuCategories": [
     {

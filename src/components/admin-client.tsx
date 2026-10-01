@@ -594,6 +594,66 @@ export function AdminClient({ initial, authenticated }: Props) {
       );
     }
 
+    if (section === "menuPage") {
+      const m = content.menuPage;
+      return (
+        <div className="space-y-6">
+          {(
+            [
+              ["title", "Titulek"],
+              ["intro", "Úvod"],
+              ["extrasTitle", "Nadpis přídavků"],
+              ["extrasText", "Text přídavků"],
+              ["glutenNote", "Poznámka bez lepku"],
+              ["allergensTitle", "Nadpis alergenů"],
+              ["allergensText", "Text alergenů"],
+              ["orderNote", "Poznámka k objednávce"],
+            ] as const
+          ).map(([key, label]) => (
+            <Field
+              key={key}
+              label={label}
+              value={m[key]}
+              onChange={(v) => updateAt(["menuPage", key], v)}
+              multiline={m[key].length > 60}
+            />
+          ))}
+          <div className="space-y-4 rounded-[6.4px] border border-[var(--line)] bg-white p-5">
+            <p className="text-base font-extrabold text-[var(--brand-red)]">
+              FAQ
+            </p>
+            <Field
+              label="Nadpis FAQ"
+              value={m.faqTitle}
+              onChange={(v) => updateAt(["menuPage", "faqTitle"], v)}
+            />
+            {m.faqs.map((f, i) => (
+              <div
+                key={i}
+                className="space-y-3 border-t border-[var(--line)] pt-4"
+              >
+                <Field
+                  label={`Otázka ${i + 1}`}
+                  value={f.q}
+                  onChange={(v) =>
+                    updateAt(["menuPage", "faqs", String(i), "q"], v)
+                  }
+                />
+                <Field
+                  label="Odpověď"
+                  value={f.a}
+                  onChange={(v) =>
+                    updateAt(["menuPage", "faqs", String(i), "a"], v)
+                  }
+                  multiline
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+    }
+
     // Generic object of strings
     const data = sectionData as Record<string, string>;
     return (
