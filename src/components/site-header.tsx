@@ -75,7 +75,7 @@ export function SiteHeader({ content }: { content: SiteContent }) {
               </a>
             </div>
             <Button asChild className="btn-green">
-              <a href={site.phoneHref}>{site.callLabel}</a>
+              <Link href="/kontakt">{nav.contact}</Link>
             </Button>
           </nav>
 
@@ -108,9 +108,13 @@ export function SiteHeader({ content }: { content: SiteContent }) {
                   {l.label}
                 </Link>
               ))}
-              <a href={site.phoneHref} className="btn-green inline-flex w-fit">
-                {site.callLabel}
-              </a>
+              <Link
+                href="/kontakt"
+                className="btn-green inline-flex w-fit"
+                onClick={() => setOpen(false)}
+              >
+                {nav.contact}
+              </Link>
             </div>
           </div>
         )}
