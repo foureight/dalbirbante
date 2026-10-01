@@ -58,15 +58,12 @@ export function ContactForm({ content }: { content: SiteContent }) {
           className="rounded-[6.4px] border-[var(--line)] bg-white/70"
         />
       </div>
-      <Button
-        type="submit"
-        className="rounded-full bg-[var(--accent)] px-6 text-white hover:bg-[var(--accent-hover)]"
-      >
+      <Button type="submit" className="btn-brand">
         {contact.formSubmit}
       </Button>
-      <p className="text-sm text-[var(--muted)]">{contact.formHint}</p>
+      <p className="text-[var(--muted)]">{contact.formHint}</p>
       {sent && (
-        <p className="text-sm text-[var(--forest)]">{contact.formSuccess}</p>
+        <p className="text-[var(--forest)]">{contact.formSuccess}</p>
       )}
     </form>
   );

@@ -45,19 +45,12 @@ export default async function HomePage() {
               {home.introText}
             </p>
             <div className="animate-rise-delay-2 mt-10 flex flex-wrap gap-4">
-              <Button
-                asChild
-                className="btn-brand h-12 px-8 hover:bg-[var(--brand-red-hover)]"
-              >
+              <Button asChild className="btn-brand">
                 <a href={site.orderUrl} target="_blank" rel="noreferrer">
                   {site.orderLabel}
                 </a>
               </Button>
-              <Button
-                asChild
-                variant="outline"
-                className="h-12 rounded-full border-white/50 bg-transparent px-8 text-white hover:bg-white/10 hover:text-white"
-              >
+              <Button asChild className="btn-outline-light">
                 <Link href="/menu">{home.menuCta}</Link>
               </Button>
             </div>
@@ -152,19 +145,12 @@ export default async function HomePage() {
               <p className="mt-6 text-white/85">{home.deliveryText}</p>
               <p className="mt-5 text-white/85">{home.deliveryText2}</p>
               <div className="mt-10 flex flex-wrap gap-4">
-                <Button
-                  asChild
-                  className="btn-brand h-12 px-8 hover:bg-[var(--brand-red-hover)]"
-                >
+                <Button asChild className="btn-brand">
                   <a href={site.orderUrl} target="_blank" rel="noreferrer">
                     {site.orderLabel}
                   </a>
                 </Button>
-                <Button
-                  asChild
-                  variant="outline"
-                  className="h-12 rounded-full border-white/40 bg-transparent px-8 text-white hover:bg-white/10 hover:text-white"
-                >
+                <Button asChild className="btn-outline-light">
                   <Link href="/rozvoz">{content.nav.delivery}</Link>
                 </Button>
               </div>
@@ -224,7 +210,9 @@ export default async function HomePage() {
         <section className="border-t border-[var(--line)] bg-white">
           <div className="band-inner grid gap-14 md:grid-cols-2 md:gap-20">
             <div>
-              <h2 className="section-title">{home.contactTitle}</h2>
+              <h2 className="section-title text-[var(--brand-red)]">
+                {home.contactTitle}
+              </h2>
               <p className="section-lead">{home.contactText}</p>
               <div className="mt-12 space-y-8">
                 <div>

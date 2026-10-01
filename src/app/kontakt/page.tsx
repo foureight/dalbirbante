@@ -72,8 +72,8 @@ export default async function ContactPage() {
               </p>
             </div>
             <div>
-              <h2 className="mb-2 text-[var(--brand-red)]">{contact.formTitle}</h2>
-              <p className="mb-4 text-[var(--muted)]">{contact.formLead}</p>
+              <h2 className="mb-4 text-[var(--brand-red)]">{contact.formTitle}</h2>
+              <p className="mb-8 text-[var(--muted)]">{contact.formLead}</p>
               <ContactForm content={content} />
             </div>
           </div>

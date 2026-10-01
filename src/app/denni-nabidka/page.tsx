@@ -26,13 +26,14 @@ export default async function DailyMenuPage() {
           <p className="section-lead">{daily.intro}</p>
           <p className="mt-8 text-[var(--muted)]">{daily.note}</p>
           <div className="mt-12 flex flex-wrap gap-4">
-            <Button
-              asChild
-              className="btn-brand h-12 px-8 hover:bg-[var(--brand-red-hover)]"
-            >
+            <Button asChild className="btn-brand">
               <a href={site.phoneHref}>{site.callLabel}</a>
             </Button>
-            <Button asChild variant="outline" className="h-12 rounded-full px-8">
+            <Button
+              asChild
+              variant="outline"
+              className="rounded-full px-[2.2rem] py-[1.5rem] text-[1.3rem] font-extrabold uppercase"
+            >
               <Link href="/menu">{content.nav.menu}</Link>
             </Button>
           </div>

@@ -55,10 +55,7 @@ export default async function GlutenFreePage() {
               ))}
             </ul>
 
-            <Button
-              asChild
-              className="btn-brand mt-10 h-12 px-8 hover:bg-[var(--brand-red-hover)]"
-            >
+            <Button asChild className="btn-brand mt-10">
               <a href={site.phoneHref}>{site.callLabel}</a>
             </Button>
           </div>

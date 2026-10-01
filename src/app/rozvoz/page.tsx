@@ -76,10 +76,7 @@ export default async function DeliveryPage() {
             />
           </div>
 
-          <Button
-            asChild
-            className="btn-brand mt-8 h-11 px-6 hover:bg-[var(--brand-red-hover)]"
-          >
+          <Button asChild className="btn-brand mt-8">
             <a href={site.orderUrl} target="_blank" rel="noreferrer">
               {site.orderLabel}
             </a>
