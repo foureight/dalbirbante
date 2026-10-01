@@ -9,13 +9,16 @@ import { DeliveryMap } from "@/components/delivery-map";
 import { PageHero } from "@/components/page-hero";
 import { Reveal } from "@/components/reveal";
 import { getFaqSchema, getPageSchema } from "@/lib/schema";
+import { buildPageMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
   const content = await getContent();
-  return {
+  return buildPageMetadata(content, {
+    path: "/rozvoz",
     title: content.site.pageMeta.delivery.title,
     description: content.site.pageMeta.delivery.description,
-  };
+    image: "/images/panozzo.webp",
+  });
 }
 
 export default async function DeliveryPage() {

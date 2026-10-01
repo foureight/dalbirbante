@@ -65,6 +65,13 @@
     ]
   },
   "pages": {
+    "home": {
+      "@type": "WebPage",
+      "@id": "https://www.dalbirbante.cz/#webpage",
+      "url": "https://www.dalbirbante.cz/",
+      "name": "Dal Birbante – neapolská pizza Praha 9 Vinoř",
+      "description": "Pravá neapolská pizza ve Vinoři (Praha 9). Pizzerie Dal Birbante – pizza z pece, panozzo, těstoviny, denní menu a rozvoz po okolí."
+    },
     "menu": {
       "@type": "WebPage",
       "@id": "https://www.dalbirbante.cz/menu#webpage",

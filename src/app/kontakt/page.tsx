@@ -8,13 +8,15 @@ import { ContactForm } from "@/components/contact-form";
 import { PageJsonLd } from "@/components/json-ld";
 import { Reveal } from "@/components/reveal";
 import { getPageSchema } from "@/lib/schema";
+import { buildPageMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
   const content = await getContent();
-  return {
+  return buildPageMetadata(content, {
+    path: "/kontakt",
     title: content.site.pageMeta.contact.title,
     description: content.site.pageMeta.contact.description,
-  };
+  });
 }
 
 export default async function ContactPage() {

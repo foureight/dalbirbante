@@ -13,10 +13,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/bezlepkova-pizza-vinor",
   ];
 
-  return paths.map((path) => ({
-    url: `${base}${path}`,
-    lastModified: now,
-    changeFrequency: path === "" || path === "/menu" ? "weekly" : "monthly",
-    priority: path === "" ? 1 : 0.8,
-  }));
+  return paths.map((path) => {
+    let changeFrequency: "daily" | "weekly" | "monthly" = "monthly";
+    if (path === "" || path === "/menu") changeFrequency = "weekly";
+    if (path === "/denni-nabidka") changeFrequency = "daily";
+
+    return {
+      url: `${base}${path}`,
+      lastModified: now,
+      changeFrequency,
+      priority: path === "" ? 1 : path === "/menu" || path === "/rozvoz" ? 0.9 : 0.8,
+    };
+  });
 }

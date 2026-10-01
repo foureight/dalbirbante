@@ -9,13 +9,16 @@ import { PageJsonLd } from "@/components/json-ld";
 import { FaqAccordion } from "@/components/faq-accordion";
 import { Reveal } from "@/components/reveal";
 import { getFaqSchema, getPageSchema } from "@/lib/schema";
+import { buildPageMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
   const content = await getContent();
-  return {
+  return buildPageMetadata(content, {
+    path: "/menu",
     title: content.site.pageMeta.menu.title,
     description: content.site.pageMeta.menu.description,
-  };
+    image: "/images/lifestyle-08.webp",
+  });
 }
 
 export default async function MenuPage() {

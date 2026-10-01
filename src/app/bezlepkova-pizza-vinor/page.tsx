@@ -9,13 +9,15 @@ import { FaqAccordion } from "@/components/faq-accordion";
 import { PageHero } from "@/components/page-hero";
 import { Reveal } from "@/components/reveal";
 import { getFaqSchema, getPageSchema } from "@/lib/schema";
+import { buildPageMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
   const content = await getContent();
-  return {
+  return buildPageMetadata(content, {
+    path: "/bezlepkova-pizza-vinor",
     title: content.site.pageMeta.glutenFree.title,
     description: content.site.pageMeta.glutenFree.description,
-  };
+  });
 }
 
 export default async function GlutenFreePage() {

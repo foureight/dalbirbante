@@ -9,13 +9,16 @@ import { PageHero } from "@/components/page-hero";
 import { PageJsonLd } from "@/components/json-ld";
 import { Reveal } from "@/components/reveal";
 import { getPageSchema } from "@/lib/schema";
+import { buildPageMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
   const content = await getContent();
-  return {
+  return buildPageMetadata(content, {
+    path: "/denni-nabidka",
     title: content.site.pageMeta.daily.title,
     description: content.site.pageMeta.daily.description,
-  };
+    image: "/images/gallery/03.webp",
+  });
 }
 
 export default async function DailyMenuPage() {

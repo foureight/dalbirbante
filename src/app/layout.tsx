@@ -2,24 +2,20 @@ import type { Metadata } from "next";
 import { getContent } from "@/lib/content";
 import { JsonLd } from "@/components/json-ld";
 import { Providers } from "@/components/providers";
+import { buildPageMetadata, siteBaseUrl } from "@/lib/seo";
 import "./globals.css";
 
 export async function generateMetadata(): Promise<Metadata> {
   const content = await getContent();
   return {
-    title: content.site.metaTitle,
-    description: content.site.metaDescription,
-    keywords: content.site.keywords,
-    icons: { icon: "/favicon.png" },
-    metadataBase: new URL(content.site.siteUrl || "https://www.dalbirbante.cz"),
-    openGraph: {
+    ...buildPageMetadata(content, {
+      path: "/",
       title: content.site.metaTitle,
       description: content.site.metaDescription,
-      locale: "cs_CZ",
-      type: "website",
-      url: content.site.siteUrl || "https://www.dalbirbante.cz",
-      images: ["/images/lifestyle-01.webp"],
-    },
+    }),
+    keywords: content.site.keywords,
+    icons: { icon: "/favicon.png" },
+    metadataBase: new URL(siteBaseUrl(content)),
   };
 }
 

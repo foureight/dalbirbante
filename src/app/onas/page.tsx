@@ -7,13 +7,16 @@ import { PageJsonLd } from "@/components/json-ld";
 import { FaqAccordion } from "@/components/faq-accordion";
 import { Reveal } from "@/components/reveal";
 import { getFaqSchema, getPageSchema } from "@/lib/schema";
+import { buildPageMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
   const content = await getContent();
-  return {
+  return buildPageMetadata(content, {
+    path: "/onas",
     title: content.site.pageMeta.about.title,
     description: content.site.pageMeta.about.description,
-  };
+    image: "/images/lifestyle-onas.webp",
+  });
 }
 
 export default async function AboutPage() {

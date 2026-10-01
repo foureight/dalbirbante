@@ -11,7 +11,7 @@ import { Reveal } from "@/components/reveal";
 import { FeatureIcon } from "@/components/feature-icon";
 import { HeroSlideshow } from "@/components/hero-slideshow";
 import { Button } from "@/components/ui/button";
-import { getFaqSchema } from "@/lib/schema";
+import { getFaqSchema, getPageSchema } from "@/lib/schema";
 
 const gallery = [
   "/images/gallery/01.webp",
@@ -30,6 +30,7 @@ export default async function HomePage() {
 
   return (
     <>
+      <PageJsonLd data={getPageSchema("home", content)} />
       <PageJsonLd
         data={getFaqSchema("https://www.dalbirbante.cz/#faq", home.faqs)}
       />
