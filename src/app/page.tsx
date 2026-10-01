@@ -124,7 +124,7 @@ export default async function HomePage() {
                   </p>
                   <Link
                     href={block.href}
-                    className="btn-outline-light mt-auto inline-flex w-fit"
+                    className="btn-outline-light inline-flex w-fit"
                   >
                     Více
                   </Link>

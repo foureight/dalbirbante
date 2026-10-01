@@ -462,12 +462,6 @@
   min-height: calc(1.45em * 2);
 }
 
-/* Stejná mezera nadpis→text a text→tlačítko; zbývající výška jde pod tlačítko. */
-.band-card > .btn-outline-light {
-  margin-top: 0;
-  margin-bottom: auto;
-}
-
 .band-link {
   transition:
     transform 0.25s ease,
