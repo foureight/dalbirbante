@@ -68,7 +68,9 @@ export default async function DailyMenuPage() {
           </ul>
 
           <Reveal delay={120}>
-            <p className="mt-10 max-w-3xl text-[var(--muted)]">{daily.note}</p>
+            <p className="mt-10 whitespace-nowrap text-[var(--muted)] max-md:overflow-x-auto max-md:whitespace-normal">
+              {daily.note}
+            </p>
             <div className="mt-12 flex flex-wrap gap-4">
               <Button asChild className="btn-brand">
                 <a href={site.phoneHref}>{site.callLabel}</a>
