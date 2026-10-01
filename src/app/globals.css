@@ -584,11 +584,11 @@
   align-items: center !important;
   justify-content: center !important;
   box-sizing: border-box !important;
-  min-height: 3.9rem !important;
-  min-width: 12.5rem !important;
-  padding: 1.5rem 2.2rem !important;
+  min-height: 2rem !important;
+  min-width: 6.25rem !important;
+  padding: 0.75rem 1.1rem !important;
   font-family: var(--font-display) !important;
-  font-size: 1.3rem !important;
+  font-size: 0.85rem !important;
   font-weight: 800 !important;
   line-height: 1.2 !important;
   letter-spacing: 0 !important;
