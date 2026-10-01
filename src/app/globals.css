@@ -39,6 +39,8 @@
 :root {
   --font-body: "Omnes", sans-serif;
   --font-display: "Omnes", sans-serif;
+  --font-size-base: 23px;
+  --line-height-base: 38px;
   /* Brand tokens from dalbirbante.cz */
   --brand-red: #ce2b37;
   --brand-red-hover: #b1222d;
