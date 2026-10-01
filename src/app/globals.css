@@ -449,6 +449,7 @@
   -webkit-line-clamp: 2;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: pre-line;
   line-height: 1.15;
   min-height: calc(1.15em * 2);
 }
