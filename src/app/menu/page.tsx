@@ -32,7 +32,7 @@ export default async function MenuPage() {
             </h1>
             <p className="section-lead">{menuPage.intro}</p>
             <div className="mt-10 flex flex-wrap items-center gap-4">
-              <Button asChild className="btn-brand">
+              <Button asChild className="btn-green">
                 <a href={site.orderUrl} target="_blank" rel="noreferrer">
                   {site.orderLabel}
                 </a>
