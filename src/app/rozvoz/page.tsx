@@ -87,7 +87,7 @@ export default async function DeliveryPage() {
         <section className="w-full border-t border-[var(--line)] bg-[var(--paper-soft)] px-5 py-16 md:px-10 md:py-24">
           <div className="site-max mx-auto w-full">
             <Reveal className="pointer-events-auto">
-              <h2 className="text-[var(--brand-red)]">{delivery.faqTitle}</h2>
+              <h2 className="text-[var(--brand-green)]">{delivery.faqTitle}</h2>
               <FaqAccordion items={delivery.faqs} />
             </Reveal>
           </div>
