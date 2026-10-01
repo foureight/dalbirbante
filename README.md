@@ -34,6 +34,21 @@ V administraci lze upravit prakticky všechny texty webu (úvod, menu, o nás, k
 - Kontakt + mapa z Reservo (`system/map.php`) + rozvozové zóny
 - Odkaz na online objednávku Reservo Eats
 
+## Kontaktní formulář (SMTP)
+
+Formulář odesílá e-maily přes SMTP. Do `.env.local` doplňte:
+
+```bash
+SMTP_HOST=smtp.example.com
+SMTP_PORT=587
+SMTP_USER=vas@email.cz
+SMTP_PASS=heslo
+CONTACT_TO=mangio@dalbirbante.cz
+CONTACT_FROM=web@dalbirbante.cz
+```
+
+Bez těchto hodnot formulář vrátí chybu o chybějícím SMTP (web dál běží).
+
 ## Poznámka k ukládání
 
 Ukládání obsahu zapisuje do souboru `data/content.json`. Funguje lokálně a na běžném Node serveru (`npm start`). Na serverless hostingu (např. Vercel) souborový zápis nepřetrvává — tam je potřeba napojit databázi nebo headless CMS.
