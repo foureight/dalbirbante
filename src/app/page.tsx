@@ -40,7 +40,7 @@ export default async function HomePage() {
             />
             <div className="absolute inset-0 bg-black/45" />
           </div>
-          <div className="site-max relative mx-auto flex min-h-[75svh] w-full flex-col justify-end px-5 pb-20 pt-28 md:min-h-[90svh] md:justify-center md:px-10 md:pb-28">
+          <div className="site-max relative mx-auto flex min-h-[75svh] w-full flex-col justify-end px-5 pb-16 pt-28 md:min-h-[90svh] md:justify-center md:px-10 md:pb-24">
             <h1 className="animate-rise-delay max-w-4xl text-white">
               {home.introTitle}
             </h1>
@@ -57,6 +57,33 @@ export default async function HomePage() {
                 <Link href="/menu">{home.menuCta}</Link>
               </Button>
             </div>
+            <nav
+              aria-label="Rychlé odkazy"
+              className="animate-rise-delay-2 mt-14 grid gap-6 border-t border-white/25 pt-8 sm:grid-cols-3 sm:gap-8"
+            >
+              {[
+                {
+                  t: home.pizzaWeekTitle,
+                  href: "/menu#pizza",
+                },
+                {
+                  t: home.dailyMenuTitle,
+                  href: "/denni-nabidka",
+                },
+                {
+                  t: home.glutenFreeTitle,
+                  href: "/bezlepkova-pizza-vinor",
+                },
+              ].map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="text-sm font-extrabold uppercase tracking-wide text-white underline-offset-4 transition hover:underline md:text-base"
+                >
+                  {item.t}
+                </Link>
+              ))}
+            </nav>
           </div>
         </section>
 
