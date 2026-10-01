@@ -73,7 +73,7 @@ export default async function GlutenFreePage() {
 
         <section className="border-t border-[var(--line)] bg-[var(--paper-soft)]">
           <div className="page-wrap space-y-10 py-24 md:py-32">
-            <Reveal>
+            <Reveal className="pointer-events-auto">
               <h2 className="text-[var(--brand-red)]">{glutenFree.faqTitle}</h2>
               <FaqAccordion
                 items={glutenFree.faqs}

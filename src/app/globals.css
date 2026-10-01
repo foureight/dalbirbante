@@ -263,6 +263,12 @@
     transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+.reveal.reveal-ready:not(.is-visible) {
+  /* Invisible reveals still occupy layout and can sit over later content
+     after translate/scale — don't steal clicks from FAQ and other controls. */
+  pointer-events: none;
+}
+
 .reveal.reveal-ready:not(.is-visible).reveal-up {
   opacity: 0;
   transform: translateY(28px);
@@ -281,6 +287,7 @@
 .reveal.reveal-ready.is-visible {
   opacity: 1;
   transform: none;
+  pointer-events: auto;
 }
 
 .img-zoom {

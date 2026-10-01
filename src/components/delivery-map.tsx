@@ -19,14 +19,34 @@ export function DeliveryMap({ className = "" }: { className?: string }) {
 
     let cancelled = false;
     let popup: Popup | null = null;
+    let map: Map | null = null;
 
-    const map = new maplibregl.Map({
-      container: containerRef.current,
-      style: "https://tiles.openfreemap.org/styles/positron",
-      center: CENTER,
-      zoom: 11.2,
-      attributionControl: false,
-    });
+    const canUseWebGL2 = () => {
+      try {
+        const canvas = document.createElement("canvas");
+        return Boolean(canvas.getContext("webgl2"));
+      } catch {
+        return false;
+      }
+    };
+
+    if (!canUseWebGL2()) {
+      setError("Mapu nelze zobrazit v tomto prohlížeči.");
+      return;
+    }
+
+    try {
+      map = new maplibregl.Map({
+        container: containerRef.current,
+        style: "https://tiles.openfreemap.org/styles/positron",
+        center: CENTER,
+        zoom: 11.2,
+        attributionControl: false,
+      });
+    } catch {
+      setError("Mapu nelze zobrazit v tomto prohlížeči.");
+      return;
+    }
 
     mapRef.current = map;
     map.addControl(
@@ -35,7 +55,7 @@ export function DeliveryMap({ className = "" }: { className?: string }) {
     );
 
     map.on("load", () => {
-      if (cancelled) return;
+      if (cancelled || !map) return;
 
       const ordered = [...zones.features].sort(
         (a, b) => Number(b.properties.id) - Number(a.properties.id),
@@ -82,6 +102,7 @@ export function DeliveryMap({ className = "" }: { className?: string }) {
       });
 
       map.on("mousemove", "zones-fill", (e: MapLayerMouseEvent) => {
+        if (!map) return;
         map.getCanvas().style.cursor = "pointer";
         const f = e.features?.[0];
         if (!f?.properties || !e.lngLat || !popup) return;
@@ -95,6 +116,7 @@ export function DeliveryMap({ className = "" }: { className?: string }) {
       });
 
       map.on("mouseleave", "zones-fill", () => {
+        if (!map) return;
         map.getCanvas().style.cursor = "";
         popup?.remove();
       });
@@ -109,7 +131,7 @@ export function DeliveryMap({ className = "" }: { className?: string }) {
     return () => {
       cancelled = true;
       popup?.remove();
-      map.remove();
+      map?.remove();
       mapRef.current = null;
     };
   }, []);
