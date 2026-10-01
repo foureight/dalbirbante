@@ -307,7 +307,9 @@ export function AdminClient({ initial, authenticated }: Props) {
             ) : null,
           )}
           <div className="space-y-3 border border-[var(--line)] bg-white/60 p-4">
-            <p className="text-sm font-medium">Nabídka (položky seznamu)</p>
+            <p className="text-base font-extrabold text-[var(--brand-red)]">
+              Nabídka (položky seznamu)
+            </p>
             {h.offerItems.map((item, i) => (
               <Field
                 key={i}
