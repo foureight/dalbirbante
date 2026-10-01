@@ -9,7 +9,7 @@ import { getContent, saveContent } from "@/lib/content";
 import type { SiteContent } from "@/lib/types";
 
 export async function GET() {
-  const content = await getContent();
+  const content = await getContent({ orphans: false });
   return NextResponse.json(content);
 }
 

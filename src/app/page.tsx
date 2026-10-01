@@ -81,7 +81,7 @@ export default async function HomePage() {
               <div className="img-zoom relative aspect-[4/5] overflow-hidden rounded-[6.4px]">
                 <Image
                   src="/images/lifestyle-01.webp"
-                  alt="Pizza z pece Dal Birbante"
+                  alt="Pizza z\u00A0pece Dal Birbante"
                   fill
                   className="img-zoom-media object-cover"
                   sizes="(max-width:768px) 100vw, 50vw"

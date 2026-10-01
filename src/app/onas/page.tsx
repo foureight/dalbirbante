@@ -56,7 +56,7 @@ export default async function AboutPage() {
             <div className="img-zoom relative aspect-[4/5] overflow-hidden rounded-[6.4px] md:mt-4">
               <Image
                 src="/images/lifestyle-01.webp"
-                alt="Interiér a pizza Dal Birbante"
+                alt="Interiér a\u00A0pizza Dal Birbante"
                 fill
                 className="img-zoom-media object-cover"
                 sizes="(max-width:768px) 100vw, 40vw"

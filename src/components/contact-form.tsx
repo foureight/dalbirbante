@@ -42,7 +42,9 @@ export function ContactForm({ content }: { content: SiteContent }) {
       setMessage("");
     } catch {
       setStatus("error");
-      setError("Odeslání se nepovedlo. Zkontrolujte připojení a zkuste znovu.");
+      setError(
+        "Odeslání se nepovedlo. Zkontrolujte připojení a\u00A0zkuste znovu.",
+      );
     }
   }
 
