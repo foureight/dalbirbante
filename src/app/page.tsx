@@ -96,7 +96,7 @@ export default async function HomePage() {
           </div>
         </section>
 
-        <section className="band-black">
+        <section className="band-green">
           <div className="band-inner grid gap-14 md:grid-cols-3 md:gap-12">
             {[
               {
@@ -121,7 +121,7 @@ export default async function HomePage() {
                   <p className="mt-5 text-white/80">{block.d}</p>
                   <Link
                     href={block.href}
-                    className="band-link mt-6 inline-block font-semibold uppercase tracking-wide text-[var(--brand-red)] hover:underline"
+                    className="band-link mt-6 inline-block font-semibold uppercase tracking-wide text-white hover:underline"
                   >
                     Více
                   </Link>
