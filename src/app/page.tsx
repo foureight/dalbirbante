@@ -25,7 +25,7 @@ export default async function HomePage() {
     <>
       <SiteHeader content={content} />
       <main className="flex-1">
-        <section className="relative min-h-[70svh] overflow-hidden text-white md:min-h-[85svh]">
+        <section className="relative min-h-[75svh] overflow-hidden text-white md:min-h-[90svh]">
           <div className="absolute inset-0">
             <Image
               src="/images/lifestyle-08.webp"
@@ -37,17 +37,17 @@ export default async function HomePage() {
             />
             <div className="absolute inset-0 bg-black/45" />
           </div>
-          <div className="relative mx-auto flex min-h-[70svh] max-w-6xl flex-col justify-end px-4 pb-14 pt-24 md:min-h-[85svh] md:justify-center md:px-6 md:pb-20">
-            <h1 className="animate-rise-delay font-display max-w-4xl text-3xl uppercase leading-tight md:text-5xl lg:text-6xl">
+          <div className="relative mx-auto flex min-h-[75svh] max-w-6xl flex-col justify-end px-5 pb-20 pt-28 md:min-h-[90svh] md:justify-center md:px-10 md:pb-28">
+            <h1 className="animate-rise-delay font-display max-w-4xl text-4xl uppercase leading-[1.15] md:text-5xl lg:text-6xl">
               {home.introTitle}
             </h1>
-            <p className="animate-rise-delay-2 mt-5 max-w-2xl text-base leading-relaxed text-white/90 md:text-lg">
+            <p className="animate-rise-delay-2 mt-8 max-w-2xl text-white/90">
               {home.introText}
             </p>
-            <div className="animate-rise-delay-2 mt-8 flex flex-wrap gap-3">
+            <div className="animate-rise-delay-2 mt-10 flex flex-wrap gap-4">
               <Button
                 asChild
-                className="btn-brand h-11 px-6 hover:bg-[var(--brand-red-hover)]"
+                className="btn-brand h-12 px-8 hover:bg-[var(--brand-red-hover)]"
               >
                 <a href={site.orderUrl} target="_blank" rel="noreferrer">
                   {site.orderLabel}
@@ -56,7 +56,7 @@ export default async function HomePage() {
               <Button
                 asChild
                 variant="outline"
-                className="h-11 rounded-full border-white/50 bg-transparent px-6 text-white hover:bg-white/10 hover:text-white"
+                className="h-12 rounded-full border-white/50 bg-transparent px-8 text-white hover:bg-white/10 hover:text-white"
               >
                 <Link href="/menu">{home.menuCta}</Link>
               </Button>
@@ -65,22 +65,22 @@ export default async function HomePage() {
         </section>
 
         <section className="section-pad mx-auto max-w-6xl">
-          <div className="grid items-center gap-10 md:grid-cols-2 md:gap-16">
+          <div className="grid items-center gap-14 md:grid-cols-2 md:gap-20 lg:gap-24">
             <div>
-              <h2 className="font-display text-2xl uppercase text-[var(--brand-red)] md:text-3xl">
+              <h2 className="font-display text-3xl uppercase text-[var(--brand-red)] md:text-4xl">
                 {home.offerTitle}
               </h2>
-              <ul className="mt-5 space-y-2 text-[var(--ink)]">
+              <ul className="mt-8 space-y-4 text-[var(--ink)]">
                 {home.offerItems.map((item) => (
-                  <li key={item} className="flex gap-3">
-                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--brand-red)]" />
+                  <li key={item} className="flex gap-4">
+                    <span className="mt-4 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--brand-red)]" />
                     <span>{item}</span>
                   </li>
                 ))}
               </ul>
-              <p className="mt-5 text-[var(--muted)]">{home.wineText}</p>
-              <p className="mt-4 text-[var(--ink)]">{home.ctaLine1}</p>
-              <p className="mt-2 text-[var(--ink)]">{home.ctaLine2}</p>
+              <p className="mt-8 text-[var(--muted)]">{home.wineText}</p>
+              <p className="mt-6 text-[var(--ink)]">{home.ctaLine1}</p>
+              <p className="mt-3 text-[var(--ink)]">{home.ctaLine2}</p>
             </div>
             <div className="relative aspect-[4/5] overflow-hidden rounded-[6.4px]">
               <Image
@@ -95,7 +95,7 @@ export default async function HomePage() {
         </section>
 
         <section className="band-black">
-          <div className="mx-auto grid max-w-6xl gap-10 px-4 py-16 md:grid-cols-3 md:px-6 md:py-20">
+          <div className="band-inner grid gap-14 md:grid-cols-3 md:gap-12">
             {[
               {
                 t: home.pizzaWeekTitle,
@@ -113,16 +113,14 @@ export default async function HomePage() {
                 href: "/bezlepkova-pizza-vinor",
               },
             ].map((block) => (
-              <div key={block.t} className="border-t border-white/25 pt-5">
+              <div key={block.t} className="border-t border-white/25 pt-8">
                 <h2 className="font-display text-2xl uppercase md:text-3xl">
                   {block.t}
                 </h2>
-                <p className="mt-3 text-sm leading-relaxed text-white/75">
-                  {block.d}
-                </p>
+                <p className="mt-5 text-white/80">{block.d}</p>
                 <Link
                   href={block.href}
-                  className="mt-4 inline-block text-sm font-semibold uppercase tracking-wide text-[var(--brand-red)] hover:underline"
+                  className="mt-6 inline-block font-semibold uppercase tracking-wide text-[var(--brand-red)] hover:underline"
                 >
                   Více
                 </Link>
@@ -132,7 +130,7 @@ export default async function HomePage() {
         </section>
 
         <section className="section-pad mx-auto max-w-6xl">
-          <div className="grid items-center gap-10 md:grid-cols-2">
+          <div className="grid items-center gap-14 md:grid-cols-2 md:gap-20">
             <div className="relative aspect-[5/4] overflow-hidden rounded-[6.4px]">
               <Image
                 src="/images/panozzo.webp"
@@ -152,15 +150,15 @@ export default async function HomePage() {
         </section>
 
         <section className="band-black">
-          <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 md:grid-cols-2 md:px-6 md:py-20">
+          <div className="band-inner grid items-center gap-14 md:grid-cols-2 md:gap-20">
             <div>
               <h2 className="section-title-light">{home.deliveryTitle}</h2>
-              <p className="mt-4 text-white/80">{home.deliveryText}</p>
-              <p className="mt-3 text-white/80">{home.deliveryText2}</p>
-              <div className="mt-8 flex flex-wrap gap-3">
+              <p className="mt-6 text-white/85">{home.deliveryText}</p>
+              <p className="mt-5 text-white/85">{home.deliveryText2}</p>
+              <div className="mt-10 flex flex-wrap gap-4">
                 <Button
                   asChild
-                  className="btn-brand h-11 px-6 hover:bg-[var(--brand-red-hover)]"
+                  className="btn-brand h-12 px-8 hover:bg-[var(--brand-red-hover)]"
                 >
                   <a href={site.orderUrl} target="_blank" rel="noreferrer">
                     {site.orderLabel}
@@ -169,7 +167,7 @@ export default async function HomePage() {
                 <Button
                   asChild
                   variant="outline"
-                  className="h-11 rounded-full border-white/40 bg-transparent text-white hover:bg-white/10 hover:text-white"
+                  className="h-12 rounded-full border-white/40 bg-transparent px-8 text-white hover:bg-white/10 hover:text-white"
                 >
                   <Link href="/rozvoz">{content.nav.delivery}</Link>
                 </Button>
@@ -188,13 +186,13 @@ export default async function HomePage() {
         </section>
 
         <section className="border-y border-[var(--line)] bg-[var(--paper-soft)]">
-          <div className="mx-auto max-w-6xl px-4 py-14 md:px-6">
+          <div className="band-inner">
             <h2 className="section-title text-center">{home.featuresTitle}</h2>
-            <div className="mt-10 grid grid-cols-2 gap-x-6 gap-y-4 md:grid-cols-4">
+            <div className="mt-14 grid grid-cols-1 gap-x-10 gap-y-8 sm:grid-cols-2 md:grid-cols-4">
               {home.features.map((f) => (
                 <p
                   key={f}
-                  className="border-l-2 border-[var(--brand-red)] pl-3 text-sm md:text-base"
+                  className="border-l-2 border-[var(--brand-red)] pl-5"
                 >
                   {f}
                 </p>
@@ -203,10 +201,13 @@ export default async function HomePage() {
           </div>
         </section>
 
-        <section id="galerie" className="section-pad mx-auto max-w-6xl scroll-mt-24">
+        <section
+          id="galerie"
+          className="section-pad mx-auto max-w-6xl scroll-mt-28"
+        >
           <h2 className="section-title">{home.galleryTitle}</h2>
           <p className="section-lead">{home.gallerySubtitle}</p>
-          <div className="mt-10 grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
+          <div className="mt-14 grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
             {gallery.map((src, i) => (
               <div
                 key={src}
@@ -225,26 +226,26 @@ export default async function HomePage() {
         </section>
 
         <section className="border-t border-[var(--line)] bg-white">
-          <div className="mx-auto grid max-w-6xl gap-10 px-4 py-16 md:grid-cols-2 md:px-6 md:py-20">
+          <div className="band-inner grid gap-14 md:grid-cols-2 md:gap-20">
             <div>
               <h2 className="section-title">{home.contactTitle}</h2>
               <p className="section-lead">{home.contactText}</p>
-              <div className="mt-8 space-y-4">
+              <div className="mt-12 space-y-8">
                 <div>
-                  <h3 className="font-display text-lg uppercase text-[var(--brand-red)]">
+                  <h3 className="font-display text-xl uppercase text-[var(--brand-red)]">
                     {home.hoursTitle}
                   </h3>
-                  <p className="mt-1 text-[var(--muted)]">
+                  <p className="mt-3 text-[var(--muted)]">
                     {site.hours}
                     <br />
                     {site.hoursClosed}
                   </p>
                 </div>
                 <div>
-                  <h3 className="font-display text-lg uppercase text-[var(--brand-red)]">
+                  <h3 className="font-display text-xl uppercase text-[var(--brand-red)]">
                     {home.whereTitle}
                   </h3>
-                  <p className="mt-1 text-[var(--muted)]">
+                  <p className="mt-3 text-[var(--muted)]">
                     {site.addressShort}
                     <br />
                     <a href={site.phoneHref} className="text-[var(--brand-red)]">

@@ -21,18 +21,18 @@ export default async function DailyMenuPage() {
     <>
       <SiteHeader content={content} />
       <main className="flex-1">
-        <section className="mx-auto max-w-3xl px-4 py-16 md:px-6 md:py-24">
+        <section className="mx-auto max-w-3xl px-5 py-24 md:px-10 md:py-36">
           <h1 className="section-title text-[var(--brand-red)]">{daily.title}</h1>
           <p className="section-lead">{daily.intro}</p>
-          <p className="mt-6 text-[var(--muted)]">{daily.note}</p>
-          <div className="mt-10 flex flex-wrap gap-3">
+          <p className="mt-8 text-[var(--muted)]">{daily.note}</p>
+          <div className="mt-12 flex flex-wrap gap-4">
             <Button
               asChild
-              className="btn-brand h-11 px-6 hover:bg-[var(--brand-red-hover)]"
+              className="btn-brand h-12 px-8 hover:bg-[var(--brand-red-hover)]"
             >
               <a href={site.phoneHref}>{site.callLabel}</a>
             </Button>
-            <Button asChild variant="outline" className="h-11 rounded-full">
+            <Button asChild variant="outline" className="h-12 rounded-full px-8">
               <Link href="/menu">{content.nav.menu}</Link>
             </Button>
           </div>

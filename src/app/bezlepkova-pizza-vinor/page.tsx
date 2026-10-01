@@ -35,21 +35,21 @@ export default async function GlutenFreePage() {
       />
       <SiteHeader content={content} />
       <main className="flex-1">
-        <section className="mx-auto grid max-w-6xl gap-10 px-4 py-14 md:grid-cols-2 md:px-6 md:py-20">
+        <section className="page-wrap grid gap-14 py-24 md:grid-cols-2 md:gap-20 md:py-36">
           <div>
             <h1 className="section-title text-[var(--brand-red)]">
               {glutenFree.title}
             </h1>
             <p className="section-lead">{glutenFree.intro}</p>
-            <p className="mt-4 text-[var(--muted)]">{glutenFree.intro2}</p>
+            <p className="mt-6 text-[var(--muted)]">{glutenFree.intro2}</p>
 
-            <h2 className="mt-10 font-display text-2xl uppercase text-[var(--brand-green)]">
+            <h2 className="mt-14 font-display text-2xl uppercase text-[var(--brand-green)] md:text-3xl">
               {glutenFree.howTitle}
             </h2>
-            <ul className="mt-4 space-y-2">
+            <ul className="mt-6 space-y-4">
               {glutenFree.howItems.map((item) => (
-                <li key={item} className="flex gap-3 text-[var(--ink)]">
-                  <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--brand-red)]" />
+                <li key={item} className="flex gap-4 text-[var(--ink)]">
+                  <span className="mt-4 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--brand-red)]" />
                   <span>{item}</span>
                 </li>
               ))}
@@ -57,7 +57,7 @@ export default async function GlutenFreePage() {
 
             <Button
               asChild
-              className="btn-brand mt-8 h-11 px-6 hover:bg-[var(--brand-red-hover)]"
+              className="btn-brand mt-10 h-12 px-8 hover:bg-[var(--brand-red-hover)]"
             >
               <a href={site.phoneHref}>{site.callLabel}</a>
             </Button>
@@ -74,13 +74,13 @@ export default async function GlutenFreePage() {
         </section>
 
         <section className="border-t border-[var(--line)] bg-[var(--paper-soft)]">
-          <div className="mx-auto max-w-6xl space-y-6 px-4 py-14 md:px-6">
+          <div className="page-wrap space-y-10 py-24 md:py-32">
             {glutenFree.faqs.map((f) => (
-              <div key={f.q} className="border-b border-[var(--line)] pb-5">
-                <h2 className="font-display text-xl uppercase text-[var(--brand-red)]">
+              <div key={f.q} className="border-b border-[var(--line)] pb-8">
+                <h2 className="font-display text-xl uppercase text-[var(--brand-red)] md:text-2xl">
                   {f.q}
                 </h2>
-                <p className="mt-2 text-[var(--muted)]">{f.a}</p>
+                <p className="mt-4 text-[var(--muted)]">{f.a}</p>
               </div>
             ))}
           </div>

@@ -30,25 +30,25 @@ export default async function AboutPage() {
             sizes="100vw"
           />
           <div className="absolute inset-0 bg-black/50" />
-          <div className="relative mx-auto flex min-h-[40vh] max-w-6xl items-end px-4 pb-12 md:px-6">
+          <div className="relative mx-auto flex min-h-[48vh] max-w-6xl items-end px-5 pb-16 md:px-10 md:pb-20">
             <h1 className="font-display text-5xl uppercase md:text-6xl">
               {about.title}
             </h1>
           </div>
         </section>
 
-        <section className="mx-auto grid max-w-6xl gap-12 px-4 py-16 md:grid-cols-[1.1fr_0.9fr] md:px-6 md:py-24">
+        <section className="page-wrap grid gap-16 py-24 md:grid-cols-[1.1fr_0.9fr] md:gap-20 md:py-36">
           <div>
             <p className="font-display text-2xl leading-snug text-[var(--brand-green)] md:text-3xl">
               {about.lead}
             </p>
-            <div className="mt-8 space-y-5 text-base leading-relaxed text-[var(--muted)] md:text-lg">
+            <div className="mt-10 space-y-7 text-[var(--muted)]">
               {about.paragraphs.map((p) => (
                 <p key={p.slice(0, 32)}>{p}</p>
               ))}
             </div>
           </div>
-          <div className="relative aspect-[4/5] overflow-hidden rounded-[6.4px] md:mt-8">
+          <div className="relative aspect-[4/5] overflow-hidden rounded-[6.4px] md:mt-4">
             <Image
               src="/images/lifestyle-01.webp"
               alt="Interiér a pizza Dal Birbante"

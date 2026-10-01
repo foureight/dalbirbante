@@ -35,16 +35,16 @@ export default async function DeliveryPage() {
       />
       <SiteHeader content={content} />
       <main className="flex-1">
-        <section className="mx-auto max-w-6xl px-4 py-14 md:px-6 md:py-20">
+        <section className="page-wrap py-24 md:py-36">
           <h1 className="section-title text-[var(--brand-red)]">{delivery.title}</h1>
           <p className="section-lead">{delivery.intro}</p>
-          <p className="mt-4 max-w-3xl text-[var(--muted)]">{delivery.intro2}</p>
+          <p className="mt-6 max-w-3xl text-[var(--muted)]">{delivery.intro2}</p>
 
-          <h2 className="mt-12 font-display text-2xl uppercase text-[var(--brand-green)]">
+          <h2 className="mt-16 font-display text-2xl uppercase text-[var(--brand-green)] md:text-3xl">
             {delivery.pricesTitle}
           </h2>
-          <div className="mt-6 overflow-x-auto">
-            <table className="w-full min-w-[560px] text-left text-sm">
+          <div className="mt-8 overflow-x-auto">
+            <table className="w-full min-w-[560px] text-left">
               <thead>
                 <tr className="border-b border-[var(--line)] text-[var(--muted)]">
                   <th className="py-3 font-medium">Zóna</th>

@@ -21,33 +21,33 @@ export default async function MenuPage() {
     <>
       <SiteHeader content={content} />
       <main className="flex-1">
-        <section className="mx-auto max-w-6xl px-4 pb-10 pt-10 md:px-6 md:pt-14">
+        <section className="page-wrap pb-12 pt-16 md:pb-16 md:pt-24">
           <h1 className="section-title text-[var(--brand-red)]">{menuPage.title}</h1>
           <p className="section-lead">{menuPage.intro}</p>
-          <div className="mt-6 flex flex-wrap items-center gap-3">
+          <div className="mt-10 flex flex-wrap items-center gap-4">
             <Button
               asChild
-              className="btn-brand h-11 px-6 hover:bg-[var(--brand-red-hover)]"
+              className="btn-brand h-12 px-8 hover:bg-[var(--brand-red-hover)]"
             >
               <a href={site.orderUrl} target="_blank" rel="noreferrer">
                 {site.orderLabel}
               </a>
             </Button>
-            <p className="text-sm text-[var(--muted)]">{menuPage.orderNote}</p>
+            <p className="text-[var(--muted)]">{menuPage.orderNote}</p>
           </div>
         </section>
 
-        <div className="mx-auto max-w-6xl space-y-16 px-4 pb-20 md:px-6">
+        <div className="page-wrap space-y-20 pb-28 md:space-y-28">
           {menuCategories.map((cat) => (
             <section key={cat.id} id={cat.id}>
-              <h2 className="font-display border-b border-[var(--line)] pb-3 text-3xl uppercase text-[var(--brand-red)]">
+              <h2 className="font-display border-b border-[var(--line)] pb-4 text-3xl uppercase text-[var(--brand-red)] md:text-4xl">
                 {cat.name}
               </h2>
-              <ul className="mt-6 divide-y divide-[var(--line)]">
+              <ul className="mt-8 divide-y divide-[var(--line)]">
                 {cat.items.map((item) => (
                   <li
                     key={`${cat.id}-${item.name}`}
-                    className="grid gap-4 py-5 sm:grid-cols-[auto_1fr_auto] sm:items-start"
+                    className="grid gap-4 py-7 sm:grid-cols-[auto_1fr_auto] sm:items-start"
                   >
                     {item.image ? (
                       <div className="relative h-20 w-20 overflow-hidden rounded-[6.4px] sm:h-24 sm:w-24">

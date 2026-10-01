@@ -34,17 +34,17 @@ export default async function ContactPage() {
             />
             <div className="absolute inset-0 bg-black/60" />
           </div>
-          <div className="relative mx-auto max-w-6xl px-4 py-20 md:px-6 md:py-28">
+          <div className="relative mx-auto max-w-6xl px-5 py-24 md:px-10 md:py-36">
             <h1 className="font-display text-5xl uppercase md:text-6xl">
               {contact.title}
             </h1>
-            <p className="mt-4 max-w-xl text-xl text-white/90">{contact.lead}</p>
-            <p className="mt-3 max-w-xl text-white/80">{contact.openText}</p>
+            <p className="mt-8 max-w-xl text-white/90">{contact.lead}</p>
+            <p className="mt-5 max-w-xl text-white/80">{contact.openText}</p>
           </div>
         </section>
 
-        <section className="mx-auto grid max-w-6xl gap-12 px-4 py-16 md:grid-cols-2 md:px-6 md:py-20">
-          <div className="space-y-8">
+        <section className="page-wrap grid gap-16 py-24 md:grid-cols-2 md:gap-20 md:py-36">
+          <div className="space-y-12">
             <div>
               <h2 className="font-display text-2xl uppercase text-[var(--brand-red)]">
                 {contact.hoursTitle}

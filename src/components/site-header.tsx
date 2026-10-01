@@ -20,23 +20,23 @@ export function SiteHeader({ content }: { content: SiteContent }) {
 
   return (
     <header className="sticky top-0 z-50">
-      <div className="bg-[var(--brand-green)] px-4 py-2 text-center text-[11px] font-semibold uppercase tracking-[0.14em] text-white md:text-xs">
+      <div className="bg-[var(--brand-green)] px-5 py-2.5 text-center text-xs font-semibold uppercase tracking-[0.14em] text-white md:px-10">
         {site.announcement}
       </div>
       <div className="border-b border-[var(--line)] bg-white">
-        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 md:px-6 md:py-4">
+        <div className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-5 py-5 md:px-10 md:py-6">
           <Link href="/" className="flex items-center">
             <Image
               src="/images/logo.webp"
               alt={site.brandName}
               width={320}
               height={40}
-              className="h-8 w-auto object-contain md:h-10"
+              className="h-9 w-auto object-contain md:h-11"
               priority
             />
           </Link>
 
-          <nav className="nav-menu hidden items-center gap-5 text-[var(--ink)] lg:flex">
+          <nav className="nav-menu hidden items-center gap-8 text-[var(--ink)] lg:flex">
             {links.map((l) => (
               <Link
                 key={l.href}
@@ -51,18 +51,18 @@ export function SiteHeader({ content }: { content: SiteContent }) {
               target="_blank"
               rel="noreferrer"
               aria-label="Instagram"
-              className="inline-flex size-7 items-center justify-center text-[var(--ink)] hover:text-[var(--brand-red)]"
+              className="inline-flex size-10 items-center justify-center text-[var(--ink)] transition hover:text-[var(--brand-red)]"
             >
-              <Image src="/icons/instagram.svg" alt="" width={22} height={22} />
+              <Image src="/icons/instagram.svg" alt="" width={32} height={32} />
             </a>
             <a
               href={site.facebookUrl}
               target="_blank"
               rel="noreferrer"
               aria-label="Facebook"
-              className="inline-flex size-7 items-center justify-center text-[var(--ink)] hover:text-[var(--brand-red)]"
+              className="inline-flex size-10 items-center justify-center text-[var(--ink)] transition hover:text-[var(--brand-red)]"
             >
-              <Image src="/icons/facebook.svg" alt="" width={22} height={22} />
+              <Image src="/icons/facebook.svg" alt="" width={32} height={32} />
             </a>
             <Button asChild className="btn-green h-10 px-5 hover:bg-[#007a3a]">
               <a href={site.phoneHref}>{site.callLabel}</a>

@@ -31,18 +31,18 @@ export function SiteFooter({ content }: { content: SiteContent }) {
 
   return (
     <footer className="bg-[var(--brand-green)] text-white">
-      <div className="mx-auto max-w-5xl px-4 pb-14 pt-12 md:px-6 md:pb-16 md:pt-14">
+      <div className="mx-auto max-w-5xl px-5 pb-20 pt-16 md:px-10 md:pb-24 md:pt-20">
         <FooterGoodbye
           czech={site.goodbye}
           italian={site.goodbyeIt || "BUON APPETITO!"}
         />
 
-        <div className="grid gap-10 text-center md:grid-cols-3 md:items-start md:gap-8">
+        <div className="grid gap-14 text-center md:grid-cols-3 md:items-start md:gap-12">
           <div>
-            <h3 className="mb-4 font-display text-2xl font-black uppercase tracking-wide text-black md:text-[1.7rem]">
+            <h3 className="mb-6 font-display text-2xl font-black uppercase tracking-wide text-black md:text-[1.7rem]">
               Sitemap
             </h3>
-            <nav className="flex flex-col items-center gap-1.5 text-base text-white md:text-lg">
+            <nav className="flex flex-col items-center gap-3 text-white">
               {sitemap.map((item) => (
                 <Link
                   key={item.href}
@@ -56,10 +56,10 @@ export function SiteFooter({ content }: { content: SiteContent }) {
           </div>
 
           <div>
-            <h3 className="mb-4 font-display text-2xl font-black uppercase tracking-wide text-black md:text-[1.7rem]">
+            <h3 className="mb-6 font-display text-2xl font-black uppercase tracking-wide text-black md:text-[1.7rem]">
               {contact.whereTitle}
             </h3>
-            <div className="flex flex-col items-center gap-1.5 text-base leading-relaxed text-white md:text-lg">
+            <div className="flex flex-col items-center gap-3 text-white">
               <p>{site.addressShort}</p>
               <p>
                 volejte{" "}
@@ -76,7 +76,7 @@ export function SiteFooter({ content }: { content: SiteContent }) {
               >
                 {site.email}
               </a>
-              <div className="mt-4 flex items-center justify-center gap-3">
+              <div className="mt-6 flex items-center justify-center gap-4">
                 <a
                   href={site.facebookUrl}
                   target="_blank"
@@ -100,10 +100,10 @@ export function SiteFooter({ content }: { content: SiteContent }) {
           </div>
 
           <div>
-            <h3 className="mb-4 font-display text-2xl font-black uppercase tracking-wide text-black md:text-[1.7rem]">
+            <h3 className="mb-6 font-display text-2xl font-black uppercase tracking-wide text-black md:text-[1.7rem]">
               {contact.hoursTitle}
             </h3>
-            <div className="flex flex-col items-center gap-1.5 text-base leading-relaxed text-white md:text-lg">
+            <div className="flex flex-col items-center gap-3 text-white">
               <p>{site.hours}</p>
               <p>{site.hoursClosed}</p>
             </div>
