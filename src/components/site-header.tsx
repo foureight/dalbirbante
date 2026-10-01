@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
+import { AnnouncementBar } from "@/components/announcement-bar";
 import type { SiteContent } from "@/lib/types";
 
 export function SiteHeader({ content }: { content: SiteContent }) {
@@ -20,9 +21,7 @@ export function SiteHeader({ content }: { content: SiteContent }) {
 
   return (
     <header className="sticky top-0 z-50">
-      <div className="bg-[var(--brand-green)] px-5 py-2.5 text-center text-xs font-semibold uppercase tracking-[0.14em] text-white md:px-10">
-        {site.announcement}
-      </div>
+      <AnnouncementBar message={site.announcement} />
       <div className="border-b border-[var(--line)] bg-white">
         <div className="mx-auto flex max-w-6xl items-center justify-between gap-6 px-5 py-5 md:px-10 md:py-6">
           <Link href="/" className="flex items-center">
