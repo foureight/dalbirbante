@@ -207,7 +207,9 @@ export default async function HomePage() {
           className="site-max section-pad mx-auto w-full scroll-mt-28"
         >
           <Reveal>
-            <h2 className="section-title">{home.galleryTitle}</h2>
+            <h2 className="section-title text-[var(--brand-green)]">
+              {home.galleryTitle}
+            </h2>
             <p className="section-lead">{home.gallerySubtitle}</p>
           </Reveal>
           <div className="mt-14 grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
