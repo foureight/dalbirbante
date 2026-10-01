@@ -111,7 +111,12 @@ export default async function HomePage() {
                 <div className="flex h-full flex-col">
                   <h2 className="band-card-title">
                     <Link href={block.href} className="transition hover:opacity-90">
-                      {block.t}
+                      {block.t.split("\n").map((line, lineIndex) => (
+                        <span key={`${block.t}-${lineIndex}`}>
+                          {lineIndex > 0 ? <br /> : null}
+                          {line}
+                        </span>
+                      ))}
                     </Link>
                   </h2>
                   <Link
