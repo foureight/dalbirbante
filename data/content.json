@@ -148,6 +148,29 @@
       "V našem malém italském bistru se zaměřujeme především na pravou neapolskou pizzu s tenkým těstem a nadýchanými okraji. Pizza se peče při teplotách přes 420 °C po dobu 60–90 sekund, díky čemuž je těsto lehké, křehké a okraje příjemně opálené.",
       "Na výrobu těsta používáme mouku Caputo typu 00. Rajčata z okolí Vesuvu dodávají pizze výraznou chuť a jasně červenou barvu. Čerstvou mozzarellu Fior di latte nám vozí náš partner Mozzarellart. Všechny klíčové suroviny pocházejí přímo z Itálie, abychom vám mohli nabídnout co nejautentičtější chuť Neapole.",
       "Kromě pizzy u nás ochutnáte i výběr italských sýrů a salámů, plněné bagety panozzo, dezerty a kvalitní bio vína Pisoni. Posezení nabízí zhruba 14 míst v příjemném prostředí, jídlo vám rádi zabalíme s sebou nebo dovezeme až domů."
+    ],
+    "faqTitle": "Nejčastější otázky o nás",
+    "faqs": [
+      {
+        "q": "Co znamená jméno Dal Birbante?",
+        "a": "Dal Birbante neboli „Birba“ vychází z italského označení pro malého rošťáka – přesně takového, který má pořád hlad a chuť objevovat nové chutě. Stejnou energii chceme mít i v naší kuchyni ve Vinoři."
+      },
+      {
+        "q": "Čím se liší vaše neapolská pizza?",
+        "a": "Pečeme pravou neapolskou pizzu s tenkým těstem a nadýchanými okraji při teplotách přes 420 °C jen 60–90 sekund. Používáme mouku Caputo 00, rajčata z okolí Vesuvu a čerstvou mozzarellu fior di latte – klíčové suroviny vozíme z Itálie."
+      },
+      {
+        "q": "Kde vás najdu a kolik máte míst k sezení?",
+        "a": "Jsme na adrese Mladoboleslavská 1, Praha 9 – Vinoř. V bistru máme zhruba 14 míst v příjemném prostředí. Jídlo si můžete dát u nás, zabalit s sebou, nebo objednat rozvoz."
+      },
+      {
+        "q": "Jaká je otevírací doba?",
+        "a": "Otevřeno máme úterý–sobota 11:00–20:30. V neděli a pondělí máme zavřeno. Aktuální výjimky sledujte v zeleném pruhu nahoře na webu nebo na našich sociálních sítích."
+      },
+      {
+        "q": "Nabízíte i něco jiného než pizzu?",
+        "a": "Ano. Kromě pizzy pečeme panozzo, připravujeme těstoviny a lasagne, nabízíme italské sýry a salámy, dezerty a bio vína Pisoni. Přes poledne máme také denní menu a na přání bezlepkové varianty."
+      }
     ]
   },
   "menuPage": {

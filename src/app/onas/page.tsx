@@ -4,8 +4,9 @@ import { getContent } from "@/lib/content";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { PageJsonLd } from "@/components/json-ld";
+import { FaqAccordion } from "@/components/faq-accordion";
 import { Reveal } from "@/components/reveal";
-import { getPageSchema } from "@/lib/schema";
+import { getFaqSchema, getPageSchema } from "@/lib/schema";
 
 export async function generateMetadata(): Promise<Metadata> {
   const content = await getContent();
@@ -22,6 +23,9 @@ export default async function AboutPage() {
   return (
     <>
       <PageJsonLd data={getPageSchema("about", content)} />
+      <PageJsonLd
+        data={getFaqSchema("https://www.dalbirbante.cz/onas#faq", about.faqs)}
+      />
       <SiteHeader content={content} />
       <main className="flex-1">
         <section className="relative min-h-[40vh] overflow-hidden text-white">
@@ -63,6 +67,18 @@ export default async function AboutPage() {
               />
             </div>
           </Reveal>
+        </section>
+
+        <section
+          id="faq"
+          className="w-full border-t border-[var(--line)] bg-[var(--paper-soft)] px-5 py-16 md:px-10 md:py-24"
+        >
+          <div className="site-max mx-auto w-full">
+            <Reveal className="pointer-events-auto">
+              <h2 className="text-[var(--brand-green)]">{about.faqTitle}</h2>
+              <FaqAccordion items={about.faqs} />
+            </Reveal>
+          </div>
         </section>
       </main>
       <SiteFooter content={content} />

@@ -102,6 +102,8 @@ export type SiteContent = {
     title: string;
     lead: string;
     paragraphs: string[];
+    faqTitle: string;
+    faqs: FaqItem[];
   };
   menuPage: {
     title: string;
