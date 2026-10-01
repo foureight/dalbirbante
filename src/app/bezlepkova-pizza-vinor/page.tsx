@@ -59,12 +59,12 @@ export default async function GlutenFreePage() {
             </Button>
           </Reveal>
           <Reveal delay={140} variant="scale">
-            <div className="img-zoom relative aspect-[4/5] overflow-hidden rounded-[6.4px]">
+            <div className="img-zoom relative aspect-square overflow-hidden rounded-[6.4px] bg-[var(--paper-soft)]">
               <Image
                 src="/images/burrata.webp"
                 alt="Bezlepková pizza Dal Birbante Vinoř"
                 fill
-                className="img-zoom-media object-cover"
+                className="img-zoom-media object-contain"
                 sizes="(max-width:768px) 100vw, 50vw"
               />
             </div>
