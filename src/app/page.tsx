@@ -180,7 +180,9 @@ export default async function HomePage() {
         <section className="border-y border-[var(--line)] bg-[var(--paper-soft)]">
           <div className="band-inner">
             <Reveal>
-              <h2 className="section-title text-center">{home.featuresTitle}</h2>
+              <h2 className="section-title text-center text-[var(--brand-green)]">
+                {home.featuresTitle}
+              </h2>
             </Reveal>
             <div className="mt-14 grid grid-cols-1 gap-x-12 gap-y-10 sm:grid-cols-2 md:grid-cols-3">
               {home.features.map((f, i) => (
