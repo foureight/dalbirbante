@@ -78,15 +78,7 @@ export default async function DailyMenuPage() {
             <p className="mt-10 whitespace-nowrap text-[var(--muted)] max-md:overflow-x-auto max-md:whitespace-normal">
               {daily.note}
             </p>
-            <div className="mt-12 flex flex-wrap gap-4">
-              <Button asChild className="btn-green">
-                <a href={site.orderUrl} target="_blank" rel="noreferrer">
-                  {site.orderLabel}
-                </a>
-              </Button>
-              <Button asChild className="btn-brand">
-                <a href={site.phoneHref}>{site.callLabel}</a>
-              </Button>
+            <div className="mt-12">
               <Button
                 asChild
                 variant="outline"
