@@ -31,7 +31,7 @@ export function FooterGoodbye({
 
       <div className="relative flex h-[clamp(2.8rem,7vw,4.2rem)] items-center justify-center">
         <p
-          className={`absolute inset-x-0 font-display text-[clamp(2.4rem,6vw,3.75rem)] font-black uppercase leading-none tracking-wide text-white transition-all duration-700 ${
+          className={`absolute inset-x-0 whitespace-nowrap font-display text-[clamp(1.75rem,5.5vw,3.75rem)] font-black uppercase leading-none tracking-wide text-white transition-all duration-700 ${
             showItalian
               ? "translate-y-2 opacity-0"
               : "translate-y-0 opacity-100"
@@ -40,7 +40,7 @@ export function FooterGoodbye({
           {czech}
         </p>
         <p
-          className={`absolute inset-x-0 font-display text-[clamp(2.4rem,6vw,3.75rem)] font-black uppercase leading-none tracking-wide text-white transition-all duration-700 ${
+          className={`absolute inset-x-0 whitespace-nowrap font-display text-[clamp(1.75rem,5.5vw,3.75rem)] font-black uppercase leading-none tracking-wide text-white transition-all duration-700 ${
             showItalian
               ? "translate-y-0 opacity-100"
               : "-translate-y-2 opacity-0"
