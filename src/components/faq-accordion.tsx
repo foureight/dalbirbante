@@ -11,10 +11,11 @@ export function FaqAccordion({
 }) {
   return (
     <div className="relative z-[1] mt-6 divide-y divide-[var(--line)] border-y border-[var(--line)]">
-      {items.map((f) => (
+      {items.map((f, index) => (
         <details
           key={f.q}
           className="group"
+          open={index === 0 ? true : undefined}
           onToggle={(e) => {
             if (!e.currentTarget.open) return;
             const root = e.currentTarget.parentElement;
