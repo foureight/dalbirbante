@@ -153,7 +153,7 @@ export default async function HomePage() {
           </div>
         </section>
 
-        <section className="band-black">
+        <section className="band-green">
           <div className="band-inner grid items-start gap-14 md:grid-cols-2 md:gap-20">
             <Reveal>
               <h2 className="section-title-light">{home.deliveryTitle}</h2>
