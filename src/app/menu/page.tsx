@@ -5,6 +5,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { Button } from "@/components/ui/button";
 import { OrderButton } from "@/components/order-button";
+import { PageHero } from "@/components/page-hero";
 import { PageJsonLd } from "@/components/json-ld";
 import { Reveal } from "@/components/reveal";
 import { getPageSchema } from "@/lib/schema";
@@ -26,12 +27,15 @@ export default async function MenuPage() {
       <PageJsonLd data={getPageSchema("menu", content)} />
       <SiteHeader content={content} />
       <main className="flex-1">
+        <PageHero
+          title={menuPage.title}
+          image="/images/lifestyle-08.webp"
+          imageAlt="Neapolská pizza Dal Birbante"
+        />
+
         <section className="page-wrap pb-12 pt-16 md:pb-16 md:pt-24">
           <Reveal>
-            <h1 className="section-title text-[var(--brand-red)]">
-              {menuPage.title}
-            </h1>
-            <p className="mt-6 max-w-none text-justify text-[var(--muted)]">
+            <p className="max-w-none text-justify text-[var(--muted)]">
               {menuPage.intro}
             </p>
             <div className="mt-10 flex flex-wrap items-center gap-4">
@@ -49,7 +53,7 @@ export default async function MenuPage() {
           {menuCategories.map((cat, i) => (
             <Reveal key={cat.id} delay={(i % 3) * 60}>
               <section id={cat.id}>
-                <h2 className="border-b border-[var(--line)] pb-4 text-[var(--brand-red)]">
+                <h2 className="border-b border-[var(--line)] pb-4 text-[var(--brand-green)]">
                   {cat.name}
                 </h2>
                 <ul className="mt-8 divide-y divide-[var(--line)]">
@@ -95,14 +99,14 @@ export default async function MenuPage() {
           <Reveal>
             <section className="space-y-6 rounded-[6.4px] border border-[var(--line)] bg-[var(--paper-soft)] p-6 md:p-8">
               <div>
-                <h2 className="text-[var(--brand-red)]">{menuPage.extrasTitle}</h2>
+                <h2 className="text-[var(--brand-green)]">{menuPage.extrasTitle}</h2>
                 <p className="mt-2 text-[var(--muted)]">{menuPage.extrasText}</p>
               </div>
               <p className="font-medium text-[var(--brand-green)]">
                 {menuPage.glutenNote}
               </p>
               <div>
-                <h2 className="text-[var(--brand-red)]">
+                <h2 className="text-[var(--brand-green)]">
                   {menuPage.allergensTitle}
                 </h2>
                 <p className="mt-2 text-[var(--muted)]">{menuPage.allergensText}</p>

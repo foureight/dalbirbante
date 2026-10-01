@@ -5,6 +5,7 @@ import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { Button } from "@/components/ui/button";
 import { OrderButton } from "@/components/order-button";
+import { PageHero } from "@/components/page-hero";
 import { PageJsonLd } from "@/components/json-ld";
 import { Reveal } from "@/components/reveal";
 import { getPageSchema } from "@/lib/schema";
@@ -26,15 +27,24 @@ export default async function DailyMenuPage() {
       <PageJsonLd data={getPageSchema("daily", content)} />
       <SiteHeader content={content} />
       <main className="flex-1">
-        <section className="page-wrap py-24 md:py-36">
-          <Reveal>
-            <h1 className="section-title text-[var(--brand-red)]">
+        <PageHero
+          title={
+            <>
               {daily.title}
-              <span className="mt-3 block text-[var(--brand-green)] md:mt-0 md:ml-4 md:inline">
+              <span className="mt-3 block text-white md:mt-0 md:ml-4 md:inline">
                 {daily.date}
               </span>
-            </h1>
-            <p className="mt-6 max-w-none text-[var(--muted)]">{daily.intro}</p>
+            </>
+          }
+          image="/images/gallery/03.webp"
+          imageAlt="Denní menu Dal Birbante"
+        />
+
+        <section className="page-wrap py-24 md:py-36">
+          <Reveal>
+            <p className="max-w-none text-justify text-[var(--muted)]">
+              {daily.intro}
+            </p>
           </Reveal>
 
           <ul className="mt-14 divide-y divide-[var(--line)] border-y border-[var(--line)]">
@@ -43,9 +53,7 @@ export default async function DailyMenuPage() {
                 <li className="grid gap-5 py-8 sm:grid-cols-[1fr_auto] sm:items-center">
                   <div>
                     <h2 className="text-[clamp(1.35rem,2vw,1.75rem)] normal-case tracking-normal text-[var(--ink)]">
-                      <span className="font-black uppercase">
-                        {item.name}
-                      </span>
+                      <span className="font-black uppercase">{item.name}</span>
                       {item.emoji ? (
                         <span className="ml-2 font-normal" aria-hidden>
                           {item.emoji}

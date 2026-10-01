@@ -26,24 +26,22 @@ export default async function ContactPage() {
       <PageJsonLd data={getPageSchema("contact", content)} />
       <SiteHeader content={content} />
       <main className="flex-1">
-        <section className="relative overflow-hidden text-white">
-          <div className="absolute inset-0">
-            <Image
-              src="/images/kontakt-bg.webp"
-              alt=""
-              fill
-              priority
-              className="hero-pan object-cover"
-              sizes="100vw"
-            />
-            <div className="absolute inset-0 bg-black/60" />
-          </div>
-          <div className="site-max relative mx-auto w-full px-5 py-24 md:px-10 md:py-36">
+        <section className="relative min-h-[40vh] overflow-hidden text-white">
+          <Image
+            src="/images/kontakt-bg.webp"
+            alt=""
+            fill
+            priority
+            className="hero-pan object-cover"
+            sizes="100vw"
+          />
+          <div className="absolute inset-0 bg-black/50" />
+          <div className="site-max relative mx-auto flex min-h-[48vh] w-full flex-col justify-end px-5 pb-16 md:px-10 md:pb-20">
             <h1 className="animate-rise-delay text-white">{contact.title}</h1>
-            <p className="animate-rise-delay-2 mt-8 max-w-xl text-white/90">
+            <p className="animate-rise-delay-2 mt-6 max-w-3xl text-white/90">
               {contact.lead}
             </p>
-            <p className="animate-rise-delay-2 mt-5 max-w-xl text-white/80">
+            <p className="animate-rise-delay-2 mt-4 max-w-3xl text-white/80">
               {contact.openText}
             </p>
           </div>
@@ -54,7 +52,7 @@ export default async function ContactPage() {
             <Reveal>
               <div className="space-y-12">
                 <div>
-                  <h2 className="text-[var(--brand-red)]">{contact.hoursTitle}</h2>
+                  <h2 className="text-[var(--brand-green)]">{contact.hoursTitle}</h2>
                   <p className="mt-3 text-[var(--muted)]">
                     {site.hours}
                     <br />

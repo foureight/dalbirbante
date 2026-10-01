@@ -6,6 +6,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { Button } from "@/components/ui/button";
 import { PageJsonLd } from "@/components/json-ld";
 import { FaqAccordion } from "@/components/faq-accordion";
+import { PageHero } from "@/components/page-hero";
 import { Reveal } from "@/components/reveal";
 import { getFaqSchema, getPageSchema } from "@/lib/schema";
 
@@ -32,13 +33,20 @@ export default async function GlutenFreePage() {
       />
       <SiteHeader content={content} />
       <main className="flex-1">
-        <section className="page-wrap grid gap-14 py-24 md:grid-cols-2 md:gap-20 md:py-36">
+        <PageHero
+          title={glutenFree.title}
+          image="/images/burrata.webp"
+          imageAlt="Bezlepková pizza Dal Birbante Vinoř"
+        />
+
+        <section className="page-wrap grid gap-14 py-24 md:grid-cols-[1.1fr_0.9fr] md:gap-20 md:py-36">
           <Reveal>
-            <h1 className="section-title text-[var(--brand-red)]">
-              {glutenFree.title}
-            </h1>
-            <p className="section-lead">{glutenFree.intro}</p>
-            <p className="mt-6 text-[var(--muted)]">{glutenFree.intro2}</p>
+            <p className="max-w-none text-justify text-[var(--muted)]">
+              {glutenFree.intro}
+            </p>
+            <p className="mt-6 max-w-none text-justify text-[var(--muted)]">
+              {glutenFree.intro2}
+            </p>
 
             <h2 className="mt-14 text-[var(--brand-green)]">
               {glutenFree.howTitle}
@@ -65,7 +73,7 @@ export default async function GlutenFreePage() {
                 alt="Bezlepková pizza Dal Birbante Vinoř"
                 fill
                 className="img-zoom-media object-contain"
-                sizes="(max-width:768px) 100vw, 50vw"
+                sizes="(max-width:768px) 100vw, 40vw"
               />
             </div>
           </Reveal>
@@ -74,7 +82,7 @@ export default async function GlutenFreePage() {
         <section className="border-t border-[var(--line)] bg-[var(--paper-soft)]">
           <div className="page-wrap space-y-10 py-24 md:py-32">
             <Reveal className="pointer-events-auto">
-              <h2 className="text-[var(--brand-red)]">{glutenFree.faqTitle}</h2>
+              <h2 className="text-[var(--brand-green)]">{glutenFree.faqTitle}</h2>
               <FaqAccordion
                 items={glutenFree.faqs}
                 titleClassName="text-[var(--brand-red)]"

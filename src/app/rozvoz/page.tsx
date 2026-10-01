@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { PageJsonLd } from "@/components/json-ld";
 import { FaqAccordion } from "@/components/faq-accordion";
 import { DeliveryMap } from "@/components/delivery-map";
+import { PageHero } from "@/components/page-hero";
 import { Reveal } from "@/components/reveal";
 import { getFaqSchema, getPageSchema } from "@/lib/schema";
 
@@ -32,12 +33,15 @@ export default async function DeliveryPage() {
       />
       <SiteHeader content={content} />
       <main className="flex-1">
+        <PageHero
+          title={delivery.title}
+          image="/images/panozzo.webp"
+          imageAlt="Rozvoz jídla Dal Birbante"
+        />
+
         <section className="page-wrap py-24 md:py-36">
           <Reveal>
-            <h1 className="section-title text-[var(--brand-red)]">
-              {delivery.title}
-            </h1>
-            <p className="mt-6 max-w-none text-justify text-[var(--muted)]">
+            <p className="max-w-none text-justify text-[var(--muted)]">
               {delivery.intro}
             </p>
             <p className="mt-6 max-w-none text-justify text-[var(--muted)]">
