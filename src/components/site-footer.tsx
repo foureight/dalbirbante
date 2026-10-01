@@ -76,7 +76,7 @@ export function SiteFooter({ content }: { content: SiteContent }) {
               >
                 {site.email}
               </a>
-              <div className="mt-6 flex items-center justify-center gap-5">
+              <div className="mt-10 flex items-center justify-center gap-5 md:mt-12">
                 <a
                   href={site.facebookUrl}
                   target="_blank"
