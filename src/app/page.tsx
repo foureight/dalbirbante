@@ -63,7 +63,7 @@ export default async function HomePage() {
                 },
                 {
                   t: home.glutenFreeTitle,
-                  href: "/menu",
+                  href: "/menu#pasta",
                 },
               ].map((item) => (
                 <Link
@@ -116,12 +116,12 @@ export default async function HomePage() {
         </section>
 
         <section className="band-green">
-          <div className="band-inner grid gap-14 md:grid-cols-3 md:gap-12">
+          <div className="band-inner grid gap-14 md:grid-cols-3 md:gap-12 md:items-stretch">
             {[
               {
                 t: home.pizzaWeekTitle,
                 d: home.pizzaWeekText,
-                href: "/menu",
+                href: "/menu#pizza",
               },
               {
                 t: home.dailyMenuTitle,
@@ -131,20 +131,20 @@ export default async function HomePage() {
               {
                 t: home.glutenFreeTitle,
                 d: home.glutenFreeText,
-                href: "/menu",
+                href: "/menu#pasta",
               },
             ].map((block, i) => (
-              <Reveal key={block.t} delay={i * 100}>
-                <div className="border-t border-white/25 pt-8">
+              <Reveal key={block.t} delay={i * 100} className="h-full">
+                <div className="flex h-full flex-col border-t border-white/25 pt-8">
                   <h2>
                     <Link href={block.href} className="transition hover:opacity-90">
                       {block.t}
                     </Link>
                   </h2>
-                  <p className="mt-5 text-white/80">{block.d}</p>
+                  <p className="mt-5 flex-1 text-white/80">{block.d}</p>
                   <Link
                     href={block.href}
-                    className="band-link mt-6 inline-block font-semibold uppercase tracking-wide text-white hover:underline"
+                    className="btn-outline-light mt-8 inline-flex w-fit"
                   >
                     Více
                   </Link>
