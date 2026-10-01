@@ -81,7 +81,7 @@ export function AddressAutocomplete({
     setSuggestions([]);
   }
 
-  function onKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
+  function onKeyDown(e: KeyboardEvent<HTMLInputElement>) {
     if (!open || !suggestions.length) return;
     if (e.key === "ArrowDown") {
       e.preventDefault();
