@@ -113,14 +113,38 @@
     "whereTitle": "KDE JSME?",
     "featuresTitle": "U nás najdete",
     "features": [
-      "Rozvážíme",
-      "Platba kartou",
-      "Bereme stravenky",
-      "Vlastní parkoviště",
-      "Bezbariérové",
-      "Venkovní posezení",
-      "Bezplatná wi-fi",
-      "Mazlíčci vítáni"
+      {
+        "title": "Rozvážíme",
+        "text": "Pizza a italské speciality vám dovezeme až domů."
+      },
+      {
+        "title": "Platba kartou",
+        "text": "Zaplatíte u nás kartou i bezhotovostně."
+      },
+      {
+        "title": "Bereme stravenky",
+        "text": "Přijímáme stravenky a stravenkové karty."
+      },
+      {
+        "title": "Vlastní parkoviště",
+        "text": "Parkování máte přímo u pizzerie, bez hledání místa."
+      },
+      {
+        "title": "Bezbariérové",
+        "text": "Do bistra se pohodlně dostanete i s kočárkem nebo vozíkem."
+      },
+      {
+        "title": "Venkovní posezení",
+        "text": "V sezóně si pizzu užijete venku na terase."
+      },
+      {
+        "title": "Bezplatná wi-fi",
+        "text": "Připojení k internetu máte u nás zdarma."
+      },
+      {
+        "title": "Mazlíčci vítáni",
+        "text": "Se čtyřnohými kamarády jste u nás vítáni."
+      }
     ],
     "galleryTitle": "Fotogalerie",
     "gallerySubtitle": "Pizza z pece, panozzo a atmosféra našeho bistra."

@@ -183,10 +183,13 @@ export default async function HomePage() {
             </Reveal>
             <div className="mt-14 grid grid-cols-1 gap-x-10 gap-y-8 sm:grid-cols-2 md:grid-cols-4">
               {home.features.map((f, i) => (
-                <Reveal key={f} delay={60 * i}>
-                  <p className="feature-chip border-l-2 border-[var(--brand-red)] pl-5">
-                    {f}
-                  </p>
+                <Reveal key={f.title} delay={60 * i}>
+                  <div className="feature-chip border-l-2 border-[var(--brand-red)] pl-5">
+                    <p className="font-semibold text-[var(--ink)]">{f.title}</p>
+                    <p className="mt-2 text-[0.95rem] leading-snug text-[var(--muted)]">
+                      {f.text}
+                    </p>
+                  </div>
                 </Reveal>
               ))}
             </div>

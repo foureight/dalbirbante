@@ -298,12 +298,22 @@ export function AdminClient({ initial, authenticated }: Props) {
           <div className="space-y-3 border border-[var(--line)] bg-white/60 p-4">
             <p className="text-sm font-medium">Výhody / features</p>
             {h.features.map((item, i) => (
-              <Field
-                key={i}
-                label={`Feature ${i + 1}`}
-                value={item}
-                onChange={(v) => updateAt(["home", "features", String(i)], v)}
-              />
+              <div key={i} className="space-y-2 border-t border-[var(--line)] pt-3">
+                <Field
+                  label={`Název ${i + 1}`}
+                  value={item.title}
+                  onChange={(v) =>
+                    updateAt(["home", "features", String(i), "title"], v)
+                  }
+                />
+                <Field
+                  label={`Text ${i + 1}`}
+                  value={item.text}
+                  onChange={(v) =>
+                    updateAt(["home", "features", String(i), "text"], v)
+                  }
+                />
+              </div>
             ))}
           </div>
         </div>

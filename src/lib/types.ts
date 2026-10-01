@@ -94,7 +94,7 @@ export type SiteContent = {
     hoursTitle: string;
     whereTitle: string;
     featuresTitle: string;
-    features: string[];
+    features: { title: string; text: string }[];
     galleryTitle: string;
     gallerySubtitle: string;
   };
