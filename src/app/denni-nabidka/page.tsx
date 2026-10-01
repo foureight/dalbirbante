@@ -28,7 +28,7 @@ export default async function DailyMenuPage() {
         <section className="page-wrap py-24 md:py-36">
           <Reveal>
             <h1 className="section-title text-[var(--brand-red)]">{daily.title}</h1>
-            <p className="section-lead">{daily.intro}</p>
+            <p className="mt-6 max-w-none text-[var(--muted)]">{daily.intro}</p>
             <div className="mt-10 flex flex-wrap items-baseline gap-x-6 gap-y-2">
               <p className="text-2xl font-black uppercase tracking-wide text-[var(--brand-green)] md:text-3xl">
                 {daily.date}
