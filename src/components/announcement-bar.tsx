@@ -70,8 +70,8 @@ export function AnnouncementBar({ message }: { message: string }) {
         closed ? "bg-[var(--brand-red)]" : "bg-[var(--brand-green)]"
       }`}
     >
-      <div className="site-max mx-auto flex w-full items-center justify-center gap-4 px-5 py-3 pr-12 md:px-10 md:pr-14">
-        <p className="text-center text-sm font-semibold uppercase tracking-[0.12em] md:text-base">
+      <div className="site-max mx-auto flex w-full items-center gap-4 px-5 py-3 pr-12 md:px-10 md:pr-14">
+        <p className="text-left text-sm font-semibold uppercase tracking-[0.12em] md:text-base">
           {activeMessage}
         </p>
       </div>
