@@ -6,6 +6,7 @@ import { SiteFooter } from "@/components/site-footer";
 import { ContactForm } from "@/components/contact-form";
 import { DeliveryMap } from "@/components/delivery-map";
 import { Reveal } from "@/components/reveal";
+import { FeatureIcon } from "@/components/feature-icon";
 import { Button } from "@/components/ui/button";
 
 const gallery = [
@@ -181,14 +182,17 @@ export default async function HomePage() {
             <Reveal>
               <h2 className="section-title text-center">{home.featuresTitle}</h2>
             </Reveal>
-            <div className="mt-14 grid grid-cols-1 gap-x-10 gap-y-8 sm:grid-cols-2 md:grid-cols-4">
+            <div className="mt-14 grid grid-cols-1 gap-x-12 gap-y-10 sm:grid-cols-2 md:grid-cols-3">
               {home.features.map((f, i) => (
                 <Reveal key={f.title} delay={60 * i}>
-                  <div className="feature-chip border-l-2 border-[var(--brand-red)] pl-5">
-                    <p className="font-semibold text-[var(--ink)]">{f.title}</p>
-                    <p className="mt-2 text-[0.95rem] leading-snug text-[var(--muted)]">
-                      {f.text}
-                    </p>
+                  <div className="feature-chip flex items-start gap-4">
+                    <FeatureIcon title={f.title} />
+                    <div>
+                      <p className="font-semibold text-[var(--ink)]">{f.title}</p>
+                      <p className="mt-2 text-[0.95rem] leading-snug text-[var(--muted)]">
+                        {f.text}
+                      </p>
+                    </div>
                   </div>
                 </Reveal>
               ))}
