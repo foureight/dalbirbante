@@ -3,6 +3,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
+import { Button } from "@/components/ui/button";
 import { AnnouncementBar } from "@/components/announcement-bar";
 import type { SiteContent } from "@/lib/types";
 
