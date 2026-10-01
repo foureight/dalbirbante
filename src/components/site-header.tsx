@@ -36,19 +36,19 @@ export function SiteHeader({ content }: { content: SiteContent }) {
                 {l.label}
               </Link>
             ))}
-            <div className="ml-1 flex items-center gap-0">
+            <div className="ml-1 flex items-center -space-x-1">
               <a
                 href={site.instagramUrl}
                 target="_blank"
                 rel="noreferrer"
                 aria-label="Instagram"
-                className="inline-flex size-9 items-center justify-center text-[var(--ink)] transition hover:text-[var(--brand-red)]"
+                className="inline-flex size-12 items-center justify-center text-[var(--ink)] transition hover:text-[var(--brand-red)]"
               >
                 <Image
                   src="/icons/instagram.svg"
                   alt=""
-                  width={32}
-                  height={32}
+                  width={48}
+                  height={48}
                 />
               </a>
               <a
@@ -56,13 +56,13 @@ export function SiteHeader({ content }: { content: SiteContent }) {
                 target="_blank"
                 rel="noreferrer"
                 aria-label="Facebook"
-                className="inline-flex size-9 items-center justify-center text-[var(--ink)] transition hover:text-[var(--brand-red)]"
+                className="inline-flex size-12 items-center justify-center text-[var(--ink)] transition hover:text-[var(--brand-red)]"
               >
                 <Image
                   src="/icons/facebook.svg"
                   alt=""
-                  width={32}
-                  height={32}
+                  width={48}
+                  height={48}
                 />
               </a>
             </div>
