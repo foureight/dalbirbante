@@ -11,9 +11,26 @@ npm run dev -- --port 43123
 
 Otevřete [http://127.0.0.1:43123](http://127.0.0.1:43123).
 
+## Objednávky, košík a Stripe
+
+- V menu u pizzy: **Do košíku** → výběr klasická / bezlepková (+99 Kč) → checkboxy přísad → košík
+- Košík v hlavičce (ikona před Kontakt)
+- Platba kartou přes **Stripe** (Payment Element)
+- Fronta v restauraci: [/admin/objednavky](http://127.0.0.1:43123/admin/objednavky) — tisk kuchyňského lístku
+
+Do `.env.local` doplňte Stripe klíče:
+
+```bash
+STRIPE_SECRET_KEY=sk_test_...
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_...
+```
+
+Bez klíčů běží testovací platba (mock), objednávka se stejně uloží do `data/orders.json` a objeví se ve frontě.
+
 ## Administrace textů
 
 - Adresa: [/admin](http://127.0.0.1:43123/admin)
+- Fronta objednávek: [/admin/objednavky](http://127.0.0.1:43123/admin/objednavky)
 - Výchozí heslo: `dalbirbante`
 
 Heslo a tajný klíč session můžete změnit přes prostředí:

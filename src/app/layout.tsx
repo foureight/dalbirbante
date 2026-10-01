@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { getContent } from "@/lib/content";
 import { JsonLd } from "@/components/json-ld";
+import { Providers } from "@/components/providers";
 import "./globals.css";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -43,7 +44,9 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
         />
         <JsonLd content={content} />
       </head>
-      <body className="min-h-full flex flex-col font-sans">{children}</body>
+      <body className="min-h-full flex flex-col font-sans">
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }

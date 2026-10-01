@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { getContent } from "@/lib/content";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
-import { OrderButton } from "@/components/order-button";
+import { AddToCartButton } from "@/components/add-to-cart-button";
 import { PageHero } from "@/components/page-hero";
 import { PageJsonLd } from "@/components/json-ld";
 import { Reveal } from "@/components/reveal";
@@ -78,7 +78,12 @@ export default async function MenuPage() {
                         <p className="text-3xl font-black leading-none text-[var(--brand-red)] md:text-4xl">
                           {item.price}
                         </p>
-                        <OrderButton href={site.orderUrl} />
+                        <AddToCartButton
+                          name={item.name}
+                          price={item.price}
+                          image={item.image}
+                          categoryId={cat.id}
+                        />
                       </div>
                     </li>
                   ))}

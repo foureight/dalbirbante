@@ -6,10 +6,31 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { AnnouncementBar } from "@/components/announcement-bar";
 import { BrandLogo } from "@/components/brand-logo";
+import { useCart } from "@/components/cart-provider";
 import type { SiteContent } from "@/lib/types";
+
+function CartIcon({ className = "size-8" }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className={className}
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.8"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      aria-hidden
+    >
+      <circle cx="9" cy="20" r="1.4" />
+      <circle cx="17" cy="20" r="1.4" />
+      <path d="M3 4h2l1.4 9.2a1.6 1.6 0 0 0 1.6 1.3h8.7a1.6 1.6 0 0 0 1.6-1.2L20 7H6.2" />
+    </svg>
+  );
+}
 
 export function SiteHeader({ content }: { content: SiteContent }) {
   const [open, setOpen] = useState(false);
+  const { count, setOpen: setCartOpen } = useCart();
   const { site, nav } = content;
 
   const links = [
@@ -66,58 +87,40 @@ export function SiteHeader({ content }: { content: SiteContent }) {
                 />
               </a>
             </div>
-            <a
-              href={site.orderUrl}
-              target="_blank"
-              rel="noreferrer"
+            <button
+              type="button"
               aria-label={site.orderLabel}
               title={site.orderLabel}
-              className="nav-cart inline-flex size-12 items-center justify-center text-[var(--ink)] transition hover:text-[var(--brand-red)]"
+              onClick={() => setCartOpen(true)}
+              className="nav-cart relative inline-flex size-12 items-center justify-center text-[var(--ink)] transition hover:text-[var(--brand-red)]"
             >
-              <svg
-                viewBox="0 0 24 24"
-                className="size-8"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.8"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden
-              >
-                <circle cx="9" cy="20" r="1.4" />
-                <circle cx="17" cy="20" r="1.4" />
-                <path d="M3 4h2l1.4 9.2a1.6 1.6 0 0 0 1.6 1.3h8.7a1.6 1.6 0 0 0 1.6-1.2L20 7H6.2" />
-              </svg>
-            </a>
+              <CartIcon className="size-8" />
+              {count > 0 ? (
+                <span className="absolute right-0.5 top-0.5 inline-flex min-w-5 items-center justify-center rounded-full bg-[var(--brand-red)] px-1 text-[11px] font-bold leading-5 text-white">
+                  {count}
+                </span>
+              ) : null}
+            </button>
             <Button asChild className="btn-green">
               <Link href="/kontakt">{nav.contact}</Link>
             </Button>
           </nav>
 
           <div className="flex items-center gap-1 lg:hidden">
-            <a
-              href={site.orderUrl}
-              target="_blank"
-              rel="noreferrer"
+            <button
+              type="button"
               aria-label={site.orderLabel}
               title={site.orderLabel}
-              className="nav-cart inline-flex size-10 items-center justify-center text-[var(--ink)] transition hover:text-[var(--brand-red)]"
+              onClick={() => setCartOpen(true)}
+              className="nav-cart relative inline-flex size-10 items-center justify-center text-[var(--ink)] transition hover:text-[var(--brand-red)]"
             >
-              <svg
-                viewBox="0 0 24 24"
-                className="size-7"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.8"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden
-              >
-                <circle cx="9" cy="20" r="1.4" />
-                <circle cx="17" cy="20" r="1.4" />
-                <path d="M3 4h2l1.4 9.2a1.6 1.6 0 0 0 1.6 1.3h8.7a1.6 1.6 0 0 0 1.6-1.2L20 7H6.2" />
-              </svg>
-            </a>
+              <CartIcon className="size-7" />
+              {count > 0 ? (
+                <span className="absolute right-0 top-0 inline-flex min-w-5 items-center justify-center rounded-full bg-[var(--brand-red)] px-1 text-[11px] font-bold leading-5 text-white">
+                  {count}
+                </span>
+              ) : null}
+            </button>
             <button
               type="button"
               className="inline-flex h-10 w-10 items-center justify-center text-[var(--ink)]"
@@ -148,15 +151,17 @@ export function SiteHeader({ content }: { content: SiteContent }) {
                   {l.label}
                 </Link>
               ))}
-              <a
-                href={site.orderUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="font-semibold text-[var(--brand-green)]"
-                onClick={() => setOpen(false)}
+              <button
+                type="button"
+                className="text-left font-semibold text-[var(--brand-green)]"
+                onClick={() => {
+                  setOpen(false);
+                  setCartOpen(true);
+                }}
               >
                 {site.orderLabel}
-              </a>
+                {count > 0 ? ` (${count})` : ""}
+              </button>
               <Link
                 href="/kontakt"
                 className="btn-green inline-flex w-fit"

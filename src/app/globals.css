@@ -819,3 +819,81 @@
   background: var(--brand-green);
   color: #fff;
 }
+
+.kitchen-ticket {
+  width: 80mm;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 8mm 6mm;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 12px;
+  line-height: 1.35;
+  color: #000;
+  background: #fff;
+}
+
+.kitchen-ticket__brand {
+  font-size: 18px;
+  font-weight: 800;
+  text-align: center;
+  letter-spacing: 0.04em;
+}
+
+.kitchen-ticket__sub {
+  text-align: center;
+  margin-top: 2px;
+  margin-bottom: 8px;
+}
+
+.kitchen-ticket__rule {
+  border-top: 1px dashed #000;
+  margin: 8px 0;
+}
+
+.kitchen-ticket__row {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.kitchen-ticket__strong {
+  font-weight: 800;
+}
+
+.kitchen-ticket__items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.kitchen-ticket__item + .kitchen-ticket__item {
+  margin-top: 6px;
+}
+
+.kitchen-ticket__note {
+  margin-top: 6px;
+  font-weight: 700;
+}
+
+.kitchen-ticket__footer {
+  margin-top: 12px;
+  text-align: center;
+  font-size: 11px;
+}
+
+@media print {
+  body * {
+    visibility: hidden !important;
+  }
+
+  .kitchen-ticket,
+  .kitchen-ticket * {
+    visibility: visible !important;
+  }
+
+  .kitchen-ticket {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}

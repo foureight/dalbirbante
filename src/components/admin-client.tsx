@@ -515,6 +515,9 @@ export function AdminClient({ initial, authenticated }: Props) {
             </p>
           </div>
           <div className="flex gap-2">
+            <Button asChild variant="outline" className="rounded-full">
+              <a href="/admin/objednavky">Fronta objednávek</a>
+            </Button>
             <Button
               onClick={save}
               disabled={saving}
