@@ -105,11 +105,14 @@ export function detectDeliveryZoneFromAddress(address: string) {
 
 export function calcOrderFees(input: {
   itemsTotal: number;
+  itemCount: number;
   fulfillment: "pickup" | "delivery";
   deliveryZoneId?: string | null;
   customerAddress?: string | null;
 }) {
-  const packagingFee = input.itemsTotal > 0 ? PACKAGING_FEE : 0;
+  const count = Math.max(0, Math.floor(input.itemCount));
+  // Balení 15 Kč za každé jídlo (kus).
+  const packagingFee = count > 0 ? PACKAGING_FEE * count : 0;
 
   // Cena dopravy se počítá výhradně z obce v adrese doručení.
   const zone =
@@ -122,6 +125,8 @@ export function calcOrderFees(input: {
 
   return {
     packagingFee,
+    packagingCount: count,
+    packagingUnit: PACKAGING_FEE,
     deliveryFee,
     deliveryZone: zone,
     total,

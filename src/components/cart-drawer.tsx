@@ -10,7 +10,7 @@ import {
 } from "@stripe/react-stripe-js";
 import { useCart } from "@/components/cart-provider";
 import { formatPrice } from "@/lib/money";
-import { calcOrderFees, PACKAGING_FEE } from "@/lib/order-fees";
+import { calcOrderFees } from "@/lib/order-fees";
 import { AddressAutocomplete } from "@/components/address-autocomplete";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -135,10 +135,11 @@ export function CartDrawer() {
     () =>
       calcOrderFees({
         itemsTotal: total,
+        itemCount: count,
         fulfillment,
         customerAddress,
       }),
-    [total, fulfillment, customerAddress],
+    [total, count, fulfillment, customerAddress],
   );
 
   useEffect(() => {
@@ -420,8 +421,13 @@ export function CartDrawer() {
                   <span>{formatPrice(total)}</span>
                 </div>
                 <div className="flex justify-between gap-3">
-                  <span>Balení</span>
-                  <span>{formatPrice(fees.packagingFee || PACKAGING_FEE)}</span>
+                  <span>
+                    Balení
+                    {fees.packagingCount > 1
+                      ? ` (${fees.packagingCount}× ${formatPrice(fees.packagingUnit)})`
+                      : ""}
+                  </span>
+                  <span>{formatPrice(fees.packagingFee)}</span>
                 </div>
                 <div className="flex justify-between gap-3">
                   <span>

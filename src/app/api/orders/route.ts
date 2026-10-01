@@ -54,8 +54,10 @@ export async function POST(request: Request) {
       qty: Number(i.qty),
     }));
     const itemsTotal = normalized.reduce((s, i) => s + i.unitPrice * i.qty, 0);
+    const itemCount = normalized.reduce((s, i) => s + i.qty, 0);
     const fees = calcOrderFees({
       itemsTotal,
+      itemCount,
       fulfillment,
       deliveryZoneId,
       customerAddress,

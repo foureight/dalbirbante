@@ -152,7 +152,11 @@ export function AdminOrdersClient({ authenticated }: { authenticated: boolean })
                   </li>
                 ))}
                 <li>
-                  Balení{" "}
+                  Balení
+                  {(() => {
+                    const pieces = order.items.reduce((s, i) => s + i.qty, 0);
+                    return pieces > 1 ? ` (${pieces}×)` : "";
+                  })()}{" "}
                   <span className="text-[var(--muted)]">
                     ({formatPrice(order.packagingFee ?? 0)})
                   </span>

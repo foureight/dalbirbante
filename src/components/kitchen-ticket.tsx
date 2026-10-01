@@ -41,7 +41,13 @@ export function KitchenTicket({ order }: { order: Order }) {
       </ul>
       <div className="kitchen-ticket__rule" />
       <div className="kitchen-ticket__row">
-        <span>Balení</span>
+        <span>
+          Balení
+          {(() => {
+            const pieces = order.items.reduce((s, i) => s + i.qty, 0);
+            return pieces > 1 ? ` (${pieces}×)` : "";
+          })()}
+        </span>
         <span>{formatPrice(order.packagingFee ?? 0)}</span>
       </div>
       <div className="kitchen-ticket__row">
