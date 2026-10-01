@@ -64,7 +64,10 @@ export default async function MenuPage() {
                           />
                         </div>
                       ) : (
-                        <div className="hidden h-24 w-24 sm:block" />
+                        <div
+                          className="h-20 w-20 shrink-0 rounded-full bg-[#d9d9d9] sm:h-24 sm:w-24"
+                          aria-hidden
+                        />
                       )}
                       <div>
                         <h3>{item.name}</h3>
