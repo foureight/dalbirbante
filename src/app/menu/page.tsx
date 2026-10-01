@@ -80,10 +80,7 @@ export default async function MenuPage() {
                         <p className="text-3xl font-black leading-none text-[var(--brand-red)] md:text-4xl">
                           {item.price}
                         </p>
-                        <Button
-                          asChild
-                          className="btn-green !px-6 !py-3 !text-base"
-                        >
+                        <Button asChild className="btn-green">
                           <a
                             href={site.orderUrl}
                             target="_blank"
