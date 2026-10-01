@@ -37,8 +37,12 @@ export default async function DeliveryPage() {
             <h1 className="section-title text-[var(--brand-red)]">
               {delivery.title}
             </h1>
-            <p className="section-lead">{delivery.intro}</p>
-            <p className="mt-6 max-w-3xl text-[var(--muted)]">{delivery.intro2}</p>
+            <p className="mt-6 max-w-none text-justify text-[var(--muted)]">
+              {delivery.intro}
+            </p>
+            <p className="mt-6 max-w-none text-justify text-[var(--muted)]">
+              {delivery.intro2}
+            </p>
           </Reveal>
 
           <Reveal delay={80}>
