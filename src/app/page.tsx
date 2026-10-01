@@ -30,6 +30,9 @@ export default async function HomePage() {
 
   return (
     <>
+      <PageJsonLd
+        data={getFaqSchema("https://www.dalbirbante.cz/#faq", home.faqs)}
+      />
       <SiteHeader content={content} />
       <main className="flex-1">
         <section className="relative min-h-[75svh] overflow-hidden text-white md:min-h-[90svh]">
@@ -240,6 +243,18 @@ export default async function HomePage() {
                 </div>
               </Reveal>
             ))}
+          </div>
+        </section>
+
+        <section
+          id="faq"
+          className="w-full border-t border-[var(--line)] bg-[var(--paper-soft)] px-5 py-16 md:px-10 md:py-24"
+        >
+          <div className="site-max mx-auto w-full">
+            <Reveal className="pointer-events-auto">
+              <h2 className="text-[var(--brand-green)]">{home.faqTitle}</h2>
+              <FaqAccordion items={home.faqs} />
+            </Reveal>
           </div>
         </section>
 
