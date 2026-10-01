@@ -76,7 +76,7 @@ export default async function MenuPage() {
                           </p>
                         ) : null}
                       </div>
-                      <div className="flex flex-col items-start gap-3 sm:items-end">
+                      <div className="flex shrink-0 flex-wrap items-center gap-4 sm:justify-end">
                         <p className="text-3xl font-black leading-none text-[var(--brand-red)] md:text-4xl">
                           {item.price}
                         </p>
