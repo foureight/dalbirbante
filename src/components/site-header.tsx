@@ -75,6 +75,12 @@ export function SiteHeader({ content }: { content: SiteContent }) {
                 />
               </a>
             </div>
+            <Button
+              asChild
+              className="btn-green !min-w-0 !px-5 !py-3 !text-base"
+            >
+              <a href={site.phoneHref}>{site.callLabel}</a>
+            </Button>
           </nav>
 
           <button
@@ -106,6 +112,12 @@ export function SiteHeader({ content }: { content: SiteContent }) {
                   {l.label}
                 </Link>
               ))}
+              <a
+                href={site.phoneHref}
+                className="btn-green inline-flex w-fit !min-w-0 !px-5 !py-3 !text-base"
+              >
+                {site.callLabel}
+              </a>
             </div>
           </div>
         )}
