@@ -92,7 +92,7 @@ export function SiteHeader({ content }: { content: SiteContent }) {
               aria-label={site.orderLabel}
               title={site.orderLabel}
               onClick={() => setCartOpen(true)}
-              className="nav-cart relative inline-flex size-12 items-center justify-center text-[var(--ink)] transition hover:text-[var(--brand-red)]"
+              className="nav-cart relative inline-flex size-12 items-center justify-center text-[var(--ink)] transition hover:text-[var(--brand-green)]"
             >
               <CartIcon className="size-8" />
               {count > 0 ? (
@@ -112,7 +112,7 @@ export function SiteHeader({ content }: { content: SiteContent }) {
               aria-label={site.orderLabel}
               title={site.orderLabel}
               onClick={() => setCartOpen(true)}
-              className="nav-cart relative inline-flex size-10 items-center justify-center text-[var(--ink)] transition hover:text-[var(--brand-red)]"
+              className="nav-cart relative inline-flex size-10 items-center justify-center text-[var(--ink)] transition hover:text-[var(--brand-green)]"
             >
               <CartIcon className="size-7" />
               {count > 0 ? (
