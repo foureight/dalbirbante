@@ -320,7 +320,9 @@ export function AdminClient({ initial, authenticated }: Props) {
             ))}
           </div>
           <div className="space-y-3 border border-[var(--line)] bg-white/60 p-4">
-            <p className="text-sm font-medium">Výhody / features</p>
+            <p className="text-base font-extrabold text-[var(--brand-red)]">
+              Výhody / features
+            </p>
             {h.features.map((item, i) => (
               <div key={i} className="space-y-2 border-t border-[var(--line)] pt-3">
                 <Field
@@ -493,7 +495,9 @@ export function AdminClient({ initial, authenticated }: Props) {
             ) : null,
           )}
           <div className="space-y-3 border border-[var(--line)] bg-white/60 p-4">
-            <p className="text-sm font-medium">Jak připravujeme</p>
+            <p className="text-base font-extrabold text-[var(--brand-red)]">
+              Jak připravujeme
+            </p>
             {content.glutenFree.howItems.map((item, i) => (
               <Field
                 key={i}
