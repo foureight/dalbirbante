@@ -48,33 +48,6 @@ export default async function HomePage() {
                 <Link href="/menu">{home.menuCta}</Link>
               </Button>
             </div>
-            <nav
-              aria-label="Rychlé odkazy"
-              className="animate-rise-delay-2 mt-14 grid gap-6 border-t border-white/25 pt-8 sm:grid-cols-3 sm:gap-8"
-            >
-              {[
-                {
-                  t: home.pizzaWeekTitle,
-                  href: "/menu",
-                },
-                {
-                  t: home.dailyMenuTitle,
-                  href: "/denni-nabidka",
-                },
-                {
-                  t: home.glutenFreeTitle,
-                  href: "/menu#pasta",
-                },
-              ].map((item) => (
-                <Link
-                  key={item.t}
-                  href={item.href}
-                  className="text-sm font-extrabold uppercase tracking-wide text-white underline-offset-4 transition hover:underline md:text-base"
-                >
-                  {item.t}
-                </Link>
-              ))}
-            </nav>
           </div>
         </section>
 
