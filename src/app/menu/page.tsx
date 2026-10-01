@@ -30,7 +30,9 @@ export default async function MenuPage() {
             <h1 className="section-title text-[var(--brand-red)]">
               {menuPage.title}
             </h1>
-            <p className="section-lead">{menuPage.intro}</p>
+            <p className="mt-6 max-w-none text-justify text-[var(--muted)]">
+              {menuPage.intro}
+            </p>
             <div className="mt-10 flex flex-wrap items-center gap-4">
               <Button asChild className="btn-green">
                 <a href={site.orderUrl} target="_blank" rel="noreferrer">
