@@ -36,7 +36,7 @@ export function SiteHeader({ content }: { content: SiteContent }) {
                 {l.label}
               </Link>
             ))}
-            <div className="ml-1 flex items-center -space-x-1">
+            <div className="ml-1 flex items-center -space-x-4">
               <a
                 href={site.instagramUrl}
                 target="_blank"
