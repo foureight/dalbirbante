@@ -62,13 +62,13 @@ export default async function DeliveryPage() {
             </table>
           </div>
 
-          <div className="relative mt-10 aspect-[2/1] max-w-3xl overflow-hidden rounded-[6.4px] border border-[var(--line)]">
+          <div className="relative mt-10 aspect-[2/1] w-full overflow-hidden rounded-[6.4px] border border-[var(--line)]">
             <Image
               src="/images/zony.webp"
               alt="Mapa rozvozových zón Dal Birbante"
               fill
               className="object-contain bg-white"
-              sizes="(max-width:768px) 100vw, 700px"
+              sizes="100vw"
             />
           </div>
 
@@ -77,9 +77,13 @@ export default async function DeliveryPage() {
               {site.orderLabel}
             </a>
           </Button>
+        </section>
 
-          <h2 className="mt-16 text-[var(--brand-red)]">{delivery.faqTitle}</h2>
-          <FaqAccordion items={delivery.faqs} />
+        <section className="w-full border-t border-[var(--line)] bg-[var(--paper-soft)] px-5 py-16 md:px-10 md:py-24">
+          <div className="mx-auto w-full max-w-7xl">
+            <h2 className="text-[var(--brand-red)]">{delivery.faqTitle}</h2>
+            <FaqAccordion items={delivery.faqs} />
+          </div>
         </section>
       </main>
       <SiteFooter content={content} />
