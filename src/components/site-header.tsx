@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { AnnouncementBar } from "@/components/announcement-bar";
+import { BrandLogo } from "@/components/brand-logo";
 import type { SiteContent } from "@/lib/types";
 
 export function SiteHeader({ content }: { content: SiteContent }) {
@@ -23,16 +24,7 @@ export function SiteHeader({ content }: { content: SiteContent }) {
       <AnnouncementBar message={site.announcement} />
       <div className="border-b border-[var(--line)] bg-white">
         <div className="site-max mx-auto flex w-full items-center justify-between gap-6 px-5 py-5 md:px-10 md:py-6">
-          <Link href="/" className="flex items-center">
-            <Image
-              src="/images/logo.webp"
-              alt={site.brandName}
-              width={320}
-              height={40}
-              className="h-9 w-auto object-contain md:h-11"
-              priority
-            />
-          </Link>
+          <BrandLogo brandName={site.brandName} />
 
           <nav className="nav-menu hidden items-center gap-3 text-[var(--ink)] lg:flex xl:gap-4">
             {links.map((l) => (
