@@ -110,6 +110,7 @@ export type SiteContent = {
   menuPage: {
     title: string;
     intro: string;
+    doughChoiceNote: string;
     orderNote: string;
     allergensTitle: string;
     allergensText: string;

@@ -52,10 +52,21 @@ export default async function MenuPage() {
           imageAlt="Neapolská pizza Dal Birbante"
         />
 
-        <section className="page-wrap pb-8 pt-10 md:pb-16 md:pt-24">
+        <section className="page-wrap space-y-5 pb-8 pt-10 md:space-y-6 md:pb-16 md:pt-24">
           <Reveal>
             <p className="max-w-none text-left text-base leading-relaxed text-[var(--muted)] sm:text-lg md:text-2xl md:leading-relaxed">
               {menuPage.intro}
+            </p>
+          </Reveal>
+          <Reveal delay={60}>
+            <p className="rounded-[6.4px] border border-[var(--brand-green)]/25 bg-[var(--brand-green)]/8 px-4 py-3 text-left text-base font-medium leading-relaxed text-[var(--brand-green-deep)] sm:px-5 sm:py-4 sm:text-lg md:text-xl">
+              {menuPage.doughChoiceNote}{" "}
+              <a
+                href="/bezlepkova-pizza-vinor"
+                className="underline decoration-[var(--brand-green)] underline-offset-4 transition hover:opacity-80"
+              >
+                Více o bezlepkové nabídce
+              </a>
             </p>
           </Reveal>
         </section>

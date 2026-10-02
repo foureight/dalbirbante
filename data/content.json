@@ -227,7 +227,8 @@
         "q": "Kde najdu alergeny k jídlům?",
         "a": "Seznam alergenů je přímo na této stránce pod nabídkou. Pokud máte alergii nebo intoleranci, upozorněte nás prosím při objednávce — rádi poradíme s výběrem."
       }
-    ]
+    ],
+    "doughChoiceNote": "Při přidání pizzy nebo pasty do košíku si vyberete, jestli chcete klasickou, nebo bezlepkovou variantu. Bezlepková pizza +99 Kč, bezlepková pasta / gnocchi / lasagne +29 Kč."
   },
   "menuCategories": [
     {

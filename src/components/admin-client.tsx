@@ -665,6 +665,7 @@ export function AdminClient({ initial, authenticated }: Props) {
               [
                 ["title", "Titulek"],
                 ["intro", "Úvod"],
+                ["doughChoiceNote", "Poznámka klasická / bezlepková"],
                 ["extrasTitle", "Nadpis přídavků"],
                 ["extrasText", "Text přídavků"],
                 ["glutenNote", "Poznámka bez lepku"],
