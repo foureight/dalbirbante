@@ -85,9 +85,9 @@ export default async function MenuPage() {
                             <Image
                               src="/images/menu/drink-can.svg"
                               alt=""
-                              width={56}
-                              height={56}
-                              className="pointer-events-none select-none"
+                              width={88}
+                              height={88}
+                              className="pointer-events-none h-[78%] w-[78%] select-none object-contain sm:h-[82%] sm:w-[82%]"
                               aria-hidden
                             />
                           )}
