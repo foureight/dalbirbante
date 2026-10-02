@@ -252,26 +252,108 @@ export function AdminClient({ initial, authenticated }: Props) {
                           multiline
                         />
                       </div>
-                      {"image" in item && item.image !== undefined ? (
-                        <div className="md:col-span-2">
-                          <Field
-                            label="Cesta k obrázku"
-                            value={item.image || ""}
-                            onChange={(v) =>
-                              updateAt(
-                                [
-                                  "menuCategories",
-                                  String(ci),
-                                  "items",
-                                  String(ii),
-                                  "image",
-                                ],
-                                v,
-                              )
-                            }
-                          />
+                      <div className="md:col-span-2 space-y-3 rounded-[6.4px] border border-[var(--line)] bg-white p-3">
+                        <div className="flex flex-wrap items-start gap-4">
+                          <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-full bg-[#f3f3f3]">
+                            {item.image ? (
+                              // eslint-disable-next-line @next/next/no-img-element
+                              <img
+                                src={item.image}
+                                alt=""
+                                className="h-full w-full object-contain p-1"
+                              />
+                            ) : (
+                              <span className="grid h-full place-items-center text-xs text-[var(--muted)]">
+                                bez fotky
+                              </span>
+                            )}
+                          </div>
+                          <div className="min-w-0 flex-1 space-y-3">
+                            <Field
+                              label="Fotka (cesta nebo URL)"
+                              value={item.image || ""}
+                              onChange={(v) =>
+                                updateAt(
+                                  [
+                                    "menuCategories",
+                                    String(ci),
+                                    "items",
+                                    String(ii),
+                                    "image",
+                                  ],
+                                  v,
+                                )
+                              }
+                              hint="Např. /images/menu/lemonsoda.webp — po nahrání se vyplní samo."
+                            />
+                            <div className="flex flex-wrap items-center gap-2">
+                              <label className="inline-flex cursor-pointer items-center rounded-full border border-[var(--line)] bg-[var(--paper-soft)] px-4 py-2 text-sm font-medium transition hover:border-[var(--brand-green)]">
+                                Nahrát fotku
+                                <input
+                                  type="file"
+                                  accept="image/jpeg,image/png,image/webp,image/gif"
+                                  className="sr-only"
+                                  onChange={async (e) => {
+                                    const file = e.target.files?.[0];
+                                    e.target.value = "";
+                                    if (!file) return;
+                                    setError(null);
+                                    const body = new FormData();
+                                    body.append("file", file);
+                                    const res = await fetch("/api/admin/upload", {
+                                      method: "POST",
+                                      body,
+                                    });
+                                    const data = (await res.json().catch(() => ({}))) as {
+                                      path?: string;
+                                      error?: string;
+                                    };
+                                    if (!res.ok || !data.path) {
+                                      setError(
+                                        data.error || "Nahrání fotky selhalo.",
+                                      );
+                                      return;
+                                    }
+                                    updateAt(
+                                      [
+                                        "menuCategories",
+                                        String(ci),
+                                        "items",
+                                        String(ii),
+                                        "image",
+                                      ],
+                                      data.path,
+                                    );
+                                    setStatus(
+                                      "Fotka nahrána — uložte změny, aby se projevila v menu.",
+                                    );
+                                  }}
+                                />
+                              </label>
+                              {item.image ? (
+                                <button
+                                  type="button"
+                                  className="rounded-full border border-[var(--line)] px-4 py-2 text-sm text-[var(--muted)] transition hover:border-[var(--brand-red)] hover:text-[var(--brand-red)]"
+                                  onClick={() =>
+                                    updateAt(
+                                      [
+                                        "menuCategories",
+                                        String(ci),
+                                        "items",
+                                        String(ii),
+                                        "image",
+                                      ],
+                                      "",
+                                    )
+                                  }
+                                >
+                                  Odebrat fotku
+                                </button>
+                              ) : null}
+                            </div>
+                          </div>
                         </div>
-                      ) : null}
+                      </div>
                     </div>
                   </ItemCard>
                 ))}
