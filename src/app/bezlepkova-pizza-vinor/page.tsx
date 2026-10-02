@@ -41,30 +41,30 @@ export default async function GlutenFreePage() {
           imageAlt="Bezlepková pizza Dal Birbante Vinoř"
         />
 
-        <section className="page-wrap grid gap-14 py-24 md:grid-cols-[1.1fr_0.9fr] md:gap-20 md:py-36">
+        <section className="page-wrap grid gap-10 py-12 md:grid-cols-[1.1fr_0.9fr] md:gap-20 md:py-36">
           <Reveal>
-            <p className="max-w-none text-justify text-[var(--muted)]">
+            <p className="max-w-none text-left text-base leading-relaxed text-[var(--muted)] md:text-justify md:text-[length:inherit] md:leading-[inherit]">
               {glutenFree.intro}
             </p>
-            <p className="mt-6 max-w-none text-justify text-[var(--muted)]">
+            <p className="mt-4 max-w-none text-left text-base leading-relaxed text-[var(--muted)] md:mt-6 md:text-justify md:text-[length:inherit] md:leading-[inherit]">
               {glutenFree.intro2}
             </p>
 
-            <h2 className="mt-14 text-[var(--brand-green)]">
+            <h2 className="mt-10 text-[var(--brand-green)] md:mt-14">
               {glutenFree.howTitle}
             </h2>
-            <ul className="mt-6 space-y-4">
+            <ul className="mt-5 space-y-3 md:mt-6 md:space-y-4">
               {glutenFree.howItems.map((item, i) => (
                 <Reveal key={item} delay={70 * (i + 1)}>
-                  <li className="flex gap-4 text-[var(--ink)]">
-                    <span className="mt-4 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--brand-red)]" />
+                  <li className="flex gap-3 text-base leading-relaxed text-[var(--ink)] sm:gap-4">
+                    <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--brand-red)] sm:mt-4" />
                     <span>{item}</span>
                   </li>
                 </Reveal>
               ))}
             </ul>
 
-            <Button asChild className="btn-brand mt-10">
+            <Button asChild className="btn-brand mt-8 w-full sm:mt-10 sm:w-auto">
               <a href={site.phoneHref}>{site.callLabel}</a>
             </Button>
           </Reveal>

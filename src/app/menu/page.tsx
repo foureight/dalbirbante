@@ -42,22 +42,22 @@ export default async function MenuPage() {
           imageAlt="Neapolská pizza Dal Birbante"
         />
 
-        <section className="page-wrap pb-12 pt-16 md:pb-16 md:pt-24">
+        <section className="page-wrap pb-8 pt-10 md:pb-16 md:pt-24">
           <Reveal>
-            <p className="max-w-none text-justify text-xl leading-relaxed text-[var(--muted)] md:text-2xl md:leading-relaxed">
+            <p className="max-w-none text-left text-base leading-relaxed text-[var(--muted)] sm:text-lg md:text-justify md:text-2xl md:leading-relaxed">
               {menuPage.intro}
             </p>
           </Reveal>
         </section>
 
-        <div className="page-wrap space-y-20 pb-28 md:space-y-28">
+        <div className="page-wrap space-y-14 pb-20 md:space-y-28 md:pb-28">
           {menuCategories.map((cat, i) => (
             <Reveal key={cat.id} delay={(i % 3) * 60}>
               <section id={cat.id}>
-                <h2 className="border-b border-[var(--line)] pb-4 text-[var(--brand-green)]">
+                <h2 className="border-b border-[var(--line)] pb-3 text-[var(--brand-green)] md:pb-4">
                   {cat.name}
                 </h2>
-                <ul className="mt-8 divide-y divide-[var(--line)]">
+                <ul className="mt-5 divide-y divide-[var(--line)] md:mt-8">
                   {cat.items.map((item) => {
                     const drinkPlaceholder =
                       cat.id === "drinks" ? "/images/menu/drink-can.svg" : null;
@@ -65,11 +65,11 @@ export default async function MenuPage() {
                     return (
                     <li
                       key={`${cat.id}-${item.name}`}
-                      className="menu-row grid gap-4 py-8 sm:grid-cols-[auto_1fr_auto] sm:items-center"
+                      className="menu-row grid grid-cols-[4.5rem_1fr] items-start gap-x-3 gap-y-3 py-5 sm:grid-cols-[auto_1fr_auto] sm:items-center sm:gap-4 sm:py-8"
                     >
                       {imageSrc ? (
                         <div
-                          className={`relative flex h-24 w-24 shrink-0 items-center justify-center overflow-hidden rounded-full sm:h-28 sm:w-28 ${
+                          className={`relative col-start-1 row-span-2 flex h-[4.5rem] w-[4.5rem] shrink-0 items-center justify-center overflow-hidden rounded-full sm:row-span-1 sm:h-28 sm:w-28 ${
                             item.image ? "bg-[#f3f3f3]" : "bg-[#d9d9d9]"
                           }`}
                         >
@@ -94,22 +94,22 @@ export default async function MenuPage() {
                         </div>
                       ) : (
                         <div
-                          className="h-24 w-24 shrink-0 rounded-full bg-[#d9d9d9] sm:h-28 sm:w-28"
+                          className="col-start-1 row-span-2 h-[4.5rem] w-[4.5rem] shrink-0 rounded-full bg-[#d9d9d9] sm:row-span-1 sm:h-28 sm:w-28"
                           aria-hidden
                         />
                       )}
-                      <div>
-                        <h3 className="text-[1.85rem] leading-tight md:text-[2.35rem]">
+                      <div className="min-w-0 col-start-2">
+                        <h3 className="text-[1.35rem] leading-tight sm:text-[1.85rem] md:text-[2.35rem]">
                           {item.name}
                         </h3>
                         {item.description ? (
-                          <p className="mt-2 text-xl leading-relaxed text-[var(--muted)] md:text-2xl">
+                          <p className="mt-1 text-sm leading-snug text-[var(--muted)] sm:mt-2 sm:text-xl sm:leading-relaxed md:text-2xl">
                             {item.description}
                           </p>
                         ) : null}
                       </div>
-                      <div className="flex shrink-0 flex-wrap items-center gap-8 sm:justify-end">
-                        <p className="text-3xl font-black leading-none text-[var(--brand-red)] md:text-4xl">
+                      <div className="col-span-2 flex items-center justify-between gap-3 sm:col-span-1 sm:col-start-3 sm:justify-end sm:gap-8">
+                        <p className="text-2xl font-black leading-none text-[var(--brand-red)] sm:text-3xl md:text-4xl">
                           {item.price}
                         </p>
                         <AddToCartButton
@@ -128,21 +128,21 @@ export default async function MenuPage() {
           ))}
 
           <Reveal>
-            <section className="space-y-6 rounded-[6.4px] border border-[var(--line)] bg-[var(--paper-soft)] p-6 md:p-8">
+            <section className="space-y-5 rounded-[6.4px] border border-[var(--line)] bg-[var(--paper-soft)] p-4 sm:p-6 md:space-y-6 md:p-8">
               <div>
                 <h2 className="text-[var(--brand-green)]">{menuPage.extrasTitle}</h2>
-                <p className="mt-2 text-xl leading-relaxed text-[var(--muted)] md:text-2xl">
+                <p className="mt-2 text-base leading-relaxed text-[var(--muted)] md:text-2xl">
                   {menuPage.extrasText}
                 </p>
               </div>
-              <p className="text-xl font-medium text-[var(--brand-green)] md:text-2xl">
+              <p className="text-base font-medium leading-relaxed text-[var(--brand-green)] md:text-2xl">
                 {menuPage.glutenNote}
               </p>
               <div>
                 <h2 className="text-[var(--brand-green)]">
                   {menuPage.allergensTitle}
                 </h2>
-                <p className="mt-2 text-xl leading-relaxed text-[var(--muted)] md:text-2xl">
+                <p className="mt-2 text-base leading-relaxed text-[var(--muted)] md:text-2xl">
                   {menuPage.allergensText}
                 </p>
               </div>
@@ -150,16 +150,16 @@ export default async function MenuPage() {
           </Reveal>
 
           <Reveal delay={80}>
-            <div className="flex flex-col items-start gap-5">
+            <div className="flex flex-col items-stretch gap-4 sm:items-start sm:gap-5">
               <a
                 href={site.orderUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="btn-green"
+                className="btn-green w-full sm:w-auto"
               >
                 {site.orderLabel}
               </a>
-              <p className="text-xl text-[var(--muted)] md:text-2xl">
+              <p className="text-base leading-relaxed text-[var(--muted)] md:text-2xl">
                 {menuPage.orderNote}
               </p>
             </div>

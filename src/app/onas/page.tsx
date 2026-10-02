@@ -31,7 +31,7 @@ export default async function AboutPage() {
       />
       <SiteHeader content={content} />
       <main className="flex-1">
-        <section className="relative min-h-[40vh] overflow-hidden text-white">
+        <section className="relative min-h-[34vh] overflow-hidden text-white sm:min-h-[40vh]">
           <Image
             src="/images/lifestyle-onas.webp"
             alt="O nás Dal Birbante"
@@ -40,18 +40,20 @@ export default async function AboutPage() {
             className="hero-pan object-cover"
             sizes="100vw"
           />
-          <div className="absolute inset-0 bg-black/50" />
-          <div className="site-max relative mx-auto flex min-h-[48vh] w-full items-end px-5 pb-16 md:px-10 md:pb-20">
-            <h1 className="animate-rise-delay text-white">{about.title}</h1>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/45 to-black/25" />
+          <div className="site-max relative mx-auto flex min-h-[38vh] w-full items-end px-4 pb-10 sm:min-h-[48vh] sm:px-5 sm:pb-14 md:px-10 md:pb-20">
+            <h1 className="animate-rise-delay text-white drop-shadow-[0_2px_10px_rgba(0,0,0,0.35)]">
+              {about.title}
+            </h1>
           </div>
         </section>
 
-        <section className="page-wrap grid gap-16 py-24 md:grid-cols-[1.1fr_0.9fr] md:gap-20 md:py-36">
+        <section className="page-wrap grid gap-10 py-12 md:grid-cols-[1.1fr_0.9fr] md:gap-20 md:py-36">
           <Reveal>
             <h2 className="leading-snug text-[var(--brand-green)]">
               {about.lead}
             </h2>
-            <div className="mt-10 space-y-7 text-[var(--muted)]">
+            <div className="mt-6 space-y-5 text-base leading-relaxed text-[var(--muted)] md:mt-10 md:space-y-7 md:text-[length:inherit] md:leading-[inherit]">
               {about.paragraphs.map((p, i) => (
                 <Reveal key={p.slice(0, 32)} delay={80 * (i + 1)}>
                   <p>{p}</p>

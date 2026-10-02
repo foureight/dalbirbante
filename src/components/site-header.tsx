@@ -44,7 +44,7 @@ export function SiteHeader({ content }: { content: SiteContent }) {
     <header className="sticky top-0 z-50">
       <AnnouncementBar message={site.announcement} />
       <div className="border-b border-[var(--line)] bg-white">
-        <div className="site-max mx-auto flex w-full items-center justify-between gap-6 px-5 py-5 md:px-10 md:py-6">
+        <div className="site-max mx-auto flex w-full items-center justify-between gap-2 px-4 py-3 sm:gap-4 sm:px-5 sm:py-4 md:gap-6 md:px-10 md:py-6">
           <BrandLogo brandName={site.brandName} />
 
           <nav className="nav-menu hidden items-center gap-3 text-[var(--ink)] lg:flex xl:gap-4">
@@ -106,7 +106,7 @@ export function SiteHeader({ content }: { content: SiteContent }) {
             </Button>
           </nav>
 
-          <div className="flex items-center gap-1 lg:hidden">
+          <div className="flex shrink-0 items-center gap-0.5 lg:hidden">
             <button
               type="button"
               aria-label={site.orderLabel}
@@ -123,7 +123,7 @@ export function SiteHeader({ content }: { content: SiteContent }) {
             </button>
             <button
               type="button"
-              className="inline-flex h-10 w-10 items-center justify-center text-[var(--ink)]"
+              className="inline-flex size-10 items-center justify-center text-[var(--ink)]"
               aria-label="Menu"
               onClick={() => setOpen((v) => !v)}
             >
@@ -145,15 +145,20 @@ export function SiteHeader({ content }: { content: SiteContent }) {
 
         {open && (
           <div className="border-t border-[var(--line)] bg-white px-4 py-5 lg:hidden">
-            <div className="nav-menu flex flex-col gap-4 text-[var(--ink)]">
+            <div className="nav-menu flex flex-col gap-1 text-[var(--ink)]">
               {links.map((l) => (
-                <Link key={l.href} href={l.href} onClick={() => setOpen(false)}>
+                <Link
+                  key={l.href}
+                  href={l.href}
+                  onClick={() => setOpen(false)}
+                  className="rounded-[6.4px] px-2 py-3 transition hover:bg-[var(--paper-soft)]"
+                >
                   {l.label}
                 </Link>
               ))}
               <button
                 type="button"
-                className="text-left font-semibold text-[var(--brand-green)]"
+                className="rounded-[6.4px] px-2 py-3 text-left font-semibold text-[var(--brand-green)]"
                 onClick={() => {
                   setOpen(false);
                   setCartOpen(true);
@@ -164,7 +169,7 @@ export function SiteHeader({ content }: { content: SiteContent }) {
               </button>
               <Link
                 href="/kontakt"
-                className="btn-green inline-flex w-fit"
+                className="btn-green mt-2 inline-flex w-full justify-center"
                 onClick={() => setOpen(false)}
               >
                 {nav.contact}

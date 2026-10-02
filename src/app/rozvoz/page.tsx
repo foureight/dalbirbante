@@ -42,22 +42,48 @@ export default async function DeliveryPage() {
           imageAlt="Rozvoz jídla Dal Birbante"
         />
 
-        <section className="page-wrap py-24 md:py-36">
+        <section className="page-wrap py-12 md:py-36">
           <Reveal>
-            <p className="max-w-none text-justify text-[var(--muted)]">
+            <p className="max-w-none text-left text-base leading-relaxed text-[var(--muted)] md:text-justify md:text-[length:inherit] md:leading-[inherit]">
               {delivery.intro}
             </p>
-            <p className="mt-6 max-w-none text-justify text-[var(--muted)]">
+            <p className="mt-4 max-w-none text-left text-base leading-relaxed text-[var(--muted)] md:mt-6 md:text-justify md:text-[length:inherit] md:leading-[inherit]">
               {delivery.intro2}
             </p>
           </Reveal>
 
           <Reveal delay={80}>
-            <h2 className="mt-16 text-[var(--brand-green)]">
+            <h2 className="mt-10 text-[var(--brand-green)] md:mt-16">
               {delivery.pricesTitle}
             </h2>
-            <div className="mt-8 overflow-x-auto">
-              <table className="w-full min-w-[560px] text-left">
+
+            <ul className="mt-5 space-y-3 md:hidden">
+              {delivery.zones.map((z) => (
+                <li
+                  key={z.name}
+                  className="rounded-[6.4px] border border-[var(--line)] bg-[var(--paper-soft)] px-4 py-4"
+                >
+                  <div className="flex items-baseline justify-between gap-3">
+                    <p className="font-extrabold uppercase tracking-wide text-[var(--ink)]">
+                      {z.name}
+                    </p>
+                    <p className="shrink-0 font-black text-[var(--brand-red)]">
+                      {z.fee}
+                    </p>
+                  </div>
+                  <p className="mt-2 text-sm leading-snug text-[var(--muted)]">
+                    {z.areas}
+                  </p>
+                  <p className="mt-2 text-sm text-[var(--ink)]">
+                    Min. objednávka:{" "}
+                    <span className="font-semibold">{z.min}</span>
+                  </p>
+                </li>
+              ))}
+            </ul>
+
+            <div className="mt-8 hidden overflow-x-auto md:block">
+              <table className="w-full text-left">
                 <thead>
                   <tr className="border-b border-[var(--line)] text-[var(--ink)]">
                     <th className="py-3 font-bold">Zóna</th>
@@ -81,13 +107,13 @@ export default async function DeliveryPage() {
           </Reveal>
 
           <Reveal delay={120} variant="scale">
-            <div className="mt-10 w-full">
+            <div className="mt-8 w-full md:mt-10">
               <DeliveryMap />
             </div>
           </Reveal>
 
           <Reveal delay={160}>
-            <Button asChild className="btn-brand mt-8">
+            <Button asChild className="btn-brand mt-8 w-full sm:w-auto">
               <a href={site.orderUrl} target="_blank" rel="noreferrer">
                 {site.orderLabel}
               </a>

@@ -36,22 +36,23 @@ export default async function HomePage() {
       />
       <SiteHeader content={content} />
       <main className="flex-1">
-        <section className="relative min-h-[75svh] overflow-hidden text-white md:min-h-[90svh]">
+        <section className="relative min-h-[70svh] overflow-hidden text-white md:min-h-[90svh]">
           <HeroSlideshow />
-          <div className="site-max relative mx-auto flex min-h-[75svh] w-full flex-col justify-end px-5 pb-16 pt-28 md:min-h-[90svh] md:justify-center md:px-10 md:pb-24">
-            <h1 className="animate-rise-delay max-w-4xl text-white">
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/35 to-black/20 md:from-black/55 md:via-black/25 md:to-transparent" />
+          <div className="site-max relative mx-auto flex min-h-[70svh] w-full flex-col justify-end px-4 pb-10 pt-24 sm:px-5 sm:pb-14 md:min-h-[90svh] md:justify-center md:px-10 md:pb-24">
+            <h1 className="animate-rise-delay max-w-4xl text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.35)]">
               {home.introTitle}
             </h1>
-            <p className="animate-rise-delay-2 mt-8 max-w-2xl text-white/90">
+            <p className="animate-rise-delay-2 mt-4 max-w-2xl text-[0.98rem] leading-relaxed text-white/90 sm:mt-6 sm:text-[1.05rem] md:mt-8 md:text-[length:var(--font-size-base)] md:leading-[var(--line-height-base)]">
               {home.introText}
             </p>
-            <div className="animate-rise-delay-2 mt-10 flex flex-wrap gap-4">
-              <Button asChild className="btn-brand">
+            <div className="animate-rise-delay-2 mt-6 flex w-full flex-col gap-3 sm:mt-8 sm:w-auto sm:flex-row sm:flex-wrap sm:gap-4 md:mt-10">
+              <Button asChild className="btn-brand w-full sm:w-auto">
                 <a href={site.orderUrl} target="_blank" rel="noreferrer">
                   {site.orderLabel}
                 </a>
               </Button>
-              <Button asChild className="btn-outline-light">
+              <Button asChild className="btn-outline-light w-full sm:w-auto">
                 <Link href="/menu">{home.menuCta}</Link>
               </Button>
             </div>
@@ -131,7 +132,7 @@ export default async function HomePage() {
                   </p>
                   <Link
                     href={block.href}
-                    className="btn-outline-light inline-flex w-fit"
+                    className="btn-outline-light mt-auto inline-flex w-full sm:w-fit"
                   >
                     Více
                   </Link>
@@ -169,13 +170,13 @@ export default async function HomePage() {
               <h2 className="section-title-light">{home.deliveryTitle}</h2>
               <p className="mt-6 text-white/85">{home.deliveryText}</p>
               <p className="mt-5 text-white/85">{home.deliveryText2}</p>
-              <div className="mt-10 flex flex-wrap gap-4">
-                <Button asChild className="btn-brand">
+              <div className="mt-8 flex w-full flex-col gap-3 sm:mt-10 sm:w-auto sm:flex-row sm:flex-wrap sm:gap-4">
+                <Button asChild className="btn-brand w-full sm:w-auto">
                   <a href={site.orderUrl} target="_blank" rel="noreferrer">
                     {site.orderLabel}
                   </a>
                 </Button>
-                <Button asChild className="btn-outline-light">
+                <Button asChild className="btn-outline-light w-full sm:w-auto">
                   <Link href="/rozvoz">{content.nav.delivery}</Link>
                 </Button>
               </div>
