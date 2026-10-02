@@ -76,7 +76,7 @@ export default async function GlutenFreePage() {
                 </Reveal>
               ))}
             </ul>
-            <p className="mt-5 font-bold leading-relaxed text-[var(--brand-green)]">
+            <p className="mt-5 overflow-x-auto font-bold leading-relaxed whitespace-nowrap text-[var(--brand-green)]">
               {glutenFree.productsNote}
             </p>
 
