@@ -8,7 +8,6 @@ zerops:
       deployFiles: ./
       cache:
         - node_modules
-        - .next/cache
     run:
       base: nodejs@22
       ports:
