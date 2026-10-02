@@ -21,7 +21,7 @@ export function FooterGoodbye({
   }, []);
 
   return (
-    <div className="mb-10 flex w-full flex-col items-center text-center md:mb-14">
+    <div className="mb-20 flex w-full flex-col items-center text-center md:mb-28">
       <div className="footer-wave-marquee mb-3 w-full max-w-md overflow-hidden text-white md:max-w-lg">
         <div className="footer-wave-track" aria-hidden>
           <span className="footer-wave-text">{WAVES.join("")}</span>
