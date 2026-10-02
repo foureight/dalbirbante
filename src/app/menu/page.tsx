@@ -60,7 +60,7 @@ export default async function MenuPage() {
                 <ul className="mt-8 divide-y divide-[var(--line)]">
                   {cat.items.map((item) => {
                     const drinkPlaceholder =
-                      cat.id === "drinks" ? "/images/menu/drink-can.webp" : null;
+                      cat.id === "drinks" ? "/images/menu/drink-can.svg" : null;
                     const imageSrc = item.image || drinkPlaceholder;
                     return (
                     <li
@@ -83,11 +83,11 @@ export default async function MenuPage() {
                             />
                           ) : (
                             <Image
-                              src={imageSrc}
+                              src="/images/menu/drink-can.svg"
                               alt=""
-                              width={72}
-                              height={72}
-                              className="h-[58%] w-auto object-contain"
+                              width={56}
+                              height={56}
+                              className="pointer-events-none select-none"
                               aria-hidden
                             />
                           )}
