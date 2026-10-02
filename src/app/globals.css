@@ -838,6 +838,8 @@
   border: 1px solid var(--line);
   border-radius: 6.4px;
   background: #f3f3f3;
+  /* Isolate from .band-green { color: #fff } so popups/legend stay readable */
+  color: var(--ink);
 }
 
 .delivery-map__canvas {
@@ -899,6 +901,16 @@
   line-height: 1.35;
   padding: 0.65rem 0.8rem;
   border-radius: 8px;
+  color: var(--ink);
+  background: #fff;
+}
+
+.maplibregl-popup-content strong {
+  color: var(--ink);
+}
+
+.maplibregl-popup-tip {
+  border-top-color: #fff;
 }
 
 .wave-divider {
