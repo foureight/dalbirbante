@@ -99,7 +99,11 @@ export default async function MenuPage() {
                               src={imageSrc}
                               alt={item.name}
                               fill
-                              className="object-cover"
+                              className={
+                                cat.id === "drinks"
+                                  ? "object-contain p-2 sm:p-3"
+                                  : "object-cover"
+                              }
                               sizes="112px"
                             />
                           ) : (
