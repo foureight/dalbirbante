@@ -30,6 +30,7 @@ export function DeliveryMap({ className = "" }: { className?: string }) {
     if (!containerRef.current || mapRef.current) return;
 
     let cancelled = false;
+    let styleLoaded = false;
     let popup: Popup | null = null;
     let map: Map | null = null;
 
@@ -69,6 +70,9 @@ export function DeliveryMap({ className = "" }: { className?: string }) {
 
     map.on("load", () => {
       if (cancelled || !map) return;
+
+      styleLoaded = true;
+      setError("");
 
       const ordered = [...zones.features].sort(
         (a, b) => Number(b.properties.id) - Number(a.properties.id),
@@ -137,8 +141,11 @@ export function DeliveryMap({ className = "" }: { className?: string }) {
       setReady(true);
     });
 
+    // MapLibre emits "error" for recoverable tile glitches too — only block the
+    // UI when the style never loads (e.g. worker/CDN failure).
     map.on("error", () => {
-      if (!cancelled) setError("Mapové podklady se nepodařilo načíst.");
+      if (cancelled || styleLoaded) return;
+      setError("Mapové podklady se nepodařilo načíst.");
     });
 
     return () => {
@@ -155,7 +162,9 @@ export function DeliveryMap({ className = "" }: { className?: string }) {
       {!ready && !error && (
         <div className="delivery-map__status">Načítám mapu…</div>
       )}
-      {error && <div className="delivery-map__status">{error}</div>}
+      {!ready && error && (
+        <div className="delivery-map__status">{error}</div>
+      )}
       <ul className="delivery-map__legend" aria-label="Legenda zón">
         {zones.features.map((f) => (
           <li key={f.properties.id}>
