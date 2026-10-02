@@ -16,7 +16,7 @@ export type Order = {
   createdAt: string;
   status: OrderStatus;
   paid: boolean;
-  paymentMethod: "card";
+  paymentMethod: "card" | "on_site";
   customerName: string;
   customerPhone: string;
   customerAddress?: string;

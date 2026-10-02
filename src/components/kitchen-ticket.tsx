@@ -76,7 +76,13 @@ export function KitchenTicket({ order }: { order: Order }) {
       </div>
       <div className="kitchen-ticket__row">
         <span>PLATBA</span>
-        <span>{order.paid ? "KARTA · ZAPLACENO" : "NEZAPLACENO"}</span>
+        <span>
+          {order.paymentMethod === "on_site"
+            ? "NA MÍSTĚ"
+            : order.paid
+              ? "KARTA · ZAPLACENO"
+              : "NEZAPLACENO"}
+        </span>
       </div>
       <div className="kitchen-ticket__rule" />
       <div>

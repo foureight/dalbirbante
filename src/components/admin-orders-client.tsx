@@ -119,7 +119,11 @@ export function AdminOrdersClient({ authenticated }: { authenticated: boolean })
                     {order.fulfillment === "delivery" ? "Rozvoz" : "Vyzvednutí"}
                     {order.deliveryZoneName ? ` · ${order.deliveryZoneName}` : ""}{" "}
                     · {STATUS_LABEL[order.status]}
-                    {order.paid ? " · Zaplaceno kartou" : ""}
+                    {order.paymentMethod === "on_site"
+                      ? " · Platba na místě"
+                      : order.paid
+                        ? " · Zaplaceno kartou"
+                        : ""}
                   </p>
                   <div className="mt-2 space-y-1 text-sm">
                     <p>

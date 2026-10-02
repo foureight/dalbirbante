@@ -91,6 +91,17 @@ export async function POST(request: Request) {
       );
     }
 
+    // Pickup is paid in the restaurant — no card payment required.
+    if (fulfillment === "pickup") {
+      return NextResponse.json({
+        mode: "pay_on_site",
+        itemsTotal,
+        packagingFee: fees.packagingFee,
+        deliveryFee: fees.deliveryFee,
+        total: fees.total,
+      });
+    }
+
     if (!hasStripe()) {
       return NextResponse.json({
         mode: "mock",

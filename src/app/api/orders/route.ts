@@ -34,6 +34,7 @@ export async function POST(request: Request) {
       ? String(body.paymentIntentId)
       : "";
     const mockPay = Boolean(body.mockPay);
+    const payOnSite = Boolean(body.payOnSite) || fulfillment === "pickup";
 
     if (!customerName || !customerPhone || !items.length) {
       return NextResponse.json(
@@ -44,6 +45,12 @@ export async function POST(request: Request) {
     if (fulfillment === "delivery" && customerAddress.length < 5) {
       return NextResponse.json(
         { error: "Zadejte adresu doručení včetně obce." },
+        { status: 400 },
+      );
+    }
+    if (fulfillment === "delivery" && payOnSite && !mockPay) {
+      return NextResponse.json(
+        { error: "Rozvoz se platí kartou online." },
         { status: 400 },
       );
     }
@@ -81,7 +88,9 @@ export async function POST(request: Request) {
       );
     }
 
-    if (hasStripe()) {
+    if (fulfillment === "pickup" || payOnSite) {
+      // Paid in restaurant — skip Stripe.
+    } else if (hasStripe()) {
       if (!paymentIntentId) {
         return NextResponse.json(
           { error: "Chybí potvrzení platby Stripe." },
@@ -115,6 +124,7 @@ export async function POST(request: Request) {
       );
     }
 
+    const isOnSite = fulfillment === "pickup" || payOnSite;
     const order = await createOrder({
       customerName,
       customerPhone,
@@ -130,9 +140,11 @@ export async function POST(request: Request) {
       itemsTotal,
       items: normalized,
       total: fees.total,
-      paymentMethod: "card",
-      paid: true,
-      stripePaymentIntentId: paymentIntentId || undefined,
+      paymentMethod: isOnSite ? "on_site" : "card",
+      paid: !isOnSite,
+      stripePaymentIntentId: isOnSite
+        ? undefined
+        : paymentIntentId || undefined,
     });
 
     return NextResponse.json({
@@ -141,8 +153,14 @@ export async function POST(request: Request) {
         id: order.id,
         number: order.number,
         total: order.total,
+        paid: order.paid,
+        paymentMethod: order.paymentMethod,
       },
-      paymentMode: hasStripe() ? "stripe" : "mock",
+      paymentMode: isOnSite
+        ? "pay_on_site"
+        : hasStripe()
+          ? "stripe"
+          : "mock",
     });
   } catch (err) {
     console.error(err);

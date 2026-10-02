@@ -108,10 +108,13 @@ export function CartDrawer() {
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [orderNumber, setOrderNumber] = useState<number | null>(null);
-  const [mode, setMode] = useState<"stripe" | "mock" | null>(null);
+  const [mode, setMode] = useState<"stripe" | "mock" | "pay_on_site" | null>(
+    null,
+  );
   const [clientSecret, setClientSecret] = useState<string | null>(null);
   const [publishableKey, setPublishableKey] = useState("");
   const [payTotal, setPayTotal] = useState(0);
+  const [paidOnSite, setPaidOnSite] = useState(false);
 
   useEffect(() => {
     if (!open) {
@@ -163,10 +166,42 @@ export function CartDrawer() {
       fulfillment === "delivery" ? fees.deliveryZone?.id || deliveryZoneId : "",
   };
 
+  async function placePickupOrder() {
+    setBusy(true);
+    setError(null);
+    const res = await fetch("/api/orders", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        ...meta,
+        fulfillment: "pickup",
+        items: orderItems,
+        payOnSite: true,
+      }),
+    });
+    const data = await res.json();
+    setBusy(false);
+    if (!res.ok) {
+      setError(data.error || "Objednávku se nepodařilo odeslat.");
+      return;
+    }
+    setOrderNumber(data.order.number);
+    setPaidOnSite(true);
+    clear();
+    setStep("done");
+  }
+
   async function startCheckout(e: FormEvent) {
     e.preventDefault();
     setBusy(true);
     setError(null);
+    setPaidOnSite(false);
+
+    if (fulfillment === "pickup") {
+      await placePickupOrder();
+      return;
+    }
+
     const res = await fetch("/api/checkout", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -202,6 +237,7 @@ export function CartDrawer() {
       return;
     }
     setOrderNumber(data.order.number);
+    setPaidOnSite(false);
     clear();
     setStep("done");
   }
@@ -241,10 +277,14 @@ export function CartDrawer() {
           {step === "done" ? (
             <div className="space-y-4">
               <p className="text-2xl font-extrabold text-[var(--brand-green)]">
-                Objednávka #{orderNumber} je zaplacená
+                {paidOnSite
+                  ? `Objednávka #${orderNumber} je přijatá`
+                  : `Objednávka #${orderNumber} je zaplacená`}
               </p>
               <p className="text-[var(--muted)]">
-                Dorazila do fronty v restauraci. Připravíme ji co nejdřív.
+                {paidOnSite
+                  ? "Dorazila do fronty v restauraci. Zaplatíte na místě při vyzvednutí."
+                  : "Dorazila do fronty v restauraci. Připravíme ji co nejdřív."}
               </p>
               <Button className="btn-green" onClick={() => setOpen(false)}>
                 Pokračovat
@@ -315,48 +355,69 @@ export function CartDrawer() {
 
           {step === "checkout" ? (
             <div className="space-y-5">
-              <p className="text-sm text-[var(--muted)]">
-                Platba kartou přes Stripe
-                {mode === "mock"
-                  ? " (teď běží testovací režim bez klíčů)."
-                  : "."}
-              </p>
-              {mode === "stripe" && clientSecret && stripePromise ? (
-                <Elements
-                  stripe={stripePromise}
-                  options={{
-                    clientSecret,
-                    appearance: { theme: "stripe" },
-                    locale: "cs",
-                  }}
-                >
-                  <StripePayForm
-                    meta={meta}
-                    items={orderItems}
-                    onSuccess={handleStripeSuccess}
-                    onError={(msg) => setError(msg || null)}
-                  />
-                </Elements>
-              ) : null}
-              {mode === "mock" ? (
+              {mode === "pay_on_site" ? (
                 <div className="space-y-3 rounded-[6.4px] border border-[var(--line)] bg-[var(--paper-soft)] p-4">
                   <p className="text-sm text-[var(--muted)]">
-                    Doplňte <code>STRIPE_SECRET_KEY</code> a{" "}
-                    <code>NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY</code> pro ostré
-                    platby. Teď můžete odeslat testovací objednávku.
+                    Vyzvednutí na místě — platíte v restauraci. Kartu teď
+                    nepotřebujete.
                   </p>
                   <Button
                     type="button"
                     className="btn-green w-full"
                     disabled={busy}
-                    onClick={mockPay}
+                    onClick={placePickupOrder}
                   >
                     {busy
                       ? "Odesílám…"
-                      : `Zaplatit testově ${formatPrice(payTotal || fees.total)}`}
+                      : `Objednat · ${formatPrice(payTotal || fees.total)}`}
                   </Button>
                 </div>
-              ) : null}
+              ) : (
+                <>
+                  <p className="text-sm text-[var(--muted)]">
+                    Platba kartou přes Stripe
+                    {mode === "mock"
+                      ? " (teď běží testovací režim bez klíčů)."
+                      : "."}
+                  </p>
+                  {mode === "stripe" && clientSecret && stripePromise ? (
+                    <Elements
+                      stripe={stripePromise}
+                      options={{
+                        clientSecret,
+                        appearance: { theme: "stripe" },
+                        locale: "cs",
+                      }}
+                    >
+                      <StripePayForm
+                        meta={meta}
+                        items={orderItems}
+                        onSuccess={handleStripeSuccess}
+                        onError={(msg) => setError(msg || null)}
+                      />
+                    </Elements>
+                  ) : null}
+                  {mode === "mock" ? (
+                    <div className="space-y-3 rounded-[6.4px] border border-[var(--line)] bg-[var(--paper-soft)] p-4">
+                      <p className="text-sm text-[var(--muted)]">
+                        Doplňte <code>STRIPE_SECRET_KEY</code> a{" "}
+                        <code>NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY</code> pro
+                        ostré platby. Teď můžete odeslat testovací objednávku.
+                      </p>
+                      <Button
+                        type="button"
+                        className="btn-green w-full"
+                        disabled={busy}
+                        onClick={mockPay}
+                      >
+                        {busy
+                          ? "Odesílám…"
+                          : `Zaplatit testově ${formatPrice(payTotal || fees.total)}`}
+                      </Button>
+                    </div>
+                  ) : null}
+                </>
+              )}
             </div>
           ) : null}
 
@@ -491,6 +552,12 @@ export function CartDrawer() {
                 ) : null}
               </div>
 
+              {fulfillment === "pickup" ? (
+                <p className="text-sm text-[var(--muted)]">
+                  Při vyzvednutí na místě zaplatíte v restauraci — platba kartou
+                  online není potřeba.
+                </p>
+              ) : null}
               <Button
                 type="submit"
                 className="btn-green w-full"
@@ -501,8 +568,12 @@ export function CartDrawer() {
                 }
               >
                 {busy
-                  ? "Připravuji platbu…"
-                  : `K platbě · ${formatPrice(fees.total)}`}
+                  ? fulfillment === "pickup"
+                    ? "Odesílám objednávku…"
+                    : "Připravuji platbu…"
+                  : fulfillment === "pickup"
+                    ? `Objednat · platba na místě · ${formatPrice(fees.total)}`
+                    : `K platbě kartou · ${formatPrice(fees.total)}`}
               </Button>
             </form>
           ) : null}
