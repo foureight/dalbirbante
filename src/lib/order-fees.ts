@@ -73,8 +73,8 @@ export const DELIVERY_ZONES: DeliveryZoneFee[] = [
     min: 299,
   },
   {
-    id: "zone-6",
-    name: "Zóna 6",
+    id: "zone-5",
+    name: "Zóna 5",
     areas:
       "Černý Most, Prosek, Horní Počernice, Nový Brázdim, Brandýs n./L., Hloubětín",
     areaTokens: [
