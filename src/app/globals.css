@@ -865,6 +865,8 @@
   list-style: none;
   border-top: 1px solid var(--line);
   background: #fff;
+  /* band-green sets color:#fff — force readable legend ink */
+  color: var(--ink);
   font-size: 0.95rem;
 }
 
