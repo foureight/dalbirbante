@@ -22,6 +22,7 @@ export type CartLine = {
   unitPrice: number;
   qty: number;
   image?: string;
+  categoryId?: string;
   detail?: CartLineDetail;
 };
 

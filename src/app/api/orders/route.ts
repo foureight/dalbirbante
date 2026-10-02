@@ -52,12 +52,12 @@ export async function POST(request: Request) {
       name: String(i.name).slice(0, 120),
       unitPrice: Number(i.unitPrice),
       qty: Number(i.qty),
+      categoryId: i.categoryId ? String(i.categoryId).slice(0, 40) : undefined,
     }));
     const itemsTotal = normalized.reduce((s, i) => s + i.unitPrice * i.qty, 0);
-    const itemCount = normalized.reduce((s, i) => s + i.qty, 0);
     const fees = calcOrderFees({
       itemsTotal,
-      itemCount,
+      items: normalized,
       fulfillment,
       deliveryZoneId,
       customerAddress,

@@ -64,18 +64,18 @@ export default async function MenuPage() {
                       className="menu-row grid gap-4 py-8 sm:grid-cols-[auto_1fr_auto] sm:items-center"
                     >
                       {item.image ? (
-                        <div className="relative h-20 w-20 sm:h-24 sm:w-24">
+                        <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-full bg-[#f3f3f3] sm:h-28 sm:w-28">
                           <Image
                             src={item.image}
                             alt={item.name}
                             fill
-                            className="object-contain"
-                            sizes="96px"
+                            className="object-cover"
+                            sizes="112px"
                           />
                         </div>
                       ) : (
                         <div
-                          className="h-20 w-20 shrink-0 rounded-full bg-[#d9d9d9] sm:h-24 sm:w-24"
+                          className="h-24 w-24 shrink-0 rounded-full bg-[#d9d9d9] sm:h-28 sm:w-28"
                           aria-hidden
                         />
                       )}

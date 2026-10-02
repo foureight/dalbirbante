@@ -5,6 +5,7 @@ export type OrderItem = {
   name: string;
   unitPrice: number;
   qty: number;
+  categoryId?: string;
 };
 
 export type OrderStatus = "new" | "preparing" | "ready" | "done";

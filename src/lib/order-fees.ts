@@ -1,6 +1,12 @@
 import { parsePrice } from "@/lib/money";
 
-export const PACKAGING_FEE = 15;
+/** Krabice (pizza, pasta, denní menu…) */
+export const BOX_FEE = 10;
+/** Sáček na panozzo */
+export const PANOZZO_BAG_FEE = 5;
+
+/** @deprecated use BOX_FEE / PANOZZO_BAG_FEE */
+export const PACKAGING_FEE = BOX_FEE;
 
 export type DeliveryZoneFee = {
   id: string;
@@ -9,6 +15,12 @@ export type DeliveryZoneFee = {
   areaTokens: string[];
   fee: number;
   min: number;
+};
+
+export type PackagingItem = {
+  name?: string;
+  categoryId?: string | null;
+  qty: number;
 };
 
 function normalizePlace(value: string) {
@@ -103,16 +115,54 @@ export function detectDeliveryZoneFromAddress(address: string) {
   return best;
 }
 
+export function isPanozzoItem(item: {
+  name?: string;
+  categoryId?: string | null;
+}) {
+  const cat = (item.categoryId || "").toLowerCase();
+  if (cat === "panozzo") return true;
+  const name = (item.name || "").toLowerCase();
+  return name.includes("panozzo");
+}
+
+export function packagingUnitForItem(item: {
+  name?: string;
+  categoryId?: string | null;
+}) {
+  return isPanozzoItem(item) ? PANOZZO_BAG_FEE : BOX_FEE;
+}
+
 export function calcOrderFees(input: {
   itemsTotal: number;
-  itemCount: number;
+  /** Preferované — balení podle typu jídla */
+  items?: PackagingItem[];
+  /** Fallback, když chybí items (vše jako krabice) */
+  itemCount?: number;
   fulfillment: "pickup" | "delivery";
   deliveryZoneId?: string | null;
   customerAddress?: string | null;
 }) {
-  const count = Math.max(0, Math.floor(input.itemCount));
-  // Balení 15 Kč za každé jídlo (kus).
-  const packagingFee = count > 0 ? PACKAGING_FEE * count : 0;
+  let packagingFee = 0;
+  let boxCount = 0;
+  let bagCount = 0;
+
+  if (input.items?.length) {
+    for (const item of input.items) {
+      const qty = Math.max(0, Math.floor(item.qty));
+      if (qty < 1) continue;
+      if (isPanozzoItem(item)) {
+        bagCount += qty;
+        packagingFee += PANOZZO_BAG_FEE * qty;
+      } else {
+        boxCount += qty;
+        packagingFee += BOX_FEE * qty;
+      }
+    }
+  } else {
+    const count = Math.max(0, Math.floor(input.itemCount || 0));
+    boxCount = count;
+    packagingFee = count > 0 ? BOX_FEE * count : 0;
+  }
 
   // Cena dopravy se počítá výhradně z obce v adrese doručení.
   const zone =
@@ -122,11 +172,17 @@ export function calcOrderFees(input: {
 
   const deliveryFee = zone ? zone.fee : 0;
   const total = input.itemsTotal + packagingFee + deliveryFee;
+  const packagingCount = boxCount + bagCount;
 
   return {
     packagingFee,
-    packagingCount: count,
-    packagingUnit: PACKAGING_FEE,
+    packagingCount,
+    packagingBoxCount: boxCount,
+    packagingBagCount: bagCount,
+    packagingBoxUnit: BOX_FEE,
+    packagingBagUnit: PANOZZO_BAG_FEE,
+    /** @deprecated průměr / krabice — pro starší UI */
+    packagingUnit: BOX_FEE,
     deliveryFee,
     deliveryZone: zone,
     total,

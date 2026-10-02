@@ -125,21 +125,26 @@ export function CartDrawer() {
     return loadStripe(publishableKey) as Promise<Stripe | null>;
   }, [publishableKey]);
 
-  const orderItems = items.map((i) => ({
-    name: i.name,
-    unitPrice: i.unitPrice,
-    qty: i.qty,
-  }));
+  const orderItems = useMemo(
+    () =>
+      items.map((i) => ({
+        name: i.name,
+        unitPrice: i.unitPrice,
+        qty: i.qty,
+        categoryId: i.categoryId,
+      })),
+    [items],
+  );
 
   const fees = useMemo(
     () =>
       calcOrderFees({
         itemsTotal: total,
-        itemCount: count,
+        items: orderItems,
         fulfillment,
         customerAddress,
       }),
-    [total, count, fulfillment, customerAddress],
+    [total, orderItems, fulfillment, customerAddress],
   );
 
   useEffect(() => {
@@ -420,14 +425,37 @@ export function CartDrawer() {
                   <span>Položky</span>
                   <span>{formatPrice(total)}</span>
                 </div>
-                <div className="flex justify-between gap-3">
-                  <span>
-                    Balení
-                    {fees.packagingCount > 1
-                      ? ` (${fees.packagingCount}× ${formatPrice(fees.packagingUnit)})`
-                      : ""}
-                  </span>
-                  <span>{formatPrice(fees.packagingFee)}</span>
+                <div className="space-y-1">
+                  <div className="flex justify-between gap-3">
+                    <span>Balení</span>
+                    <span>{formatPrice(fees.packagingFee)}</span>
+                  </div>
+                  {fees.packagingBoxCount > 0 ? (
+                    <div className="flex justify-between gap-3 pl-3 text-[var(--muted)]">
+                      <span>
+                        Krabice ({fees.packagingBoxCount}×{" "}
+                        {formatPrice(fees.packagingBoxUnit)})
+                      </span>
+                      <span>
+                        {formatPrice(
+                          fees.packagingBoxCount * fees.packagingBoxUnit,
+                        )}
+                      </span>
+                    </div>
+                  ) : null}
+                  {fees.packagingBagCount > 0 ? (
+                    <div className="flex justify-between gap-3 pl-3 text-[var(--muted)]">
+                      <span>
+                        Sáček panozzo ({fees.packagingBagCount}×{" "}
+                        {formatPrice(fees.packagingBagUnit)})
+                      </span>
+                      <span>
+                        {formatPrice(
+                          fees.packagingBagCount * fees.packagingBagUnit,
+                        )}
+                      </span>
+                    </div>
+                  ) : null}
                 </div>
                 <div className="flex justify-between gap-3">
                   <span>

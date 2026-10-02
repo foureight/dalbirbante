@@ -36,7 +36,7 @@ export function AddToCartButton({
             setCustomizeOpen(true);
             return;
           }
-          addItem({ name, unitPrice, image });
+          addItem({ name, unitPrice, image, categoryId });
           setAdded(true);
           window.setTimeout(() => setAdded(false), 1200);
         }}
@@ -51,6 +51,7 @@ export function AddToCartButton({
           name={name}
           basePrice={unitPrice}
           image={image}
+          categoryId={categoryId}
         />
       ) : null}
     </>

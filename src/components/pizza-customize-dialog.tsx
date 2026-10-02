@@ -17,6 +17,7 @@ type Props = {
   name: string;
   basePrice: number;
   image?: string;
+  categoryId?: string;
 };
 
 export function PizzaCustomizeDialog({
@@ -25,6 +26,7 @@ export function PizzaCustomizeDialog({
   name,
   basePrice,
   image,
+  categoryId = "pizza",
 }: Props) {
   const { addItem } = useCart();
   const [dough, setDough] = useState<"classic" | "glutenFree">("classic");
@@ -84,6 +86,7 @@ export function PizzaCustomizeDialog({
       name: label,
       unitPrice,
       image,
+      categoryId,
       detail: {
         baseName: name,
         glutenFree: dough === "glutenFree",

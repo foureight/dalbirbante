@@ -45,7 +45,20 @@ export function KitchenTicket({ order }: { order: Order }) {
           Balení
           {(() => {
             const pieces = order.items.reduce((s, i) => s + i.qty, 0);
-            return pieces > 1 ? ` (${pieces}×)` : "";
+            const bags = order.items.reduce(
+              (s, i) =>
+                s +
+                ((i.categoryId === "panozzo" ||
+                  i.name.toLowerCase().includes("panozzo"))
+                  ? i.qty
+                  : 0),
+              0,
+            );
+            const boxes = pieces - bags;
+            const parts: string[] = [];
+            if (boxes > 0) parts.push(`${boxes}× krabice`);
+            if (bags > 0) parts.push(`${bags}× sáček`);
+            return parts.length ? ` (${parts.join(", ")})` : "";
           })()}
         </span>
         <span>{formatPrice(order.packagingFee ?? 0)}</span>
