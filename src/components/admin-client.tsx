@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, type ReactNode } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -27,39 +27,28 @@ function setPath(obj: unknown, path: string[], value: string): unknown {
   return record;
 }
 
+const FIELD_CONTROL =
+  "rounded-[6.4px] border border-[var(--line)] bg-[#fbfbfb] text-lg text-[var(--ink)] transition focus-visible:border-[var(--brand-green)] focus-visible:bg-white focus-visible:ring-2 focus-visible:ring-[var(--brand-green)]/20";
+
 function Field({
   label,
   value,
   onChange,
   multiline,
   hint,
-  emphasize,
 }: {
   label: string;
   value: string;
   onChange: (v: string) => void;
   multiline?: boolean;
   hint?: string;
+  /** @deprecated kept for call-site compat; visual treatment is now uniform */
   emphasize?: boolean;
 }) {
   const useTextarea = multiline || value.length > 80;
   return (
-    <div
-      className={
-        emphasize
-          ? "space-y-2 rounded-[6.4px] border-2 border-[var(--brand-green)] bg-[#eef8f1] p-4"
-          : "space-y-2"
-      }
-    >
-      <Label
-        className={
-          emphasize
-            ? "text-base font-bold text-[var(--brand-green)]"
-            : "text-base font-semibold text-[var(--ink)]"
-        }
-      >
-        {label}
-      </Label>
+    <div className="space-y-2">
+      <Label className="text-base font-semibold text-[var(--ink)]">{label}</Label>
       {hint ? (
         <p className="text-sm leading-snug text-[var(--muted)]">{hint}</p>
       ) : null}
@@ -68,18 +57,64 @@ function Field({
           value={value}
           onChange={(e) => onChange(e.target.value)}
           rows={Math.min(10, Math.max(4, Math.ceil(value.length / 55)))}
-          className="min-h-[7rem] rounded-[6.4px] border-[var(--line)] bg-white px-4 py-3 text-lg leading-relaxed text-[var(--ink)]"
+          className={`min-h-[7rem] px-4 py-3 leading-relaxed ${FIELD_CONTROL}`}
         />
       ) : (
         <Input
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className="h-12 rounded-[6.4px] border-[var(--line)] bg-white px-4 text-lg text-[var(--ink)]"
+          className={`h-12 px-4 ${FIELD_CONTROL}`}
         />
       )}
     </div>
   );
 }
+
+function Panel({
+  title,
+  hint,
+  children,
+}: {
+  title: string;
+  hint?: ReactNode;
+  children: ReactNode;
+}) {
+  return (
+    <section className="rounded-[6.4px] border border-[var(--line)] bg-white p-5 shadow-sm md:p-7">
+      <h2 className="text-2xl font-extrabold text-[var(--brand-red)]">{title}</h2>
+      {hint ? (
+        <div className="mt-2 text-base leading-relaxed text-[var(--muted)]">
+          {hint}
+        </div>
+      ) : null}
+      <div className="mt-6 space-y-5">{children}</div>
+    </section>
+  );
+}
+
+function ItemCard({
+  title,
+  children,
+}: {
+  title: string;
+  children: ReactNode;
+}) {
+  return (
+    <div className="space-y-4 rounded-[6.4px] border border-[var(--line)] border-l-4 border-l-[var(--brand-red)] bg-white p-5 shadow-sm">
+      <p className="text-lg font-extrabold text-[var(--brand-red)]">{title}</p>
+      <div className="space-y-4">{children}</div>
+    </div>
+  );
+}
+
+const NAV_LABELS: Record<string, string> = {
+  menu: "Menu",
+  daily: "Denní nabídka",
+  delivery: "Rozvoz",
+  about: "O nás",
+  contact: "Kontakt",
+  glutenFree: "Bezlepková pizza",
+};
 
 const SECTIONS: { key: keyof SiteContent; label: string }[] = [
   { key: "site", label: "Základní údaje" },
@@ -158,11 +193,11 @@ export function AdminClient({ initial, authenticated }: Props) {
   const editor = useMemo(() => {
     if (section === "menuCategories") {
       return (
-        <div className="space-y-10">
+        <div className="space-y-6">
           {content.menuCategories.map((cat, ci) => (
-            <div key={cat.id} className="space-y-4 border border-[var(--line)] bg-white/60 p-4">
+            <Panel key={cat.id} title={`Kategorie · ${cat.name || ci + 1}`}>
               <Field
-                label={`Kategorie ${ci + 1} – název`}
+                label="Název kategorie"
                 value={cat.name}
                 onChange={(v) => updateAt(["menuCategories", String(ci), "name"], v)}
               />
@@ -171,56 +206,37 @@ export function AdminClient({ initial, authenticated }: Props) {
                 value={cat.id}
                 onChange={(v) => updateAt(["menuCategories", String(ci), "id"], v)}
               />
-              <div className="space-y-6">
+              <div className="space-y-4">
                 {cat.items.map((item, ii) => (
-                  <div
+                  <ItemCard
                     key={`${cat.id}-${ii}`}
-                    className="grid gap-3 border-t border-[var(--line)] pt-4 md:grid-cols-2"
+                    title={`Položka ${ii + 1}${item.name ? ` · ${item.name}` : ""}`}
                   >
-                    <Field
-                      label="Název položky"
-                      value={item.name}
-                      onChange={(v) =>
-                        updateAt(
-                          ["menuCategories", String(ci), "items", String(ii), "name"],
-                          v,
-                        )
-                      }
-                    />
-                    <Field
-                      label="Cena"
-                      value={item.price}
-                      onChange={(v) =>
-                        updateAt(
-                          ["menuCategories", String(ci), "items", String(ii), "price"],
-                          v,
-                        )
-                      }
-                    />
-                    <div className="md:col-span-2">
+                    <div className="grid gap-4 md:grid-cols-2">
                       <Field
-                        label="Popis"
-                        value={item.description}
+                        label="Název položky"
+                        value={item.name}
                         onChange={(v) =>
                           updateAt(
-                            [
-                              "menuCategories",
-                              String(ci),
-                              "items",
-                              String(ii),
-                              "description",
-                            ],
+                            ["menuCategories", String(ci), "items", String(ii), "name"],
                             v,
                           )
                         }
-                        multiline
                       />
-                    </div>
-                    {"image" in item && item.image !== undefined ? (
+                      <Field
+                        label="Cena"
+                        value={item.price}
+                        onChange={(v) =>
+                          updateAt(
+                            ["menuCategories", String(ci), "items", String(ii), "price"],
+                            v,
+                          )
+                        }
+                      />
                       <div className="md:col-span-2">
                         <Field
-                          label="Cesta k obrázku"
-                          value={item.image || ""}
+                          label="Popis"
+                          value={item.description}
                           onChange={(v) =>
                             updateAt(
                               [
@@ -228,18 +244,39 @@ export function AdminClient({ initial, authenticated }: Props) {
                                 String(ci),
                                 "items",
                                 String(ii),
-                                "image",
+                                "description",
                               ],
                               v,
                             )
                           }
+                          multiline
                         />
                       </div>
-                    ) : null}
-                  </div>
+                      {"image" in item && item.image !== undefined ? (
+                        <div className="md:col-span-2">
+                          <Field
+                            label="Cesta k obrázku"
+                            value={item.image || ""}
+                            onChange={(v) =>
+                              updateAt(
+                                [
+                                  "menuCategories",
+                                  String(ci),
+                                  "items",
+                                  String(ii),
+                                  "image",
+                                ],
+                                v,
+                              )
+                            }
+                          />
+                        </div>
+                      ) : null}
+                    </div>
+                  </ItemCard>
                 ))}
               </div>
-            </div>
+            </Panel>
           ))}
         </div>
       );
@@ -248,45 +285,56 @@ export function AdminClient({ initial, authenticated }: Props) {
     if (section === "delivery") {
       return (
         <div className="space-y-6">
-          <Field
-            label="Titulek"
-            value={content.delivery.title}
-            onChange={(v) => updateAt(["delivery", "title"], v)}
-          />
-          <Field
-            label="Úvod"
-            value={content.delivery.intro}
-            onChange={(v) => updateAt(["delivery", "intro"], v)}
-            multiline
-          />
-          {content.delivery.zones.map((z, i) => (
-            <div
-              key={i}
-              className="grid gap-3 border border-[var(--line)] bg-white/60 p-4 md:grid-cols-2"
-            >
-              <Field
-                label="Zóna"
-                value={z.name}
-                onChange={(v) => updateAt(["delivery", "zones", String(i), "name"], v)}
-              />
-              <Field
-                label="Poplatek"
-                value={z.fee}
-                onChange={(v) => updateAt(["delivery", "zones", String(i), "fee"], v)}
-              />
-              <Field
-                label="Oblasti"
-                value={z.areas}
-                onChange={(v) => updateAt(["delivery", "zones", String(i), "areas"], v)}
-                multiline
-              />
-              <Field
-                label="Min. objednávka"
-                value={z.min}
-                onChange={(v) => updateAt(["delivery", "zones", String(i), "min"], v)}
-              />
-            </div>
-          ))}
+          <Panel title="Rozvoz — texty stránky">
+            <Field
+              label="Titulek"
+              value={content.delivery.title}
+              onChange={(v) => updateAt(["delivery", "title"], v)}
+            />
+            <Field
+              label="Úvod"
+              value={content.delivery.intro}
+              onChange={(v) => updateAt(["delivery", "intro"], v)}
+              multiline
+            />
+          </Panel>
+          <div className="space-y-4">
+            {content.delivery.zones.map((z, i) => (
+              <ItemCard key={i} title={z.name || `Zóna ${i + 1}`}>
+                <div className="grid gap-4 md:grid-cols-2">
+                  <Field
+                    label="Zóna"
+                    value={z.name}
+                    onChange={(v) =>
+                      updateAt(["delivery", "zones", String(i), "name"], v)
+                    }
+                  />
+                  <Field
+                    label="Poplatek"
+                    value={z.fee}
+                    onChange={(v) =>
+                      updateAt(["delivery", "zones", String(i), "fee"], v)
+                    }
+                  />
+                  <Field
+                    label="Oblasti"
+                    value={z.areas}
+                    onChange={(v) =>
+                      updateAt(["delivery", "zones", String(i), "areas"], v)
+                    }
+                    multiline
+                  />
+                  <Field
+                    label="Min. objednávka"
+                    value={z.min}
+                    onChange={(v) =>
+                      updateAt(["delivery", "zones", String(i), "min"], v)
+                    }
+                  />
+                </div>
+              </ItemCard>
+            ))}
+          </div>
         </div>
       );
     }
@@ -294,22 +342,21 @@ export function AdminClient({ initial, authenticated }: Props) {
     if (section === "home") {
       const h = content.home;
       return (
-        <div className="space-y-4">
-          {Object.entries(h).map(([key, value]) =>
-            typeof value === "string" ? (
-              <Field
-                key={key}
-                label={key}
-                value={value}
-                onChange={(v) => updateAt(["home", key], v)}
-                multiline={value.length > 60}
-              />
-            ) : null,
-          )}
-          <div className="space-y-3 border border-[var(--line)] bg-white/60 p-4">
-            <p className="text-base font-extrabold text-[var(--brand-red)]">
-              Nabídka (položky seznamu)
-            </p>
+        <div className="space-y-6">
+          <Panel title="Úvodní stránka — texty">
+            {Object.entries(h).map(([key, value]) =>
+              typeof value === "string" ? (
+                <Field
+                  key={key}
+                  label={key}
+                  value={value}
+                  onChange={(v) => updateAt(["home", key], v)}
+                  multiline={value.length > 60}
+                />
+              ) : null,
+            )}
+          </Panel>
+          <Panel title="Nabídka (položky seznamu)">
             {h.offerItems.map((item, i) => (
               <Field
                 key={i}
@@ -318,46 +365,37 @@ export function AdminClient({ initial, authenticated }: Props) {
                 onChange={(v) => updateAt(["home", "offerItems", String(i)], v)}
               />
             ))}
-          </div>
-          <div className="space-y-3 border border-[var(--line)] bg-white/60 p-4">
-            <p className="text-base font-extrabold text-[var(--brand-red)]">
-              Výhody / features
-            </p>
+          </Panel>
+          <Panel title="Výhody / features">
             {h.features.map((item, i) => (
-              <div key={i} className="space-y-2 border-t border-[var(--line)] pt-3">
+              <ItemCard key={i} title={`Výhoda ${i + 1}`}>
                 <Field
-                  label={`Název ${i + 1}`}
+                  label="Název"
                   value={item.title}
                   onChange={(v) =>
                     updateAt(["home", "features", String(i), "title"], v)
                   }
                 />
                 <Field
-                  label={`Text ${i + 1}`}
+                  label="Text"
                   value={item.text}
                   onChange={(v) =>
                     updateAt(["home", "features", String(i), "text"], v)
                   }
                 />
-              </div>
+              </ItemCard>
             ))}
-          </div>
-          <div className="space-y-4 rounded-[6.4px] border border-[var(--line)] bg-white p-5">
-            <p className="text-base font-extrabold text-[var(--brand-red)]">
-              FAQ
-            </p>
+          </Panel>
+          <Panel title="FAQ">
             <Field
               label="Nadpis FAQ"
               value={h.faqTitle}
               onChange={(v) => updateAt(["home", "faqTitle"], v)}
             />
             {h.faqs.map((f, i) => (
-              <div
-                key={i}
-                className="space-y-3 border-t border-[var(--line)] pt-4"
-              >
+              <ItemCard key={i} title={`Otázka ${i + 1}`}>
                 <Field
-                  label={`Otázka ${i + 1}`}
+                  label="Otázka"
                   value={f.q}
                   onChange={(v) =>
                     updateAt(["home", "faqs", String(i), "q"], v)
@@ -371,9 +409,9 @@ export function AdminClient({ initial, authenticated }: Props) {
                   }
                   multiline
                 />
-              </div>
+              </ItemCard>
             ))}
-          </div>
+          </Panel>
         </div>
       );
     }
@@ -381,73 +419,63 @@ export function AdminClient({ initial, authenticated }: Props) {
     if (section === "daily") {
       const d = content.daily;
       return (
-        <div className="space-y-8">
-          <div className="rounded-[6.4px] border border-[var(--brand-green)]/30 bg-white p-5 shadow-sm md:p-7">
-            <h2 className="text-2xl font-extrabold text-[var(--brand-red)]">
-              Denní nabídka — texty stránky
-            </h2>
-            <p className="mt-2 text-base text-[var(--muted)]">
-              Tyto texty se zobrazují na{" "}
-              <a
-                href="/denni-nabidka"
-                target="_blank"
-                rel="noreferrer"
-                className="font-semibold text-[var(--brand-red)] underline"
-              >
-                /denni-nabidka
-              </a>
-              . Intro pište srozumitelně — nemusí začínat „Každý den“.
-            </p>
-            <div className="mt-6 space-y-5">
+        <div className="space-y-6">
+          <Panel
+            title="Denní nabídka — texty stránky"
+            hint={
+              <>
+                Tyto texty se zobrazují na{" "}
+                <a
+                  href="/denni-nabidka"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="font-semibold text-[var(--brand-red)] underline"
+                >
+                  /denni-nabidka
+                </a>
+                . Intro pište srozumitelně — nemusí začínat „Každý den“.
+              </>
+            }
+          >
+            <Field
+              label="Nadpis stránky"
+              value={d.title}
+              onChange={(v) => updateAt(["daily", "title"], v)}
+            />
+            <Field
+              label="Úvodní text (intro)"
+              value={d.intro}
+              onChange={(v) => updateAt(["daily", "intro"], v)}
+              multiline
+              hint="Hlavní odstavec pod fotkou — měňte podle aktuální nabídky."
+            />
+            <Field
+              label="Poznámka pod nabídkou"
+              value={d.note}
+              onChange={(v) => updateAt(["daily", "note"], v)}
+              multiline
+            />
+            <div className="grid gap-5 sm:grid-cols-2">
               <Field
-                label="Nadpis stránky"
-                value={d.title}
-                onChange={(v) => updateAt(["daily", "title"], v)}
+                label="Datum"
+                value={d.date}
+                onChange={(v) => updateAt(["daily", "date"], v)}
+                hint="Zobrazí se vedle nadpisu (např. 1. 10. 2026)."
               />
               <Field
-                label="Úvodní text (intro)"
-                value={d.intro}
-                onChange={(v) => updateAt(["daily", "intro"], v)}
-                multiline
-                emphasize
-                hint="Hlavní odstavec pod fotkou — měňte podle aktuální nabídky."
+                label="Čas podávání"
+                value={d.hours}
+                onChange={(v) => updateAt(["daily", "hours"], v)}
               />
-              <Field
-                label="Poznámka pod nabídkou"
-                value={d.note}
-                onChange={(v) => updateAt(["daily", "note"], v)}
-                multiline
-              />
-              <div className="grid gap-5 sm:grid-cols-2">
-                <Field
-                  label="Datum"
-                  value={d.date}
-                  onChange={(v) => updateAt(["daily", "date"], v)}
-                  emphasize
-                  hint="Zobrazí se vedle nadpisu (např. 1. 10. 2026)."
-                />
-                <Field
-                  label="Čas podávání"
-                  value={d.hours}
-                  onChange={(v) => updateAt(["daily", "hours"], v)}
-                />
-              </div>
             </div>
-          </div>
+          </Panel>
 
-          <div className="space-y-5">
-            <h2 className="text-2xl font-extrabold text-[var(--brand-red)]">
-              Položky denního menu
-            </h2>
+          <Panel title="Položky denního menu">
             {d.items.map((item, i) => (
-              <div
+              <ItemCard
                 key={i}
-                className="space-y-4 rounded-[6.4px] border border-[var(--line)] border-l-4 border-l-[var(--brand-red)] bg-white p-5 shadow-sm"
+                title={`Jídlo ${i + 1}${item.name ? ` · ${item.name}` : ""}`}
               >
-                <p className="text-lg font-extrabold text-[var(--brand-red)]">
-                  Jídlo {i + 1}
-                  {item.name ? ` · ${item.name}` : ""}
-                </p>
                 <div className="grid gap-4 sm:grid-cols-[1fr_auto_auto]">
                   <Field
                     label="Název"
@@ -486,50 +514,43 @@ export function AdminClient({ initial, authenticated }: Props) {
                     updateAt(["daily", "items", String(i), "note"], v)
                   }
                 />
-              </div>
+              </ItemCard>
             ))}
-          </div>
+          </Panel>
 
-          <div className="rounded-[6.4px] border border-[var(--line)] bg-[var(--paper-soft)] p-5">
-            <h2 className="text-xl font-extrabold text-[var(--brand-red)]">
-              Text na úvodní stránce
-            </h2>
-            <p className="mt-1 text-sm text-[var(--muted)]">
-              Krátký text u dlaždice „Denní menu přes poledne“ v zeleném pruhu.
-            </p>
-            <div className="mt-4">
-              <Field
-                label="Text dlaždice (home)"
-                value={content.home.dailyMenuText}
-                onChange={(v) => updateAt(["home", "dailyMenuText"], v)}
-                multiline
-                emphasize
-                hint="Měl by být jiný než intro na stránce denní nabídky."
-              />
-            </div>
-          </div>
+          <Panel
+            title="Text na úvodní stránce"
+            hint="Krátký text u dlaždice „Denní menu přes poledne“ v zeleném pruhu."
+          >
+            <Field
+              label="Text dlaždice (home)"
+              value={content.home.dailyMenuText}
+              onChange={(v) => updateAt(["home", "dailyMenuText"], v)}
+              multiline
+              hint="Měl by být jiný než intro na stránce denní nabídky."
+            />
+          </Panel>
         </div>
       );
     }
 
     if (section === "glutenFree") {
       return (
-        <div className="space-y-4">
-          {Object.entries(content.glutenFree).map(([key, value]) =>
-            typeof value === "string" ? (
-              <Field
-                key={key}
-                label={key}
-                value={value}
-                onChange={(v) => updateAt(["glutenFree", key], v)}
-                multiline={value.length > 60}
-              />
-            ) : null,
-          )}
-          <div className="space-y-3 border border-[var(--line)] bg-white/60 p-4">
-            <p className="text-base font-extrabold text-[var(--brand-red)]">
-              Jak připravujeme
-            </p>
+        <div className="space-y-6">
+          <Panel title="Bezlepková — texty stránky">
+            {Object.entries(content.glutenFree).map(([key, value]) =>
+              typeof value === "string" ? (
+                <Field
+                  key={key}
+                  label={key}
+                  value={value}
+                  onChange={(v) => updateAt(["glutenFree", key], v)}
+                  multiline={value.length > 60}
+                />
+              ) : null,
+            )}
+          </Panel>
+          <Panel title="Jak připravujeme">
             {content.glutenFree.howItems.map((item, i) => (
               <Field
                 key={i}
@@ -540,29 +561,28 @@ export function AdminClient({ initial, authenticated }: Props) {
                 }
               />
             ))}
-          </div>
-          {content.glutenFree.faqs.map((f, i) => (
-            <div
-              key={i}
-              className="space-y-3 border border-[var(--line)] bg-white/60 p-4"
-            >
-              <Field
-                label={`FAQ ${i + 1} – otázka`}
-                value={f.q}
-                onChange={(v) =>
-                  updateAt(["glutenFree", "faqs", String(i), "q"], v)
-                }
-              />
-              <Field
-                label="Odpověď"
-                value={f.a}
-                onChange={(v) =>
-                  updateAt(["glutenFree", "faqs", String(i), "a"], v)
-                }
-                multiline
-              />
-            </div>
-          ))}
+          </Panel>
+          <Panel title="FAQ">
+            {content.glutenFree.faqs.map((f, i) => (
+              <ItemCard key={i} title={`Otázka ${i + 1}`}>
+                <Field
+                  label="Otázka"
+                  value={f.q}
+                  onChange={(v) =>
+                    updateAt(["glutenFree", "faqs", String(i), "q"], v)
+                  }
+                />
+                <Field
+                  label="Odpověď"
+                  value={f.a}
+                  onChange={(v) =>
+                    updateAt(["glutenFree", "faqs", String(i), "a"], v)
+                  }
+                  multiline
+                />
+              </ItemCard>
+            ))}
+          </Panel>
         </div>
       );
     }
@@ -570,42 +590,40 @@ export function AdminClient({ initial, authenticated }: Props) {
     if (section === "about") {
       return (
         <div className="space-y-6">
-          <Field
-            label="Titulek"
-            value={content.about.title}
-            onChange={(v) => updateAt(["about", "title"], v)}
-          />
-          <Field
-            label="Lead"
-            value={content.about.lead}
-            onChange={(v) => updateAt(["about", "lead"], v)}
-            multiline
-          />
-          {content.about.paragraphs.map((p, i) => (
+          <Panel title="O nás — texty stránky">
             <Field
-              key={i}
-              label={`Odstavec ${i + 1}`}
-              value={p}
-              onChange={(v) => updateAt(["about", "paragraphs", String(i)], v)}
+              label="Titulek"
+              value={content.about.title}
+              onChange={(v) => updateAt(["about", "title"], v)}
+            />
+            <Field
+              label="Lead"
+              value={content.about.lead}
+              onChange={(v) => updateAt(["about", "lead"], v)}
               multiline
             />
-          ))}
-          <div className="space-y-4 rounded-[6.4px] border border-[var(--line)] bg-white p-5">
-            <p className="text-base font-extrabold text-[var(--brand-red)]">
-              FAQ
-            </p>
+            {content.about.paragraphs.map((p, i) => (
+              <Field
+                key={i}
+                label={`Odstavec ${i + 1}`}
+                value={p}
+                onChange={(v) =>
+                  updateAt(["about", "paragraphs", String(i)], v)
+                }
+                multiline
+              />
+            ))}
+          </Panel>
+          <Panel title="FAQ">
             <Field
               label="Nadpis FAQ"
               value={content.about.faqTitle}
               onChange={(v) => updateAt(["about", "faqTitle"], v)}
             />
             {content.about.faqs.map((f, i) => (
-              <div
-                key={i}
-                className="space-y-3 border-t border-[var(--line)] pt-4"
-              >
+              <ItemCard key={i} title={`Otázka ${i + 1}`}>
                 <Field
-                  label={`Otázka ${i + 1}`}
+                  label="Otázka"
                   value={f.q}
                   onChange={(v) =>
                     updateAt(["about", "faqs", String(i), "q"], v)
@@ -619,9 +637,9 @@ export function AdminClient({ initial, authenticated }: Props) {
                   }
                   multiline
                 />
-              </div>
+              </ItemCard>
             ))}
-          </div>
+          </Panel>
         </div>
       );
     }
@@ -630,42 +648,38 @@ export function AdminClient({ initial, authenticated }: Props) {
       const m = content.menuPage;
       return (
         <div className="space-y-6">
-          {(
-            [
-              ["title", "Titulek"],
-              ["intro", "Úvod"],
-              ["extrasTitle", "Nadpis přídavků"],
-              ["extrasText", "Text přídavků"],
-              ["glutenNote", "Poznámka bez lepku"],
-              ["allergensTitle", "Nadpis alergenů"],
-              ["allergensText", "Text alergenů"],
-              ["orderNote", "Poznámka k objednávce"],
-            ] as const
-          ).map(([key, label]) => (
-            <Field
-              key={key}
-              label={label}
-              value={m[key]}
-              onChange={(v) => updateAt(["menuPage", key], v)}
-              multiline={m[key].length > 60}
-            />
-          ))}
-          <div className="space-y-4 rounded-[6.4px] border border-[var(--line)] bg-white p-5">
-            <p className="text-base font-extrabold text-[var(--brand-red)]">
-              FAQ
-            </p>
+          <Panel title="Stránka menu — texty">
+            {(
+              [
+                ["title", "Titulek"],
+                ["intro", "Úvod"],
+                ["extrasTitle", "Nadpis přídavků"],
+                ["extrasText", "Text přídavků"],
+                ["glutenNote", "Poznámka bez lepku"],
+                ["allergensTitle", "Nadpis alergenů"],
+                ["allergensText", "Text alergenů"],
+                ["orderNote", "Poznámka k objednávce"],
+              ] as const
+            ).map(([key, label]) => (
+              <Field
+                key={key}
+                label={label}
+                value={m[key]}
+                onChange={(v) => updateAt(["menuPage", key], v)}
+                multiline={m[key].length > 60}
+              />
+            ))}
+          </Panel>
+          <Panel title="FAQ">
             <Field
               label="Nadpis FAQ"
               value={m.faqTitle}
               onChange={(v) => updateAt(["menuPage", "faqTitle"], v)}
             />
             {m.faqs.map((f, i) => (
-              <div
-                key={i}
-                className="space-y-3 border-t border-[var(--line)] pt-4"
-              >
+              <ItemCard key={i} title={`Otázka ${i + 1}`}>
                 <Field
-                  label={`Otázka ${i + 1}`}
+                  label="Otázka"
                   value={f.q}
                   onChange={(v) =>
                     updateAt(["menuPage", "faqs", String(i), "q"], v)
@@ -679,17 +693,40 @@ export function AdminClient({ initial, authenticated }: Props) {
                   }
                   multiline
                 />
-              </div>
+              </ItemCard>
             ))}
-          </div>
+          </Panel>
         </div>
       );
     }
 
-    // Generic object of strings
+    if (section === "nav") {
+      const data = content.nav as Record<string, string>;
+      return (
+        <Panel
+          title="Navigace"
+          hint="Popisky v horním menu a v patičce. Po uložení se projeví hned na celém webu."
+        >
+          {Object.entries(data).map(([key, value]) =>
+            typeof value === "string" ? (
+              <Field
+                key={key}
+                label={NAV_LABELS[key] || key}
+                value={value}
+                onChange={(v) => updateAt(["nav", key], v)}
+              />
+            ) : null,
+          )}
+        </Panel>
+      );
+    }
+
+    // Generic object of strings (site, contact, footer, …)
     const data = sectionData as Record<string, string>;
+    const sectionLabel =
+      SECTIONS.find((s) => s.key === section)?.label || String(section);
     return (
-      <div className="space-y-4">
+      <Panel title={sectionLabel}>
         {Object.entries(data).map(([key, value]) =>
           typeof value === "string" ? (
             <Field
@@ -701,7 +738,7 @@ export function AdminClient({ initial, authenticated }: Props) {
             />
           ) : null,
         )}
-      </div>
+      </Panel>
     );
   }, [section, content, sectionData]);
 
@@ -788,10 +825,9 @@ export function AdminClient({ initial, authenticated }: Props) {
       </header>
 
       <div className="mx-auto grid max-w-6xl gap-6 px-4 py-8 md:grid-cols-[240px_1fr]">
-        <aside className="flex flex-row gap-2 overflow-x-auto md:flex-col md:overflow-visible">
+        <aside className="flex flex-row gap-2 overflow-x-auto md:flex-col md:overflow-visible md:rounded-[6.4px] md:border md:border-[var(--line)] md:bg-white md:p-2 md:shadow-sm">
           {SECTIONS.map((s) => {
             const active = section === s.key;
-            const isDaily = s.key === "daily";
             return (
               <button
                 key={s.key}
@@ -800,9 +836,7 @@ export function AdminClient({ initial, authenticated }: Props) {
                 className={`whitespace-nowrap rounded-[6.4px] px-4 py-3 text-left text-base font-semibold transition ${
                   active
                     ? "bg-[var(--brand-green)] text-white shadow-sm"
-                    : isDaily
-                      ? "border border-[var(--brand-green)] bg-[#eef8f1] text-[var(--brand-green)] hover:bg-[#dff3e6]"
-                      : "bg-white text-[var(--ink)] hover:bg-white"
+                    : "bg-white text-[var(--ink)] hover:bg-[#eef8f1] hover:text-[var(--brand-green)] md:bg-transparent"
                 }`}
               >
                 {s.label}
