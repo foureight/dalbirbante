@@ -35,7 +35,7 @@ export default async function GlutenFreePage() {
         data={getBreadcrumbSchema([
           { name: "Domů", path: "/" },
           {
-            name: "Bezlepková pizza Vinoř",
+            name: "Bezlepková nabídka",
             path: "/bezlepkova-pizza-vinor",
           },
         ])}
@@ -51,7 +51,7 @@ export default async function GlutenFreePage() {
         <PageHero
           title={glutenFree.title}
           image="/images/burrata.webp"
-          imageAlt="Bezlepková pizza Dal Birbante Vinoř"
+          imageAlt="Bezlepková pizza, pasta a gnocchi Dal Birbante Vinoř"
         />
 
         <section className="page-wrap grid gap-10 py-12 md:grid-cols-[1.1fr_0.9fr] md:gap-20 md:py-36">
@@ -61,6 +61,23 @@ export default async function GlutenFreePage() {
             </p>
             <p className="mt-4 max-w-none text-left text-base leading-relaxed text-[var(--muted)] md:mt-6 md:text-[length:inherit] md:leading-[inherit]">
               {glutenFree.intro2}
+            </p>
+
+            <h2 className="mt-10 text-[var(--brand-green)] md:mt-14">
+              {glutenFree.productsTitle}
+            </h2>
+            <ul className="mt-5 space-y-3 md:mt-6 md:space-y-4">
+              {glutenFree.products.map((item, i) => (
+                <Reveal key={item} delay={60 * (i + 1)}>
+                  <li className="flex gap-3 text-base leading-relaxed text-[var(--ink)] sm:gap-4">
+                    <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--brand-red)] sm:mt-4" />
+                    <span>{item}</span>
+                  </li>
+                </Reveal>
+              ))}
+            </ul>
+            <p className="mt-5 text-base font-medium leading-relaxed text-[var(--brand-green)] md:text-[length:inherit]">
+              {glutenFree.productsNote}
             </p>
 
             <h2 className="mt-10 text-[var(--brand-green)] md:mt-14">
@@ -77,15 +94,20 @@ export default async function GlutenFreePage() {
               ))}
             </ul>
 
-            <Button asChild className="btn-brand mt-8 w-full sm:mt-10 sm:w-auto">
-              <a href={site.phoneHref}>{site.callLabel}</a>
-            </Button>
+            <div className="mt-8 flex w-full flex-col gap-3 sm:mt-10 sm:w-auto sm:flex-row sm:flex-wrap sm:gap-4">
+              <Button asChild className="btn-brand w-full sm:w-auto">
+                <a href={site.phoneHref}>{site.callLabel}</a>
+              </Button>
+              <Button asChild className="btn-green w-full sm:w-auto">
+                <a href="/menu">Celé menu</a>
+              </Button>
+            </div>
           </Reveal>
           <Reveal delay={140} variant="scale">
             <div className="img-zoom relative aspect-square overflow-hidden rounded-[6.4px] bg-[var(--paper-soft)]">
               <Image
                 src="/images/burrata.webp"
-                alt="Bezlepková pizza Dal Birbante Vinoř"
+                alt="Bezlepková pizza, pasta a gnocchi Dal Birbante Vinoř"
                 fill
                 className="img-zoom-media object-contain"
                 sizes="(max-width:768px) 100vw, 40vw"

@@ -550,6 +550,18 @@ export function AdminClient({ initial, authenticated }: Props) {
               ) : null,
             )}
           </Panel>
+          <Panel title="Bezlepkové produkty">
+            {(content.glutenFree.products || []).map((item, i) => (
+              <Field
+                key={i}
+                label={`Produkt ${i + 1}`}
+                value={item}
+                onChange={(v) =>
+                  updateAt(["glutenFree", "products", String(i)], v)
+                }
+              />
+            ))}
+          </Panel>
           <Panel title="Jak připravujeme">
             {content.glutenFree.howItems.map((item, i) => (
               <Field

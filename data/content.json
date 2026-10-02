@@ -70,8 +70,8 @@
         "description": "Rozvoz neapolské pizzy z Dal Birbante po Praze 9 a okolí – Kbely, Satalice, Letňany, Čakovice a další. Ceny a zóny rozvozu."
       },
       "glutenFree": {
-        "title": "Bezlepková pizza Vinoř – Dal Birbante",
-        "description": "Bezlepková pizza ve Vinoři u Dal Birbante. Kvalitní těsto pro celiaky, na místě, s sebou i s rozvozem po Praze 9."
+        "title": "Bezlepková pizza, pasta a gnocchi Vinoř – Dal Birbante",
+        "description": "Bezlepková pizza, těstoviny, gnocchi i lasagne ve Vinoři u Dal Birbante. Na místě, s sebou i s rozvozem po Praze 9."
       }
     }
   },
@@ -645,33 +645,48 @@
     ]
   },
   "glutenFree": {
-    "title": "BEZLEPKOVÁ PIZZA V PRAZE - VINOŘI",
-    "intro": "Chcete si dát pizzu, ale vyhýbáte se lepku? V Dal Birbante v Praze – Vinoři připravujeme také bezlepkovou pizzu. Používáme speciální bezlepkové těsto a dbáme na maximálně možnou separaci od klasického těsta, aby riziko kontaminace bylo co nejmenší.",
-    "intro2": "Bezlepkovou pizzu si můžete dát přímo v našem bistru, vzít si ji s sebou nebo objednat na rozvoz. Doporučujeme si bezlepkovou variantu ověřit při objednávce – rádi vám sdělíme aktuální možnosti a poradíme s výběrem.",
-    "howTitle": "Jak připravujeme bezlepkovou pizzu?",
+    "title": "BEZLEPKOVÁ PIZZA, TĚSTOVINY A GNOCCHI VE VINOŘI",
+    "intro": "Chcete si dát italskou klasiku, ale vyhýbáte se lepku? V Dal Birbante v Praze – Vinoři připravujeme bezlepkovou pizzu, vybrané těstoviny, gnocchi i lasagne. Používáme speciální bezlepkové těsto a dbáme na maximálně možnou separaci od klasického těsta, aby riziko kontaminace bylo co nejmenší.",
+    "intro2": "Bezlepkovou variantu si můžete dát přímo v bistru, vzít s sebou nebo objednat na rozvoz. Při objednávce prosím vždy uveďte bezlepkovou volbu — rádi ověříme aktuální dostupnost a poradíme s výběrem.",
+    "howTitle": "Jak připravujeme bezlepkové pokrmy?",
     "faqTitle": "Časté otázky",
     "howItems": [
-      "používáme bezlepkové těsto od ověřeného dodavatele",
-      "pizzaiolo pracuje s bezlepkovým těstem odděleně od klasického",
-      "používáme kvalitní italské suroviny stejně jako u klasické pizzy"
+      "používáme bezlepkové těsto a bezlepkové těstoviny od ověřených dodavatelů",
+      "pizzaiolo a kuchyně pracují s bezlepkovou variantou odděleně od klasického těsta",
+      "používáme stejné kvalitní italské suroviny jako u klasické nabídky",
+      "příplatek: pizza +99 Kč, pasta / gnocchi / lasagne +29 Kč"
     ],
     "faqs": [
       {
-        "q": "Je bezlepková pizza vhodná pro celiaky?",
-        "a": "Používáme speciální bezlepkové těsto, ale pizza se připravuje v prostředí, kde se pracuje i s klasickým lepkovým těstem. Přestože děláme maximum pro oddělení bezlepkového těsta, stopová kontaminace není zcela vyloučena. Pokud trpíte celiakií nebo silnou alergií, vždy nás na to prosím upozorněte."
+        "q": "Jsou bezlepkové produkty vhodné pro celiaky?",
+        "a": "Používáme speciální bezlepkové těsto a těstoviny, ale kuchyně pracuje i s klasickým lepkem. Přestože děláme maximum pro oddělení, stopová kontaminace není zcela vyloučena. Pokud trpíte celiakií nebo silnou alergií, vždy nás na to prosím upozorněte."
       },
       {
-        "q": "Musím si bezlepkovou pizzu objednat předem?",
-        "a": "Doporučujeme se předem informovat, zda je aktuálně bezlepkové těsto dostupné. Objednat pak můžete přímo na místě, telefonicky nebo v rámci rozvozu."
+        "q": "Musím si bezlepkovou variantu objednat předem?",
+        "a": "Doporučujeme se předem informovat, zda je aktuálně bezlepkové těsto a pasta dostupné. Objednat pak můžete přímo na místě, telefonicky, přes web nebo v rámci rozvozu."
       },
       {
-        "q": "Rozvážíte i bezlepkovou pizzu?",
-        "a": "Ano, bezlepkovou pizzu rozvážíme ve stejných zónách jako klasickou pizzu. Stačí při objednávce nahlásit, že chcete bezlepkovou variantu."
+        "q": "Rozvážíte i bezlepkovou pizzu a pastu?",
+        "a": "Ano, bezlepkovou pizzu, těstoviny i gnocchi rozvážíme ve stejných zónách jako klasickou nabídku. Stačí při objednávce nahlásit bezlepkovou variantu."
       },
       {
-        "q": "Jaké suroviny používáte na bezlepkovou pizzu?",
-        "a": "Na bezlepkovou pizzu používáme stejné kvalitní suroviny jako na naši klasickou neapolskou pizzu – rajčata z okolí Vesuvu, čerstvou mozzarellu a další ingredience dovezené z Itálie. Liší se pouze složení těsta."
+        "q": "Jaké suroviny používáte na bezlepkové pokrmy?",
+        "a": "Na bezlepkovou pizzu i pastu používáme stejné kvalitní suroviny jako na klasickou nabídku – rajčata z okolí Vesuvu, čerstvou mozzarellu a další ingredience z Itálie. Liší se především těsto / těstoviny."
+      },
+      {
+        "q": "Které těstoviny a gnocchi můžu mít bezlepkově?",
+        "a": "Bezlepkově připravíme Spaghetti aglio olio e peperoncino, Spaghetti pomodoro e basilico, Tagliatelle al ragú, Gnocchi ai quattro formaggi i Lasagne. Příplatek je 29 Kč."
       }
+    ],
+    "productsTitle": "Co všechno nabízíme bezlepkově?",
+    "productsNote": "Bezlepková pizza +99 Kč · Bezlepková pasta / gnocchi / lasagne +29 Kč",
+    "products": [
+      "Bezlepková pizza — kteroukoli pizzu z našeho menu připravíme na bezlepkovém těstě",
+      "Spaghetti aglio, olio e peperoncino",
+      "Spaghetti pomodoro e basilico",
+      "Tagliatelle al ragú",
+      "Gnocchi ai quattro formaggi",
+      "Lasagne"
     ]
   },
   "contact": {

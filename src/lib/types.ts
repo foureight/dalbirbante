@@ -147,6 +147,9 @@ export type SiteContent = {
     title: string;
     intro: string;
     intro2: string;
+    productsTitle: string;
+    productsNote: string;
+    products: string[];
     howTitle: string;
     faqTitle: string;
     howItems: string[];
