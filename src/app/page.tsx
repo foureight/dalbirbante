@@ -110,16 +110,19 @@ export default async function HomePage() {
                 t: home.pizzaWeekTitle,
                 d: home.pizzaWeekText,
                 href: "/menu#pizza",
+                cta: "Pizza týdne",
               },
               {
                 t: home.dailyMenuTitle,
                 d: home.dailyMenuText,
                 href: "/denni-nabidka",
+                cta: "Denní nabídka",
               },
               {
                 t: home.glutenFreeTitle,
                 d: home.glutenFreeText,
-                href: "/menu#pasta",
+                href: "/bezlepkova-pizza-vinor",
+                cta: "Bezlepková nabídka",
               },
             ].map((block, i) => (
               <Reveal key={block.t} delay={i * 100} className="h-full">
@@ -141,11 +144,7 @@ export default async function HomePage() {
                     href={block.href}
                     className="btn-outline-light mt-auto inline-flex w-full sm:w-fit"
                   >
-                    {block.href === "/menu#pizza"
-                      ? "Pizza týdne"
-                      : block.href === "/denni-nabidka"
-                        ? "Denní nabídka"
-                        : "Bezlepková pizza"}
+                    {block.cta}
                   </Link>
                 </div>
               </Reveal>
