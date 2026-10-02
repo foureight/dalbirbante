@@ -107,7 +107,7 @@ export default async function MenuPage() {
                               src="/images/menu/drink-can.svg"
                               alt=""
                               fill
-                              className="object-contain p-[3px]"
+                              className="object-contain p-4 sm:p-6"
                               sizes="112px"
                               aria-hidden
                             />
