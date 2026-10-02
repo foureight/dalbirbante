@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Dal Birbante – mapa</title>
-  <link href="https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.css" rel="stylesheet" />
+  <link href="/vendor/maplibre/maplibre-gl.css" rel="stylesheet" />
   <style>
     html, body, #map { margin: 0; padding: 0; width: 100%; height: 100%; background: #f3f3f3; }
     .marker {
@@ -14,18 +14,32 @@
       background-size: contain;
       background-repeat: no-repeat;
     }
+    .map-error {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      font: 15px/1.4 system-ui, sans-serif;
+      color: #666;
+      background: rgba(243, 243, 243, 0.92);
+      z-index: 2;
+      padding: 1rem;
+      text-align: center;
+    }
   </style>
 </head>
 <body>
   <div id="map"></div>
-  <script src="https://unpkg.com/maplibre-gl@2.4.0/dist/maplibre-gl.js"></script>
-  <script>
+  <script type="module">
+    import { Map, Marker, setWorkerUrl } from "/vendor/maplibre/maplibre-gl.mjs";
+    setWorkerUrl("/vendor/maplibre/maplibre-gl-worker.mjs");
+
     const centerLat = 50.1431511;
     const centerLng = 14.5786469;
     const zoomLevel = 13;
     const pinIconUrl = "/images/pin.svg";
 
-    const map = new maplibregl.Map({
+    const map = new Map({
       container: "map",
       style: "https://tiles.openfreemap.org/styles/positron",
       center: [centerLng, centerLat],
@@ -33,15 +47,22 @@
       attributionControl: false,
     });
 
+    map.on("error", () => {
+      if (document.querySelector(".map-error")) return;
+      const el = document.createElement("div");
+      el.className = "map-error";
+      el.textContent = "Mapové podklady se nepodařilo načíst.";
+      document.body.appendChild(el);
+    });
+
     map.on("load", () => {
-      // soft grayscale wash for a light B&W look
       const canvas = map.getCanvas();
       canvas.style.filter = "grayscale(1) contrast(1.05) brightness(1.02)";
 
       const el = document.createElement("div");
       el.className = "marker";
       el.style.backgroundImage = "url(" + pinIconUrl + ")";
-      new maplibregl.Marker(el).setLngLat([centerLng, centerLat]).addTo(map);
+      new Marker({ element: el }).setLngLat([centerLng, centerLat]).addTo(map);
     });
   </script>
 </body>

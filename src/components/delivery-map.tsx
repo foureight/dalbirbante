@@ -2,11 +2,23 @@
 
 import { useEffect, useRef, useState } from "react";
 import * as maplibregl from "maplibre-gl";
+import { setWorkerUrl } from "maplibre-gl";
 import type { Map, MapLayerMouseEvent, Popup } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import zones from "../../data/delivery-zones.json";
 
 const CENTER: [number, number] = [14.578649, 50.143151];
+
+// Turbopack/Next rewrites maplibre's import.meta.url, so the default relative
+// worker path 404s. Point at the self-hosted module worker instead.
+const MAPLIBRE_WORKER_URL = "/vendor/maplibre/maplibre-gl-worker.mjs";
+let workerConfigured = false;
+
+function ensureMaplibreWorker() {
+  if (workerConfigured || typeof window === "undefined") return;
+  setWorkerUrl(MAPLIBRE_WORKER_URL);
+  workerConfigured = true;
+}
 
 export function DeliveryMap({ className = "" }: { className?: string }) {
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -36,6 +48,7 @@ export function DeliveryMap({ className = "" }: { className?: string }) {
     }
 
     try {
+      ensureMaplibreWorker();
       map = new maplibregl.Map({
         container: containerRef.current,
         style: "https://tiles.openfreemap.org/styles/positron",
