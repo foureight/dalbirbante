@@ -56,10 +56,10 @@ export default async function GlutenFreePage() {
 
         <section className="page-wrap grid gap-10 py-12 md:grid-cols-[1.1fr_0.9fr] md:gap-20 md:py-36">
           <Reveal>
-            <p className="max-w-none text-left text-base leading-relaxed text-[var(--muted)] md:text-[length:inherit] md:leading-[inherit]">
+            <p className="max-w-none text-left leading-relaxed text-[var(--muted)]">
               {glutenFree.intro}
             </p>
-            <p className="mt-4 max-w-none text-left text-base leading-relaxed text-[var(--muted)] md:mt-6 md:text-[length:inherit] md:leading-[inherit]">
+            <p className="mt-4 max-w-none text-left leading-relaxed text-[var(--muted)] md:mt-6">
               {glutenFree.intro2}
             </p>
 
@@ -69,14 +69,14 @@ export default async function GlutenFreePage() {
             <ul className="mt-5 space-y-3 md:mt-6 md:space-y-4">
               {glutenFree.products.map((item, i) => (
                 <Reveal key={item} delay={60 * (i + 1)}>
-                  <li className="flex gap-3 text-base leading-relaxed text-[var(--ink)] sm:gap-4">
+                  <li className="flex gap-3 leading-relaxed text-[var(--ink)] sm:gap-4">
                     <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--brand-red)] sm:mt-4" />
                     <span>{item}</span>
                   </li>
                 </Reveal>
               ))}
             </ul>
-            <p className="mt-5 text-base font-medium leading-relaxed text-[var(--brand-green)] md:text-[length:inherit]">
+            <p className="mt-5 font-bold leading-relaxed text-[var(--brand-green)]">
               {glutenFree.productsNote}
             </p>
 
@@ -86,7 +86,7 @@ export default async function GlutenFreePage() {
             <ul className="mt-5 space-y-3 md:mt-6 md:space-y-4">
               {glutenFree.howItems.map((item, i) => (
                 <Reveal key={item} delay={70 * (i + 1)}>
-                  <li className="flex gap-3 text-base leading-relaxed text-[var(--ink)] sm:gap-4">
+                  <li className="flex gap-3 leading-relaxed text-[var(--ink)] sm:gap-4">
                     <span className="mt-2.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--brand-red)] sm:mt-4" />
                     <span>{item}</span>
                   </li>
