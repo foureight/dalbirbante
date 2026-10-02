@@ -7,7 +7,7 @@ export type PizzaExtra = {
 export const GLUTEN_FREE_PIZZA_SURCHARGE = 99;
 export const GLUTEN_FREE_PASTA_SURCHARGE = 29;
 
-/** Přídavky podle menu Dal Birbante */
+/** Přísady navíc podle menu Dal Birbante */
 export const PIZZA_EXTRAS: PizzaExtra[] = [
   { id: "oregano", name: "oregano", price: 15 },
   { id: "olivovy-olej", name: "olivový olej", price: 15 },

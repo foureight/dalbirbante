@@ -202,7 +202,7 @@
     "orderNote": "Kompletní nabídku a online objednávku najdete také na Reservo.",
     "allergensTitle": "Seznam alergenů",
     "allergensText": "(1) Obiloviny obsahující lepek (2) Korýši a výrobky z nich (3) Vejce a výrobky z nich (4) Ryby a výrobky z nich (5) Jádra podzemnice olejné (arašídy) a výrobky z nich (6) Sójové boby a výrobky z nich (7) Mléko a výrobky z něj (včetně laktózy) (8) Skořápkové plody (9) Celer a výrobky z něj (10) Hořčice a výrobky z ní (11) Sezamová semena a výrobky z nich (12) Oxid siřičitý a siřičitany (13) Vlčí bob (lupina) a výrobky z něj (14) Měkkýši a výrobky z nich",
-    "extrasTitle": "Přídavky na pizzu",
+    "extrasTitle": "PŘÍSADY NAVÍC",
     "extrasText": "oregano, olivový olej, bazalka, chilli, česnek, pistácie 15 Kč · rukola, cibule 20 Kč · kapary, Grana Padano, pecorino romano 25 Kč · drcená rajčata, gorgonzola, uzená scamorza, ricotta 30 Kč · žampiony, artyčoky, dušená šunka 35 Kč · olivy taggiasche, lilek, cuketa, mozzarella fior di latte, stracchino, stracciatella, pikantní salám spianata romana, ančovičky, tuňák, mortadella 40 Kč · salsiccia 50 Kč · parmská šunka 70 Kč",
     "glutenNote": "Bezlepková pizza +99 Kč · Bezlepková pasta +29 Kč",
     "faqTitle": "Nejčastější otázky k menu",
@@ -213,7 +213,7 @@
       },
       {
         "q": "Mohu si pizzu upravit přílohami?",
-        "a": "Ano. Při přidání do košíku si u pizzy zvolíte klasické nebo bezlepkové těsto a zaškrtnete přílohy (rukola, gorgonzola, parmská šunka a další). Ceny přídavků jsou uvedené v sekci Přídavky na pizzu."
+        "a": "Ano. Při přidání do košíku si u pizzy zvolíte klasické nebo bezlepkové těsto a zaškrtnete přílohy (rukola, gorgonzola, parmská šunka a další). Ceny jsou uvedené v sekci Přísady navíc."
       },
       {
         "q": "Máte bezlepkovou pizzu nebo těstoviny?",
