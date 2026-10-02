@@ -452,7 +452,8 @@
         {
           "name": "Oransoda",
           "description": "0,33 l",
-          "price": "49 Kč"
+          "price": "49 Kč",
+          "image": "/images/menu/oransoda.webp"
         },
         {
           "name": "Coca Cola",
