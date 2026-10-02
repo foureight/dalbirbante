@@ -842,8 +842,8 @@
 
 .delivery-map__canvas {
   width: 100%;
-  height: min(62vw, 520px);
-  min-height: 320px;
+  height: min(72vw, 560px);
+  min-height: 360px;
 }
 
 .delivery-map__status {

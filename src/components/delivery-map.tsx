@@ -20,6 +20,27 @@ function ensureMaplibreWorker() {
   workerConfigured = true;
 }
 
+function zoneBounds(features: typeof zones.features): [[number, number], [number, number]] {
+  let minLng = Infinity;
+  let minLat = Infinity;
+  let maxLng = -Infinity;
+  let maxLat = -Infinity;
+  for (const f of features) {
+    for (const ring of f.geometry.coordinates) {
+      for (const [lng, lat] of ring) {
+        minLng = Math.min(minLng, lng);
+        minLat = Math.min(minLat, lat);
+        maxLng = Math.max(maxLng, lng);
+        maxLat = Math.max(maxLat, lat);
+      }
+    }
+  }
+  return [
+    [minLng, minLat],
+    [maxLng, maxLat],
+  ];
+}
+
 export function DeliveryMap({ className = "" }: { className?: string }) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<Map | null>(null);
@@ -52,9 +73,10 @@ export function DeliveryMap({ className = "" }: { className?: string }) {
       ensureMaplibreWorker();
       map = new maplibregl.Map({
         container: containerRef.current,
-        style: "https://tiles.openfreemap.org/styles/positron",
+        // Brighter street map closer to the Google Maps reference look
+        style: "https://tiles.openfreemap.org/styles/liberty",
         center: CENTER,
-        zoom: 11.2,
+        zoom: 10.6,
         attributionControl: false,
       });
     } catch {
@@ -74,6 +96,7 @@ export function DeliveryMap({ className = "" }: { className?: string }) {
       styleLoaded = true;
       setError("");
 
+      // Outer zones first so inner yellow/orange sit on top (concentric look)
       const ordered = [...zones.features].sort(
         (a, b) => Number(b.properties.id) - Number(a.properties.id),
       );
@@ -92,7 +115,7 @@ export function DeliveryMap({ className = "" }: { className?: string }) {
         source: "delivery-zones",
         paint: {
           "fill-color": ["get", "color"],
-          "fill-opacity": 0.28,
+          "fill-opacity": 0.42,
         },
       });
 
@@ -102,8 +125,8 @@ export function DeliveryMap({ className = "" }: { className?: string }) {
         source: "delivery-zones",
         paint: {
           "line-color": ["get", "color"],
-          "line-width": 2,
-          "line-opacity": 0.9,
+          "line-width": 2.5,
+          "line-opacity": 0.95,
         },
       });
 
@@ -138,6 +161,16 @@ export function DeliveryMap({ className = "" }: { className?: string }) {
         popup?.remove();
       });
 
+      try {
+        map.fitBounds(zoneBounds(zones.features), {
+          padding: { top: 36, bottom: 36, left: 36, right: 36 },
+          maxZoom: 11.2,
+          duration: 0,
+        });
+      } catch {
+        // keep default center/zoom
+      }
+
       setReady(true);
     });
 
@@ -156,6 +189,11 @@ export function DeliveryMap({ className = "" }: { className?: string }) {
     };
   }, []);
 
+  // Legend: innermost first (Zóna 1 → 5)
+  const legend = [...zones.features].sort(
+    (a, b) => Number(a.properties.id) - Number(b.properties.id),
+  );
+
   return (
     <div className={`delivery-map ${className}`}>
       <div ref={containerRef} className="delivery-map__canvas" />
@@ -166,7 +204,7 @@ export function DeliveryMap({ className = "" }: { className?: string }) {
         <div className="delivery-map__status">{error}</div>
       )}
       <ul className="delivery-map__legend" aria-label="Legenda zón">
-        {zones.features.map((f) => (
+        {legend.map((f) => (
           <li key={f.properties.id}>
             <span
               className="delivery-map__swatch"
