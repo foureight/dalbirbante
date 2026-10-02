@@ -1,0 +1,26 @@
+# Vlož do Zerops → Import project
+# Předtím musí být kód na GitHubu (včetně zerops.yml).
+# Hesla a klíče doplň svoje — necommituj ostré secrets do gitu.
+
+project:
+  name: dalbirbante
+  tags:
+    - production
+
+services:
+  - hostname: app
+    type: nodejs@22
+    enableSubdomainAccess: true
+    buildFromGit: https://github.com/foureight/dalbirbante.git
+    envVariables:
+      ADMIN_PASSWORD: "zmen-heslo"
+      ADMIN_SECRET: "zmen-na-dlouhy-nahodny-retezec"
+      CAPTCHA_SECRET: "zmen-na-dalsi-nahodny-retezec"
+      SMTP_HOST: "smtp.cloudevelops.com"
+      SMTP_PORT: "465"
+      SMTP_USER: "web@dalbirbante.cz"
+      SMTP_PASS: "zmen-smtp-heslo"
+      CONTACT_TO: "mangio@dalbirbante.cz"
+      CONTACT_FROM: "web@dalbirbante.cz"
+      STRIPE_SECRET_KEY: "sk_live_..."
+      NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: "pk_live_..."
