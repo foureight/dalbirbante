@@ -61,7 +61,7 @@ export default async function DeliveryPage() {
               {delivery.zones.map((z) => (
                 <li
                   key={z.name}
-                  className="rounded-[6.4px] border border-[var(--line)] bg-[var(--paper-soft)] px-4 py-4"
+                  className="rounded-[6.4px] border border-[var(--line)] bg-white px-4 py-4"
                 >
                   <div className="flex items-baseline justify-between gap-3">
                     <p className="font-extrabold uppercase tracking-wide text-[var(--ink)]">

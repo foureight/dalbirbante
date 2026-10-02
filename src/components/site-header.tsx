@@ -106,7 +106,7 @@ export function SiteHeader({ content }: { content: SiteContent }) {
             </Button>
           </nav>
 
-          <div className="flex shrink-0 items-center gap-0.5 lg:hidden">
+          <div className="flex shrink-0 items-center gap-1.5 lg:hidden">
             <button
               type="button"
               aria-label={site.orderLabel}
