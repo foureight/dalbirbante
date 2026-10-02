@@ -44,10 +44,10 @@ export default async function DeliveryPage() {
 
         <section className="page-wrap py-12 md:py-36">
           <Reveal>
-            <p className="max-w-none text-left text-base leading-relaxed text-[var(--muted)] md:text-justify md:text-[length:inherit] md:leading-[inherit]">
+            <p className="max-w-none text-left text-base leading-relaxed text-[var(--muted)] md:text-[length:inherit] md:leading-[inherit]">
               {delivery.intro}
             </p>
-            <p className="mt-4 max-w-none text-left text-base leading-relaxed text-[var(--muted)] md:mt-6 md:text-justify md:text-[length:inherit] md:leading-[inherit]">
+            <p className="mt-4 max-w-none text-left text-base leading-relaxed text-[var(--muted)] md:mt-6 md:text-[length:inherit] md:leading-[inherit]">
               {delivery.intro2}
             </p>
           </Reveal>

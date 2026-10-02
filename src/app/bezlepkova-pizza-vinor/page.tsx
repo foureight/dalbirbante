@@ -43,10 +43,10 @@ export default async function GlutenFreePage() {
 
         <section className="page-wrap grid gap-10 py-12 md:grid-cols-[1.1fr_0.9fr] md:gap-20 md:py-36">
           <Reveal>
-            <p className="max-w-none text-left text-base leading-relaxed text-[var(--muted)] md:text-justify md:text-[length:inherit] md:leading-[inherit]">
+            <p className="max-w-none text-left text-base leading-relaxed text-[var(--muted)] md:text-[length:inherit] md:leading-[inherit]">
               {glutenFree.intro}
             </p>
-            <p className="mt-4 max-w-none text-left text-base leading-relaxed text-[var(--muted)] md:mt-6 md:text-justify md:text-[length:inherit] md:leading-[inherit]">
+            <p className="mt-4 max-w-none text-left text-base leading-relaxed text-[var(--muted)] md:mt-6 md:text-[length:inherit] md:leading-[inherit]">
               {glutenFree.intro2}
             </p>
 

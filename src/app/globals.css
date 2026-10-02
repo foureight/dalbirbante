@@ -118,6 +118,7 @@
     font-weight: 400;
     font-size: 1.05rem;
     line-height: 1.55;
+    text-align: left;
     background: #ffffff;
     overflow-x: clip;
   }
@@ -662,11 +663,11 @@
 
 .footer-goodbye-line {
   position: absolute;
-  left: 50%;
+  left: 0;
   top: 50%;
   margin: 0;
   white-space: nowrap;
-  text-align: center;
+  text-align: left;
   font-family: var(--font-display);
   font-weight: 900;
   font-size: clamp(1.75rem, 5.5vw, 3.75rem);
@@ -674,7 +675,7 @@
   letter-spacing: 0.04em;
   text-transform: uppercase;
   color: #fff;
-  transform: translate(-50%, -50%);
+  transform: translateY(-50%);
   transition:
     opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1),
     transform 0.85s cubic-bezier(0.22, 1, 0.36, 1),
@@ -687,7 +688,7 @@
   opacity: 1;
   filter: blur(0);
   letter-spacing: 0.04em;
-  transform: translate(-50%, -50%) scale(1);
+  transform: translateY(-50%) scale(1);
   pointer-events: auto;
 }
 
@@ -695,7 +696,7 @@
   opacity: 0;
   filter: blur(4px);
   letter-spacing: 0.18em;
-  transform: translate(-50%, -62%) scale(0.92);
+  transform: translateY(calc(-50% - 0.4em)) scale(0.92);
   pointer-events: none;
 }
 
@@ -703,7 +704,7 @@
   opacity: 0;
   filter: blur(4px);
   letter-spacing: 0.18em;
-  transform: translate(-50%, -38%) scale(1.06);
+  transform: translateY(calc(-50% + 0.4em)) scale(1.06);
   pointer-events: none;
 }
 
@@ -729,7 +730,7 @@
   .footer-goodbye-line.is-enter {
     filter: none;
     letter-spacing: 0.04em;
-    transform: translate(-50%, -50%);
+    transform: translateY(-50%);
   }
 }
 

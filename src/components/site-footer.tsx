@@ -47,10 +47,10 @@ export function SiteFooter({ content }: { content: SiteContent }) {
             italian={site.goodbyeIt || "BUON APPETITO!"}
           />
 
-          <div className="grid gap-14 text-center md:grid-cols-3 md:items-start md:gap-20 lg:gap-28">
+          <div className="grid gap-14 text-left md:grid-cols-3 md:items-start md:gap-20 lg:gap-28">
             <div>
               <h3 className="mb-6 text-black">Sitemap</h3>
-              <nav className="flex flex-col items-center gap-3 text-white">
+              <nav className="flex flex-col items-start gap-3 text-white">
                 {sitemap.map((item) => (
                   <Link
                     key={item.href}
@@ -65,7 +65,7 @@ export function SiteFooter({ content }: { content: SiteContent }) {
 
             <div>
               <h3 className="mb-6 text-black">{contact.whereTitle}</h3>
-              <div className="flex flex-col items-center gap-3 text-white">
+              <div className="flex flex-col items-start gap-3 text-white">
                 <p>{site.addressShort}</p>
                 <p>
                   volejte{" "}
@@ -82,7 +82,7 @@ export function SiteFooter({ content }: { content: SiteContent }) {
                 >
                   {site.email}
                 </a>
-                <div className="mt-16 flex items-center justify-center gap-1.5 md:mt-20 md:gap-1.5">
+                <div className="mt-16 flex items-center justify-start gap-1.5 md:mt-20 md:gap-1.5">
                   <a
                     href={site.facebookUrl}
                     target="_blank"
@@ -107,7 +107,7 @@ export function SiteFooter({ content }: { content: SiteContent }) {
 
             <div>
               <h3 className="mb-6 text-black">{contact.hoursTitle}</h3>
-              <div className="flex flex-col items-center gap-3 text-white">
+              <div className="flex flex-col items-start gap-3 text-white">
                 <p>{site.hours}</p>
                 <p>{site.hoursClosed}</p>
               </div>
@@ -117,7 +117,7 @@ export function SiteFooter({ content }: { content: SiteContent }) {
       </div>
 
       <div className="border-t border-[var(--line)] bg-white text-[var(--ink)]">
-        <div className="site-max mx-auto flex w-full flex-col items-center justify-between gap-3 px-5 py-5 text-center text-sm md:flex-row md:px-10 md:text-left md:text-base">
+        <div className="site-max mx-auto flex w-full flex-col items-start justify-between gap-3 px-5 py-5 text-left text-sm md:flex-row md:items-center md:px-10 md:text-base">
           <p>
             © {year} {site.brandName}
           </p>

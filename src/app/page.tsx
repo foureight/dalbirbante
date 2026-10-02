@@ -190,7 +190,7 @@ export default async function HomePage() {
         <section className="border-y border-[var(--line)] bg-[var(--paper-soft)]">
           <div className="band-inner">
             <Reveal>
-              <h2 className="section-title text-center !text-[var(--brand-green)]">
+              <h2 className="section-title text-left !text-[var(--brand-green)]">
                 {home.featuresTitle}
               </h2>
             </Reveal>

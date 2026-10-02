@@ -44,7 +44,7 @@ export default async function MenuPage() {
 
         <section className="page-wrap pb-8 pt-10 md:pb-16 md:pt-24">
           <Reveal>
-            <p className="max-w-none text-left text-base leading-relaxed text-[var(--muted)] sm:text-lg md:text-justify md:text-2xl md:leading-relaxed">
+            <p className="max-w-none text-left text-base leading-relaxed text-[var(--muted)] sm:text-lg md:text-2xl md:leading-relaxed">
               {menuPage.intro}
             </p>
           </Reveal>
