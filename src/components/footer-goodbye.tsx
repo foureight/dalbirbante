@@ -21,7 +21,7 @@ export function FooterGoodbye({
   }, []);
 
   return (
-    <div className="mb-10 flex w-full flex-col items-start text-left md:mb-14">
+    <div className="mb-10 flex w-full flex-col items-center text-center md:mb-14">
       <div className="footer-wave-marquee mb-3 w-full max-w-md overflow-hidden text-white md:max-w-lg">
         <div className="footer-wave-track" aria-hidden>
           <span className="footer-wave-text">{WAVES.join("")}</span>
@@ -29,7 +29,7 @@ export function FooterGoodbye({
         </div>
       </div>
 
-      <div className="relative flex h-[clamp(2.8rem,7vw,4.5rem)] w-full items-center justify-start overflow-visible">
+      <div className="relative mx-auto flex h-[clamp(2.8rem,7vw,4.5rem)] w-full items-center justify-center overflow-visible">
         <span
           className={`footer-goodbye-line ${
             showItalian ? "is-exit" : "is-active"
