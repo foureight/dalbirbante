@@ -8,7 +8,7 @@ import { AddToCartButton } from "@/components/add-to-cart-button";
 import { PageHero } from "@/components/page-hero";
 import { PageJsonLd } from "@/components/json-ld";
 import { Reveal } from "@/components/reveal";
-import { getPageSchema } from "@/lib/schema";
+import { getBreadcrumbSchema, getPageSchema } from "@/lib/schema";
 import { buildPageMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -28,6 +28,12 @@ export default async function DailyMenuPage() {
   return (
     <>
       <PageJsonLd data={getPageSchema("daily", content)} />
+      <PageJsonLd
+        data={getBreadcrumbSchema([
+          { name: "Domů", path: "/" },
+          { name: "Denní nabídka", path: "/denni-nabidka" },
+        ])}
+      />
       <SiteHeader content={content} />
       <main className="flex-1">
         <PageHero

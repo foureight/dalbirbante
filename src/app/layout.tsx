@@ -1,9 +1,13 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { getContent } from "@/lib/content";
 import { JsonLd } from "@/components/json-ld";
 import { Providers } from "@/components/providers";
 import { buildPageMetadata, siteBaseUrl } from "@/lib/seo";
 import "./globals.css";
+
+export const viewport: Viewport = {
+  themeColor: "#009246",
+};
 
 export async function generateMetadata(): Promise<Metadata> {
   const content = await getContent();
@@ -13,8 +17,11 @@ export async function generateMetadata(): Promise<Metadata> {
       title: content.site.metaTitle,
       description: content.site.metaDescription,
     }),
-    keywords: content.site.keywords,
-    icons: { icon: "/favicon.png" },
+    icons: {
+      icon: "/favicon.png",
+      apple: "/apple-touch-icon.png",
+    },
+    manifest: "/site.webmanifest",
     metadataBase: new URL(siteBaseUrl(content)),
   };
 }

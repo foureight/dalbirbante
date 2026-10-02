@@ -12,7 +12,7 @@ export function BrandLogo({ brandName }: Props) {
     <Link href="/" className="brand-logo" aria-label={brandName}>
       <Image
         src="/images/logo-wordmark-v2.webp"
-        alt=""
+        alt={brandName}
         width={287}
         height={40}
         className="brand-logo__word"

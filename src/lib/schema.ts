@@ -112,3 +112,19 @@ export function getFaqSchema(id: string, faqs: FaqItem[]) {
     })),
   };
 }
+
+export function getBreadcrumbSchema(
+  items: { name: string; path: string }[],
+) {
+  const base = "https://www.dalbirbante.cz";
+  return {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.name,
+      item: item.path === "/" ? `${base}/` : `${base}${item.path}`,
+    })),
+  };
+}

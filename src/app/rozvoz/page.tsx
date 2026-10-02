@@ -8,7 +8,11 @@ import { FaqAccordion } from "@/components/faq-accordion";
 import { DeliveryMap } from "@/components/delivery-map";
 import { PageHero } from "@/components/page-hero";
 import { Reveal } from "@/components/reveal";
-import { getFaqSchema, getPageSchema } from "@/lib/schema";
+import {
+  getBreadcrumbSchema,
+  getFaqSchema,
+  getPageSchema,
+} from "@/lib/schema";
 import { buildPageMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -33,6 +37,12 @@ export default async function DeliveryPage() {
           "https://www.dalbirbante.cz/rozvoz#faq",
           delivery.faqs,
         )}
+      />
+      <PageJsonLd
+        data={getBreadcrumbSchema([
+          { name: "Domů", path: "/" },
+          { name: "Rozvoz", path: "/rozvoz" },
+        ])}
       />
       <SiteHeader content={content} />
       <main className="flex-1">

@@ -27,8 +27,8 @@
     "announcement": "Důležité sdělení: sledujte aktuální otevírací dobu a denní nabídku.",
     "goodbye": "DOBROU CHUŤ!",
     "goodbyeIt": "BUON APPETITO!",
-    "metaTitle": "Dal Birbante – neapolská pizza Praha 9 Vinoř",
-    "metaDescription": "Pokud hledáte pravou neapolskou pizzu v Praze, zamiřte do pizzerie Dal Birbante ve Vinoři. Nabízíme bohatý výběr pizz, těstovin a italských baget panozzo. Využijte také možnost objednání čerstvých italských surovin přímo k vašim dveřím. Přijďte a ochutnejte pravou chuť Itálie!",
+    "metaTitle": "Pravá neapolská pizza Praha 9 Vinoř – Dal Birbante",
+    "metaDescription": "Pravá neapolská pizza v Praze 9 – Vinoři. Dal Birbante nabízí pizzu z pece, panozzo, těstoviny a rozvoz po Praze 9 a okolí.",
     "seoDescription": "Dal Birbante je italská pizzerie ve Vinoři v Praze 9, která připravuje pravou neapolskou pizzu z kvalitních italských surovin. V nabídce najdete také panozzo, těstoviny, lasagne, italské speciality a pečlivě vybraná italská vína včetně bio vín Pisoni. Pizzerie nabízí posezení i rozvoz po Praze 9 a okolí.",
     "geo": {
       "latitude": 50.143151,
@@ -51,27 +51,27 @@
     "pageMeta": {
       "menu": {
         "title": "Menu – neapolská pizza, těstoviny a panozzo | Dal Birbante",
-        "description": "Menu pizzerie Dal Birbante ve Vinoři – neapolská pizza z pece, italské bagety panozzo, těstoviny, saláty, dezerty a další italské speciality. Vychutnejte si pravou chuť Neapole na adrese Mladoboleslavská 1."
+        "description": "Menu Dal Birbante ve Vinoři: neapolská pizza z pece, panozzo, těstoviny, saláty a italské speciality. Objednejte online nebo na místě."
       },
       "about": {
         "title": "O nás – italské bistro a pizzerie Dal Birbante",
-        "description": "Pizzerii Dal Birbante jsme otevřeli v roce 2024 ve Vinoři. Zaměřujeme se na pravou neapolskou pizzu z italských surovin, panozzo, těstoviny, dezerty a bio vína Pisoni."
+        "description": "Pizzerie Dal Birbante ve Vinoři (od 2024). Pravá neapolská pizza, panozzo, těstoviny a italská vína z kvalitních surovin."
       },
       "contact": {
         "title": "Kontakt – Dal Birbante Vinoř",
-        "description": "Kontakt pizzerie Dal Birbante: Mladoboleslavská 1, Praha 9 – Vinoř, tel. +420 733 572 911, e-mail mangio@dalbirbante.cz. Otevřeno úterý–sobota 11:00–20:30."
+        "description": "Kontakt Dal Birbante: Mladoboleslavská 1, Praha 9 – Vinoř, +420 733 572 911, mangio@dalbirbante.cz. Út–So 11:00–20:30."
       },
       "daily": {
         "title": "Denní menu – italské bistro Dal Birbante",
-        "description": "Denní menu Dal Birbante ve Vinoři. Polévky, panozzo, pizza a další italské speciality v čase oběda. Podívejte se, co pro vás dnes vaříme."
+        "description": "Denní menu Dal Birbante ve Vinoři – polévky, panozzo a italské speciality k obědu. Podívejte se, co dnes vaříme."
       },
       "delivery": {
         "title": "Rozvoz pizzy Praha 9 – Dal Birbante",
-        "description": "Rozvoz neapolské pizzy a italských specialit z Dal Birbante. Dovážíme z Vinoře do Kbel, Satalic, Letňan, Čakovic, Brandýsa n. L. a dalších lokalit. Podívejte se na ceny rozvozu."
+        "description": "Rozvoz neapolské pizzy z Dal Birbante po Praze 9 a okolí – Kbely, Satalice, Letňany, Čakovice a další. Ceny a zóny rozvozu."
       },
       "glutenFree": {
         "title": "Bezlepková pizza Vinoř – Dal Birbante",
-        "description": "Bezlepková pizza ve Vinoři. V Dal Birbante připravujeme bezlepkovou pizzu z kvalitního těsta, vhodnou pro celiaky a osoby s intolerancí lepku. Na místě, s sebou i na rozvoz."
+        "description": "Bezlepková pizza ve Vinoři u Dal Birbante. Kvalitní těsto pro celiaky, na místě, s sebou i s rozvozem po Praze 9."
       }
     }
   },
@@ -84,7 +84,7 @@
     "glutenFree": "Bezlepková pizza"
   },
   "home": {
-    "introTitle": "PRAVÁ NEAPOLSKÁ PIZZA V PRAZE 9 - VINOŘE – DAL BIRBANTE",
+    "introTitle": "PRAVÁ NEAPOLSKÁ PIZZA PRAHA 9 VINOŘ – DAL BIRBANTE",
     "introText": "V pizzerii Dal Birbante ve Vinoři (Praha 9) připravujeme autentickou neapolskou pizzu z prvotřídních italských surovin. Používáme originální italskou mouku, kvalitní rajčata San Marzano a čerstvou mozzarellu fior di latte, díky kterým má naše pizza typickou chuť i strukturu jako v Neapoli.",
     "offerTitle": "Naše nabídka ale nekončí u pizzy. Ochutnat u nás můžete také:",
     "offerItems": [

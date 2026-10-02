@@ -7,7 +7,7 @@ import { ReservoMap } from "@/components/reservo-map";
 import { ContactForm } from "@/components/contact-form";
 import { PageJsonLd } from "@/components/json-ld";
 import { Reveal } from "@/components/reveal";
-import { getPageSchema } from "@/lib/schema";
+import { getBreadcrumbSchema, getPageSchema } from "@/lib/schema";
 import { buildPageMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -26,12 +26,18 @@ export default async function ContactPage() {
   return (
     <>
       <PageJsonLd data={getPageSchema("contact", content)} />
+      <PageJsonLd
+        data={getBreadcrumbSchema([
+          { name: "Domů", path: "/" },
+          { name: "Kontakt", path: "/kontakt" },
+        ])}
+      />
       <SiteHeader content={content} />
       <main className="flex-1">
         <section className="relative min-h-[34vh] overflow-hidden text-white sm:min-h-[40vh]">
           <Image
             src="/images/kontakt-bg.webp"
-            alt=""
+            alt="Pizza Dal Birbante – kontakt a adresa ve Vinoři"
             fill
             priority
             className="hero-pan object-cover"

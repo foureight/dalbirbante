@@ -8,7 +8,11 @@ import { PageJsonLd } from "@/components/json-ld";
 import { FaqAccordion } from "@/components/faq-accordion";
 import { PageHero } from "@/components/page-hero";
 import { Reveal } from "@/components/reveal";
-import { getFaqSchema, getPageSchema } from "@/lib/schema";
+import {
+  getBreadcrumbSchema,
+  getFaqSchema,
+  getPageSchema,
+} from "@/lib/schema";
 import { buildPageMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -27,6 +31,15 @@ export default async function GlutenFreePage() {
   return (
     <>
       <PageJsonLd data={getPageSchema("glutenFree", content)} />
+      <PageJsonLd
+        data={getBreadcrumbSchema([
+          { name: "Domů", path: "/" },
+          {
+            name: "Bezlepková pizza Vinoř",
+            path: "/bezlepkova-pizza-vinor",
+          },
+        ])}
+      />
       <PageJsonLd
         data={getFaqSchema(
           "https://www.dalbirbante.cz/bezlepkova-pizza-vinor#faq",

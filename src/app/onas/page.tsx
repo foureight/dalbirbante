@@ -6,7 +6,11 @@ import { SiteFooter } from "@/components/site-footer";
 import { PageJsonLd } from "@/components/json-ld";
 import { FaqAccordion } from "@/components/faq-accordion";
 import { Reveal } from "@/components/reveal";
-import { getFaqSchema, getPageSchema } from "@/lib/schema";
+import {
+  getBreadcrumbSchema,
+  getFaqSchema,
+  getPageSchema,
+} from "@/lib/schema";
 import { buildPageMetadata } from "@/lib/seo";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -28,6 +32,12 @@ export default async function AboutPage() {
       <PageJsonLd data={getPageSchema("about", content)} />
       <PageJsonLd
         data={getFaqSchema("https://www.dalbirbante.cz/onas#faq", about.faqs)}
+      />
+      <PageJsonLd
+        data={getBreadcrumbSchema([
+          { name: "Domů", path: "/" },
+          { name: "O nás", path: "/onas" },
+        ])}
       />
       <SiteHeader content={content} />
       <main className="flex-1">

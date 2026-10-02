@@ -11,7 +11,11 @@ import { Reveal } from "@/components/reveal";
 import { FeatureIcon } from "@/components/feature-icon";
 import { HeroSlideshow } from "@/components/hero-slideshow";
 import { Button } from "@/components/ui/button";
-import { getFaqSchema, getPageSchema } from "@/lib/schema";
+import {
+  getBreadcrumbSchema,
+  getFaqSchema,
+  getPageSchema,
+} from "@/lib/schema";
 
 const gallery = [
   "/images/gallery/01.webp",
@@ -33,6 +37,9 @@ export default async function HomePage() {
       <PageJsonLd data={getPageSchema("home", content)} />
       <PageJsonLd
         data={getFaqSchema("https://www.dalbirbante.cz/#faq", home.faqs)}
+      />
+      <PageJsonLd
+        data={getBreadcrumbSchema([{ name: "Domů", path: "/" }])}
       />
       <SiteHeader content={content} />
       <main className="flex-1">
@@ -134,7 +141,11 @@ export default async function HomePage() {
                     href={block.href}
                     className="btn-outline-light mt-auto inline-flex w-full sm:w-fit"
                   >
-                    Více
+                    {block.href === "/menu#pizza"
+                      ? "Pizza týdne"
+                      : block.href === "/denni-nabidka"
+                        ? "Denní nabídka"
+                        : "Bezlepková pizza"}
                   </Link>
                 </div>
               </Reveal>

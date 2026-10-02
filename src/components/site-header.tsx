@@ -67,7 +67,7 @@ export function SiteHeader({ content }: { content: SiteContent }) {
               >
                 <Image
                   src="/icons/instagram.svg"
-                  alt=""
+                  alt="Instagram Dal Birbante"
                   width={48}
                   height={48}
                 />
@@ -81,7 +81,7 @@ export function SiteHeader({ content }: { content: SiteContent }) {
               >
                 <Image
                   src="/icons/facebook.svg"
-                  alt=""
+                  alt="Facebook Dal Birbante"
                   width={48}
                   height={48}
                 />
