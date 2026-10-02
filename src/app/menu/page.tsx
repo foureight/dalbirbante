@@ -58,20 +58,39 @@ export default async function MenuPage() {
                   {cat.name}
                 </h2>
                 <ul className="mt-8 divide-y divide-[var(--line)]">
-                  {cat.items.map((item) => (
+                  {cat.items.map((item) => {
+                    const drinkPlaceholder =
+                      cat.id === "drinks" ? "/images/menu/drink-can.webp" : null;
+                    const imageSrc = item.image || drinkPlaceholder;
+                    return (
                     <li
                       key={`${cat.id}-${item.name}`}
                       className="menu-row grid gap-4 py-8 sm:grid-cols-[auto_1fr_auto] sm:items-center"
                     >
-                      {item.image ? (
-                        <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-full bg-[#f3f3f3] sm:h-28 sm:w-28">
-                          <Image
-                            src={item.image}
-                            alt={item.name}
-                            fill
-                            className="object-cover"
-                            sizes="112px"
-                          />
+                      {imageSrc ? (
+                        <div
+                          className={`relative flex h-24 w-24 shrink-0 items-center justify-center overflow-hidden rounded-full sm:h-28 sm:w-28 ${
+                            item.image ? "bg-[#f3f3f3]" : "bg-[#d9d9d9]"
+                          }`}
+                        >
+                          {item.image ? (
+                            <Image
+                              src={imageSrc}
+                              alt={item.name}
+                              fill
+                              className="object-cover"
+                              sizes="112px"
+                            />
+                          ) : (
+                            <Image
+                              src={imageSrc}
+                              alt=""
+                              width={72}
+                              height={72}
+                              className="h-[58%] w-auto object-contain"
+                              aria-hidden
+                            />
+                          )}
                         </div>
                       ) : (
                         <div
@@ -96,12 +115,13 @@ export default async function MenuPage() {
                         <AddToCartButton
                           name={item.name}
                           price={item.price}
-                          image={item.image}
+                          image={item.image || drinkPlaceholder || undefined}
                           categoryId={cat.id}
                         />
                       </div>
                     </li>
-                  ))}
+                    );
+                  })}
                 </ul>
               </section>
             </Reveal>
