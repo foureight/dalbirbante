@@ -381,7 +381,7 @@ export function AdminClient({ initial, authenticated }: Props) {
   function removeHeroSlide(index: number) {
     setContent((prev) => {
       const slides = prev.home.heroSlides || [];
-      if (slides.length <= 1) return prev;
+      if (!slides[index]) return prev;
       return {
         ...prev,
         home: {
@@ -390,7 +390,7 @@ export function AdminClient({ initial, authenticated }: Props) {
         },
       };
     });
-    setStatus("Slide odebrán — uložte změny.");
+    setStatus("Hero fotka smazána — uložte změny, aby zmizela z webu.");
     setError(null);
   }
 
@@ -848,17 +848,23 @@ export function AdminClient({ initial, authenticated }: Props) {
           <Panel
             badge="Hlavička"
             title="Fotky v horním banneru (hero)"
-            hint="Tyto fotky se střídají nahoře na úvodní stránce. Pořadí = pořadí v slideshow. Nahrajte PNG/JPG — uloží se jako WebP."
+            hint="Tyto fotky se střídají nahoře na úvodní stránce. Každou jde smazat tlačítkem „Smazat fotku“. Po úpravě uložte změny."
           >
+            {heroSlides.length === 0 ? (
+              <p className="rounded-[8px] border border-dashed border-[var(--line)] bg-[var(--paper-soft)] px-4 py-5 text-lg text-[var(--muted)]">
+                Žádné hero fotky. Přidejte novou, nebo po uložení zůstane
+                výchozí záložní fotka na webu.
+              </p>
+            ) : null}
             {heroSlides.map((slide, i) => (
               <ItemCard
-                key={`hero-${i}`}
+                key={`hero-${i}-${slide.src || "empty"}`}
                 typeLabel="Hero"
                 title={`Fotka ${i + 1}`}
                 meta={slide.src || "bez fotky"}
                 accent="green"
               >
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap items-center gap-2">
                   <button
                     type="button"
                     className="rounded-full border border-[var(--line)] px-4 py-2 text-base font-semibold transition hover:border-[var(--brand-green)] disabled:opacity-40"
@@ -877,11 +883,20 @@ export function AdminClient({ initial, authenticated }: Props) {
                   </button>
                   <button
                     type="button"
-                    className="rounded-full border border-[var(--line)] px-4 py-2 text-base font-semibold text-[var(--muted)] transition hover:border-[var(--brand-red)] hover:text-[var(--brand-red)] disabled:opacity-40"
-                    disabled={heroSlides.length <= 1}
-                    onClick={() => removeHeroSlide(i)}
+                    className="ml-auto rounded-full border-2 border-[var(--brand-red)] bg-[var(--brand-red)]/10 px-5 py-2 text-base font-extrabold text-[var(--brand-red)] transition hover:bg-[var(--brand-red)] hover:text-white"
+                    onClick={() => {
+                      if (
+                        typeof window !== "undefined" &&
+                        !window.confirm(
+                          `Opravdu smazat fotku ${i + 1} z horního banneru?`,
+                        )
+                      ) {
+                        return;
+                      }
+                      removeHeroSlide(i);
+                    }}
                   >
-                    Smazat
+                    Smazat fotku
                   </button>
                 </div>
                 <AdminImageField
