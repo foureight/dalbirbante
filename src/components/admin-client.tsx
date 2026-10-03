@@ -19,17 +19,6 @@ import {
   resolveTownCoords,
 } from "@/lib/delivery-towns";
 
-function slugifyDishId(name: string, fallback: string) {
-  const base = name
-    .normalize("NFKD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-+|-+$/g, "")
-    .slice(0, 48);
-  return base || fallback;
-}
-
 function syncDailyItems(
   catalog: DailyDish[],
   todayIds: string[],
@@ -78,18 +67,19 @@ function Field({
   /** @deprecated kept for call-site compat; visual treatment is now uniform */
   emphasize?: boolean;
 }) {
-  const useTextarea = multiline || value.length > 80;
+  // Only honor explicit multiline — auto-switching Input↔Textarea at 80
+  // chars steals focus mid-typing.
   return (
     <div className="space-y-2.5">
       <Label className="text-lg font-bold text-[var(--ink)]">{label}</Label>
       {hint ? (
         <p className="text-base leading-snug text-[var(--muted)]">{hint}</p>
       ) : null}
-      {useTextarea ? (
+      {multiline ? (
         <Textarea
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          rows={Math.min(10, Math.max(4, Math.ceil(value.length / 55)))}
+          rows={Math.min(10, Math.max(4, Math.ceil(value.length / 55) || 4))}
           className={`min-h-[8rem] px-4 py-3.5 text-xl leading-relaxed ${FIELD_CONTROL}`}
         />
       ) : (
@@ -481,7 +471,7 @@ export function AdminClient({ initial, authenticated }: Props) {
   }
 
   function addCatalogDish(category: DailyDishCategory = "ostatni") {
-    const id = slugifyDishId("", `jidlo-${Date.now().toString(36)}`);
+    const id = `jidlo-${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 6)}`;
     setContent((prev) => {
       const catalog = [...(prev.daily.catalog || [])];
       catalog.push({
@@ -501,6 +491,14 @@ export function AdminClient({ initial, authenticated }: Props) {
     setEditingDishId(id);
     setStatus("Přidáno jídlo — vyplňte údaje a uložte.");
     setError(null);
+    // Scroll to the new open editor after paint
+    if (typeof window !== "undefined") {
+      window.setTimeout(() => {
+        document
+          .getElementById(`daily-dish-${id}`)
+          ?.scrollIntoView({ behavior: "smooth", block: "center" });
+      }, 50);
+    }
   }
 
   function removeCatalogDish(id: string) {
@@ -527,37 +525,18 @@ export function AdminClient({ initial, authenticated }: Props) {
     field: keyof DailyDish,
     value: string,
   ) {
+    // Keep dish ids stable while typing — remapping id on every name
+    // keystroke closed the edit panel (editingDishId no longer matched).
     setContent((prev) => {
-      const catalog = (prev.daily.catalog || []).map((d) => {
-        if (d.id !== id) return d;
-        const next = { ...d, [field]: value };
-        if (field === "name" && value.trim()) {
-          const used = new Set(
-            (prev.daily.catalog || [])
-              .filter((x) => x.id !== id)
-              .map((x) => x.id),
-          );
-          let nextId = slugifyDishId(value, id);
-          if (used.has(nextId) && nextId !== id) {
-            nextId = `${nextId}-${id.slice(-4)}`;
-          }
-          next.id = nextId;
-        }
-        return next;
-      });
-      const idMap = new Map(
-        (prev.daily.catalog || []).map((old, i) => [old.id, catalog[i].id]),
-      );
-      const todayIds = (prev.daily.todayIds || []).map(
-        (tid) => idMap.get(tid) || tid,
+      const catalog = (prev.daily.catalog || []).map((d) =>
+        d.id === id ? { ...d, [field]: value } : d,
       );
       return {
         ...prev,
         daily: {
           ...prev.daily,
           catalog,
-          todayIds,
-          items: syncDailyItems(catalog, todayIds),
+          items: syncDailyItems(catalog, prev.daily.todayIds || []),
         },
       };
     });
@@ -1363,6 +1342,7 @@ export function AdminClient({ initial, authenticated }: Props) {
                           const open = editingDishId === dish.id;
                           return (
                             <li
+                              id={`daily-dish-${dish.id}`}
                               key={dish.id}
                               className={`border-b border-[var(--line)] last:border-b-0 ${
                                 selected ? "bg-[var(--brand-green)]/8" : ""
