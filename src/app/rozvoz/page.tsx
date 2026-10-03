@@ -67,24 +67,25 @@ export default async function DeliveryPage() {
               {delivery.pricesTitle}
             </h2>
 
-            <ul className="mt-5 space-y-3 md:hidden">
+            {/* Cards until lg — table is too narrow on phones/tablets */}
+            <ul className="mt-5 space-y-3 lg:hidden">
               {delivery.zones.map((z) => (
                 <li
                   key={z.name}
                   className="rounded-[6.4px] border border-[var(--line)] bg-white px-4 py-4"
                 >
                   <div className="flex items-baseline justify-between gap-3">
-                    <p className="font-extrabold uppercase tracking-wide text-[var(--ink)]">
+                    <p className="whitespace-nowrap font-extrabold uppercase tracking-wide text-[var(--ink)]">
                       {z.name}
                     </p>
-                    <p className="shrink-0 font-black text-[var(--brand-red)]">
+                    <p className="shrink-0 whitespace-nowrap text-xl font-black text-[var(--brand-red)]">
                       {z.fee}
                     </p>
                   </div>
                   <p className="mt-2 text-sm leading-snug text-[var(--muted)]">
                     {z.areas}
                   </p>
-                  <p className="mt-2 text-sm text-[var(--ink)]">
+                  <p className="mt-3 text-sm text-[var(--ink)]">
                     Min. objednávka:{" "}
                     <span className="font-semibold">{z.min}</span>
                   </p>
@@ -92,23 +93,35 @@ export default async function DeliveryPage() {
               ))}
             </ul>
 
-            <div className="mt-8 hidden overflow-x-auto md:block">
-              <table className="w-full text-left">
+            <div className="mt-8 hidden overflow-x-auto lg:block">
+              <table className="w-full min-w-[36rem] text-left">
                 <thead>
                   <tr className="border-b border-[var(--line)] text-[var(--ink)]">
-                    <th className="py-3 font-bold">Zóna</th>
-                    <th className="py-3 font-bold">Oblasti</th>
-                    <th className="py-3 text-right font-bold">Rozvoz</th>
-                    <th className="py-3 text-right font-bold">Min. objednávka</th>
+                    <th className="whitespace-nowrap py-3 pr-4 font-bold">
+                      Zóna
+                    </th>
+                    <th className="py-3 pr-4 font-bold">Oblasti</th>
+                    <th className="whitespace-nowrap py-3 pr-4 text-right font-bold">
+                      Rozvoz
+                    </th>
+                    <th className="whitespace-nowrap py-3 text-right font-bold">
+                      Min. objednávka
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
                   {delivery.zones.map((z) => (
                     <tr key={z.name} className="border-b border-[var(--line)]">
-                      <td className="py-3 font-medium">{z.name}</td>
-                      <td className="py-3 text-[var(--muted)]">{z.areas}</td>
-                      <td className="py-3 text-right">{z.fee}</td>
-                      <td className="py-3 text-right">{z.min}</td>
+                      <td className="whitespace-nowrap py-3 pr-4 font-medium">
+                        {z.name}
+                      </td>
+                      <td className="py-3 pr-4 text-[var(--muted)]">{z.areas}</td>
+                      <td className="whitespace-nowrap py-3 pr-4 text-right">
+                        {z.fee}
+                      </td>
+                      <td className="whitespace-nowrap py-3 text-right">
+                        {z.min}
+                      </td>
                     </tr>
                   ))}
                 </tbody>
