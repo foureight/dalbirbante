@@ -303,19 +303,28 @@ const NAV_LABELS: Record<string, string> = {
   glutenFree: "Bezlepková pizza",
 };
 
-const SECTIONS: { key: keyof SiteContent; label: string }[] = [
+const MAIN_SECTIONS: { key: keyof SiteContent; label: string }[] = [
   { key: "daily", label: "Denní · výběr jídel" },
   { key: "menuCategories", label: "Menu · pizzy a produkty" },
   { key: "home", label: "Úvod · hero fotky" },
   { key: "menuPage", label: "Stránka menu" },
   { key: "delivery", label: "Rozvoz" },
   { key: "glutenFree", label: "Bezlepková" },
-  { key: "site", label: "Základní údaje" },
-  { key: "nav", label: "Navigace" },
   { key: "about", label: "O nás" },
   { key: "contact", label: "Kontakt" },
+];
+
+const SETTINGS_SECTIONS: { key: keyof SiteContent; label: string }[] = [
+  { key: "site", label: "Základní údaje" },
+  { key: "nav", label: "Navigace" },
   { key: "footer", label: "Patička" },
 ];
+
+const SECTIONS = [...MAIN_SECTIONS, ...SETTINGS_SECTIONS];
+
+const SETTINGS_KEYS = new Set(
+  SETTINGS_SECTIONS.map((s) => s.key as string),
+);
 
 export function AdminClient({ initial, authenticated }: Props) {
   const router = useRouter();
@@ -334,6 +343,7 @@ export function AdminClient({ initial, authenticated }: Props) {
   const [editingMenuItemKey, setEditingMenuItemKey] = useState<string | null>(
     null,
   );
+  const [settingsOpen, setSettingsOpen] = useState(false);
 
   const sectionData = content[section];
 
@@ -1982,7 +1992,7 @@ export function AdminClient({ initial, authenticated }: Props) {
           <p className="mb-1 hidden px-3 pt-1 text-sm font-extrabold uppercase tracking-wide text-[var(--muted)] md:block">
             Sekce
           </p>
-          {SECTIONS.map((s) => {
+          {MAIN_SECTIONS.map((s) => {
             const active = section === s.key;
             const isDaily = s.key === "daily";
             return (
@@ -2002,6 +2012,53 @@ export function AdminClient({ initial, authenticated }: Props) {
               </button>
             );
           })}
+
+          <div className="mt-1 flex shrink-0 flex-col gap-1 border-t border-[var(--line)] pt-2 md:mt-2">
+            <button
+              type="button"
+              onClick={() => setSettingsOpen((o) => !o)}
+              className={`flex items-center gap-2 whitespace-nowrap rounded-[8px] px-4 py-3.5 text-left text-lg font-bold transition ${
+                SETTINGS_KEYS.has(section)
+                  ? "bg-[#eef8f1] text-[var(--brand-green-deep)]"
+                  : "bg-white text-[var(--ink)] hover:bg-[#eef8f1] hover:text-[var(--brand-green)] md:bg-transparent"
+              }`}
+              aria-expanded={settingsOpen || SETTINGS_KEYS.has(section)}
+            >
+              <span
+                className={`inline-block text-sm transition-transform ${
+                  settingsOpen || SETTINGS_KEYS.has(section) ? "rotate-90" : ""
+                }`}
+                aria-hidden
+              >
+                ▶
+              </span>
+              Nastavení
+            </button>
+            {settingsOpen || SETTINGS_KEYS.has(section) ? (
+              <div className="flex flex-row gap-1 md:ml-2 md:flex-col">
+                {SETTINGS_SECTIONS.map((s) => {
+                  const active = section === s.key;
+                  return (
+                    <button
+                      key={s.key}
+                      type="button"
+                      onClick={() => {
+                        setSettingsOpen(true);
+                        setSection(s.key);
+                      }}
+                      className={`whitespace-nowrap rounded-[8px] px-4 py-3 text-left text-base font-bold transition ${
+                        active
+                          ? "bg-[var(--brand-green)] text-white shadow-sm"
+                          : "bg-white text-[var(--ink)] hover:bg-[#eef8f1] hover:text-[var(--brand-green)] md:bg-transparent"
+                      }`}
+                    >
+                      {s.label}
+                    </button>
+                  );
+                })}
+              </div>
+            ) : null}
+          </div>
         </aside>
         <div className="min-w-0">{editor}</div>
       </div>
