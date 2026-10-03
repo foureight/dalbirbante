@@ -59,7 +59,7 @@ export default async function DailyMenuPage() {
           <ul className="mt-8 divide-y divide-[var(--line)] border-y border-[var(--line)] md:mt-14">
             {daily.items.map((item, i) => (
               <Reveal key={item.name} delay={(i % 3) * 50}>
-                <li className="grid gap-3 py-5 sm:grid-cols-[1fr_auto] sm:items-center sm:gap-5 sm:py-8">
+                <li className="grid gap-3 py-5 sm:grid-cols-[1fr_auto] sm:items-start sm:gap-5 sm:py-8">
                   <div className="min-w-0">
                     <h2 className="text-[1.25rem] leading-tight normal-case tracking-normal text-[var(--ink)] sm:text-[clamp(1.35rem,2vw,1.75rem)]">
                       <span className="font-black uppercase">{item.name}</span>
@@ -76,7 +76,7 @@ export default async function DailyMenuPage() {
                       <p className="mt-2 text-sm text-[var(--muted)]">{item.note}</p>
                     ) : null}
                   </div>
-                  <div className="flex items-center justify-between gap-3 sm:justify-end sm:gap-8">
+                  <div className="flex items-start justify-between gap-3 sm:justify-end sm:gap-8">
                     <p className="text-2xl font-black leading-none text-[var(--brand-red)] sm:text-3xl md:text-4xl">
                       {item.price}
                     </p>

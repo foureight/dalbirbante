@@ -172,7 +172,7 @@ export default async function HomePage() {
         </section>
 
         <section className="site-max section-pad mx-auto w-full">
-          <div className="grid items-center gap-14 md:grid-cols-2 md:gap-20">
+          <div className="grid items-start gap-14 md:grid-cols-2 md:gap-20">
             <Reveal variant="scale">
               <div className="img-zoom relative aspect-[5/4] overflow-hidden rounded-[6.4px]">
                 <Image

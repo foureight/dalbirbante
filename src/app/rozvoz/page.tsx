@@ -74,11 +74,11 @@ export default async function DeliveryPage() {
                   key={z.name}
                   className="rounded-[6.4px] border border-[var(--line)] bg-white px-4 py-4"
                 >
-                  <div className="flex items-baseline justify-between gap-3">
+                  <div className="flex items-start justify-between gap-3">
                     <p className="whitespace-nowrap font-extrabold uppercase tracking-wide text-[var(--ink)]">
                       {z.name}
                     </p>
-                    <p className="shrink-0 whitespace-nowrap text-xl font-black text-[var(--brand-red)]">
+                    <p className="shrink-0 whitespace-nowrap text-xl font-black leading-none text-[var(--brand-red)]">
                       {z.fee}
                     </p>
                   </div>
@@ -97,14 +97,14 @@ export default async function DeliveryPage() {
               <table className="w-full min-w-[36rem] text-left">
                 <thead>
                   <tr className="border-b border-[var(--line)] text-[var(--ink)]">
-                    <th className="whitespace-nowrap py-3 pr-4 font-bold">
+                    <th className="align-top whitespace-nowrap py-3 pr-4 font-bold">
                       Zóna
                     </th>
-                    <th className="py-3 pr-4 font-bold">Oblasti</th>
-                    <th className="whitespace-nowrap py-3 pr-4 text-right font-bold">
+                    <th className="align-top py-3 pr-4 font-bold">Oblasti</th>
+                    <th className="align-top whitespace-nowrap py-3 pr-4 text-right font-bold">
                       Rozvoz
                     </th>
-                    <th className="whitespace-nowrap py-3 text-right font-bold">
+                    <th className="align-top whitespace-nowrap py-3 text-right font-bold">
                       Min. objednávka
                     </th>
                   </tr>
@@ -112,14 +112,16 @@ export default async function DeliveryPage() {
                 <tbody>
                   {delivery.zones.map((z) => (
                     <tr key={z.name} className="border-b border-[var(--line)]">
-                      <td className="whitespace-nowrap py-3 pr-4 font-medium">
+                      <td className="align-top whitespace-nowrap py-3 pr-4 font-medium">
                         {z.name}
                       </td>
-                      <td className="py-3 pr-4 text-[var(--muted)]">{z.areas}</td>
-                      <td className="whitespace-nowrap py-3 pr-4 text-right">
+                      <td className="align-top py-3 pr-4 text-[var(--muted)]">
+                        {z.areas}
+                      </td>
+                      <td className="align-top whitespace-nowrap py-3 pr-4 text-right">
                         {z.fee}
                       </td>
-                      <td className="whitespace-nowrap py-3 text-right">
+                      <td className="align-top whitespace-nowrap py-3 text-right">
                         {z.min}
                       </td>
                     </tr>

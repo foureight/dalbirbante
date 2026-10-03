@@ -91,7 +91,7 @@ export default async function MenuPage() {
                     return (
                     <li
                       key={`${cat.id}-${item.name}`}
-                      className="menu-row flex items-center gap-3 py-5 sm:gap-5 sm:py-8"
+                      className="menu-row flex items-start gap-3 py-5 sm:gap-5 sm:py-8"
                     >
                       {imageSrc ? (
                         <div
@@ -134,11 +134,11 @@ export default async function MenuPage() {
                             {item.badge}
                           </p>
                         ) : null}
-                        <div className="flex flex-col gap-2 sm:flex-row sm:flex-nowrap sm:items-center sm:gap-4 md:gap-6">
+                        <div className="flex flex-col gap-2 sm:flex-row sm:flex-nowrap sm:items-start sm:gap-4 md:gap-6">
                           <h3 className="min-w-0 text-[1.2rem] leading-tight sm:flex-1 sm:text-[1.85rem] md:text-[2.35rem]">
                             {item.name}
                           </h3>
-                          <div className="flex shrink-0 items-center gap-3 sm:ml-auto sm:gap-4 md:gap-5">
+                          <div className="flex shrink-0 items-start gap-3 sm:ml-auto sm:gap-4 md:gap-5">
                             <p className="text-xl font-black leading-none whitespace-nowrap text-[var(--brand-red)] sm:text-3xl md:text-4xl">
                               {item.price}
                             </p>

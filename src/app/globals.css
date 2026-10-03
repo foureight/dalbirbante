@@ -586,8 +586,15 @@
   letter-spacing: 0.04em;
 }
 
+/* Content rows/tables: top-align with the first line, never vertically centered */
+table th,
+table td {
+  vertical-align: top;
+}
+
 .menu-row {
   transition: none;
+  align-items: flex-start;
 }
 
 .menu-row:hover {
