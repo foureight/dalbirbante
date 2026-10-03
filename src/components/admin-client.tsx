@@ -6,7 +6,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import type { DailyDish, SiteContent } from "@/lib/types";
+import type { DailyDish, DailyDishCategory, SiteContent } from "@/lib/types";
+import {
+  DAILY_CATEGORY_LABEL,
+  DAILY_CATEGORY_ORDER,
+  dishCategory,
+} from "@/lib/daily-dishes";
 import {
   buildDeliveryZoneFeatures,
   listKnownDeliveryTowns,
@@ -475,7 +480,7 @@ export function AdminClient({ initial, authenticated }: Props) {
     });
   }
 
-  function addCatalogDish() {
+  function addCatalogDish(category: DailyDishCategory = "ostatni") {
     const id = slugifyDishId("", `jidlo-${Date.now().toString(36)}`);
     setContent((prev) => {
       const catalog = [...(prev.daily.catalog || [])];
@@ -486,6 +491,7 @@ export function AdminClient({ initial, authenticated }: Props) {
         emoji: "",
         description: "",
         note: "",
+        category,
       });
       return {
         ...prev,
@@ -1233,17 +1239,20 @@ export function AdminClient({ initial, authenticated }: Props) {
       const todayIds = d.todayIds || [];
       const todaySet = new Set(todayIds);
       const todayDishes = syncDailyItems(catalog, todayIds);
+      const grouped = DAILY_CATEGORY_ORDER.map((cat) => ({
+        cat,
+        label: DAILY_CATEGORY_LABEL[cat],
+        dishes: catalog.filter((dish) => dishCategory(dish) === cat),
+      })).filter((g) => g.dishes.length > 0);
 
       return (
         <div className="space-y-6">
           <Panel
             badge="Dnes"
-            title="Seznam jídel"
+            title="Vybrané denní menu"
             hint={
               <>
-                Jídla jsou zavřená. <strong>Vybrat</strong> = dnes na webu,{" "}
-                <strong>Editovat</strong> otevře údaje,{" "}
-                <strong>Smazat</strong> jídlo odstraní. Výběr se ukáže na{" "}
+                Tohle jde na{" "}
                 <a
                   href="/denni-nabidka"
                   target="_blank"
@@ -1252,7 +1261,7 @@ export function AdminClient({ initial, authenticated }: Props) {
                 >
                   /denni-nabidka
                 </a>
-                .
+                . Pořadí měníte šipkami, jídla přidáváte níže ve výběru.
               </>
             }
           >
@@ -1275,145 +1284,29 @@ export function AdminClient({ initial, authenticated }: Props) {
               {todayDishes.length === 1 ? "jídlo" : "jídel"}
             </div>
 
-            {catalog.length === 0 ? (
+            {todayDishes.length === 0 ? (
               <p className="text-lg text-[var(--muted)]">
-                Seznam je prázdný — přidejte první jídlo.
+                Zatím nic — níže u kategorií klikněte na{" "}
+                <strong>Vybrat</strong>.
               </p>
             ) : (
               <ul className="overflow-hidden rounded-[8px] border border-[var(--line)] bg-white">
-                {catalog.map((dish) => {
-                  const selected = todaySet.has(dish.id);
-                  const open = editingDishId === dish.id;
-                  return (
-                    <li
-                      key={dish.id}
-                      className={`border-b border-[var(--line)] last:border-b-0 ${
-                        selected ? "bg-[var(--brand-green)]/8" : ""
-                      }`}
-                    >
-                      <div className="flex flex-wrap items-center gap-2 px-4 py-3.5">
-                        <p className="min-w-0 flex-1 text-xl font-extrabold leading-tight text-[var(--ink)]">
-                          {dish.name?.trim() || "Bez názvu"}
-                          {dish.price ? (
-                            <span className="ml-2 text-base font-bold text-[var(--brand-red)]">
-                              {dish.price}
-                            </span>
-                          ) : null}
-                        </p>
-                        <button
-                          type="button"
-                          onClick={() => toggleTodayDish(dish.id)}
-                          className={`shrink-0 rounded-full px-4 py-2 text-base font-extrabold transition ${
-                            selected
-                              ? "bg-[var(--brand-green)] text-white"
-                              : "border-2 border-[var(--brand-green)] text-[var(--brand-green)] hover:bg-[var(--brand-green)] hover:text-white"
-                          }`}
-                        >
-                          {selected ? "Vybráno" : "Vybrat"}
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() =>
-                            setEditingDishId(open ? null : dish.id)
-                          }
-                          className={`shrink-0 rounded-full px-4 py-2 text-base font-extrabold transition ${
-                            open
-                              ? "bg-[var(--ink)] text-white"
-                              : "border-2 border-[var(--ink)] text-[var(--ink)] hover:bg-[var(--ink)] hover:text-white"
-                          }`}
-                        >
-                          {open ? "Zavřít" : "Editovat"}
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => {
-                            if (
-                              typeof window !== "undefined" &&
-                              !window.confirm(
-                                `Smazat „${dish.name || "jídlo"}“?`,
-                              )
-                            ) {
-                              return;
-                            }
-                            removeCatalogDish(dish.id);
-                          }}
-                          className="shrink-0 rounded-full border-2 border-[var(--brand-red)] px-4 py-2 text-base font-extrabold text-[var(--brand-red)] transition hover:bg-[var(--brand-red)] hover:text-white"
-                        >
-                          Smazat
-                        </button>
-                      </div>
-                      {open ? (
-                        <div className="space-y-4 border-t border-[var(--line)] bg-[var(--paper)] px-4 py-4">
-                          <div className="grid gap-4 sm:grid-cols-[1fr_auto_auto]">
-                            <Field
-                              label="Název"
-                              value={dish.name}
-                              onChange={(v) =>
-                                updateCatalogDish(dish.id, "name", v)
-                              }
-                            />
-                            <Field
-                              label="Cena"
-                              value={dish.price}
-                              onChange={(v) =>
-                                updateCatalogDish(dish.id, "price", v)
-                              }
-                            />
-                            <Field
-                              label="Emoji"
-                              value={dish.emoji}
-                              onChange={(v) =>
-                                updateCatalogDish(dish.id, "emoji", v)
-                              }
-                            />
-                          </div>
-                          <Field
-                            label="Popis"
-                            value={dish.description}
-                            onChange={(v) =>
-                              updateCatalogDish(dish.id, "description", v)
-                            }
-                            multiline
-                          />
-                          <Field
-                            label="Poznámka"
-                            value={dish.note}
-                            onChange={(v) =>
-                              updateCatalogDish(dish.id, "note", v)
-                            }
-                          />
-                        </div>
-                      ) : null}
-                    </li>
-                  );
-                })}
-              </ul>
-            )}
-
-            <Button
-              type="button"
-              className="h-14 rounded-full bg-[var(--brand-green)] px-8 text-lg font-extrabold text-white hover:opacity-90"
-              onClick={addCatalogDish}
-            >
-              + Přidat jídlo
-            </Button>
-
-            {todayDishes.length > 0 ? (
-              <div className="space-y-3">
-                <p className="text-lg font-bold text-[var(--ink)]">
-                  Pořadí na webu
-                </p>
                 {todayDishes.map((dish, i) => (
-                  <div
+                  <li
                     key={dish.id}
-                    className="flex flex-wrap items-center gap-2 rounded-[8px] border border-[var(--line)] bg-white px-4 py-3"
+                    className="flex flex-wrap items-center gap-2 border-b border-[var(--line)] px-4 py-3 last:border-b-0"
                   >
-                    <span className="text-base font-extrabold text-[var(--muted)]">
+                    <span className="w-8 text-base font-extrabold text-[var(--muted)]">
                       {i + 1}.
                     </span>
-                    <span className="min-w-0 flex-1 text-lg font-bold">
+                    <span className="min-w-0 flex-1 text-lg font-extrabold">
                       {dish.emoji ? `${dish.emoji} ` : null}
                       {dish.name}
+                      {dish.price ? (
+                        <span className="ml-2 text-base font-bold text-[var(--brand-red)]">
+                          {dish.price}
+                        </span>
+                      ) : null}
                     </span>
                     <button
                       type="button"
@@ -1431,10 +1324,195 @@ export function AdminClient({ initial, authenticated }: Props) {
                     >
                       Dolů
                     </button>
-                  </div>
+                    <button
+                      type="button"
+                      className="rounded-full border-2 border-[var(--brand-red)] px-3 py-1.5 text-sm font-extrabold text-[var(--brand-red)]"
+                      onClick={() => toggleTodayDish(dish.id)}
+                    >
+                      Odebrat
+                    </button>
+                  </li>
                 ))}
+              </ul>
+            )}
+          </Panel>
+
+          <Panel
+            badge="Katalog"
+            title="Vybrat jídlo"
+            hint="Jídla podle kategorií — polévky, panozzo, pasta, gnocchi, pizza. Vybrat = dnes na menu. Editovat otevře údaje."
+          >
+            {catalog.length === 0 ? (
+              <p className="text-lg text-[var(--muted)]">
+                Katalog je prázdný — přidejte první jídlo.
+              </p>
+            ) : (
+              <div className="space-y-6">
+                {grouped.map(({ cat, label, dishes }) =>
+                  dishes.length === 0 ? null : (
+                    <div key={cat} className="space-y-2">
+                      <h3 className="text-xl font-extrabold tracking-wide text-[var(--brand-green-deep)]">
+                        {label}
+                        <span className="ml-2 text-base font-semibold text-[var(--muted)]">
+                          ({dishes.length})
+                        </span>
+                      </h3>
+                      <ul className="overflow-hidden rounded-[8px] border border-[var(--line)] bg-white">
+                        {dishes.map((dish) => {
+                          const selected = todaySet.has(dish.id);
+                          const open = editingDishId === dish.id;
+                          return (
+                            <li
+                              key={dish.id}
+                              className={`border-b border-[var(--line)] last:border-b-0 ${
+                                selected ? "bg-[var(--brand-green)]/8" : ""
+                              }`}
+                            >
+                              <div className="flex flex-wrap items-center gap-2 px-4 py-3.5">
+                                <p className="min-w-0 flex-1 text-xl font-extrabold leading-tight text-[var(--ink)]">
+                                  {dish.name?.trim() || "Bez názvu"}
+                                  {dish.price ? (
+                                    <span className="ml-2 text-base font-bold text-[var(--brand-red)]">
+                                      {dish.price}
+                                    </span>
+                                  ) : null}
+                                </p>
+                                <button
+                                  type="button"
+                                  onClick={() => toggleTodayDish(dish.id)}
+                                  className={`shrink-0 rounded-full px-4 py-2 text-base font-extrabold transition ${
+                                    selected
+                                      ? "bg-[var(--brand-green)] text-white"
+                                      : "border-2 border-[var(--brand-green)] text-[var(--brand-green)] hover:bg-[var(--brand-green)] hover:text-white"
+                                  }`}
+                                >
+                                  {selected ? "Vybráno" : "Vybrat"}
+                                </button>
+                                <button
+                                  type="button"
+                                  onClick={() =>
+                                    setEditingDishId(open ? null : dish.id)
+                                  }
+                                  className={`shrink-0 rounded-full px-4 py-2 text-base font-extrabold transition ${
+                                    open
+                                      ? "bg-[var(--ink)] text-white"
+                                      : "border-2 border-[var(--ink)] text-[var(--ink)] hover:bg-[var(--ink)] hover:text-white"
+                                  }`}
+                                >
+                                  {open ? "Zavřít" : "Editovat"}
+                                </button>
+                                <button
+                                  type="button"
+                                  onClick={() => {
+                                    if (
+                                      typeof window !== "undefined" &&
+                                      !window.confirm(
+                                        `Smazat „${dish.name || "jídlo"}“?`,
+                                      )
+                                    ) {
+                                      return;
+                                    }
+                                    removeCatalogDish(dish.id);
+                                  }}
+                                  className="shrink-0 rounded-full border-2 border-[var(--brand-red)] px-4 py-2 text-base font-extrabold text-[var(--brand-red)] transition hover:bg-[var(--brand-red)] hover:text-white"
+                                >
+                                  Smazat
+                                </button>
+                              </div>
+                              {open ? (
+                                <div className="space-y-4 border-t border-[var(--line)] bg-[var(--paper-soft)] px-4 py-4">
+                                  <div className="grid gap-4 sm:grid-cols-2">
+                                    <Field
+                                      label="Název"
+                                      value={dish.name}
+                                      onChange={(v) =>
+                                        updateCatalogDish(dish.id, "name", v)
+                                      }
+                                    />
+                                    <div className="space-y-2">
+                                      <Label className="text-base font-bold">
+                                        Kategorie
+                                      </Label>
+                                      <select
+                                        className="flex h-12 w-full rounded-md border border-[var(--line)] bg-white px-3 text-base"
+                                        value={dishCategory(dish)}
+                                        onChange={(e) =>
+                                          updateCatalogDish(
+                                            dish.id,
+                                            "category",
+                                            e.target.value,
+                                          )
+                                        }
+                                      >
+                                        {DAILY_CATEGORY_ORDER.map((c) => (
+                                          <option key={c} value={c}>
+                                            {DAILY_CATEGORY_LABEL[c]}
+                                          </option>
+                                        ))}
+                                      </select>
+                                    </div>
+                                  </div>
+                                  <div className="grid gap-4 sm:grid-cols-[1fr_auto]">
+                                    <Field
+                                      label="Cena"
+                                      value={dish.price}
+                                      onChange={(v) =>
+                                        updateCatalogDish(dish.id, "price", v)
+                                      }
+                                    />
+                                    <Field
+                                      label="Emoji"
+                                      value={dish.emoji}
+                                      onChange={(v) =>
+                                        updateCatalogDish(dish.id, "emoji", v)
+                                      }
+                                    />
+                                  </div>
+                                  <Field
+                                    label="Popis"
+                                    value={dish.description}
+                                    onChange={(v) =>
+                                      updateCatalogDish(
+                                        dish.id,
+                                        "description",
+                                        v,
+                                      )
+                                    }
+                                    multiline
+                                  />
+                                  <Field
+                                    label="Poznámka"
+                                    value={dish.note}
+                                    onChange={(v) =>
+                                      updateCatalogDish(dish.id, "note", v)
+                                    }
+                                  />
+                                </div>
+                              ) : null}
+                            </li>
+                          );
+                        })}
+                      </ul>
+                      <button
+                        type="button"
+                        className="text-base font-bold text-[var(--brand-green)] underline"
+                        onClick={() => addCatalogDish(cat)}
+                      >
+                        + Přidat do {label.toLowerCase()}
+                      </button>
+                    </div>
+                  ),
+                )}
               </div>
-            ) : null}
+            )}
+
+            <Button
+              type="button"
+              className="h-14 rounded-full bg-[var(--brand-green)] px-8 text-lg font-extrabold text-white hover:opacity-90"
+              onClick={() => addCatalogDish("ostatni")}
+            >
+              + Přidat jídlo
+            </Button>
           </Panel>
 
           <Panel

@@ -595,7 +595,8 @@
         "price": "59 Kč",
         "emoji": "🍅",
         "description": "rajčatový krém, Grana Padano, bazalka, extra panenský olivový olej",
-        "note": "(s italskou bagetou panozzo + 20 Kč)"
+        "note": "(s italskou bagetou panozzo + 20 Kč)",
+        "category": "polevky"
       },
       {
         "id": "panozzo-prosciutto-e-stracchino",
@@ -603,7 +604,8 @@
         "price": "109 Kč",
         "emoji": "🥖",
         "description": "dušená šunka, sýr stracchino, bazalka, extra panenský olivový olej",
-        "note": ""
+        "note": "",
+        "category": "panozzo"
       },
       {
         "id": "trofie-al-pesto",
@@ -611,7 +613,8 @@
         "price": "199 Kč",
         "emoji": "🍝",
         "description": "tradiční čerstvé ligurské těstoviny s domácím bazalkovým pestem, mozzarellou, cherry rajčaty a Grana Padano",
-        "note": ""
+        "note": "",
+        "category": "pasta"
       },
       {
         "id": "lasagne-al-ragu",
@@ -619,7 +622,8 @@
         "price": "209 Kč",
         "emoji": "🍲",
         "description": "tradiční čerstvé boloňské lasagne s hovězím ragú, bešamelem a Grana Padano",
-        "note": ""
+        "note": "",
+        "category": "pasta"
       },
       {
         "id": "pizza-napoli",
@@ -627,7 +631,8 @@
         "price": "199 Kč",
         "emoji": "🍕",
         "description": "drcená rajčata, mozzarella fior di latte, ančovičky, olivy taggiasche, kapary, oregano, extra panenský olivový olej",
-        "note": ""
+        "note": "",
+        "category": "pizza"
       },
       {
         "id": "pizza-crudo-e-rucola",
@@ -635,7 +640,8 @@
         "price": "229 Kč",
         "emoji": "🍕",
         "description": "drcená rajčata, mozzarella fior di latte, parmská šunka, rukola, hoblinky Grana Padano, extra panenský olivový olej",
-        "note": ""
+        "note": "",
+        "category": "pizza"
       }
     ],
     "catalog": [
@@ -645,55 +651,8 @@
         "price": "59 Kč",
         "emoji": "🍅",
         "description": "rajčatový krém, Grana Padano, bazalka, extra panenský olivový olej",
-        "note": "(s italskou bagetou panozzo + 20 Kč)"
-      },
-      {
-        "id": "panozzo-prosciutto-e-stracchino",
-        "name": "PANOZZO PROSCIUTTO E STRACCHINO",
-        "price": "109 Kč",
-        "emoji": "🥖",
-        "description": "dušená šunka, sýr stracchino, bazalka, extra panenský olivový olej",
-        "note": ""
-      },
-      {
-        "id": "trofie-al-pesto",
-        "name": "TROFIE AL PESTO, MOZZARELLA E POMODORINI",
-        "price": "199 Kč",
-        "emoji": "🍝",
-        "description": "tradiční čerstvé ligurské těstoviny s domácím bazalkovým pestem, mozzarellou, cherry rajčaty a Grana Padano",
-        "note": ""
-      },
-      {
-        "id": "lasagne-al-ragu",
-        "name": "LASAGNE AL RAGÙ",
-        "price": "209 Kč",
-        "emoji": "🍲",
-        "description": "tradiční čerstvé boloňské lasagne s hovězím ragú, bešamelem a Grana Padano",
-        "note": ""
-      },
-      {
-        "id": "pizza-napoli",
-        "name": "PIZZA NAPOLI",
-        "price": "199 Kč",
-        "emoji": "🍕",
-        "description": "drcená rajčata, mozzarella fior di latte, ančovičky, olivy taggiasche, kapary, oregano, extra panenský olivový olej",
-        "note": ""
-      },
-      {
-        "id": "pizza-crudo-e-rucola",
-        "name": "PIZZA CRUDO E RUCOLA",
-        "price": "229 Kč",
-        "emoji": "🍕",
-        "description": "drcená rajčata, mozzarella fior di latte, parmská šunka, rukola, hoblinky Grana Padano, extra panenský olivový olej",
-        "note": ""
-      },
-      {
-        "id": "panozzo-salamino-e-mozzarella",
-        "name": "PANOZZO SALAMINO E MOZZARELLA",
-        "price": "109 Kč",
-        "emoji": "🥖",
-        "description": "pikantní salám, mozzarella fior di latte, bazalka, extra panenský olivový olej",
-        "note": ""
+        "note": "(s italskou bagetou panozzo + 20 Kč)",
+        "category": "polevky"
       },
       {
         "id": "panozzo-mortadella-e-ricotta",
@@ -701,15 +660,35 @@
         "price": "109 Kč",
         "emoji": "🥖",
         "description": "mortadella, ricotta, strouhané pistácie",
-        "note": ""
+        "note": "",
+        "category": "panozzo"
       },
       {
-        "id": "tagliatelle-al-salmone",
-        "name": "TAGLIATELLE AL SALMONE",
-        "price": "199 Kč",
-        "emoji": "🍤",
-        "description": "čerstvé těstoviny v rajčatovém sugo s uzeným lososem a čerstvou bazalkou",
-        "note": ""
+        "id": "panozzo-prosciutto-e-stracchino",
+        "name": "PANOZZO PROSCIUTTO E STRACCHINO",
+        "price": "109 Kč",
+        "emoji": "🥖",
+        "description": "dušená šunka, sýr stracchino, bazalka, extra panenský olivový olej",
+        "note": "",
+        "category": "panozzo"
+      },
+      {
+        "id": "panozzo-salamino-e-mozzarella",
+        "name": "PANOZZO SALAMINO E MOZZARELLA",
+        "price": "109 Kč",
+        "emoji": "🥖",
+        "description": "pikantní salám, mozzarella fior di latte, bazalka, extra panenský olivový olej",
+        "note": "",
+        "category": "panozzo"
+      },
+      {
+        "id": "lasagne-al-ragu",
+        "name": "LASAGNE AL RAGÙ",
+        "price": "209 Kč",
+        "emoji": "🍲",
+        "description": "tradiční čerstvé boloňské lasagne s hovězím ragú, bešamelem a Grana Padano",
+        "note": "",
+        "category": "pasta"
       },
       {
         "id": "penne-alla-vodka",
@@ -717,15 +696,8 @@
         "price": "189 Kč",
         "emoji": "🍝",
         "description": "těstoviny ve smetanovo-rajčatové omáčce s pancettou na vodce a Grana Padano",
-        "note": ""
-      },
-      {
-        "id": "tagliolini-ai-funghi-porcini",
-        "name": "TAGLIOLINI AI FUNGHI PORCINI, GORGONZOLA E NOCI",
-        "price": "199 Kč",
-        "emoji": "🍄",
-        "description": "čerstvé těstoviny s hříbky na bílém víně, gorgonzolou, pekanovými ořechy a Grana Padano",
-        "note": ""
+        "note": "",
+        "category": "pasta"
       },
       {
         "id": "spaghetti-ai-gamberetti",
@@ -733,7 +705,8 @@
         "price": "199 Kč",
         "emoji": "🍝",
         "description": "těstoviny s krevetami na bílém víně, cherry rajčátky confit a čerstvou bazalkou",
-        "note": ""
+        "note": "",
+        "category": "pasta"
       },
       {
         "id": "spaghetti-alla-carbonara",
@@ -741,7 +714,35 @@
         "price": "199 Kč",
         "emoji": "🍝",
         "description": "tradiční římské těstoviny s vejcem, italskou slaninou guanciale, Pecorino Romano DOP a čerstvě mletým pepřem",
-        "note": ""
+        "note": "",
+        "category": "pasta"
+      },
+      {
+        "id": "tagliatelle-al-salmone",
+        "name": "TAGLIATELLE AL SALMONE",
+        "price": "199 Kč",
+        "emoji": "🍤",
+        "description": "čerstvé těstoviny v rajčatovém sugo s uzeným lososem a čerstvou bazalkou",
+        "note": "",
+        "category": "pasta"
+      },
+      {
+        "id": "tagliolini-ai-funghi-porcini",
+        "name": "TAGLIOLINI AI FUNGHI PORCINI, GORGONZOLA E NOCI",
+        "price": "199 Kč",
+        "emoji": "🍄",
+        "description": "čerstvé těstoviny s hříbky na bílém víně, gorgonzolou, pekanovými ořechy a Grana Padano",
+        "note": "",
+        "category": "pasta"
+      },
+      {
+        "id": "trofie-al-pesto",
+        "name": "TROFIE AL PESTO, MOZZARELLA E POMODORINI",
+        "price": "199 Kč",
+        "emoji": "🍝",
+        "description": "tradiční čerstvé ligurské těstoviny s domácím bazalkovým pestem, mozzarellou, cherry rajčaty a Grana Padano",
+        "note": "",
+        "category": "pasta"
       },
       {
         "id": "gnocchi-nduja-e-ricotta",
@@ -749,7 +750,8 @@
         "price": "189 Kč",
         "emoji": "🍝",
         "description": "krémové gnocchi v rajčatovém sugo s pikantním kalábrijským roztíratelným salámem 'nduja, ricottou, čerstvou bazalkou a Grana Padano",
-        "note": ""
+        "note": "",
+        "category": "gnocchi"
       },
       {
         "id": "gnocchi-ai-quattro-formaggi",
@@ -757,15 +759,8 @@
         "price": "189 Kč",
         "emoji": "🧀",
         "description": "krémové gnocchi s gorgonzolou, stracchinem, Stelvio DOP a Grana Padano",
-        "note": ""
-      },
-      {
-        "id": "gnocchi-salsiccia-e-stelvio",
-        "name": "GNOCCHI SALSICCIA E STELVIO",
-        "price": "189 Kč",
-        "emoji": "🍝",
-        "description": "gnocchi v jemné smetanové omáčce s italskou klobásou salsiccia, Stelvio DOP a Grana Padano",
-        "note": ""
+        "note": "",
+        "category": "gnocchi"
       },
       {
         "id": "gnocchi-alla-cardinale",
@@ -773,23 +768,26 @@
         "price": "189 Kč",
         "emoji": "🍝",
         "description": "krémové gnocchi v rajčatovém sugo s domácím bazalkovým pestem, smetanou a Grana Padano",
-        "note": ""
+        "note": "",
+        "category": "gnocchi"
       },
       {
-        "id": "pizza-quattro-formaggi",
-        "name": "PIZZA QUATTRO FORMAGGI",
+        "id": "gnocchi-salsiccia-e-stelvio",
+        "name": "GNOCCHI SALSICCIA E STELVIO",
         "price": "189 Kč",
-        "emoji": "🍕",
-        "description": "drcená rajčata, mozzarella fior di latte, gorgonzola, uzená scamorza, Grana Padano",
-        "note": ""
+        "emoji": "🍝",
+        "description": "gnocchi v jemné smetanové omáčce s italskou klobásou salsiccia, Stelvio DOP a Grana Padano",
+        "note": "",
+        "category": "gnocchi"
       },
       {
-        "id": "pizza-prosciutto-e-funghi",
-        "name": "PIZZA PROSCIUTTO E FUNGHI",
-        "price": "199 Kč",
+        "id": "pizza-crudo-e-rucola",
+        "name": "PIZZA CRUDO E RUCOLA",
+        "price": "229 Kč",
         "emoji": "🍕",
-        "description": "drcená rajčata, mozzarella fior di latte, dušená šunka, žampiony",
-        "note": ""
+        "description": "drcená rajčata, mozzarella fior di latte, parmská šunka, rukola, hoblinky Grana Padano, extra panenský olivový olej",
+        "note": "",
+        "category": "pizza"
       },
       {
         "id": "pizza-funghi",
@@ -797,7 +795,35 @@
         "price": "189 Kč",
         "emoji": "🍕",
         "description": "drcená rajčata, mozzarella fior di latte, žampiony",
-        "note": ""
+        "note": "",
+        "category": "pizza"
+      },
+      {
+        "id": "pizza-napoli",
+        "name": "PIZZA NAPOLI",
+        "price": "199 Kč",
+        "emoji": "🍕",
+        "description": "drcená rajčata, mozzarella fior di latte, ančovičky, olivy taggiasche, kapary, oregano, extra panenský olivový olej",
+        "note": "",
+        "category": "pizza"
+      },
+      {
+        "id": "pizza-prosciutto-e-funghi",
+        "name": "PIZZA PROSCIUTTO E FUNGHI",
+        "price": "199 Kč",
+        "emoji": "🍕",
+        "description": "drcená rajčata, mozzarella fior di latte, dušená šunka, žampiony",
+        "note": "",
+        "category": "pizza"
+      },
+      {
+        "id": "pizza-quattro-formaggi",
+        "name": "PIZZA QUATTRO FORMAGGI",
+        "price": "189 Kč",
+        "emoji": "🍕",
+        "description": "drcená rajčata, mozzarella fior di latte, gorgonzola, uzená scamorza, Grana Padano",
+        "note": "",
+        "category": "pizza"
       }
     ],
     "todayIds": [

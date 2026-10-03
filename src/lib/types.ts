@@ -18,6 +18,15 @@ export type FaqItem = {
   a: string;
 };
 
+/** Groups dishes in admin daily picker */
+export type DailyDishCategory =
+  | "polevky"
+  | "panozzo"
+  | "pasta"
+  | "gnocchi"
+  | "pizza"
+  | "ostatni";
+
 export type DailyDish = {
   id: string;
   name: string;
@@ -25,6 +34,8 @@ export type DailyDish = {
   emoji: string;
   description: string;
   note: string;
+  /** Admin picker group — polévky / panozzo / pasta / … */
+  category?: DailyDishCategory;
 };
 
 export type SiteContent = {

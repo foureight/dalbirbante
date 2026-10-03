@@ -1,6 +1,10 @@
 import { promises as fs } from "fs";
 import path from "path";
 import type { DailyDish, SiteContent } from "./types";
+import {
+  DAILY_CATEGORY_ORDER,
+  inferDailyDishCategory,
+} from "./daily-dishes";
 import { applyCzechOrphansDeep } from "./typography";
 
 const contentPath = path.join(process.cwd(), "data", "content.json");
@@ -21,6 +25,24 @@ function slugifyDishId(name: string, fallback: string) {
   return base || fallback;
 }
 
+function normalizeDish(item: DailyDish, i: number): DailyDish {
+  const id = item.id || slugifyDishId(item.name, `dish-${i + 1}`);
+  const name = item.name || "";
+  const category =
+    item.category && DAILY_CATEGORY_ORDER.includes(item.category)
+      ? item.category
+      : inferDailyDishCategory(id, name);
+  return {
+    id,
+    name,
+    price: item.price || "",
+    emoji: item.emoji || "",
+    description: item.description || "",
+    note: item.note || "",
+    category,
+  };
+}
+
 /** Ensure daily catalog / todayIds exist and items stay in sync. */
 function normalizeDaily(data: SiteContent): SiteContent {
   const daily = data.daily;
@@ -31,23 +53,9 @@ function normalizeDaily(data: SiteContent): SiteContent {
   let items = daily.items || [];
 
   if (!catalog?.length) {
-    catalog = items.map((item, i) => ({
-      id: item.id || slugifyDishId(item.name, `dish-${i + 1}`),
-      name: item.name || "",
-      price: item.price || "",
-      emoji: item.emoji || "",
-      description: item.description || "",
-      note: item.note || "",
-    }));
+    catalog = items.map((item, i) => normalizeDish(item, i));
   } else {
-    catalog = catalog.map((item, i) => ({
-      id: item.id || slugifyDishId(item.name, `dish-${i + 1}`),
-      name: item.name || "",
-      price: item.price || "",
-      emoji: item.emoji || "",
-      description: item.description || "",
-      note: item.note || "",
-    }));
+    catalog = catalog.map((item, i) => normalizeDish(item, i));
   }
 
   if (!todayIds?.length) {
