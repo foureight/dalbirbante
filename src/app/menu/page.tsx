@@ -134,12 +134,12 @@ export default async function MenuPage() {
                             {item.badge}
                           </p>
                         ) : null}
-                        <div className="flex flex-nowrap items-center gap-2 sm:gap-4 md:gap-6">
-                          <h3 className="min-w-0 flex-1 text-[1.15rem] leading-tight sm:text-[1.85rem] md:text-[2.35rem]">
+                        <div className="flex flex-nowrap items-start gap-2 sm:items-center sm:gap-4 md:gap-6">
+                          <h3 className="min-w-0 flex-1 text-[1.05rem] leading-tight sm:text-[1.85rem] md:text-[2.35rem]">
                             {item.name}
                           </h3>
-                          <div className="ml-auto flex shrink-0 items-center gap-2 sm:gap-4 md:gap-5">
-                            <p className="text-lg font-black leading-none whitespace-nowrap text-[var(--brand-red)] sm:text-3xl md:text-4xl">
+                          <div className="ml-auto flex shrink-0 items-center gap-1.5 pt-0.5 sm:gap-4 sm:pt-0 md:gap-5">
+                            <p className="text-base font-black leading-none whitespace-nowrap text-[var(--brand-red)] sm:text-3xl md:text-4xl">
                               {item.price}
                             </p>
                             <AddToCartButton
@@ -147,6 +147,7 @@ export default async function MenuPage() {
                               price={item.price}
                               image={item.image || drinkPlaceholder || undefined}
                               categoryId={cat.id}
+                              className="!min-w-0 !px-2.5 !py-1.5 !text-[0.7rem] sm:!min-w-[6.25rem] sm:!px-[1.1rem] sm:!py-3 sm:!text-[0.95rem]"
                             />
                           </div>
                         </div>
