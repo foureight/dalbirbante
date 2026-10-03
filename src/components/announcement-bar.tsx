@@ -1,33 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import {
+  CLOSED_BANNER,
+  isClosedDay,
+} from "@/lib/opening-hours";
 
 const STORAGE_KEY = "dalbirbante-announcement-dismissed";
-const CLOSED_MESSAGE =
-  "Dnes je restaurace bohužel zavřená. Uvidíme se v úterý.";
-
-function pragueWeekday(): number {
-  // 0 = Sunday … 6 = Saturday in Europe/Prague
-  const day = new Intl.DateTimeFormat("en-US", {
-    timeZone: "Europe/Prague",
-    weekday: "short",
-  }).format(new Date());
-  const map: Record<string, number> = {
-    Sun: 0,
-    Mon: 1,
-    Tue: 2,
-    Wed: 3,
-    Thu: 4,
-    Fri: 5,
-    Sat: 6,
-  };
-  return map[day] ?? new Date().getDay();
-}
-
-function isClosedDay(): boolean {
-  const d = pragueWeekday();
-  return d === 0 || d === 1;
-}
 
 export function AnnouncementBar({ message }: { message: string }) {
   const [visible, setVisible] = useState(false);
@@ -36,12 +15,18 @@ export function AnnouncementBar({ message }: { message: string }) {
 
   useEffect(() => {
     const showClosed = isClosedDay();
-    const nextMessage = showClosed ? CLOSED_MESSAGE : message.trim();
+    const nextMessage = showClosed ? CLOSED_BANNER : message.trim();
     setClosed(showClosed);
     setActiveMessage(nextMessage);
 
     if (!nextMessage) {
       setVisible(false);
+      return;
+    }
+
+    // Closed-day banner always stays visible — cannot dismiss
+    if (showClosed) {
+      setVisible(true);
       return;
     }
 
@@ -54,6 +39,7 @@ export function AnnouncementBar({ message }: { message: string }) {
   }, [message]);
 
   function dismiss() {
+    if (closed) return;
     try {
       window.sessionStorage.setItem(STORAGE_KEY, activeMessage);
     } catch {
@@ -75,23 +61,25 @@ export function AnnouncementBar({ message }: { message: string }) {
           {activeMessage}
         </p>
       </div>
-      <button
-        type="button"
-        onClick={dismiss}
-        aria-label="Zavřít důležité sdělení"
-        className="absolute right-3 top-1/2 flex size-8 -translate-y-1/2 items-center justify-center rounded-full text-white transition hover:bg-white/15 sm:right-5 sm:size-9 md:right-10"
-      >
-        <svg
-          viewBox="0 0 24 24"
-          className="size-5"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2.2"
-          aria-hidden
+      {closed ? null : (
+        <button
+          type="button"
+          onClick={dismiss}
+          aria-label="Zavřít důležité sdělení"
+          className="absolute right-3 top-1/2 flex size-8 -translate-y-1/2 items-center justify-center rounded-full text-white transition hover:bg-white/15 sm:right-5 sm:size-9 md:right-10"
         >
-          <path d="M6 6l12 12M18 6L6 18" strokeLinecap="round" />
-        </svg>
-      </button>
+          <svg
+            viewBox="0 0 24 24"
+            className="size-5"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.2"
+            aria-hidden
+          >
+            <path d="M6 6l12 12M18 6L6 18" strokeLinecap="round" />
+          </svg>
+        </button>
+      )}
     </div>
   );
 }

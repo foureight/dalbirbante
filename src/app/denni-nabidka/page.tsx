@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getContent } from "@/lib/content";
+import { formatPragueDate } from "@/lib/opening-hours";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { Button } from "@/components/ui/button";
@@ -24,6 +25,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function DailyMenuPage() {
   const content = await getContent();
   const { site, daily } = content;
+  const todayLabel = formatPragueDate();
 
   return (
     <>
@@ -41,7 +43,7 @@ export default async function DailyMenuPage() {
             <>
               {daily.title}
               <span className="mt-3 block text-white md:mt-0 md:ml-4 md:inline">
-                {daily.date}
+                {todayLabel}
               </span>
             </>
           }

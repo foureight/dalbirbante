@@ -18,6 +18,7 @@ import {
   parseAreaTowns,
   resolveTownCoords,
 } from "@/lib/delivery-towns";
+import { formatPragueDate, isClosedDay } from "@/lib/opening-hours";
 
 function syncDailyItems(
   catalog: DailyDish[],
@@ -572,16 +573,25 @@ export function AdminClient({ initial, authenticated }: Props) {
     setSaving(true);
     setStatus(null);
     setError(null);
+    // Always stamp today's Prague date onto the daily menu
+    const payload: SiteContent = {
+      ...content,
+      daily: {
+        ...content.daily,
+        date: formatPragueDate(),
+      },
+    };
     const res = await fetch("/api/content", {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(content),
+      body: JSON.stringify(payload),
     });
     setSaving(false);
     if (!res.ok) {
       setError("Uložení selhalo. Zkontrolujte přihlášení.");
       return;
     }
+    setContent(payload);
     setStatus("Uloženo. Změny jsou hned vidět na webu.");
     router.refresh();
   }
@@ -1368,12 +1378,24 @@ export function AdminClient({ initial, authenticated }: Props) {
             }
           >
             <div className="grid items-start gap-5 sm:grid-cols-2">
-              <Field
-                label="Datum na webu"
-                value={d.date}
-                onChange={(v) => updateAt(["daily", "date"], v)}
-                hint="Např. 3. 10. 2026"
-              />
+              <div className="space-y-2.5">
+                <Label className="text-lg font-bold text-[var(--ink)]">
+                  Datum na webu
+                </Label>
+                <div className="flex h-14 items-center rounded-md border border-[var(--line)] bg-[var(--paper-soft)] px-4 text-xl font-semibold text-[var(--ink)]">
+                  {formatPragueDate()}
+                </div>
+                <p className="text-base leading-snug text-[var(--muted)]">
+                  Nastaví se samo podle dneška (Praha). Út–So otevřeno
+                  {isClosedDay() ? (
+                    <span className="font-semibold text-[var(--brand-red)]">
+                      {" "}
+                      — dnes je zavřeno
+                    </span>
+                  ) : null}
+                  .
+                </p>
+              </div>
               <Field
                 label="Čas podávání"
                 value={d.hours}
