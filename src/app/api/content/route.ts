@@ -1,3 +1,4 @@
+import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 import {
   ADMIN_COOKIE,
@@ -8,9 +9,13 @@ import {
 import { getContent, saveContent } from "@/lib/content";
 import type { SiteContent } from "@/lib/types";
 
+export const dynamic = "force-dynamic";
+
 export async function GET() {
   const content = await getContent({ orphans: false });
-  return NextResponse.json(content);
+  return NextResponse.json(content, {
+    headers: { "Cache-Control": "no-store" },
+  });
 }
 
 export async function PUT(request: Request) {
@@ -24,6 +29,12 @@ export async function PUT(request: Request) {
       return NextResponse.json({ error: "Neplatný obsah." }, { status: 400 });
     }
     await saveContent(body);
+    // Bust any cached HTML so /denni-nabidka etc. show the new menu
+    revalidatePath("/", "layout");
+    revalidatePath("/denni-nabidka");
+    revalidatePath("/menu");
+    revalidatePath("/rozvoz");
+    revalidatePath("/");
     return NextResponse.json({ ok: true });
   } catch {
     return NextResponse.json({ error: "Uložení selhalo." }, { status: 500 });

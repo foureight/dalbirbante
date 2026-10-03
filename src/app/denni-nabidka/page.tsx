@@ -12,6 +12,9 @@ import { Reveal } from "@/components/reveal";
 import { getBreadcrumbSchema, getPageSchema } from "@/lib/schema";
 import { buildPageMetadata } from "@/lib/seo";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export async function generateMetadata(): Promise<Metadata> {
   const content = await getContent();
   return buildPageMetadata(content, {

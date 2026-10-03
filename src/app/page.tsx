@@ -28,6 +28,9 @@ const gallery = [
   "/images/gallery/08.webp",
 ];
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export default async function HomePage() {
   const content = await getContent();
   const { site, home } = content;

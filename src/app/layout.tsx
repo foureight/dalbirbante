@@ -5,6 +5,10 @@ import { Providers } from "@/components/providers";
 import { buildPageMetadata, siteBaseUrl } from "@/lib/seo";
 import "./globals.css";
 
+/** CMS content lives on disk/volume — never bake pages at build time. */
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export const viewport: Viewport = {
   themeColor: "#009246",
 };
