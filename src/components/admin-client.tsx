@@ -146,6 +146,60 @@ export function AdminClient({ initial, authenticated }: Props) {
     setContent((prev) => setPath(prev, path, value) as SiteContent);
   }
 
+  function addMenuItem(categoryIndex: number) {
+    setContent((prev) => {
+      const menuCategories = prev.menuCategories.map((cat, i) =>
+        i === categoryIndex
+          ? {
+              ...cat,
+              items: [
+                ...cat.items,
+                { name: "", description: "", price: "", image: "", badge: "" },
+              ],
+            }
+          : cat,
+      );
+      return { ...prev, menuCategories };
+    });
+    setStatus("Přidána nová položka — vyplňte údaje a uložte změny.");
+    setError(null);
+  }
+
+  function removeMenuItem(categoryIndex: number, itemIndex: number) {
+    setContent((prev) => {
+      const cat = prev.menuCategories[categoryIndex];
+      if (!cat || cat.items.length <= 1) return prev;
+      const menuCategories = prev.menuCategories.map((c, i) =>
+        i === categoryIndex
+          ? { ...c, items: c.items.filter((_, ii) => ii !== itemIndex) }
+          : c,
+      );
+      return { ...prev, menuCategories };
+    });
+    setStatus("Položka odebrána — uložte změny, aby zmizela z menu.");
+    setError(null);
+  }
+
+  function moveMenuItem(
+    categoryIndex: number,
+    itemIndex: number,
+    direction: -1 | 1,
+  ) {
+    setContent((prev) => {
+      const cat = prev.menuCategories[categoryIndex];
+      if (!cat) return prev;
+      const target = itemIndex + direction;
+      if (target < 0 || target >= cat.items.length) return prev;
+      const items = [...cat.items];
+      const [row] = items.splice(itemIndex, 1);
+      items.splice(target, 0, row);
+      const menuCategories = prev.menuCategories.map((c, i) =>
+        i === categoryIndex ? { ...c, items } : c,
+      );
+      return { ...prev, menuCategories };
+    });
+  }
+
   async function login(e: React.FormEvent) {
     e.preventDefault();
     setError(null);
@@ -195,7 +249,11 @@ export function AdminClient({ initial, authenticated }: Props) {
       return (
         <div className="space-y-6">
           {content.menuCategories.map((cat, ci) => (
-            <Panel key={cat.id} title={`Kategorie · ${cat.name || ci + 1}`}>
+            <Panel
+              key={cat.id}
+              title={`Kategorie · ${cat.name || ci + 1}`}
+              hint="Přidejte pizzu nebo jiný produkt tlačítkem dole. Po úpravách nezapomeňte uložit."
+            >
               <Field
                 label="Název kategorie"
                 value={cat.name}
@@ -212,6 +270,32 @@ export function AdminClient({ initial, authenticated }: Props) {
                     key={`${cat.id}-${ii}`}
                     title={`Položka ${ii + 1}${item.name ? ` · ${item.name}` : ""}`}
                   >
+                    <div className="flex flex-wrap gap-2">
+                      <button
+                        type="button"
+                        className="rounded-full border border-[var(--line)] px-3 py-1.5 text-sm transition hover:border-[var(--brand-green)] disabled:opacity-40"
+                        disabled={ii === 0}
+                        onClick={() => moveMenuItem(ci, ii, -1)}
+                      >
+                        Nahoru
+                      </button>
+                      <button
+                        type="button"
+                        className="rounded-full border border-[var(--line)] px-3 py-1.5 text-sm transition hover:border-[var(--brand-green)] disabled:opacity-40"
+                        disabled={ii >= cat.items.length - 1}
+                        onClick={() => moveMenuItem(ci, ii, 1)}
+                      >
+                        Dolů
+                      </button>
+                      <button
+                        type="button"
+                        className="rounded-full border border-[var(--line)] px-3 py-1.5 text-sm text-[var(--muted)] transition hover:border-[var(--brand-red)] hover:text-[var(--brand-red)] disabled:opacity-40"
+                        disabled={cat.items.length <= 1}
+                        onClick={() => removeMenuItem(ci, ii)}
+                      >
+                        Smazat položku
+                      </button>
+                    </div>
                     <div className="grid gap-4 md:grid-cols-2">
                       <Field
                         label="Název položky"
@@ -374,6 +458,13 @@ export function AdminClient({ initial, authenticated }: Props) {
                     </div>
                   </ItemCard>
                 ))}
+                <Button
+                  type="button"
+                  className="rounded-full bg-[var(--brand-green)] text-white hover:opacity-90"
+                  onClick={() => addMenuItem(ci)}
+                >
+                  + Přidat produkt
+                </Button>
               </div>
             </Panel>
           ))}
