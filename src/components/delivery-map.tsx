@@ -236,7 +236,10 @@ export function DeliveryMap({ className = "", zones }: Props) {
                 type="button"
                 className={`delivery-map__legend-btn${active ? " is-active" : ""}`}
                 aria-pressed={active}
-                onClick={() => setSelectedZoneId(f.properties.id)}
+                onMouseEnter={() => setSelectedZoneId(f.properties.id)}
+                onMouseLeave={() => setSelectedZoneId(null)}
+                onFocus={() => setSelectedZoneId(f.properties.id)}
+                onBlur={() => setSelectedZoneId(null)}
               >
                 <span
                   className="delivery-map__swatch"
