@@ -597,6 +597,11 @@ table td {
   align-items: flex-start;
 }
 
+.daily-row,
+.daily-row__actions {
+  align-items: flex-start !important;
+}
+
 .menu-row:hover {
   background-color: transparent;
   transform: none;

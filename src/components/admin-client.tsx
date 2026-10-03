@@ -1242,7 +1242,7 @@ export function AdminClient({ initial, authenticated }: Props) {
               selected ? "bg-[var(--brand-green)]/8" : ""
             }`}
           >
-            <div className="flex flex-wrap items-center gap-2 px-4 py-3.5">
+            <div className="flex flex-wrap items-start gap-2 px-4 py-3.5">
               <p className="min-w-0 flex-1 text-xl font-extrabold leading-tight text-[var(--ink)]">
                 {dish.emoji ? `${dish.emoji} ` : null}
                 {dish.name?.trim() || "Bez názvu"}
@@ -1395,7 +1395,7 @@ export function AdminClient({ initial, authenticated }: Props) {
                 {todayDishes.map((dish, i) => (
                   <li
                     key={dish.id}
-                    className="flex flex-wrap items-center gap-2 border-b border-[var(--line)] px-4 py-3 last:border-b-0"
+                    className="flex flex-wrap items-start gap-2 border-b border-[var(--line)] px-4 py-3 last:border-b-0"
                   >
                     <span className="w-8 text-base font-extrabold text-[var(--muted)]">
                       {i + 1}.
