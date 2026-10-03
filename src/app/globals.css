@@ -602,6 +602,11 @@ table td {
   align-items: flex-start !important;
 }
 
+/* Amount + Kč must stay on one line */
+.price {
+  white-space: nowrap;
+}
+
 .menu-row:hover {
   background-color: transparent;
   transform: none;

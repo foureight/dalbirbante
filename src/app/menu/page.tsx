@@ -139,7 +139,7 @@ export default async function MenuPage() {
                             {item.name}
                           </h3>
                           <div className="flex shrink-0 items-start gap-3 sm:ml-auto sm:gap-4 md:gap-5">
-                            <p className="text-xl font-black leading-none whitespace-nowrap text-[var(--brand-red)] sm:text-3xl md:text-4xl">
+                            <p className="price text-xl font-black leading-none whitespace-nowrap text-[var(--brand-red)] sm:text-3xl md:text-4xl">
                               {item.price}
                             </p>
                             <AddToCartButton

@@ -79,7 +79,7 @@ export default async function DailyMenuPage() {
                     ) : null}
                   </div>
                   <div className="daily-row__actions flex items-start justify-between gap-3 sm:justify-end sm:gap-8">
-                    <p className="text-2xl font-black leading-none text-[var(--brand-red)] sm:text-3xl md:text-4xl">
+                    <p className="price whitespace-nowrap text-2xl font-black leading-none text-[var(--brand-red)] sm:text-3xl md:text-4xl">
                       {item.price}
                     </p>
                     <AddToCartButton name={item.name} price={item.price} />

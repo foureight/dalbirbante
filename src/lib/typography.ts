@@ -4,21 +4,26 @@ const NBSP = "\u00A0";
 const ORPHAN_RE =
   /(^|[\s([{„"«])([AaIiKkOoSsUuVvZz]) +(?=[\p{L}\d„"«(])/gu;
 
-function shouldSkipString(value: string): boolean {
+/** Keep amount + Kč together (99 Kč → 99\u00A0Kč). */
+const PRICE_KC_RE = /(\d) +Kč/g;
+
+function shouldSkipOrphans(value: string): boolean {
   if (!value.includes(" ")) return true;
   if (/^https?:\/\//i.test(value)) return true;
   if (/^(mailto:|tel:)/i.test(value)) return true;
-  if (value.startsWith("/") && !/\s/.test(value.slice(1, 8))) {
-    // image/path-like values without prose spaces
-    if (!/\s[AaIiKkOoSsUuVvZz]\s/.test(value)) return true;
+  if (value.startsWith("/") && !/\s[AaIiKkOoSsUuVvZz]\s/.test(value)) {
+    return true;
   }
   return false;
 }
 
-/** Insert non-breaking spaces after Czech jednoznakovky. */
+/** Insert non-breaking spaces after Czech jednoznakovky and before Kč. */
 export function fixCzechOrphans(text: string): string {
-  if (!text || shouldSkipString(text)) return text;
-  return text.replace(ORPHAN_RE, `$1$2${NBSP}`);
+  if (!text) return text;
+  // Always glue prices — even in short strings like "99 Kč"
+  let out = text.replace(PRICE_KC_RE, `$1${NBSP}Kč`);
+  if (shouldSkipOrphans(out)) return out;
+  return out.replace(ORPHAN_RE, `$1$2${NBSP}`);
 }
 
 export function applyCzechOrphansDeep<T>(value: T): T {
