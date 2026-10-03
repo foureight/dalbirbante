@@ -92,4 +92,4 @@ Bez těchto hodnot formulář vrátí chybu o chybějícím SMTP (web dál běž
 
 ## Poznámka k ukládání
 
-Ukládání obsahu zapisuje do souboru `data/content.json`. Funguje lokálně a na běžném Node serveru (`npm start`). Na serverless hostingu (např. Vercel) souborový zápis nepřetrvává — tam je potřeba napojit databázi nebo headless CMS.
+Ukládání obsahu zapisuje do `data/content.json` lokálně. Na Zerops jde zápis do persistentního disku (`DATA_DIR=/data`, Local Storage `vol`), takže denní menu a ostatní úpravy z adminu přežijí další deploy. Seed z gitu se zkopíruje jen při prvním startu, když na disku ještě nic není.

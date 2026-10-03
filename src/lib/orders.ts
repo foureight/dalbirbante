@@ -1,5 +1,5 @@
 import { promises as fs } from "fs";
-import path from "path";
+import { dataFile, ensureRuntimeFile } from "./data-dir";
 
 export type OrderItem = {
   name: string;
@@ -33,16 +33,21 @@ export type Order = {
   printedAt?: string;
 };
 
-const ORDERS_PATH = path.join(process.cwd(), "data", "orders.json");
-
 type OrdersFile = {
   nextNumber: number;
   orders: Order[];
 };
 
+async function ordersPath(): Promise<string> {
+  return ensureRuntimeFile(
+    "orders.json",
+    JSON.stringify({ nextNumber: 1, orders: [] }, null, 2) + "\n",
+  );
+}
+
 async function readFile(): Promise<OrdersFile> {
   try {
-    const raw = await fs.readFile(ORDERS_PATH, "utf8");
+    const raw = await fs.readFile(await ordersPath(), "utf8");
     return JSON.parse(raw) as OrdersFile;
   } catch {
     return { nextNumber: 1, orders: [] };
@@ -50,8 +55,11 @@ async function readFile(): Promise<OrdersFile> {
 }
 
 async function writeFile(data: OrdersFile) {
-  await fs.mkdir(path.dirname(ORDERS_PATH), { recursive: true });
-  await fs.writeFile(ORDERS_PATH, JSON.stringify(data, null, 2), "utf8");
+  const file = dataFile("orders.json");
+  await fs.mkdir(dataFile(), { recursive: true });
+  const tmp = `${file}.tmp`;
+  await fs.writeFile(tmp, JSON.stringify(data, null, 2), "utf8");
+  await fs.rename(tmp, file);
 }
 
 export async function listOrders(): Promise<Order[]> {

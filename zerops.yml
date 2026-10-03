@@ -11,6 +11,11 @@ zerops:
         - node_modules
     run:
       base: nodejs@22
+      # Persistent disk — admin CMS / orders survive deploys
+      volume:
+        hostname: vol
+        mountPath: /data
+        readOnly: false
       ports:
         - port: 3000
           httpSupport: true
@@ -18,4 +23,5 @@ zerops:
         NODE_ENV: production
         PORT: "3000"
         NODE_OPTIONS: "--max-old-space-size=384"
+        DATA_DIR: /data
       start: npm start

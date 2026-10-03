@@ -1,13 +1,11 @@
 import { promises as fs } from "fs";
-import path from "path";
 import type { DailyDish, SiteContent } from "./types";
 import {
   DAILY_CATEGORY_ORDER,
   inferDailyDishCategory,
 } from "./daily-dishes";
 import { applyCzechOrphansDeep } from "./typography";
-
-const contentPath = path.join(process.cwd(), "data", "content.json");
+import { dataFile, ensureRuntimeFile } from "./data-dir";
 
 type GetContentOptions = {
   /** When false, return raw CMS strings (admin / API). Default true. */
@@ -74,15 +72,25 @@ function normalizeDaily(data: SiteContent): SiteContent {
   };
 }
 
+async function contentPath(): Promise<string> {
+  return ensureRuntimeFile("content.json");
+}
+
 export async function getContent(
   options: GetContentOptions = {},
 ): Promise<SiteContent> {
-  const raw = await fs.readFile(contentPath, "utf8");
+  const file = await contentPath();
+  const raw = await fs.readFile(file, "utf8");
   const data = normalizeDaily(JSON.parse(raw) as SiteContent);
   if (options.orphans === false) return data;
   return applyCzechOrphansDeep(data);
 }
 
 export async function saveContent(content: SiteContent): Promise<void> {
-  await fs.writeFile(contentPath, JSON.stringify(content, null, 2) + "\n", "utf8");
+  const file = dataFile("content.json");
+  await fs.mkdir(dataFile(), { recursive: true });
+  // Atomic write so a crash mid-save cannot leave empty content.json
+  const tmp = `${file}.tmp`;
+  await fs.writeFile(tmp, JSON.stringify(content, null, 2) + "\n", "utf8");
+  await fs.rename(tmp, file);
 }

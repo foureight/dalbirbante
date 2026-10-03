@@ -1,0 +1,3 @@
+services:
+  - hostname: vol
+    type: local-storage:single@1
