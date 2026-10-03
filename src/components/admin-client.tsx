@@ -169,6 +169,7 @@ function AdminImageField({
   onChange,
   onStatus,
   onError,
+  folder = "menu",
   hint = "PNG/JPG se při nahrání převedou do WebP.",
 }: {
   label: string;
@@ -176,6 +177,7 @@ function AdminImageField({
   onChange: (path: string) => void;
   onStatus: (msg: string) => void;
   onError: (msg: string | null) => void;
+  folder?: "menu" | "hero" | "gallery";
   hint?: string;
 }) {
   return (
@@ -217,6 +219,7 @@ function AdminImageField({
                   onError(null);
                   const body = new FormData();
                   body.append("file", file);
+                  body.append("folder", folder);
                   const res = await fetch("/api/admin/upload", {
                     method: "POST",
                     body,
@@ -279,7 +282,7 @@ const NAV_LABELS: Record<string, string> = {
 const SECTIONS: { key: keyof SiteContent; label: string }[] = [
   { key: "site", label: "Základní údaje" },
   { key: "nav", label: "Navigace" },
-  { key: "home", label: "Úvodní stránka" },
+  { key: "home", label: "Úvod · hero fotky" },
   { key: "about", label: "O nás" },
   { key: "menuPage", label: "Stránka menu" },
   { key: "menuCategories", label: "Menu · pizzy a produkty" },
@@ -357,6 +360,48 @@ export function AdminClient({ initial, authenticated }: Props) {
         i === categoryIndex ? { ...c, items } : c,
       );
       return { ...prev, menuCategories };
+    });
+  }
+
+  function addHeroSlide() {
+    setContent((prev) => ({
+      ...prev,
+      home: {
+        ...prev.home,
+        heroSlides: [
+          ...(prev.home.heroSlides || []),
+          { src: "", alt: "Dal Birbante" },
+        ],
+      },
+    }));
+    setStatus("Přidán nový slide v hlavičce — nahrajte fotku a uložte.");
+    setError(null);
+  }
+
+  function removeHeroSlide(index: number) {
+    setContent((prev) => {
+      const slides = prev.home.heroSlides || [];
+      if (slides.length <= 1) return prev;
+      return {
+        ...prev,
+        home: {
+          ...prev.home,
+          heroSlides: slides.filter((_, i) => i !== index),
+        },
+      };
+    });
+    setStatus("Slide odebrán — uložte změny.");
+    setError(null);
+  }
+
+  function moveHeroSlide(index: number, direction: -1 | 1) {
+    setContent((prev) => {
+      const slides = [...(prev.home.heroSlides || [])];
+      const target = index + direction;
+      if (target < 0 || target >= slides.length) return prev;
+      const [row] = slides.splice(index, 1);
+      slides.splice(target, 0, row);
+      return { ...prev, home: { ...prev.home, heroSlides: slides } };
     });
   }
 
@@ -797,8 +842,76 @@ export function AdminClient({ initial, authenticated }: Props) {
           imageValue: h.glutenFreeImage || "",
         },
       ] as const;
+      const heroSlides = h.heroSlides || [];
       return (
         <div className="space-y-6">
+          <Panel
+            badge="Hlavička"
+            title="Fotky v horním banneru (hero)"
+            hint="Tyto fotky se střídají nahoře na úvodní stránce. Pořadí = pořadí v slideshow. Nahrajte PNG/JPG — uloží se jako WebP."
+          >
+            {heroSlides.map((slide, i) => (
+              <ItemCard
+                key={`hero-${i}`}
+                typeLabel="Hero"
+                title={`Fotka ${i + 1}`}
+                meta={slide.src || "bez fotky"}
+                accent="green"
+              >
+                <div className="flex flex-wrap gap-2">
+                  <button
+                    type="button"
+                    className="rounded-full border border-[var(--line)] px-4 py-2 text-base font-semibold transition hover:border-[var(--brand-green)] disabled:opacity-40"
+                    disabled={i === 0}
+                    onClick={() => moveHeroSlide(i, -1)}
+                  >
+                    Nahoru
+                  </button>
+                  <button
+                    type="button"
+                    className="rounded-full border border-[var(--line)] px-4 py-2 text-base font-semibold transition hover:border-[var(--brand-green)] disabled:opacity-40"
+                    disabled={i >= heroSlides.length - 1}
+                    onClick={() => moveHeroSlide(i, 1)}
+                  >
+                    Dolů
+                  </button>
+                  <button
+                    type="button"
+                    className="rounded-full border border-[var(--line)] px-4 py-2 text-base font-semibold text-[var(--muted)] transition hover:border-[var(--brand-red)] hover:text-[var(--brand-red)] disabled:opacity-40"
+                    disabled={heroSlides.length <= 1}
+                    onClick={() => removeHeroSlide(i)}
+                  >
+                    Smazat
+                  </button>
+                </div>
+                <AdminImageField
+                  label="Fotka banneru"
+                  value={slide.src}
+                  folder="hero"
+                  onChange={(v) =>
+                    updateAt(["home", "heroSlides", String(i), "src"], v)
+                  }
+                  onStatus={setStatus}
+                  onError={setError}
+                />
+                <Field
+                  label="Popis fotky (alt text)"
+                  value={slide.alt}
+                  onChange={(v) =>
+                    updateAt(["home", "heroSlides", String(i), "alt"], v)
+                  }
+                  hint="Krátký popis pro přístupnost a SEO."
+                />
+              </ItemCard>
+            ))}
+            <Button
+              type="button"
+              className="h-14 rounded-full bg-[var(--brand-green)] px-8 text-lg font-extrabold text-white hover:opacity-90"
+              onClick={addHeroSlide}
+            >
+              + Přidat fotku do hlavičky
+            </Button>
+          </Panel>
           <Panel
             badge="Zelený pruh"
             title="Aktuality na úvodní stránce"

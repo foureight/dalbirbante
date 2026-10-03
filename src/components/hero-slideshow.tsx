@@ -3,58 +3,52 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
-const SLIDES = [
+export type HeroSlide = {
+  src: string;
+  alt: string;
+};
+
+const INTERVAL_MS = 5500;
+
+const FALLBACK_SLIDES: HeroSlide[] = [
   {
     src: "/images/lifestyle-08.webp",
     alt: "Neapolská pizza Dal Birbante Praha Vinoř",
   },
-  {
-    src: "/images/lifestyle-01.webp",
-    alt: "Pizza z pece Dal Birbante",
-  },
-  {
-    src: "/images/gallery/01.webp",
-    alt: "Italská pizza Dal Birbante",
-  },
-  {
-    src: "/images/gallery/03.webp",
-    alt: "Čerstvá pizza Dal Birbante",
-  },
-  {
-    src: "/images/gallery/05.webp",
-    alt: "Neapolská pizza z pece",
-  },
-  {
-    src: "/images/panozzo.webp",
-    alt: "Panozzo a italské speciality Dal Birbante",
-  },
 ];
 
-const INTERVAL_MS = 5500;
-
-export function HeroSlideshow() {
+export function HeroSlideshow({ slides }: { slides?: HeroSlide[] }) {
+  const items =
+    slides?.filter((s) => s.src?.trim())?.length
+      ? slides.filter((s) => s.src?.trim())
+      : FALLBACK_SLIDES;
   const [active, setActive] = useState(0);
 
   useEffect(() => {
+    setActive(0);
+  }, [items.length]);
+
+  useEffect(() => {
+    if (items.length <= 1) return;
     const reduceMotion = window.matchMedia(
       "(prefers-reduced-motion: reduce)",
     ).matches;
     if (reduceMotion) return;
 
     const id = window.setInterval(() => {
-      setActive((i) => (i + 1) % SLIDES.length);
+      setActive((i) => (i + 1) % items.length);
     }, INTERVAL_MS);
 
     return () => window.clearInterval(id);
-  }, []);
+  }, [items.length]);
 
   return (
     <div className="hero-slideshow absolute inset-0">
-      {SLIDES.map((slide, i) => (
+      {items.map((slide, i) => (
         <Image
-          key={slide.src}
+          key={`${slide.src}-${i}`}
           src={slide.src}
-          alt={slide.alt}
+          alt={slide.alt || "Dal Birbante"}
           fill
           priority={i === 0}
           sizes="100vw"

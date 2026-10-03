@@ -44,7 +44,7 @@ export default async function HomePage() {
       <SiteHeader content={content} />
       <main className="flex-1">
         <section className="relative min-h-[70svh] overflow-hidden text-white md:min-h-[90svh]">
-          <HeroSlideshow />
+          <HeroSlideshow slides={home.heroSlides} />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/35 to-black/20 md:from-black/55 md:via-black/25 md:to-transparent" />
           <div className="site-max relative mx-auto flex min-h-[70svh] w-full flex-col justify-end px-4 pb-10 pt-24 sm:px-5 sm:pb-14 md:min-h-[90svh] md:justify-center md:px-10 md:pb-24">
             <h1 className="animate-rise-delay max-w-4xl text-white drop-shadow-[0_2px_12px_rgba(0,0,0,0.35)]">

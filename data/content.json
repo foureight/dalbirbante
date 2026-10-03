@@ -86,6 +86,32 @@
   "home": {
     "introTitle": "PRAVÁ NEAPOLSKÁ PIZZA PRAHA 9 VINOŘ – DAL BIRBANTE",
     "introText": "V pizzerii Dal Birbante ve Vinoři (Praha 9) připravujeme autentickou neapolskou pizzu z prvotřídních italských surovin. Používáme originální italskou mouku, kvalitní rajčata San Marzano a čerstvou mozzarellu fior di latte, díky kterým má naše pizza typickou chuť i strukturu jako v Neapoli.",
+    "heroSlides": [
+      {
+        "src": "/images/lifestyle-08.webp",
+        "alt": "Neapolská pizza Dal Birbante Praha Vinoř"
+      },
+      {
+        "src": "/images/lifestyle-01.webp",
+        "alt": "Pizza z pece Dal Birbante"
+      },
+      {
+        "src": "/images/gallery/01.webp",
+        "alt": "Italská pizza Dal Birbante"
+      },
+      {
+        "src": "/images/gallery/03.webp",
+        "alt": "Čerstvá pizza Dal Birbante"
+      },
+      {
+        "src": "/images/gallery/05.webp",
+        "alt": "Neapolská pizza z pece"
+      },
+      {
+        "src": "/images/panozzo.webp",
+        "alt": "Panozzo a italské speciality Dal Birbante"
+      }
+    ],
     "offerTitle": "Naše nabídka ale nekončí u pizzy. Ochutnat u nás můžete také:",
     "offerItems": [
       "italské bagety panozzo",

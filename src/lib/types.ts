@@ -74,6 +74,8 @@ export type SiteContent = {
   home: {
     introTitle: string;
     introText: string;
+    /** Full-bleed hero slideshow photos at the top of the homepage */
+    heroSlides: { src: string; alt: string }[];
     offerTitle: string;
     offerItems: string[];
     wineText: string;

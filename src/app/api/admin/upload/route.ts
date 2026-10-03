@@ -49,11 +49,17 @@ export async function POST(request: Request) {
       );
     }
 
+    const folderRaw = String(form.get("folder") || "menu");
+    const folder =
+      folderRaw === "hero" || folderRaw === "gallery" || folderRaw === "menu"
+        ? folderRaw
+        : "menu";
+
     const base =
       slugify(path.parse(file.name).name) ||
-      `menu-${randomBytes(4).toString("hex")}`;
+      `${folder}-${randomBytes(4).toString("hex")}`;
     const filename = `${base}-${Date.now().toString(36)}.webp`;
-    const dir = path.join(process.cwd(), "public", "images", "menu");
+    const dir = path.join(process.cwd(), "public", "images", folder);
     await fs.mkdir(dir, { recursive: true });
 
     const input = Buffer.from(await file.arrayBuffer());
@@ -66,7 +72,7 @@ export async function POST(request: Request) {
 
     return NextResponse.json({
       ok: true,
-      path: `/images/menu/${filename}`,
+      path: `/images/${folder}/${filename}`,
       converted: file.type !== "image/webp",
       bytes: webp.byteLength,
     });
