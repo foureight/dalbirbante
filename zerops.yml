@@ -16,4 +16,7 @@ zerops:
           httpSupport: true
       envVariables:
         NODE_ENV: production
+        PORT: "3000"
+        HOSTNAME: "0.0.0.0"
+        NODE_OPTIONS: "--max-old-space-size=384"
       start: npm start

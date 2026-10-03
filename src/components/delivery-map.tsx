@@ -69,17 +69,20 @@ export function DeliveryMap({ className = "", zones }: Props) {
     [collection.features],
   );
 
-  const [selectedZoneId, setSelectedZoneId] = useState<string>("1");
+  // null = only the pizzeria pin; zone polygon after legend click
+  const [selectedZoneId, setSelectedZoneId] = useState<string | null>(null);
 
-  // Keep selection valid when zones change
+  // Drop selection if that zone was removed in CMS
   useEffect(() => {
-    if (!legend.length) return;
+    if (!selectedZoneId) return;
     if (!legend.some((f) => f.properties.id === selectedZoneId)) {
-      setSelectedZoneId(legend[0].properties.id);
+      setSelectedZoneId(null);
     }
   }, [legend, selectedZoneId]);
 
-  const selectedFeature = legend.find((f) => f.properties.id === selectedZoneId);
+  const selectedFeature = selectedZoneId
+    ? legend.find((f) => f.properties.id === selectedZoneId)
+    : undefined;
 
   // Create map once
   useEffect(() => {
@@ -199,16 +202,19 @@ export function DeliveryMap({ className = "", zones }: Props) {
     } as GeoJSON.FeatureCollection);
 
     const bounds = featureBounds(selectedFeature);
-    if (bounds) {
-      try {
+    try {
+      if (bounds) {
         map.fitBounds(bounds, {
           padding: { top: 40, bottom: 40, left: 40, right: 40 },
           maxZoom: 12,
           duration: 450,
         });
-      } catch {
-        // keep view
+      } else {
+        // Default: only the pizzeria pin
+        map.flyTo({ center: CENTER, zoom: 12.2, duration: 450 });
       }
+    } catch {
+      // keep view
     }
   }, [selectedFeature, ready]);
 
