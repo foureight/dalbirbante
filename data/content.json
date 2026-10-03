@@ -688,11 +688,43 @@
         "note": ""
       },
       {
-        "id": "panozzo-caprese",
-        "name": "PANOZZO CAPRESE",
+        "id": "panozzo-salamino-e-mozzarella",
+        "name": "PANOZZO SALAMINO E MOZZARELLA",
         "price": "109 Kč",
         "emoji": "🥖",
-        "description": "rajčata, mozzarella fior di latte, domácí bazalkové pesto, extra panenský olivový olej",
+        "description": "pikantní salám, mozzarella fior di latte, bazalka, extra panenský olivový olej",
+        "note": ""
+      },
+      {
+        "id": "panozzo-mortadella-e-ricotta",
+        "name": "PANOZZO MORTADELLA E RICOTTA",
+        "price": "109 Kč",
+        "emoji": "🥖",
+        "description": "mortadella, ricotta, strouhané pistácie",
+        "note": ""
+      },
+      {
+        "id": "tagliatelle-al-salmone",
+        "name": "TAGLIATELLE AL SALMONE",
+        "price": "199 Kč",
+        "emoji": "🍤",
+        "description": "čerstvé těstoviny v rajčatovém sugo s uzeným lososem a čerstvou bazalkou",
+        "note": ""
+      },
+      {
+        "id": "penne-alla-vodka",
+        "name": "PENNE ALLA VODKA",
+        "price": "189 Kč",
+        "emoji": "🍝",
+        "description": "těstoviny ve smetanovo-rajčatové omáčce s pancettou na vodce a Grana Padano",
+        "note": ""
+      },
+      {
+        "id": "tagliolini-ai-funghi-porcini",
+        "name": "TAGLIOLINI AI FUNGHI PORCINI, GORGONZOLA E NOCI",
+        "price": "199 Kč",
+        "emoji": "🍄",
+        "description": "čerstvé těstoviny s hříbky na bílém víně, gorgonzolou, pekanovými ořechy a Grana Padano",
         "note": ""
       },
       {
@@ -704,11 +736,43 @@
         "note": ""
       },
       {
-        "id": "gnocchi-panna-e-prosciutto",
-        "name": "GNOCCHI PANNA E PROSCIUTTO",
+        "id": "spaghetti-alla-carbonara",
+        "name": "SPAGHETTI ALLA CARBONARA",
+        "price": "199 Kč",
+        "emoji": "🍝",
+        "description": "tradiční římské těstoviny s vejcem, italskou slaninou guanciale, Pecorino Romano DOP a čerstvě mletým pepřem",
+        "note": ""
+      },
+      {
+        "id": "gnocchi-nduja-e-ricotta",
+        "name": "GNOCCHI 'NDUJA E RICOTTA",
         "price": "189 Kč",
-        "emoji": "🥔",
-        "description": "krémové gnocchi ve smetanové omáčce s dušenou šunkou a Grana Padano",
+        "emoji": "🍝",
+        "description": "krémové gnocchi v rajčatovém sugo s pikantním kalábrijským roztíratelným salámem 'nduja, ricottou, čerstvou bazalkou a Grana Padano",
+        "note": ""
+      },
+      {
+        "id": "gnocchi-ai-quattro-formaggi",
+        "name": "GNOCCHI AI QUATTRO FORMAGGI",
+        "price": "189 Kč",
+        "emoji": "🧀",
+        "description": "krémové gnocchi s gorgonzolou, stracchinem, Stelvio DOP a Grana Padano",
+        "note": ""
+      },
+      {
+        "id": "gnocchi-salsiccia-e-stelvio",
+        "name": "GNOCCHI SALSICCIA E STELVIO",
+        "price": "189 Kč",
+        "emoji": "🍝",
+        "description": "gnocchi v jemné smetanové omáčce s italskou klobásou salsiccia, Stelvio DOP a Grana Padano",
+        "note": ""
+      },
+      {
+        "id": "gnocchi-alla-cardinale",
+        "name": "GNOCCHI ALLA CARDINALE",
+        "price": "189 Kč",
+        "emoji": "🍝",
+        "description": "krémové gnocchi v rajčatovém sugo s domácím bazalkovým pestem, smetanou a Grana Padano",
         "note": ""
       },
       {
@@ -720,51 +784,19 @@
         "note": ""
       },
       {
-        "id": "pizza-dolce-diavola",
-        "name": "PIZZA DOLCE DIAVOLA",
+        "id": "pizza-prosciutto-e-funghi",
+        "name": "PIZZA PROSCIUTTO E FUNGHI",
         "price": "199 Kč",
         "emoji": "🍕",
-        "description": "drcená rajčata, mozzarella fior di latte, pikantní kalábrijská klobása ’nduja, ricotta, bazalka, pepř",
+        "description": "drcená rajčata, mozzarella fior di latte, dušená šunka, žampiony",
         "note": ""
       },
       {
-        "id": "minestrone",
-        "name": "MINESTRONE",
-        "price": "59 Kč",
-        "emoji": "🥕",
-        "description": "italská zeleninová polévka, Grana Padano, extra panenský olivový olej",
-        "note": "(s italskou bagetou panozzo + 20 Kč)"
-      },
-      {
-        "id": "panozzo-prosciutto",
-        "name": "PANOZZO PROSCIUTTO",
-        "price": "129 Kč",
-        "emoji": "🥖",
-        "description": "dušená šunka, mozzarella fior di latte, rukola, cherry rajčátka",
-        "note": ""
-      },
-      {
-        "id": "tagliatelle-ragu",
-        "name": "TAGLIATELLE AL RAGÙ",
+        "id": "pizza-funghi",
+        "name": "PIZZA FUNGHI",
         "price": "189 Kč",
-        "emoji": "🍝",
-        "description": "čerstvé tagliatelle s tradičním hovězím ragù a Grana Padano",
-        "note": ""
-      },
-      {
-        "id": "pizza-margherita",
-        "name": "PIZZA MARGHERITA",
-        "price": "159 Kč",
         "emoji": "🍕",
-        "description": "drcená rajčata, mozzarella fior di latte, bazalka, extra panenský olivový olej",
-        "note": ""
-      },
-      {
-        "id": "insalata-mista",
-        "name": "INSALATA MISTA",
-        "price": "99 Kč",
-        "emoji": "🥗",
-        "description": "míchaný salát, cherry rajčátka, okurka, olivový olej, balsamico",
+        "description": "drcená rajčata, mozzarella fior di latte, žampiony",
         "note": ""
       }
     ],
