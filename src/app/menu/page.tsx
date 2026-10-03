@@ -91,11 +91,11 @@ export default async function MenuPage() {
                     return (
                     <li
                       key={`${cat.id}-${item.name}`}
-                      className="menu-row grid grid-cols-[4.5rem_1fr] items-start gap-x-3 gap-y-3 py-5 sm:grid-cols-[auto_1fr_auto] sm:items-center sm:gap-4 sm:py-8"
+                      className="menu-row flex items-center gap-3 py-5 sm:gap-5 sm:py-8"
                     >
                       {imageSrc ? (
                         <div
-                          className={`relative col-start-1 row-span-2 flex h-[4.5rem] w-[4.5rem] shrink-0 items-center justify-center overflow-hidden rounded-full sm:row-span-1 sm:h-28 sm:w-28 ${
+                          className={`relative flex h-[4.5rem] w-[4.5rem] shrink-0 items-center justify-center overflow-hidden rounded-full sm:h-28 sm:w-28 ${
                             item.image ? "bg-[#f3f3f3]" : "bg-[#d9d9d9]"
                           }`}
                         >
@@ -124,35 +124,37 @@ export default async function MenuPage() {
                         </div>
                       ) : (
                         <div
-                          className="col-start-1 row-span-2 h-[4.5rem] w-[4.5rem] shrink-0 rounded-full bg-[#d9d9d9] sm:row-span-1 sm:h-28 sm:w-28"
+                          className="h-[4.5rem] w-[4.5rem] shrink-0 rounded-full bg-[#d9d9d9] sm:h-28 sm:w-28"
                           aria-hidden
                         />
                       )}
-                      <div className="min-w-0 col-start-2">
+                      <div className="min-w-0 flex-1">
                         {item.badge ? (
                           <p className="mb-1 text-xs font-bold uppercase tracking-[0.14em] text-[var(--brand-red)] sm:text-sm">
                             {item.badge}
                           </p>
                         ) : null}
-                        <h3 className="text-[1.35rem] leading-tight sm:text-[1.85rem] md:text-[2.35rem]">
-                          {item.name}
-                        </h3>
+                        <div className="flex flex-nowrap items-center gap-2 sm:gap-4 md:gap-6">
+                          <h3 className="min-w-0 flex-1 text-[1.15rem] leading-tight sm:text-[1.85rem] md:text-[2.35rem]">
+                            {item.name}
+                          </h3>
+                          <div className="ml-auto flex shrink-0 items-center gap-2 sm:gap-4 md:gap-5">
+                            <p className="text-lg font-black leading-none whitespace-nowrap text-[var(--brand-red)] sm:text-3xl md:text-4xl">
+                              {item.price}
+                            </p>
+                            <AddToCartButton
+                              name={item.name}
+                              price={item.price}
+                              image={item.image || drinkPlaceholder || undefined}
+                              categoryId={cat.id}
+                            />
+                          </div>
+                        </div>
                         {item.description ? (
                           <p className="mt-1 text-sm leading-snug text-[var(--muted)] sm:mt-2 sm:text-xl sm:leading-relaxed md:text-2xl">
                             {item.description}
                           </p>
                         ) : null}
-                      </div>
-                      <div className="col-span-2 flex items-center justify-between gap-3 sm:col-span-1 sm:col-start-3 sm:justify-end sm:gap-8">
-                        <p className="text-2xl font-black leading-none text-[var(--brand-red)] sm:text-3xl md:text-4xl">
-                          {item.price}
-                        </p>
-                        <AddToCartButton
-                          name={item.name}
-                          price={item.price}
-                          image={item.image || drinkPlaceholder || undefined}
-                          categoryId={cat.id}
-                        />
                       </div>
                     </li>
                     );
