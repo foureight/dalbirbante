@@ -11,10 +11,20 @@ import type { SiteContent } from "@/lib/types";
 
 export const dynamic = "force-dynamic";
 
+const publicCors = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "GET, HEAD, OPTIONS",
+  "Access-Control-Allow-Headers": "Content-Type, Accept",
+};
+
+export async function OPTIONS() {
+  return new NextResponse(null, { status: 204, headers: publicCors });
+}
+
 export async function GET() {
   const content = await getContent({ orphans: false });
   return NextResponse.json(content, {
-    headers: { "Cache-Control": "no-store" },
+    headers: { ...publicCors, "Cache-Control": "no-store" },
   });
 }
 

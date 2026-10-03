@@ -29,13 +29,13 @@ export default function robots(): MetadataRoute.Robots {
     rules: [
       {
         userAgent: "*",
-        allow: "/",
-        disallow: ["/admin", "/admin/", "/api/", "/api"],
+        allow: ["/", "/api/public/"],
+        disallow: ["/admin", "/admin/", "/api/content", "/api/admin"],
       },
       ...AI_AGENTS.map((userAgent) => ({
         userAgent,
-        allow: "/",
-        disallow: ["/admin", "/admin/", "/api/", "/api"],
+        allow: ["/", "/api/public/"],
+        disallow: ["/admin", "/admin/", "/api/content", "/api/admin"],
       })),
     ],
     sitemap: "https://www.dalbirbante.cz/sitemap.xml",

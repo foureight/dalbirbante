@@ -2,10 +2,6 @@ import type { NextConfig } from "next";
 
 const securityHeaders = [
   {
-    key: "X-Frame-Options",
-    value: "SAMEORIGIN",
-  },
-  {
     key: "Referrer-Policy",
     value: "strict-origin-when-cross-origin",
   },
@@ -16,6 +12,19 @@ const securityHeaders = [
   {
     key: "Permissions-Policy",
     value: "camera=(), microphone=(), geolocation=()",
+  },
+  // Allow other sites to embed / fetch public pages (menu, denní nabídka)
+  {
+    key: "Access-Control-Allow-Origin",
+    value: "*",
+  },
+  {
+    key: "Access-Control-Allow-Methods",
+    value: "GET, HEAD, OPTIONS",
+  },
+  {
+    key: "Access-Control-Allow-Headers",
+    value: "Content-Type, Accept",
   },
   {
     key: "Content-Security-Policy",
@@ -31,7 +40,8 @@ const securityHeaders = [
       "object-src 'none'",
       "base-uri 'self'",
       "form-action 'self'",
-      "frame-ancestors 'self'",
+      // Allow embedding the site in iframes on other domains
+      "frame-ancestors *",
     ].join("; "),
   },
 ];

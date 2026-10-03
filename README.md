@@ -43,6 +43,11 @@ ADMIN_SECRET=nahodny-dlouhy-retezec
 
 V administraci lze upravit prakticky všechny texty webu (úvod, menu, o nás, kontakt, rozvoz, patička) a uložit je do `data/content.json`.
 
+Veřejný JSON feed denního menu (CORS otevřený pro jiné weby):
+
+- Lokálně: [http://127.0.0.1:43123/api/public/daily](http://127.0.0.1:43123/api/public/daily)
+- Zerops: `https://app-327e-3000.prg1.zerops.app/api/public/daily`
+
 Katalog denního menu (polévky, panozzo, těstoviny, gnocchi, rizota, maso, pizza, dezerty) se importuje z Excelu:
 
 ```bash
