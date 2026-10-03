@@ -5,18 +5,57 @@ export const DAILY_CATEGORY_ORDER: DailyDishCategory[] = [
   "panozzo",
   "pasta",
   "gnocchi",
+  "rizota",
+  "maso",
   "pizza",
+  "dezerty",
   "ostatni",
 ];
 
 export const DAILY_CATEGORY_LABEL: Record<DailyDishCategory, string> = {
   polevky: "Polévky",
   panozzo: "Panozzo",
-  pasta: "Pasta",
+  pasta: "Těstoviny",
   gnocchi: "Gnocchi",
+  rizota: "Rizota",
+  maso: "Maso",
   pizza: "Pizza",
+  dezerty: "Dezerty",
   ostatni: "Ostatní",
 };
+
+const CATEGORY_EMOJI: Record<DailyDishCategory, string> = {
+  polevky: "🍅",
+  panozzo: "🥖",
+  pasta: "🍝",
+  gnocchi: "🧀",
+  rizota: "🍚",
+  maso: "🥩",
+  pizza: "🍕",
+  dezerty: "🍰",
+  ostatni: "",
+};
+
+export function emojiForCategory(category: DailyDishCategory): string {
+  return CATEGORY_EMOJI[category] || "";
+}
+
+export function mapExcelCategory(label: string): DailyDishCategory {
+  const key = label
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .trim();
+  if (key.startsWith("polev")) return "polevky";
+  if (key.startsWith("panozzo")) return "panozzo";
+  if (key.startsWith("testovin") || key === "pasta") return "pasta";
+  if (key.startsWith("gnocchi")) return "gnocchi";
+  if (key.startsWith("rizot")) return "rizota";
+  if (key.startsWith("maso")) return "maso";
+  if (key.startsWith("pizza")) return "pizza";
+  if (key.startsWith("dezert")) return "dezerty";
+  return "ostatni";
+}
 
 export function inferDailyDishCategory(
   id: string,
@@ -36,6 +75,17 @@ export function inferDailyDishCategory(
   }
   if (key.includes("panozzo")) return "panozzo";
   if (key.includes("gnocchi")) return "gnocchi";
+  if (key.includes("risotto") || key.includes("rizoto")) return "rizota";
+  if (key.includes("carne") || key.includes("maso") || key.includes("sfilacciata"))
+    return "maso";
+  if (
+    key.includes("torta") ||
+    key.includes("bunet") ||
+    key.includes("dezert") ||
+    key.includes("cheesecake")
+  ) {
+    return "dezerty";
+  }
   if (key.includes("pizza")) return "pizza";
   if (
     key.includes("pasta") ||
@@ -46,7 +96,12 @@ export function inferDailyDishCategory(
     key.includes("penne") ||
     key.includes("lasagne") ||
     key.includes("ravioli") ||
-    key.includes("fusilli")
+    key.includes("fusilli") ||
+    key.includes("casarecce") ||
+    key.includes("rigatoni") ||
+    key.includes("farfalle") ||
+    key.includes("insalata di pasta") ||
+    key.includes("insalata di farro")
   ) {
     return "pasta";
   }

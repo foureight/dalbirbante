@@ -43,6 +43,15 @@ ADMIN_SECRET=nahodny-dlouhy-retezec
 
 V administraci lze upravit prakticky všechny texty webu (úvod, menu, o nás, kontakt, rozvoz, patička) a uložit je do `data/content.json`.
 
+Katalog denního menu (polévky, panozzo, těstoviny, gnocchi, rizota, maso, pizza, dezerty) se importuje z Excelu:
+
+```bash
+pip install openpyxl
+python3 scripts/import-daily-dishes.py
+```
+
+Soubor: `data/Dal_Birbante_jidla.xlsx` (sloupce Kategorie, Jídlo, Popis, Cena). Po importu zvolte v `/admin` → Denní, která jídla jdou na dnešek, a uložte.
+
 ## Co je na webu
 
 - Typografie **Omnes** (Regular / Semibold / Black) – stejné fonty jako na původním webu

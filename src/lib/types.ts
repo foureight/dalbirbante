@@ -24,7 +24,10 @@ export type DailyDishCategory =
   | "panozzo"
   | "pasta"
   | "gnocchi"
+  | "rizota"
+  | "maso"
   | "pizza"
+  | "dezerty"
   | "ostatni";
 
 export type DailyDish = {
