@@ -236,10 +236,22 @@
       "name": "Pizza",
       "items": [
         {
-          "name": "Dolce Diavola",
-          "description": "drcená rajčata, mozzarella fior di latte, pikantní kalábrijská klobása ’nduja, ricotta, bazalka, pepř",
+          "name": "Mortazza",
+          "description": "drcená rajčata, mozzarella fior di latte, mortadella, pistácie",
           "price": "269 Kč",
           "badge": "Pizza týdne"
+        },
+        {
+          "name": "Carnazza",
+          "description": "drcená rajčata, mozzarella fior di latte, dušená šunka, pikantní spianata romana, salsiccia",
+          "price": "289 Kč",
+          "badge": "Pizza speciale"
+        },
+        {
+          "name": "Tirolese",
+          "description": "drcená rajčata, mozzarella fior di latte, pancetta, sýr Stelvio DOP, pepř",
+          "price": "289 Kč",
+          "badge": "Pizza speciale"
         },
         {
           "name": "Marinara",
@@ -291,7 +303,8 @@
         {
           "name": "Crudo",
           "description": "drcená rajčata, mozzarella fior di latte, parmská šunka",
-          "price": "269 Kč"
+          "price": "269 Kč",
+          "image": "/images/menu/crudo.webp"
         },
         {
           "name": "Pancetta",
@@ -324,16 +337,6 @@
           "description": "mozzarella fior di latte, Grana Padano, mortadella, stracciatella, pistácie",
           "price": "319 Kč",
           "image": "/images/menu/mortadella.webp"
-        },
-        {
-          "name": "Tirolese",
-          "description": "drcená rajčata, mozzarella fior di latte, pancetta, sýr Stelvio DOP, pepř",
-          "price": "289 Kč"
-        },
-        {
-          "name": "Carnazza",
-          "description": "drcená rajčata, mozzarella fior di latte, dušená šunka, pikantní spianata romana, salsiccia",
-          "price": "289 Kč"
         }
       ]
     },
@@ -452,13 +455,13 @@
         {
           "name": "Lemonsoda",
           "description": "0,33 l",
-          "price": "49 Kč",
+          "price": "45 Kč",
           "image": "/images/menu/lemonsoda.webp"
         },
         {
           "name": "Oransoda",
           "description": "0,33 l",
-          "price": "49 Kč",
+          "price": "45 Kč",
           "image": "/images/menu/oransoda.webp"
         },
         {
@@ -484,6 +487,11 @@
         {
           "name": "Cappy",
           "description": "0,33 l",
+          "price": "49 Kč"
+        },
+        {
+          "name": "Kinley",
+          "description": "0,50 l",
           "price": "49 Kč"
         },
         {
