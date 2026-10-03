@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState, type ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -586,7 +586,9 @@ export function AdminClient({ initial, authenticated }: Props) {
     router.refresh();
   }
 
-  const editor = useMemo(() => {
+  // Do not memoize the editor: local UI state (e.g. editingDishId) must
+  // re-render the daily dish panels when Editovat is clicked.
+  const editor = (() => {
     if (section === "menuCategories") {
       return (
         <div className="space-y-8">
@@ -1752,7 +1754,7 @@ export function AdminClient({ initial, authenticated }: Props) {
         )}
       </Panel>
     );
-  }, [section, content, sectionData]);
+  })();
 
   if (!authed) {
     return (
