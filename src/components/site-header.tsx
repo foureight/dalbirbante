@@ -44,32 +44,34 @@ export function SiteHeader({ content }: { content: SiteContent }) {
     <header className="sticky top-0 z-50">
       <AnnouncementBar message={site.announcement} />
       <div className="border-b border-[var(--line)] bg-white">
-        <div className="site-max mx-auto flex w-full items-center justify-between gap-2 px-4 py-3 sm:gap-4 sm:px-5 sm:py-4 md:gap-6 md:px-10 md:py-6">
+        <div className="site-max mx-auto flex w-full items-center justify-between gap-2 px-4 py-3 sm:gap-3 sm:px-5 sm:py-4 md:px-8 md:py-5 xl:gap-6 xl:px-10 xl:py-6">
           <BrandLogo brandName={site.brandName} />
 
-          <nav className="nav-menu hidden items-center gap-3 text-[var(--ink)] lg:flex xl:gap-4">
+          {/* Desktop nav only from xl — at lg (~1024) links wrapped (e.g. Denní nabídka) */}
+          <nav className="nav-menu hidden min-w-0 items-center gap-2 text-[var(--ink)] xl:flex 2xl:gap-4">
             {links.map((l) => (
               <Link
                 key={l.href}
                 href={l.href}
-                className="transition hover:text-[var(--brand-red)]"
+                className="whitespace-nowrap transition hover:text-[var(--brand-red)]"
               >
                 {l.label}
               </Link>
             ))}
-            <div className="ml-1 flex items-center -space-x-4">
+            <div className="ml-1 flex shrink-0 items-center -space-x-3">
               <a
                 href={site.instagramUrl}
                 target="_blank"
                 rel="noreferrer"
                 aria-label="Instagram"
-                className="inline-flex size-12 items-center justify-center text-[var(--ink)] transition hover:text-[var(--brand-red)]"
+                className="inline-flex size-10 items-center justify-center text-[var(--ink)] transition hover:text-[var(--brand-red)] 2xl:size-12"
               >
                 <Image
                   src="/icons/instagram.svg"
                   alt="Instagram Dal Birbante"
-                  width={48}
-                  height={48}
+                  width={40}
+                  height={40}
+                  className="size-9 2xl:size-12"
                 />
               </a>
               <a
@@ -77,13 +79,14 @@ export function SiteHeader({ content }: { content: SiteContent }) {
                 target="_blank"
                 rel="noreferrer"
                 aria-label="Facebook"
-                className="inline-flex size-12 items-center justify-center text-[var(--ink)] transition hover:text-[var(--brand-red)]"
+                className="inline-flex size-10 items-center justify-center text-[var(--ink)] transition hover:text-[var(--brand-red)] 2xl:size-12"
               >
                 <Image
                   src="/icons/facebook.svg"
                   alt="Facebook Dal Birbante"
-                  width={48}
-                  height={48}
+                  width={40}
+                  height={40}
+                  className="size-9 2xl:size-12"
                 />
               </a>
             </div>
@@ -92,21 +95,21 @@ export function SiteHeader({ content }: { content: SiteContent }) {
               aria-label={site.orderLabel}
               title={site.orderLabel}
               onClick={() => setCartOpen(true)}
-              className="nav-cart relative inline-flex size-12 items-center justify-center text-[var(--ink)] transition hover:text-[var(--brand-green)]"
+              className="nav-cart relative inline-flex size-10 shrink-0 items-center justify-center text-[var(--ink)] transition hover:text-[var(--brand-green)] 2xl:size-12"
             >
-              <CartIcon className="size-8" />
+              <CartIcon className="size-7 2xl:size-8" />
               {count > 0 ? (
                 <span className="absolute right-0.5 top-0.5 inline-flex min-w-5 items-center justify-center rounded-full bg-[var(--brand-red)] px-1 text-[11px] font-bold leading-5 text-white">
                   {count}
                 </span>
               ) : null}
             </button>
-            <Button asChild className="btn-green">
+            <Button asChild className="btn-green shrink-0 whitespace-nowrap">
               <Link href="/kontakt">{nav.contact}</Link>
             </Button>
           </nav>
 
-          <div className="flex shrink-0 items-center gap-1.5 lg:hidden">
+          <div className="flex shrink-0 items-center gap-1.5 xl:hidden">
             <button
               type="button"
               aria-label={site.orderLabel}
@@ -125,6 +128,7 @@ export function SiteHeader({ content }: { content: SiteContent }) {
               type="button"
               className="inline-flex size-10 items-center justify-center text-[var(--ink)]"
               aria-label="Menu"
+              aria-expanded={open}
               onClick={() => setOpen((v) => !v)}
             >
               <span className="sr-only">Menu</span>
@@ -144,7 +148,7 @@ export function SiteHeader({ content }: { content: SiteContent }) {
         </div>
 
         {open && (
-          <div className="border-t border-[var(--line)] bg-white px-4 py-5 lg:hidden">
+          <div className="border-t border-[var(--line)] bg-white px-4 py-5 sm:px-5 md:px-8 xl:hidden">
             <div className="nav-menu flex flex-col gap-1 text-[var(--ink)]">
               {links.map((l) => (
                 <Link
@@ -156,6 +160,36 @@ export function SiteHeader({ content }: { content: SiteContent }) {
                   {l.label}
                 </Link>
               ))}
+              <div className="mt-2 flex items-center gap-3 px-2">
+                <a
+                  href={site.instagramUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Instagram"
+                  className="inline-flex size-10 items-center justify-center"
+                >
+                  <Image
+                    src="/icons/instagram.svg"
+                    alt=""
+                    width={36}
+                    height={36}
+                  />
+                </a>
+                <a
+                  href={site.facebookUrl}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label="Facebook"
+                  className="inline-flex size-10 items-center justify-center"
+                >
+                  <Image
+                    src="/icons/facebook.svg"
+                    alt=""
+                    width={36}
+                    height={36}
+                  />
+                </a>
+              </div>
               <button
                 type="button"
                 className="rounded-[6.4px] px-2 py-3 text-left font-semibold text-[var(--brand-green)]"

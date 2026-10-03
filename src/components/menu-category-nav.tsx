@@ -35,14 +35,14 @@ export function MenuCategoryNav({ categories }: { categories: Cat[] }) {
       className="menu-cat-nav sticky z-40 border-b border-[var(--line)] bg-[var(--paper)]/95 backdrop-blur-md"
       aria-label="Kategorie menu"
     >
-      <div className="page-wrap flex gap-2 overflow-x-auto py-3 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      <div className="page-wrap flex gap-2 overflow-x-auto py-3 pb-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         {categories.map((cat) => {
           const isActive = active === cat.id;
           return (
             <a
               key={cat.id}
               href={`#${cat.id}`}
-              className={`shrink-0 rounded-full px-4 py-2 text-sm font-semibold tracking-wide transition sm:text-base ${
+              className={`shrink-0 rounded-full px-4 py-2.5 text-sm font-semibold tracking-wide transition touch-manipulation sm:text-base ${
                 isActive
                   ? "bg-[var(--brand-green)] text-white"
                   : "bg-[var(--paper-soft)] text-[var(--ink)] hover:bg-[var(--brand-green)]/12"

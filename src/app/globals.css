@@ -316,8 +316,33 @@
 
 @media (min-width: 768px) {
   .brand-logo {
+    gap: 0.65rem;
+    flex: 0 1 auto;
+    max-width: min(52vw, 14rem);
+  }
+
+  .brand-logo__word {
+    height: 2.1rem;
+    max-width: 100%;
+    flex-shrink: 1;
+  }
+
+  .brand-logo__flag {
+    gap: 0.55rem;
+    height: 1.25rem;
+  }
+
+  .brand-logo__stripe {
+    width: 0.7rem;
+  }
+}
+
+/* Full wordmark once desktop nav has room (xl) */
+@media (min-width: 1280px) {
+  .brand-logo {
     gap: 0.85rem;
     flex: 0 0 auto;
+    max-width: none;
   }
 
   .brand-logo__word {
@@ -646,6 +671,12 @@
   text-transform: none;
 }
 
+@media (min-width: 1280px) and (max-width: 1535px) {
+  .nav-menu {
+    font-size: 1.05rem;
+  }
+}
+
 .footer-wave-marquee {
   mask-image: linear-gradient(
     to right,
@@ -843,13 +874,19 @@
 }
 
 .menu-cat-nav {
-  /* Sit just under the sticky site header + announcement bar */
+  /* Sit just under sticky header (+ announcement). Keep clear of bottom edge. */
   top: 5.25rem;
 }
 
 @media (min-width: 768px) {
   .menu-cat-nav {
-    top: 6.75rem;
+    top: 6.25rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .menu-cat-nav {
+    top: 7rem;
   }
 }
 
