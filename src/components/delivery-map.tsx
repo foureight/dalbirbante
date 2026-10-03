@@ -7,6 +7,7 @@ import type { Map, MapLayerMouseEvent, Popup } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
 import {
   buildDeliveryZoneFeatures,
+  type DeliveryZoneFeature,
   type DeliveryZoneInput,
 } from "@/lib/delivery-towns";
 
@@ -20,29 +21,23 @@ function ensureMaplibreWorker() {
   workerConfigured = true;
 }
 
-function zoneBounds(
-  features: ReturnType<typeof buildDeliveryZoneFeatures>["features"],
-): [[number, number], [number, number]] {
+function featureBounds(
+  feature: DeliveryZoneFeature | undefined,
+): [[number, number], [number, number]] | null {
+  if (!feature) return null;
   let minLng = Infinity;
   let minLat = Infinity;
   let maxLng = -Infinity;
   let maxLat = -Infinity;
-  for (const f of features) {
-    for (const ring of f.geometry.coordinates) {
-      for (const [lng, lat] of ring) {
-        minLng = Math.min(minLng, lng);
-        minLat = Math.min(minLat, lat);
-        maxLng = Math.max(maxLng, lng);
-        maxLat = Math.max(maxLat, lat);
-      }
+  for (const ring of feature.geometry.coordinates) {
+    for (const [lng, lat] of ring) {
+      minLng = Math.min(minLng, lng);
+      minLat = Math.min(minLat, lat);
+      maxLng = Math.max(maxLng, lng);
+      maxLat = Math.max(maxLat, lat);
     }
   }
-  if (!Number.isFinite(minLng)) {
-    return [
-      [14.48, 50.09],
-      [14.72, 50.21],
-    ];
-  }
+  if (!Number.isFinite(minLng)) return null;
   return [
     [minLng, minLat],
     [maxLng, maxLat],
@@ -65,6 +60,26 @@ export function DeliveryMap({ className = "", zones }: Props) {
     () => buildDeliveryZoneFeatures(zones || []),
     [zones],
   );
+
+  const legend = useMemo(
+    () =>
+      [...collection.features].sort(
+        (a, b) => Number(a.properties.id) - Number(b.properties.id),
+      ),
+    [collection.features],
+  );
+
+  const [selectedZoneId, setSelectedZoneId] = useState<string>("1");
+
+  // Keep selection valid when zones change
+  useEffect(() => {
+    if (!legend.length) return;
+    if (!legend.some((f) => f.properties.id === selectedZoneId)) {
+      setSelectedZoneId(legend[0].properties.id);
+    }
+  }, [legend, selectedZoneId]);
+
+  const selectedFeature = legend.find((f) => f.properties.id === selectedZoneId);
 
   // Create map once
   useEffect(() => {
@@ -122,7 +137,7 @@ export function DeliveryMap({ className = "", zones }: Props) {
         source: "delivery-zones",
         paint: {
           "fill-color": ["get", "color"],
-          "fill-opacity": 0.42,
+          "fill-opacity": 0.55,
         },
       });
       map.addLayer({
@@ -131,7 +146,7 @@ export function DeliveryMap({ className = "", zones }: Props) {
         source: "delivery-zones",
         paint: {
           "line-color": ["get", "color"],
-          "line-width": 2.5,
+          "line-width": 3,
           "line-opacity": 0.95,
         },
       });
@@ -168,14 +183,11 @@ export function DeliveryMap({ className = "", zones }: Props) {
     };
   }, []);
 
-  // Update polygons whenever CMS zones change
+  // Show only the selected zone
   useEffect(() => {
     const map = mapRef.current;
     if (!map || !ready) return;
 
-    const ordered = [...collection.features].sort(
-      (a, b) => Number(b.properties.id) - Number(a.properties.id),
-    );
     const source = map.getSource("delivery-zones") as
       | maplibregl.GeoJSONSource
       | undefined;
@@ -183,23 +195,22 @@ export function DeliveryMap({ className = "", zones }: Props) {
 
     source.setData({
       type: "FeatureCollection",
-      features: ordered,
+      features: selectedFeature ? [selectedFeature] : [],
     } as GeoJSON.FeatureCollection);
 
-    try {
-      map.fitBounds(zoneBounds(collection.features), {
-        padding: { top: 36, bottom: 36, left: 36, right: 36 },
-        maxZoom: 11.2,
-        duration: 500,
-      });
-    } catch {
-      // keep view
+    const bounds = featureBounds(selectedFeature);
+    if (bounds) {
+      try {
+        map.fitBounds(bounds, {
+          padding: { top: 40, bottom: 40, left: 40, right: 40 },
+          maxZoom: 12,
+          duration: 450,
+        });
+      } catch {
+        // keep view
+      }
     }
-  }, [collection, ready]);
-
-  const legend = [...collection.features].sort(
-    (a, b) => Number(a.properties.id) - Number(b.properties.id),
-  );
+  }, [selectedFeature, ready]);
 
   return (
     <div className={`delivery-map ${className}`}>
@@ -211,17 +222,27 @@ export function DeliveryMap({ className = "", zones }: Props) {
         <div className="delivery-map__status">{error}</div>
       )}
       <ul className="delivery-map__legend" aria-label="Legenda zón">
-        {legend.map((f) => (
-          <li key={f.properties.id}>
-            <span
-              className="delivery-map__swatch"
-              style={{ background: f.properties.color }}
-            />
-            <span>
-              {f.properties.name} · {f.properties.fee}
-            </span>
-          </li>
-        ))}
+        {legend.map((f) => {
+          const active = selectedZoneId === f.properties.id;
+          return (
+            <li key={f.properties.id}>
+              <button
+                type="button"
+                className={`delivery-map__legend-btn${active ? " is-active" : ""}`}
+                aria-pressed={active}
+                onClick={() => setSelectedZoneId(f.properties.id)}
+              >
+                <span
+                  className="delivery-map__swatch"
+                  style={{ background: f.properties.color }}
+                />
+                <span>
+                  {f.properties.name} · {f.properties.fee}
+                </span>
+              </button>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
