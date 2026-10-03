@@ -1274,50 +1274,34 @@ export function AdminClient({ initial, authenticated }: Props) {
                 Katalog je prázdný — nejdřív přidejte jídla níže.
               </p>
             ) : (
-              <div className="grid gap-3 sm:grid-cols-2">
+              <ul className="divide-y divide-[var(--line)] overflow-hidden rounded-[8px] border border-[var(--line)] bg-white">
                 {catalog.map((dish) => {
                   const selected = todaySet.has(dish.id);
                   return (
-                    <button
+                    <li
                       key={dish.id}
-                      type="button"
-                      onClick={() => toggleTodayDish(dish.id)}
-                      className={`rounded-[8px] border-2 p-4 text-left transition ${
-                        selected
-                          ? "border-[var(--brand-green)] bg-[var(--brand-green)]/10 shadow-sm"
-                          : "border-[var(--line)] bg-white hover:border-[var(--brand-green)]/50"
+                      className={`flex items-center gap-3 px-4 py-3.5 ${
+                        selected ? "bg-[var(--brand-green)]/8" : ""
                       }`}
                     >
-                      <div className="flex items-start gap-3">
-                        <span
-                          className={`mt-0.5 inline-flex size-7 shrink-0 items-center justify-center rounded-full text-sm font-extrabold ${
-                            selected
-                              ? "bg-[var(--brand-green)] text-white"
-                              : "border border-[var(--line)] text-[var(--muted)]"
-                          }`}
-                          aria-hidden
-                        >
-                          {selected ? "✓" : ""}
-                        </span>
-                        <div className="min-w-0 flex-1">
-                          <p className="text-xl font-extrabold leading-tight text-[var(--ink)]">
-                            {dish.emoji ? `${dish.emoji} ` : null}
-                            {dish.name?.trim() || "Bez názvu"}
-                          </p>
-                          <p className="mt-1 text-base font-bold text-[var(--brand-red)]">
-                            {dish.price || "—"}
-                          </p>
-                          {dish.description ? (
-                            <p className="mt-1 line-clamp-2 text-sm text-[var(--muted)]">
-                              {dish.description}
-                            </p>
-                          ) : null}
-                        </div>
-                      </div>
-                    </button>
+                      <p className="min-w-0 flex-1 text-xl font-extrabold leading-tight text-[var(--ink)]">
+                        {dish.name?.trim() || "Bez názvu"}
+                      </p>
+                      <button
+                        type="button"
+                        onClick={() => toggleTodayDish(dish.id)}
+                        className={`shrink-0 rounded-full px-5 py-2 text-base font-extrabold transition ${
+                          selected
+                            ? "bg-[var(--brand-green)] text-white"
+                            : "border-2 border-[var(--brand-green)] text-[var(--brand-green)] hover:bg-[var(--brand-green)] hover:text-white"
+                        }`}
+                      >
+                        {selected ? "Vybráno" : "Vybrat"}
+                      </button>
+                    </li>
                   );
                 })}
-              </div>
+              </ul>
             )}
 
             {todayDishes.length > 0 ? (
@@ -1382,9 +1366,7 @@ export function AdminClient({ initial, authenticated }: Props) {
                     }`}
                     onClick={() => toggleTodayDish(dish.id)}
                   >
-                    {todaySet.has(dish.id)
-                      ? "✓ Dnes na menu"
-                      : "Přidat na dnes"}
+                    {todaySet.has(dish.id) ? "Vybráno" : "Vybrat"}
                   </button>
                   <button
                     type="button"
