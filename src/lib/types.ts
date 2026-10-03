@@ -18,6 +18,15 @@ export type FaqItem = {
   a: string;
 };
 
+export type DailyDish = {
+  id: string;
+  name: string;
+  price: string;
+  emoji: string;
+  description: string;
+  note: string;
+};
+
 export type SiteContent = {
   site: {
     brandName: string;
@@ -137,13 +146,12 @@ export type SiteContent = {
     note: string;
     date: string;
     hours: string;
-    items: {
-      name: string;
-      price: string;
-      emoji: string;
-      description: string;
-      note: string;
-    }[];
+    /** Pool of rotating dishes — pick today's set in admin */
+    catalog: DailyDish[];
+    /** Selected catalog dish ids for today (order = display order) */
+    todayIds: string[];
+    /** Active dishes for the public page (synced from catalog + todayIds) */
+    items: DailyDish[];
   };
   delivery: {
     title: string;

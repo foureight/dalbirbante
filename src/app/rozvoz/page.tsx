@@ -118,7 +118,7 @@ export default async function DeliveryPage() {
 
           <Reveal delay={120} variant="scale">
             <div className="mt-8 w-full md:mt-10">
-              <DeliveryMap />
+              <DeliveryMap zones={delivery.zones} />
             </div>
           </Reveal>
 

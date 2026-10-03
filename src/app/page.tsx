@@ -211,7 +211,10 @@ export default async function HomePage() {
               </div>
             </Reveal>
             <Reveal delay={140} variant="fade">
-              <DeliveryMap className="min-h-[320px]" />
+              <DeliveryMap
+                className="min-h-[320px]"
+                zones={content.delivery.zones}
+              />
             </Reveal>
           </div>
         </section>

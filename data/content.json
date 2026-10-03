@@ -590,6 +590,7 @@
     "hours": "11–15 hod.",
     "items": [
       {
+        "id": "crema-al-pomodoro",
         "name": "CREMA AL POMODORO",
         "price": "59 Kč",
         "emoji": "🍅",
@@ -597,6 +598,7 @@
         "note": "(s italskou bagetou panozzo + 20 Kč)"
       },
       {
+        "id": "panozzo-caprese",
         "name": "PANOZZO CAPRESE",
         "price": "109 Kč",
         "emoji": "🥖",
@@ -604,6 +606,7 @@
         "note": ""
       },
       {
+        "id": "spaghetti-ai-gamberetti",
         "name": "SPAGHETTI AI GAMBERETTI",
         "price": "199 Kč",
         "emoji": "🍝",
@@ -611,6 +614,7 @@
         "note": ""
       },
       {
+        "id": "gnocchi-panna-e-prosciutto",
         "name": "GNOCCHI PANNA E PROSCIUTTO",
         "price": "189 Kč",
         "emoji": "🥔",
@@ -618,6 +622,7 @@
         "note": ""
       },
       {
+        "id": "pizza-quattro-formaggi",
         "name": "PIZZA QUATTRO FORMAGGI",
         "price": "189 Kč",
         "emoji": "🍕",
@@ -625,12 +630,111 @@
         "note": ""
       },
       {
+        "id": "pizza-dolce-diavola",
         "name": "PIZZA DOLCE DIAVOLA",
         "price": "199 Kč",
         "emoji": "🍕",
         "description": "drcená rajčata, mozzarella fior di latte, pikantní kalábrijská klobása ’nduja, ricotta, bazalka, pepř",
         "note": ""
       }
+    ],
+    "catalog": [
+      {
+        "id": "crema-al-pomodoro",
+        "name": "CREMA AL POMODORO",
+        "price": "59 Kč",
+        "emoji": "🍅",
+        "description": "rajčatový krém, Grana Padano, bazalka, extra panenský olivový olej",
+        "note": "(s italskou bagetou panozzo + 20 Kč)"
+      },
+      {
+        "id": "panozzo-caprese",
+        "name": "PANOZZO CAPRESE",
+        "price": "109 Kč",
+        "emoji": "🥖",
+        "description": "rajčata, mozzarella fior di latte, domácí bazalkové pesto, extra panenský olivový olej",
+        "note": ""
+      },
+      {
+        "id": "spaghetti-ai-gamberetti",
+        "name": "SPAGHETTI AI GAMBERETTI",
+        "price": "199 Kč",
+        "emoji": "🍝",
+        "description": "těstoviny s krevetami na bílém víně, cherry rajčátky confit a čerstvou bazalkou",
+        "note": ""
+      },
+      {
+        "id": "gnocchi-panna-e-prosciutto",
+        "name": "GNOCCHI PANNA E PROSCIUTTO",
+        "price": "189 Kč",
+        "emoji": "🥔",
+        "description": "krémové gnocchi ve smetanové omáčce s dušenou šunkou a Grana Padano",
+        "note": ""
+      },
+      {
+        "id": "pizza-quattro-formaggi",
+        "name": "PIZZA QUATTRO FORMAGGI",
+        "price": "189 Kč",
+        "emoji": "🍕",
+        "description": "drcená rajčata, mozzarella fior di latte, gorgonzola, uzená scamorza, Grana Padano",
+        "note": ""
+      },
+      {
+        "id": "pizza-dolce-diavola",
+        "name": "PIZZA DOLCE DIAVOLA",
+        "price": "199 Kč",
+        "emoji": "🍕",
+        "description": "drcená rajčata, mozzarella fior di latte, pikantní kalábrijská klobása ’nduja, ricotta, bazalka, pepř",
+        "note": ""
+      },
+      {
+        "id": "minestrone",
+        "name": "MINESTRONE",
+        "price": "59 Kč",
+        "emoji": "🥕",
+        "description": "italská zeleninová polévka, Grana Padano, extra panenský olivový olej",
+        "note": "(s italskou bagetou panozzo + 20 Kč)"
+      },
+      {
+        "id": "panozzo-prosciutto",
+        "name": "PANOZZO PROSCIUTTO",
+        "price": "129 Kč",
+        "emoji": "🥖",
+        "description": "dušená šunka, mozzarella fior di latte, rukola, cherry rajčátka",
+        "note": ""
+      },
+      {
+        "id": "tagliatelle-ragu",
+        "name": "TAGLIATELLE AL RAGÙ",
+        "price": "189 Kč",
+        "emoji": "🍝",
+        "description": "čerstvé tagliatelle s tradičním hovězím ragù a Grana Padano",
+        "note": ""
+      },
+      {
+        "id": "pizza-margherita",
+        "name": "PIZZA MARGHERITA",
+        "price": "159 Kč",
+        "emoji": "🍕",
+        "description": "drcená rajčata, mozzarella fior di latte, bazalka, extra panenský olivový olej",
+        "note": ""
+      },
+      {
+        "id": "insalata-mista",
+        "name": "INSALATA MISTA",
+        "price": "99 Kč",
+        "emoji": "🥗",
+        "description": "míchaný salát, cherry rajčátka, okurka, olivový olej, balsamico",
+        "note": ""
+      }
+    ],
+    "todayIds": [
+      "crema-al-pomodoro",
+      "panozzo-caprese",
+      "spaghetti-ai-gamberetti",
+      "gnocchi-panna-e-prosciutto",
+      "pizza-quattro-formaggi",
+      "pizza-dolce-diavola"
     ]
   },
   "delivery": {

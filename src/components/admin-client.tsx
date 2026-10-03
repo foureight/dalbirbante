@@ -6,7 +6,35 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
-import type { SiteContent } from "@/lib/types";
+import type { DailyDish, SiteContent } from "@/lib/types";
+import {
+  buildDeliveryZoneFeatures,
+  listKnownDeliveryTowns,
+  parseAreaTowns,
+  resolveTownCoords,
+} from "@/lib/delivery-towns";
+
+function slugifyDishId(name: string, fallback: string) {
+  const base = name
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 48);
+  return base || fallback;
+}
+
+function syncDailyItems(
+  catalog: DailyDish[],
+  todayIds: string[],
+): DailyDish[] {
+  const byId = new Map(catalog.map((d) => [d.id, d]));
+  return todayIds
+    .map((id) => byId.get(id))
+    .filter((d): d is DailyDish => Boolean(d))
+    .map((d) => ({ ...d }));
+}
 
 type Props = {
   initial: SiteContent;
@@ -286,7 +314,7 @@ const SECTIONS: { key: keyof SiteContent; label: string }[] = [
   { key: "about", label: "O nás" },
   { key: "menuPage", label: "Stránka menu" },
   { key: "menuCategories", label: "Menu · pizzy a produkty" },
-  { key: "daily", label: "Denní nabídka" },
+  { key: "daily", label: "Denní · výběr jídel" },
   { key: "delivery", label: "Rozvoz" },
   { key: "glutenFree", label: "Bezlepková" },
   { key: "contact", label: "Kontakt" },
@@ -402,6 +430,126 @@ export function AdminClient({ initial, authenticated }: Props) {
       const [row] = slides.splice(index, 1);
       slides.splice(target, 0, row);
       return { ...prev, home: { ...prev.home, heroSlides: slides } };
+    });
+  }
+
+  function toggleTodayDish(id: string) {
+    setContent((prev) => {
+      const catalog = prev.daily.catalog || [];
+      const todayIds = [...(prev.daily.todayIds || [])];
+      const idx = todayIds.indexOf(id);
+      if (idx >= 0) todayIds.splice(idx, 1);
+      else todayIds.push(id);
+      return {
+        ...prev,
+        daily: {
+          ...prev.daily,
+          todayIds,
+          items: syncDailyItems(catalog, todayIds),
+        },
+      };
+    });
+    setStatus("Výběr na dnes upraven — uložte změny.");
+    setError(null);
+  }
+
+  function moveTodayDish(id: string, direction: -1 | 1) {
+    setContent((prev) => {
+      const catalog = prev.daily.catalog || [];
+      const todayIds = [...(prev.daily.todayIds || [])];
+      const idx = todayIds.indexOf(id);
+      const target = idx + direction;
+      if (idx < 0 || target < 0 || target >= todayIds.length) return prev;
+      const [row] = todayIds.splice(idx, 1);
+      todayIds.splice(target, 0, row);
+      return {
+        ...prev,
+        daily: {
+          ...prev.daily,
+          todayIds,
+          items: syncDailyItems(catalog, todayIds),
+        },
+      };
+    });
+  }
+
+  function addCatalogDish() {
+    setContent((prev) => {
+      const catalog = [...(prev.daily.catalog || [])];
+      const id = slugifyDishId("", `jidlo-${Date.now().toString(36)}`);
+      catalog.push({
+        id,
+        name: "",
+        price: "",
+        emoji: "",
+        description: "",
+        note: "",
+      });
+      return {
+        ...prev,
+        daily: { ...prev.daily, catalog },
+      };
+    });
+    setStatus("Přidáno jídlo do katalogu — vyplňte údaje a uložte.");
+    setError(null);
+  }
+
+  function removeCatalogDish(id: string) {
+    setContent((prev) => {
+      const catalog = (prev.daily.catalog || []).filter((d) => d.id !== id);
+      const todayIds = (prev.daily.todayIds || []).filter((x) => x !== id);
+      return {
+        ...prev,
+        daily: {
+          ...prev.daily,
+          catalog,
+          todayIds,
+          items: syncDailyItems(catalog, todayIds),
+        },
+      };
+    });
+    setStatus("Jídlo odebráno z katalogu — uložte změny.");
+    setError(null);
+  }
+
+  function updateCatalogDish(
+    id: string,
+    field: keyof DailyDish,
+    value: string,
+  ) {
+    setContent((prev) => {
+      const catalog = (prev.daily.catalog || []).map((d) => {
+        if (d.id !== id) return d;
+        const next = { ...d, [field]: value };
+        if (field === "name" && value.trim()) {
+          const used = new Set(
+            (prev.daily.catalog || [])
+              .filter((x) => x.id !== id)
+              .map((x) => x.id),
+          );
+          let nextId = slugifyDishId(value, id);
+          if (used.has(nextId) && nextId !== id) {
+            nextId = `${nextId}-${id.slice(-4)}`;
+          }
+          next.id = nextId;
+        }
+        return next;
+      });
+      const idMap = new Map(
+        (prev.daily.catalog || []).map((old, i) => [old.id, catalog[i].id]),
+      );
+      const todayIds = (prev.daily.todayIds || []).map(
+        (tid) => idMap.get(tid) || tid,
+      );
+      return {
+        ...prev,
+        daily: {
+          ...prev.daily,
+          catalog,
+          todayIds,
+          items: syncDailyItems(catalog, todayIds),
+        },
+      };
     });
   }
 
@@ -749,6 +897,8 @@ export function AdminClient({ initial, authenticated }: Props) {
     }
 
     if (section === "delivery") {
+      const knownTownHint = listKnownDeliveryTowns().slice(0, 24).join(", ");
+      const mapPreview = buildDeliveryZoneFeatures(content.delivery.zones);
       return (
         <div className="space-y-6">
           <Panel title="Rozvoz — texty stránky">
@@ -764,9 +914,29 @@ export function AdminClient({ initial, authenticated }: Props) {
               multiline
             />
           </Panel>
-          <div className="space-y-4">
-            {content.delivery.zones.map((z, i) => (
-              <ItemCard key={i} title={z.name || `Zóna ${i + 1}`}>
+          <Panel
+            badge="Mapa"
+            title="Zóny rozvozu (ovládají mapu)"
+            hint={
+              <>
+                Obce v poli „Oblasti“ kreslí polygony na mapě. Oddělujte čárkou.
+                Známé obce: {knownTownHint}
+                …
+              </>
+            }
+          >
+            {content.delivery.zones.map((z, i) => {
+              const towns = parseAreaTowns(z.areas);
+              const unknown = towns.filter((t) => !resolveTownCoords(t));
+              const feature = mapPreview.features[i];
+              return (
+              <ItemCard
+                key={i}
+                typeLabel="Zóna"
+                title={z.name || `Zóna ${i + 1}`}
+                meta={z.fee}
+                accent="green"
+              >
                 <div className="grid gap-4 md:grid-cols-2">
                   <Field
                     label="Zóna"
@@ -783,12 +953,13 @@ export function AdminClient({ initial, authenticated }: Props) {
                     }
                   />
                   <Field
-                    label="Oblasti"
+                    label="Oblasti (obce na mapě)"
                     value={z.areas}
                     onChange={(v) =>
                       updateAt(["delivery", "zones", String(i), "areas"], v)
                     }
                     multiline
+                    hint="Např. Satalice, Kbely, Podolanka — po uložení se mapa přepočítá."
                   />
                   <Field
                     label="Min. objednávka"
@@ -798,9 +969,26 @@ export function AdminClient({ initial, authenticated }: Props) {
                     }
                   />
                 </div>
+                {feature ? (
+                  <p className="text-base text-[var(--muted)]">
+                    Na mapě:{" "}
+                    <span className="font-semibold text-[var(--brand-green-deep)]">
+                      {feature.properties.knownTowns.length
+                        ? feature.properties.knownTowns.join(", ")
+                        : "zatím žádná známá obec"}
+                    </span>
+                  </p>
+                ) : null}
+                {unknown.length > 0 ? (
+                  <p className="rounded-[8px] border border-[var(--brand-red)]/30 bg-[var(--brand-red)]/8 px-3 py-2 text-base text-[var(--brand-red)]">
+                    Neznámé pro mapu (přidejte přesný název nebo nám napište):{" "}
+                    {unknown.join(", ")}
+                  </p>
+                ) : null}
               </ItemCard>
-            ))}
-          </div>
+              );
+            })}
+          </Panel>
         </div>
       );
     }
@@ -1037,13 +1225,19 @@ export function AdminClient({ initial, authenticated }: Props) {
 
     if (section === "daily") {
       const d = content.daily;
+      const catalog = d.catalog || [];
+      const todayIds = d.todayIds || [];
+      const todaySet = new Set(todayIds);
+      const todayDishes = syncDailyItems(catalog, todayIds);
+
       return (
         <div className="space-y-6">
           <Panel
-            title="Denní nabídka — texty stránky"
+            badge="Dnes"
+            title="Co se dnes vaří"
             hint={
               <>
-                Tyto texty se zobrazují na{" "}
+                Naklikejte jídla z katalogu — ta se ukážou na{" "}
                 <a
                   href="/denni-nabidka"
                   target="_blank"
@@ -1052,9 +1246,208 @@ export function AdminClient({ initial, authenticated }: Props) {
                 >
                   /denni-nabidka
                 </a>
-                . Intro pište srozumitelně — nemusí začínat „Každý den“.
+                . Po výběru nezapomeňte uložit.
               </>
             }
+          >
+            <div className="grid gap-5 sm:grid-cols-2">
+              <Field
+                label="Datum na webu"
+                value={d.date}
+                onChange={(v) => updateAt(["daily", "date"], v)}
+                hint="Např. 3. 10. 2026"
+              />
+              <Field
+                label="Čas podávání"
+                value={d.hours}
+                onChange={(v) => updateAt(["daily", "hours"], v)}
+              />
+            </div>
+
+            <div className="rounded-[8px] border border-[var(--brand-green)]/25 bg-[var(--brand-green)]/8 px-4 py-3 text-lg font-semibold text-[var(--brand-green-deep)]">
+              Dnes vybrané: {todayDishes.length}{" "}
+              {todayDishes.length === 1 ? "jídlo" : "jídel"}
+            </div>
+
+            {catalog.length === 0 ? (
+              <p className="text-lg text-[var(--muted)]">
+                Katalog je prázdný — nejdřív přidejte jídla níže.
+              </p>
+            ) : (
+              <div className="grid gap-3 sm:grid-cols-2">
+                {catalog.map((dish) => {
+                  const selected = todaySet.has(dish.id);
+                  return (
+                    <button
+                      key={dish.id}
+                      type="button"
+                      onClick={() => toggleTodayDish(dish.id)}
+                      className={`rounded-[8px] border-2 p-4 text-left transition ${
+                        selected
+                          ? "border-[var(--brand-green)] bg-[var(--brand-green)]/10 shadow-sm"
+                          : "border-[var(--line)] bg-white hover:border-[var(--brand-green)]/50"
+                      }`}
+                    >
+                      <div className="flex items-start gap-3">
+                        <span
+                          className={`mt-0.5 inline-flex size-7 shrink-0 items-center justify-center rounded-full text-sm font-extrabold ${
+                            selected
+                              ? "bg-[var(--brand-green)] text-white"
+                              : "border border-[var(--line)] text-[var(--muted)]"
+                          }`}
+                          aria-hidden
+                        >
+                          {selected ? "✓" : ""}
+                        </span>
+                        <div className="min-w-0 flex-1">
+                          <p className="text-xl font-extrabold leading-tight text-[var(--ink)]">
+                            {dish.emoji ? `${dish.emoji} ` : null}
+                            {dish.name?.trim() || "Bez názvu"}
+                          </p>
+                          <p className="mt-1 text-base font-bold text-[var(--brand-red)]">
+                            {dish.price || "—"}
+                          </p>
+                          {dish.description ? (
+                            <p className="mt-1 line-clamp-2 text-sm text-[var(--muted)]">
+                              {dish.description}
+                            </p>
+                          ) : null}
+                        </div>
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+
+            {todayDishes.length > 0 ? (
+              <div className="space-y-3">
+                <p className="text-lg font-bold text-[var(--ink)]">
+                  Pořadí na webu
+                </p>
+                {todayDishes.map((dish, i) => (
+                  <div
+                    key={dish.id}
+                    className="flex flex-wrap items-center gap-2 rounded-[8px] border border-[var(--line)] bg-white px-4 py-3"
+                  >
+                    <span className="text-base font-extrabold text-[var(--muted)]">
+                      {i + 1}.
+                    </span>
+                    <span className="min-w-0 flex-1 text-lg font-bold">
+                      {dish.emoji ? `${dish.emoji} ` : null}
+                      {dish.name}
+                    </span>
+                    <button
+                      type="button"
+                      className="rounded-full border border-[var(--line)] px-3 py-1.5 text-sm font-semibold disabled:opacity-40"
+                      disabled={i === 0}
+                      onClick={() => moveTodayDish(dish.id, -1)}
+                    >
+                      Nahoru
+                    </button>
+                    <button
+                      type="button"
+                      className="rounded-full border border-[var(--line)] px-3 py-1.5 text-sm font-semibold disabled:opacity-40"
+                      disabled={i >= todayDishes.length - 1}
+                      onClick={() => moveTodayDish(dish.id, 1)}
+                    >
+                      Dolů
+                    </button>
+                  </div>
+                ))}
+              </div>
+            ) : null}
+          </Panel>
+
+          <Panel
+            badge="Katalog"
+            title="Katalog jídel (rotace)"
+            hint="Sem patří všechna jídla, která se v denní nabídce střídají. Na dnešek jen nakliknete výběr výše."
+          >
+            {catalog.map((dish) => (
+              <ItemCard
+                key={dish.id}
+                typeLabel="Katalog"
+                title={dish.name?.trim() || "Nové jídlo"}
+                meta={dish.price || undefined}
+                accent="green"
+              >
+                <div className="flex flex-wrap gap-2">
+                  <button
+                    type="button"
+                    className={`rounded-full px-4 py-2 text-base font-extrabold transition ${
+                      todaySet.has(dish.id)
+                        ? "bg-[var(--brand-green)] text-white"
+                        : "border border-[var(--brand-green)] text-[var(--brand-green)]"
+                    }`}
+                    onClick={() => toggleTodayDish(dish.id)}
+                  >
+                    {todaySet.has(dish.id)
+                      ? "✓ Dnes na menu"
+                      : "Přidat na dnes"}
+                  </button>
+                  <button
+                    type="button"
+                    className="rounded-full border-2 border-[var(--brand-red)] px-4 py-2 text-base font-extrabold text-[var(--brand-red)] transition hover:bg-[var(--brand-red)] hover:text-white"
+                    onClick={() => {
+                      if (
+                        typeof window !== "undefined" &&
+                        !window.confirm(
+                          `Smazat „${dish.name || "jídlo"}“ z katalogu?`,
+                        )
+                      ) {
+                        return;
+                      }
+                      removeCatalogDish(dish.id);
+                    }}
+                  >
+                    Smazat z katalogu
+                  </button>
+                </div>
+                <div className="grid gap-4 sm:grid-cols-[1fr_auto_auto]">
+                  <Field
+                    label="Název"
+                    value={dish.name}
+                    onChange={(v) => updateCatalogDish(dish.id, "name", v)}
+                  />
+                  <Field
+                    label="Cena"
+                    value={dish.price}
+                    onChange={(v) => updateCatalogDish(dish.id, "price", v)}
+                  />
+                  <Field
+                    label="Emoji"
+                    value={dish.emoji}
+                    onChange={(v) => updateCatalogDish(dish.id, "emoji", v)}
+                  />
+                </div>
+                <Field
+                  label="Popis"
+                  value={dish.description}
+                  onChange={(v) =>
+                    updateCatalogDish(dish.id, "description", v)
+                  }
+                  multiline
+                />
+                <Field
+                  label="Poznámka"
+                  value={dish.note}
+                  onChange={(v) => updateCatalogDish(dish.id, "note", v)}
+                />
+              </ItemCard>
+            ))}
+            <Button
+              type="button"
+              className="h-14 rounded-full bg-[var(--brand-green)] px-8 text-lg font-extrabold text-white hover:opacity-90"
+              onClick={addCatalogDish}
+            >
+              + Přidat jídlo do katalogu
+            </Button>
+          </Panel>
+
+          <Panel
+            title="Denní nabídka — texty stránky"
+            hint="Úvod a poznámky na stránce denní nabídky."
           >
             <Field
               label="Nadpis stránky"
@@ -1066,7 +1459,6 @@ export function AdminClient({ initial, authenticated }: Props) {
               value={d.intro}
               onChange={(v) => updateAt(["daily", "intro"], v)}
               multiline
-              hint="Hlavní odstavec pod fotkou — měňte podle aktuální nabídky."
             />
             <Field
               label="Poznámka pod nabídkou"
@@ -1074,73 +1466,6 @@ export function AdminClient({ initial, authenticated }: Props) {
               onChange={(v) => updateAt(["daily", "note"], v)}
               multiline
             />
-            <div className="grid gap-5 sm:grid-cols-2">
-              <Field
-                label="Datum"
-                value={d.date}
-                onChange={(v) => updateAt(["daily", "date"], v)}
-                hint="Zobrazí se vedle nadpisu (např. 1. 10. 2026)."
-              />
-              <Field
-                label="Čas podávání"
-                value={d.hours}
-                onChange={(v) => updateAt(["daily", "hours"], v)}
-              />
-            </div>
-          </Panel>
-
-          <Panel
-            badge="Denní"
-            title="Položky denního menu"
-            hint="Aktuální jídla na denní nabídce."
-          >
-            {d.items.map((item, i) => (
-              <ItemCard
-                key={i}
-                typeLabel="Denní menu"
-                title={item.name?.trim() || `Jídlo ${i + 1}`}
-                meta={item.price || undefined}
-              >
-                <div className="grid gap-4 sm:grid-cols-[1fr_auto_auto]">
-                  <Field
-                    label="Název"
-                    value={item.name}
-                    onChange={(v) =>
-                      updateAt(["daily", "items", String(i), "name"], v)
-                    }
-                  />
-                  <Field
-                    label="Cena"
-                    value={item.price}
-                    onChange={(v) =>
-                      updateAt(["daily", "items", String(i), "price"], v)
-                    }
-                  />
-                  <Field
-                    label="Emoji"
-                    value={item.emoji}
-                    onChange={(v) =>
-                      updateAt(["daily", "items", String(i), "emoji"], v)
-                    }
-                  />
-                </div>
-                <Field
-                  label="Popis"
-                  value={item.description}
-                  onChange={(v) =>
-                    updateAt(["daily", "items", String(i), "description"], v)
-                  }
-                  multiline
-                />
-                <Field
-                  label="Poznámka"
-                  value={item.note}
-                  onChange={(v) =>
-                    updateAt(["daily", "items", String(i), "note"], v)
-                  }
-                />
-              </ItemCard>
-            ))}
           </Panel>
 
           <Panel
@@ -1152,7 +1477,6 @@ export function AdminClient({ initial, authenticated }: Props) {
               value={content.home.dailyMenuText}
               onChange={(v) => updateAt(["home", "dailyMenuText"], v)}
               multiline
-              hint="Měl by být jiný než intro na stránce denní nabídky."
             />
           </Panel>
         </div>

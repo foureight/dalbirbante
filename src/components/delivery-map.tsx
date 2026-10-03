@@ -1,16 +1,16 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import * as maplibregl from "maplibre-gl";
 import { setWorkerUrl } from "maplibre-gl";
 import type { Map, MapLayerMouseEvent, Popup } from "maplibre-gl";
 import "maplibre-gl/dist/maplibre-gl.css";
-import zones from "../../data/delivery-zones.json";
+import {
+  buildDeliveryZoneFeatures,
+  type DeliveryZoneInput,
+} from "@/lib/delivery-towns";
 
 const CENTER: [number, number] = [14.578649, 50.143151];
-
-// Turbopack/Next rewrites maplibre's import.meta.url, so the default relative
-// worker path 404s. Point at the self-hosted module worker instead.
 const MAPLIBRE_WORKER_URL = "/vendor/maplibre/maplibre-gl-worker.mjs";
 let workerConfigured = false;
 
@@ -20,7 +20,9 @@ function ensureMaplibreWorker() {
   workerConfigured = true;
 }
 
-function zoneBounds(features: typeof zones.features): [[number, number], [number, number]] {
+function zoneBounds(
+  features: ReturnType<typeof buildDeliveryZoneFeatures>["features"],
+): [[number, number], [number, number]] {
   let minLng = Infinity;
   let minLat = Infinity;
   let maxLng = -Infinity;
@@ -35,55 +37,59 @@ function zoneBounds(features: typeof zones.features): [[number, number], [number
       }
     }
   }
+  if (!Number.isFinite(minLng)) {
+    return [
+      [14.48, 50.09],
+      [14.72, 50.21],
+    ];
+  }
   return [
     [minLng, minLat],
     [maxLng, maxLat],
   ];
 }
 
-export function DeliveryMap({ className = "" }: { className?: string }) {
+type Props = {
+  className?: string;
+  zones: DeliveryZoneInput[];
+};
+
+export function DeliveryMap({ className = "", zones }: Props) {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const mapRef = useRef<Map | null>(null);
+  const popupRef = useRef<Popup | null>(null);
   const [ready, setReady] = useState(false);
   const [error, setError] = useState("");
 
+  const collection = useMemo(
+    () => buildDeliveryZoneFeatures(zones || []),
+    [zones],
+  );
+
+  // Create map once
   useEffect(() => {
     if (!containerRef.current || mapRef.current) return;
 
-    let cancelled = false;
-    let styleLoaded = false;
-    let popup: Popup | null = null;
-    let map: Map | null = null;
-
-    const canUseWebGL2 = () => {
-      try {
-        const canvas = document.createElement("canvas");
-        return Boolean(canvas.getContext("webgl2"));
-      } catch {
-        return false;
-      }
-    };
-
-    if (!canUseWebGL2()) {
-      setError("Mapu nelze zobrazit v tomto prohlížeči.");
-      return;
-    }
-
     try {
-      ensureMaplibreWorker();
-      map = new maplibregl.Map({
-        container: containerRef.current,
-        // Brighter street map closer to the Google Maps reference look
-        style: "https://tiles.openfreemap.org/styles/liberty",
-        center: CENTER,
-        zoom: 10.6,
-        attributionControl: false,
-      });
+      const canvas = document.createElement("canvas");
+      if (!canvas.getContext("webgl2")) {
+        setError("Mapu nelze zobrazit v tomto prohlížeči.");
+        return;
+      }
     } catch {
       setError("Mapu nelze zobrazit v tomto prohlížeči.");
       return;
     }
 
+    ensureMaplibreWorker();
+    let styleLoaded = false;
+    const map = new maplibregl.Map({
+      container: containerRef.current,
+      style: "https://tiles.openfreemap.org/styles/liberty",
+      center: CENTER,
+      zoom: 10.6,
+      attributionControl: false,
+    });
     mapRef.current = map;
     map.addControl(
       new maplibregl.NavigationControl({ showCompass: false }),
@@ -91,24 +97,25 @@ export function DeliveryMap({ className = "" }: { className?: string }) {
     );
 
     map.on("load", () => {
-      if (cancelled || !map) return;
-
       styleLoaded = true;
       setError("");
 
-      // Outer zones first so inner yellow/orange sit on top (concentric look)
-      const ordered = [...zones.features].sort(
-        (a, b) => Number(b.properties.id) - Number(a.properties.id),
-      );
+      const el = document.createElement("div");
+      el.className = "delivery-map-pin";
+      el.title = "Dal Birbante";
+      new maplibregl.Marker({ element: el }).setLngLat(CENTER).addTo(map);
+
+      const popup = new maplibregl.Popup({
+        closeButton: false,
+        closeOnClick: false,
+        offset: 12,
+      });
+      popupRef.current = popup;
 
       map.addSource("delivery-zones", {
         type: "geojson",
-        data: {
-          type: "FeatureCollection",
-          features: ordered,
-        } as GeoJSON.FeatureCollection,
+        data: { type: "FeatureCollection", features: [] },
       });
-
       map.addLayer({
         id: "zones-fill",
         type: "fill",
@@ -118,7 +125,6 @@ export function DeliveryMap({ className = "" }: { className?: string }) {
           "fill-opacity": 0.42,
         },
       });
-
       map.addLayer({
         id: "zones-line",
         type: "line",
@@ -130,22 +136,10 @@ export function DeliveryMap({ className = "" }: { className?: string }) {
         },
       });
 
-      const el = document.createElement("div");
-      el.className = "delivery-map-pin";
-      el.title = "Dal Birbante";
-      new maplibregl.Marker({ element: el }).setLngLat(CENTER).addTo(map);
-
-      popup = new maplibregl.Popup({
-        closeButton: false,
-        closeOnClick: false,
-        offset: 12,
-      });
-
       map.on("mousemove", "zones-fill", (e: MapLayerMouseEvent) => {
-        if (!map) return;
         map.getCanvas().style.cursor = "pointer";
         const f = e.features?.[0];
-        if (!f?.properties || !e.lngLat || !popup) return;
+        if (!f?.properties || !e.lngLat) return;
         const p = f.properties;
         popup
           .setLngLat(e.lngLat)
@@ -154,43 +148,56 @@ export function DeliveryMap({ className = "" }: { className?: string }) {
           )
           .addTo(map);
       });
-
       map.on("mouseleave", "zones-fill", () => {
-        if (!map) return;
         map.getCanvas().style.cursor = "";
-        popup?.remove();
+        popup.remove();
       });
-
-      try {
-        map.fitBounds(zoneBounds(zones.features), {
-          padding: { top: 36, bottom: 36, left: 36, right: 36 },
-          maxZoom: 11.2,
-          duration: 0,
-        });
-      } catch {
-        // keep default center/zoom
-      }
 
       setReady(true);
     });
 
-    // MapLibre emits "error" for recoverable tile glitches too — only block the
-    // UI when the style never loads (e.g. worker/CDN failure).
     map.on("error", () => {
-      if (cancelled || styleLoaded) return;
+      if (styleLoaded) return;
       setError("Mapové podklady se nepodařilo načíst.");
     });
 
     return () => {
-      cancelled = true;
-      popup?.remove();
-      map?.remove();
+      popupRef.current?.remove();
+      map.remove();
       mapRef.current = null;
     };
   }, []);
 
-  // Legend: innermost first (Zóna 1 → 5)
-  const legend = [...zones.features].sort(
+  // Update polygons whenever CMS zones change
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !ready) return;
+
+    const ordered = [...collection.features].sort(
+      (a, b) => Number(b.properties.id) - Number(a.properties.id),
+    );
+    const source = map.getSource("delivery-zones") as
+      | maplibregl.GeoJSONSource
+      | undefined;
+    if (!source) return;
+
+    source.setData({
+      type: "FeatureCollection",
+      features: ordered,
+    } as GeoJSON.FeatureCollection);
+
+    try {
+      map.fitBounds(zoneBounds(collection.features), {
+        padding: { top: 36, bottom: 36, left: 36, right: 36 },
+        maxZoom: 11.2,
+        duration: 500,
+      });
+    } catch {
+      // keep view
+    }
+  }, [collection, ready]);
+
+  const legend = [...collection.features].sort(
     (a, b) => Number(a.properties.id) - Number(b.properties.id),
   );
 

@@ -1,6 +1,6 @@
 import { promises as fs } from "fs";
 import path from "path";
-import type { SiteContent } from "./types";
+import type { DailyDish, SiteContent } from "./types";
 import { applyCzechOrphansDeep } from "./typography";
 
 const contentPath = path.join(process.cwd(), "data", "content.json");
@@ -10,11 +10,67 @@ type GetContentOptions = {
   orphans?: boolean;
 };
 
+function slugifyDishId(name: string, fallback: string) {
+  const base = name
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 48);
+  return base || fallback;
+}
+
+/** Ensure daily catalog / todayIds exist and items stay in sync. */
+function normalizeDaily(data: SiteContent): SiteContent {
+  const daily = data.daily;
+  if (!daily) return data;
+
+  let catalog = daily.catalog;
+  let todayIds = daily.todayIds;
+  let items = daily.items || [];
+
+  if (!catalog?.length) {
+    catalog = items.map((item, i) => ({
+      id: item.id || slugifyDishId(item.name, `dish-${i + 1}`),
+      name: item.name || "",
+      price: item.price || "",
+      emoji: item.emoji || "",
+      description: item.description || "",
+      note: item.note || "",
+    }));
+  } else {
+    catalog = catalog.map((item, i) => ({
+      id: item.id || slugifyDishId(item.name, `dish-${i + 1}`),
+      name: item.name || "",
+      price: item.price || "",
+      emoji: item.emoji || "",
+      description: item.description || "",
+      note: item.note || "",
+    }));
+  }
+
+  if (!todayIds?.length) {
+    todayIds = catalog.map((d) => d.id);
+  }
+
+  const byId = new Map(catalog.map((d) => [d.id, d]));
+  items = todayIds
+    .map((id) => byId.get(id))
+    .filter((d): d is DailyDish => Boolean(d))
+    .map((d) => ({ ...d }));
+
+  return {
+    ...data,
+    daily: { ...daily, catalog, todayIds, items },
+  };
+}
+
 export async function getContent(
   options: GetContentOptions = {},
 ): Promise<SiteContent> {
   const raw = await fs.readFile(contentPath, "utf8");
-  const data = JSON.parse(raw) as SiteContent;
+  const data = normalizeDaily(JSON.parse(raw) as SiteContent);
   if (options.orphans === false) return data;
   return applyCzechOrphansDeep(data);
 }
