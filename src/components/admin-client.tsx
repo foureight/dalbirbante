@@ -28,7 +28,7 @@ function setPath(obj: unknown, path: string[], value: string): unknown {
 }
 
 const FIELD_CONTROL =
-  "rounded-[6.4px] border border-[var(--line)] bg-[#fbfbfb] text-lg text-[var(--ink)] transition focus-visible:border-[var(--brand-green)] focus-visible:bg-white focus-visible:ring-2 focus-visible:ring-[var(--brand-green)]/20";
+  "rounded-[6.4px] border border-[var(--line)] bg-[#fbfbfb] text-xl text-[var(--ink)] transition focus-visible:border-[var(--brand-green)] focus-visible:bg-white focus-visible:ring-2 focus-visible:ring-[var(--brand-green)]/20";
 
 function Field({
   label,
@@ -47,23 +47,23 @@ function Field({
 }) {
   const useTextarea = multiline || value.length > 80;
   return (
-    <div className="space-y-2">
-      <Label className="text-base font-semibold text-[var(--ink)]">{label}</Label>
+    <div className="space-y-2.5">
+      <Label className="text-lg font-bold text-[var(--ink)]">{label}</Label>
       {hint ? (
-        <p className="text-sm leading-snug text-[var(--muted)]">{hint}</p>
+        <p className="text-base leading-snug text-[var(--muted)]">{hint}</p>
       ) : null}
       {useTextarea ? (
         <Textarea
           value={value}
           onChange={(e) => onChange(e.target.value)}
           rows={Math.min(10, Math.max(4, Math.ceil(value.length / 55)))}
-          className={`min-h-[7rem] px-4 py-3 leading-relaxed ${FIELD_CONTROL}`}
+          className={`min-h-[8rem] px-4 py-3.5 text-xl leading-relaxed ${FIELD_CONTROL}`}
         />
       ) : (
         <Input
           value={value}
           onChange={(e) => onChange(e.target.value)}
-          className={`h-12 px-4 ${FIELD_CONTROL}`}
+          className={`h-14 px-4 text-xl ${FIELD_CONTROL}`}
         />
       )}
     </div>
@@ -72,39 +72,95 @@ function Field({
 
 function Panel({
   title,
+  badge,
   hint,
   children,
 }: {
   title: string;
+  badge?: string;
   hint?: ReactNode;
   children: ReactNode;
 }) {
   return (
-    <section className="rounded-[6.4px] border border-[var(--line)] bg-white p-5 shadow-sm md:p-7">
-      <h2 className="text-2xl font-extrabold text-[var(--brand-red)]">{title}</h2>
+    <section className="rounded-[8px] border border-[var(--line)] bg-white p-5 shadow-sm md:p-8">
+      <div className="flex flex-wrap items-center gap-3">
+        {badge ? (
+          <span className="rounded-full bg-[var(--brand-green)] px-3.5 py-1 text-sm font-extrabold uppercase tracking-wide text-white">
+            {badge}
+          </span>
+        ) : null}
+        <h2 className="text-3xl font-extrabold leading-tight text-[var(--brand-red)] md:text-4xl">
+          {title}
+        </h2>
+      </div>
       {hint ? (
-        <div className="mt-2 text-base leading-relaxed text-[var(--muted)]">
+        <div className="mt-3 text-lg leading-relaxed text-[var(--muted)]">
           {hint}
         </div>
       ) : null}
-      <div className="mt-6 space-y-5">{children}</div>
+      <div className="mt-7 space-y-6">{children}</div>
     </section>
   );
 }
 
 function ItemCard({
   title,
+  typeLabel,
+  meta,
+  accent = "red",
   children,
 }: {
   title: string;
+  typeLabel?: string;
+  meta?: string;
+  accent?: "red" | "green";
   children: ReactNode;
 }) {
+  const accentBorder =
+    accent === "green" ? "border-l-[var(--brand-green)]" : "border-l-[var(--brand-red)]";
+  const typeBg =
+    accent === "green"
+      ? "bg-[var(--brand-green)]/12 text-[var(--brand-green-deep)]"
+      : "bg-[var(--brand-red)]/10 text-[var(--brand-red)]";
   return (
-    <div className="space-y-4 rounded-[6.4px] border border-[var(--line)] border-l-4 border-l-[var(--brand-red)] bg-white p-5 shadow-sm">
-      <p className="text-lg font-extrabold text-[var(--brand-red)]">{title}</p>
-      <div className="space-y-4">{children}</div>
+    <div
+      className={`space-y-5 rounded-[8px] border border-[var(--line)] border-l-[6px] ${accentBorder} bg-white p-5 shadow-sm md:p-6`}
+    >
+      <div className="flex flex-wrap items-start justify-between gap-3">
+        <div className="min-w-0 space-y-2">
+          {typeLabel ? (
+            <span
+              className={`inline-flex rounded-full px-3 py-1 text-sm font-extrabold uppercase tracking-wide ${typeBg}`}
+            >
+              {typeLabel}
+            </span>
+          ) : null}
+          <p className="text-2xl font-extrabold leading-tight text-[var(--ink)] md:text-3xl">
+            {title}
+          </p>
+          {meta ? (
+            <p className="text-lg font-bold text-[var(--brand-red)]">{meta}</p>
+          ) : null}
+        </div>
+      </div>
+      <div className="space-y-5">{children}</div>
     </div>
   );
+}
+
+function categoryTypeLabel(catId: string, catName: string): string {
+  const id = catId.toLowerCase();
+  const name = catName.toLowerCase();
+  if (id === "pizza" || name.includes("pizza")) return "Pizza";
+  if (id === "pasta" || name.includes("pasta")) return "Pasta";
+  if (id === "drinks" || name.includes("nápoj") || name.includes("napoj"))
+    return "Nápoj";
+  if (id.includes("panozzo") || name.includes("panozzo")) return "Panozzo";
+  return catName || "Produkt";
+}
+
+function isPizzaCategory(catId: string, catName: string): boolean {
+  return categoryTypeLabel(catId, catName) === "Pizza";
 }
 
 const NAV_LABELS: Record<string, string> = {
@@ -122,7 +178,7 @@ const SECTIONS: { key: keyof SiteContent; label: string }[] = [
   { key: "home", label: "Úvodní stránka" },
   { key: "about", label: "O nás" },
   { key: "menuPage", label: "Stránka menu" },
-  { key: "menuCategories", label: "Položky menu" },
+  { key: "menuCategories", label: "Menu · pizzy a produkty" },
   { key: "daily", label: "Denní nabídka" },
   { key: "delivery", label: "Rozvoz" },
   { key: "glutenFree", label: "Bezlepková" },
@@ -135,7 +191,7 @@ export function AdminClient({ initial, authenticated }: Props) {
   const [authed, setAuthed] = useState(authenticated);
   const [password, setPassword] = useState("");
   const [content, setContent] = useState(initial);
-  const [section, setSection] = useState<keyof SiteContent>("daily");
+  const [section, setSection] = useState<keyof SiteContent>("menuCategories");
   const [status, setStatus] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -247,97 +303,102 @@ export function AdminClient({ initial, authenticated }: Props) {
   const editor = useMemo(() => {
     if (section === "menuCategories") {
       return (
-        <div className="space-y-6">
-          {content.menuCategories.map((cat, ci) => (
-            <Panel
-              key={cat.id}
-              title={`Kategorie · ${cat.name || ci + 1}`}
-              hint="Přidejte pizzu nebo jiný produkt tlačítkem dole. Po úpravách nezapomeňte uložit."
-            >
-              <Field
-                label="Název kategorie"
-                value={cat.name}
-                onChange={(v) => updateAt(["menuCategories", String(ci), "name"], v)}
-              />
-              <Field
-                label="ID kategorie"
-                value={cat.id}
-                onChange={(v) => updateAt(["menuCategories", String(ci), "id"], v)}
-              />
-              <div className="space-y-4">
-                {cat.items.map((item, ii) => (
-                  <ItemCard
-                    key={`${cat.id}-${ii}`}
-                    title={`Položka ${ii + 1}${item.name ? ` · ${item.name}` : ""}`}
-                  >
-                    <div className="flex flex-wrap gap-2">
-                      <button
-                        type="button"
-                        className="rounded-full border border-[var(--line)] px-3 py-1.5 text-sm transition hover:border-[var(--brand-green)] disabled:opacity-40"
-                        disabled={ii === 0}
-                        onClick={() => moveMenuItem(ci, ii, -1)}
-                      >
-                        Nahoru
-                      </button>
-                      <button
-                        type="button"
-                        className="rounded-full border border-[var(--line)] px-3 py-1.5 text-sm transition hover:border-[var(--brand-green)] disabled:opacity-40"
-                        disabled={ii >= cat.items.length - 1}
-                        onClick={() => moveMenuItem(ci, ii, 1)}
-                      >
-                        Dolů
-                      </button>
-                      <button
-                        type="button"
-                        className="rounded-full border border-[var(--line)] px-3 py-1.5 text-sm text-[var(--muted)] transition hover:border-[var(--brand-red)] hover:text-[var(--brand-red)] disabled:opacity-40"
-                        disabled={cat.items.length <= 1}
-                        onClick={() => removeMenuItem(ci, ii)}
-                      >
-                        Smazat položku
-                      </button>
-                    </div>
-                    <div className="grid gap-4 md:grid-cols-2">
-                      <Field
-                        label="Název položky"
-                        value={item.name}
-                        onChange={(v) =>
-                          updateAt(
-                            ["menuCategories", String(ci), "items", String(ii), "name"],
-                            v,
-                          )
-                        }
-                      />
-                      <Field
-                        label="Cena"
-                        value={item.price}
-                        onChange={(v) =>
-                          updateAt(
-                            ["menuCategories", String(ci), "items", String(ii), "price"],
-                            v,
-                          )
-                        }
-                      />
-                      <Field
-                        label="Štítek (volitelné)"
-                        value={item.badge || ""}
-                        onChange={(v) =>
-                          updateAt(
-                            [
-                              "menuCategories",
-                              String(ci),
-                              "items",
-                              String(ii),
-                              "badge",
-                            ],
-                            v,
-                          )
-                        }
-                        hint='Např. „Pizza týdne“ — zobrazí se nad názvem. Prázdné = bez štítku.'
-                      />
-                      <div className="md:col-span-2">
+        <div className="space-y-8">
+          <div className="rounded-[8px] border border-[var(--brand-green)]/25 bg-[var(--brand-green)]/8 px-5 py-4 md:px-6 md:py-5">
+            <p className="text-xl font-extrabold text-[var(--brand-green-deep)] md:text-2xl">
+              Menu · pizzy a produkty
+            </p>
+            <p className="mt-1 text-lg leading-relaxed text-[var(--muted)]">
+              Každá karta má typ (Pizza, Pasta…). Upravte název a cenu, pak uložte
+              změny nahoře.
+            </p>
+          </div>
+          {content.menuCategories.map((cat, ci) => {
+            const typeLabel = categoryTypeLabel(cat.id, cat.name);
+            const pizza = isPizzaCategory(cat.id, cat.name);
+            const addLabel = pizza
+              ? "+ Přidat pizzu"
+              : `+ Přidat ${typeLabel.toLowerCase()}`;
+            return (
+              <Panel
+                key={cat.id}
+                badge={typeLabel}
+                title={cat.name || `Kategorie ${ci + 1}`}
+                hint={
+                  pizza
+                    ? `${cat.items.length}× pizza v nabídce. Štítek „Pizza týdne“ nastavíte u konkrétní pizzy.`
+                    : `${cat.items.length} položek v kategorii ${typeLabel}.`
+                }
+              >
+                <details className="rounded-[8px] border border-[var(--line)] bg-[var(--paper-soft)] px-4 py-3">
+                  <summary className="cursor-pointer text-lg font-bold text-[var(--ink)]">
+                    Nastavení kategorie
+                  </summary>
+                  <div className="mt-4 grid gap-4 md:grid-cols-2">
+                    <Field
+                      label="Název kategorie (zobrazený na webu)"
+                      value={cat.name}
+                      onChange={(v) =>
+                        updateAt(["menuCategories", String(ci), "name"], v)
+                      }
+                    />
+                    <Field
+                      label="Technické ID"
+                      value={cat.id}
+                      onChange={(v) =>
+                        updateAt(["menuCategories", String(ci), "id"], v)
+                      }
+                      hint="Neměňte, pokud nevíte k čemu slouží (odkaz v menu)."
+                    />
+                  </div>
+                </details>
+                <div className="space-y-5">
+                  {cat.items.map((item, ii) => (
+                    <ItemCard
+                      key={`${cat.id}-${ii}`}
+                      typeLabel={typeLabel}
+                      title={item.name?.trim() || `Nová ${typeLabel.toLowerCase()}`}
+                      meta={
+                        [
+                          item.price ? item.price : null,
+                          item.badge ? `Štítek: ${item.badge}` : null,
+                          `#${ii + 1}`,
+                        ]
+                          .filter(Boolean)
+                          .join(" · ")
+                      }
+                      accent={pizza ? "green" : "red"}
+                    >
+                      <div className="flex flex-wrap gap-2">
+                        <button
+                          type="button"
+                          className="rounded-full border border-[var(--line)] px-4 py-2 text-base font-semibold transition hover:border-[var(--brand-green)] disabled:opacity-40"
+                          disabled={ii === 0}
+                          onClick={() => moveMenuItem(ci, ii, -1)}
+                        >
+                          Nahoru
+                        </button>
+                        <button
+                          type="button"
+                          className="rounded-full border border-[var(--line)] px-4 py-2 text-base font-semibold transition hover:border-[var(--brand-green)] disabled:opacity-40"
+                          disabled={ii >= cat.items.length - 1}
+                          onClick={() => moveMenuItem(ci, ii, 1)}
+                        >
+                          Dolů
+                        </button>
+                        <button
+                          type="button"
+                          className="rounded-full border border-[var(--line)] px-4 py-2 text-base font-semibold text-[var(--muted)] transition hover:border-[var(--brand-red)] hover:text-[var(--brand-red)] disabled:opacity-40"
+                          disabled={cat.items.length <= 1}
+                          onClick={() => removeMenuItem(ci, ii)}
+                        >
+                          Smazat
+                        </button>
+                      </div>
+                      <div className="grid gap-5 md:grid-cols-2">
                         <Field
-                          label="Popis"
-                          value={item.description}
+                          label={pizza ? "Název pizzy" : "Název"}
+                          value={item.name}
                           onChange={(v) =>
                             updateAt(
                               [
@@ -345,129 +406,192 @@ export function AdminClient({ initial, authenticated }: Props) {
                                 String(ci),
                                 "items",
                                 String(ii),
-                                "description",
+                                "name",
                               ],
                               v,
                             )
                           }
-                          multiline
                         />
-                      </div>
-                      <div className="md:col-span-2 space-y-3 rounded-[6.4px] border border-[var(--line)] bg-white p-3">
-                        <div className="flex flex-wrap items-start gap-4">
-                          <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-full bg-[#f3f3f3]">
-                            {item.image ? (
-                              // eslint-disable-next-line @next/next/no-img-element
-                              <img
-                                src={item.image}
-                                alt=""
-                                className="h-full w-full object-contain p-1"
-                              />
-                            ) : (
-                              <span className="grid h-full place-items-center text-xs text-[var(--muted)]">
-                                bez fotky
-                              </span>
-                            )}
-                          </div>
-                          <div className="min-w-0 flex-1 space-y-3">
-                            <Field
-                              label="Fotka (cesta nebo URL)"
-                              value={item.image || ""}
-                              onChange={(v) =>
-                                updateAt(
-                                  [
-                                    "menuCategories",
-                                    String(ci),
-                                    "items",
-                                    String(ii),
-                                    "image",
-                                  ],
-                                  v,
-                                )
-                              }
-                              hint="Např. /images/menu/lemonsoda.webp — po nahrání se vyplní samo."
-                            />
-                            <div className="flex flex-wrap items-center gap-2">
-                              <label className="inline-flex cursor-pointer items-center rounded-full border border-[var(--line)] bg-[var(--paper-soft)] px-4 py-2 text-sm font-medium transition hover:border-[var(--brand-green)]">
-                                Nahrát fotku
-                                <input
-                                  type="file"
-                                  accept="image/jpeg,image/png,image/webp,image/gif"
-                                  className="sr-only"
-                                  onChange={async (e) => {
-                                    const file = e.target.files?.[0];
-                                    e.target.value = "";
-                                    if (!file) return;
-                                    setError(null);
-                                    const body = new FormData();
-                                    body.append("file", file);
-                                    const res = await fetch("/api/admin/upload", {
-                                      method: "POST",
-                                      body,
-                                    });
-                                    const data = (await res.json().catch(() => ({}))) as {
-                                      path?: string;
-                                      error?: string;
-                                    };
-                                    if (!res.ok || !data.path) {
-                                      setError(
-                                        data.error || "Nahrání fotky selhalo.",
-                                      );
-                                      return;
-                                    }
-                                    updateAt(
-                                      [
-                                        "menuCategories",
-                                        String(ci),
-                                        "items",
-                                        String(ii),
-                                        "image",
-                                      ],
-                                      data.path,
-                                    );
-                                    setStatus(
-                                      "Fotka nahrána — uložte změny, aby se projevila v menu.",
-                                    );
-                                  }}
-                                />
-                              </label>
+                        <Field
+                          label="Cena"
+                          value={item.price}
+                          onChange={(v) =>
+                            updateAt(
+                              [
+                                "menuCategories",
+                                String(ci),
+                                "items",
+                                String(ii),
+                                "price",
+                              ],
+                              v,
+                            )
+                          }
+                        />
+                        <Field
+                          label="Štítek na webu (volitelné)"
+                          value={item.badge || ""}
+                          onChange={(v) =>
+                            updateAt(
+                              [
+                                "menuCategories",
+                                String(ci),
+                                "items",
+                                String(ii),
+                                "badge",
+                              ],
+                              v,
+                            )
+                          }
+                          hint={
+                            pizza
+                              ? 'Např. „Pizza týdne“ nebo „Pizza speciale“.'
+                              : "Volitelný štítek nad názvem. Prázdné = bez štítku."
+                          }
+                        />
+                        <div className="md:col-span-2">
+                          <Field
+                            label={pizza ? "Složení / popis" : "Popis"}
+                            value={item.description}
+                            onChange={(v) =>
+                              updateAt(
+                                [
+                                  "menuCategories",
+                                  String(ci),
+                                  "items",
+                                  String(ii),
+                                  "description",
+                                ],
+                                v,
+                              )
+                            }
+                            multiline
+                          />
+                        </div>
+                        <div className="md:col-span-2 space-y-3 rounded-[8px] border border-[var(--line)] bg-[var(--paper-soft)] p-4">
+                          <p className="text-lg font-bold text-[var(--ink)]">
+                            Fotka {pizza ? "pizzy" : "produktu"}
+                          </p>
+                          <div className="flex flex-wrap items-start gap-4">
+                            <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-full bg-white">
                               {item.image ? (
-                                <button
-                                  type="button"
-                                  className="rounded-full border border-[var(--line)] px-4 py-2 text-sm text-[var(--muted)] transition hover:border-[var(--brand-red)] hover:text-[var(--brand-red)]"
-                                  onClick={() =>
-                                    updateAt(
-                                      [
-                                        "menuCategories",
-                                        String(ci),
-                                        "items",
-                                        String(ii),
-                                        "image",
-                                      ],
-                                      "",
-                                    )
-                                  }
-                                >
-                                  Odebrat fotku
-                                </button>
-                              ) : null}
+                                // eslint-disable-next-line @next/next/no-img-element
+                                <img
+                                  src={item.image}
+                                  alt=""
+                                  className="h-full w-full object-contain p-1"
+                                />
+                              ) : (
+                                <span className="grid h-full place-items-center text-sm text-[var(--muted)]">
+                                  bez fotky
+                                </span>
+                              )}
+                            </div>
+                            <div className="min-w-0 flex-1 space-y-3">
+                              <Field
+                                label="Cesta k fotce"
+                                value={item.image || ""}
+                                onChange={(v) =>
+                                  updateAt(
+                                    [
+                                      "menuCategories",
+                                      String(ci),
+                                      "items",
+                                      String(ii),
+                                      "image",
+                                    ],
+                                    v,
+                                  )
+                                }
+                                hint="Po nahrání se vyplní samo."
+                              />
+                              <div className="flex flex-wrap items-center gap-2">
+                                <label className="inline-flex cursor-pointer items-center rounded-full border border-[var(--line)] bg-white px-5 py-2.5 text-base font-semibold transition hover:border-[var(--brand-green)]">
+                                  Nahrát fotku
+                                  <input
+                                    type="file"
+                                    accept="image/jpeg,image/png,image/webp,image/gif"
+                                    className="sr-only"
+                                    onChange={async (e) => {
+                                      const file = e.target.files?.[0];
+                                      e.target.value = "";
+                                      if (!file) return;
+                                      setError(null);
+                                      const body = new FormData();
+                                      body.append("file", file);
+                                      const res = await fetch(
+                                        "/api/admin/upload",
+                                        {
+                                          method: "POST",
+                                          body,
+                                        },
+                                      );
+                                      const data = (await res
+                                        .json()
+                                        .catch(() => ({}))) as {
+                                        path?: string;
+                                        error?: string;
+                                      };
+                                      if (!res.ok || !data.path) {
+                                        setError(
+                                          data.error || "Nahrání fotky selhalo.",
+                                        );
+                                        return;
+                                      }
+                                      updateAt(
+                                        [
+                                          "menuCategories",
+                                          String(ci),
+                                          "items",
+                                          String(ii),
+                                          "image",
+                                        ],
+                                        data.path,
+                                      );
+                                      setStatus(
+                                        "Fotka nahrána — uložte změny, aby se projevila v menu.",
+                                      );
+                                    }}
+                                  />
+                                </label>
+                                {item.image ? (
+                                  <button
+                                    type="button"
+                                    className="rounded-full border border-[var(--line)] px-5 py-2.5 text-base font-semibold text-[var(--muted)] transition hover:border-[var(--brand-red)] hover:text-[var(--brand-red)]"
+                                    onClick={() =>
+                                      updateAt(
+                                        [
+                                          "menuCategories",
+                                          String(ci),
+                                          "items",
+                                          String(ii),
+                                          "image",
+                                        ],
+                                        "",
+                                      )
+                                    }
+                                  >
+                                    Odebrat fotku
+                                  </button>
+                                ) : null}
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </ItemCard>
-                ))}
-                <Button
-                  type="button"
-                  className="rounded-full bg-[var(--brand-green)] text-white hover:opacity-90"
-                  onClick={() => addMenuItem(ci)}
-                >
-                  + Přidat produkt
-                </Button>
-              </div>
-            </Panel>
-          ))}
+                    </ItemCard>
+                  ))}
+                  <Button
+                    type="button"
+                    className="h-14 rounded-full bg-[var(--brand-green)] px-8 text-lg font-extrabold text-white hover:opacity-90"
+                    onClick={() => addMenuItem(ci)}
+                  >
+                    {addLabel}
+                  </Button>
+                </div>
+              </Panel>
+            );
+          })}
         </div>
       );
     }
@@ -660,11 +784,17 @@ export function AdminClient({ initial, authenticated }: Props) {
             </div>
           </Panel>
 
-          <Panel title="Položky denního menu">
+          <Panel
+            badge="Denní"
+            title="Položky denního menu"
+            hint="Aktuální jídla na denní nabídce."
+          >
             {d.items.map((item, i) => (
               <ItemCard
                 key={i}
-                title={`Jídlo ${i + 1}${item.name ? ` · ${item.name}` : ""}`}
+                typeLabel="Denní menu"
+                title={item.name?.trim() || `Jídlo ${i + 1}`}
+                meta={item.price || undefined}
               >
                 <div className="grid gap-4 sm:grid-cols-[1fr_auto_auto]">
                   <Field
@@ -979,31 +1109,31 @@ export function AdminClient({ initial, authenticated }: Props) {
   return (
     <div className="min-h-screen bg-[var(--paper-soft)]">
       <header className="sticky top-0 z-20 border-b border-[var(--line)] bg-white/95 backdrop-blur">
-        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-4">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-3 px-4 py-5">
           <div>
-            <h1 className="text-3xl font-extrabold text-[var(--brand-green)]">
-              Administrace textů
+            <h1 className="text-3xl font-extrabold text-[var(--brand-green)] md:text-4xl">
+              Administrace
             </h1>
-            <p className="mt-1 text-base text-[var(--muted)]">
-              Upravte texty a uložte — změny se projeví okamžitě.
+            <p className="mt-1 text-lg text-[var(--muted)]">
+              Upravte menu a texty — po uložení jsou hned na webu.
             </p>
           </div>
           <div className="ml-auto flex flex-wrap items-center justify-end gap-2">
             <Button
               asChild
               variant="outline"
-              className="rounded-full text-base transition hover:border-[var(--brand-red)] hover:bg-[var(--brand-red)] hover:text-white"
+              className="h-12 rounded-full px-5 text-lg transition hover:border-[var(--brand-red)] hover:bg-[var(--brand-red)] hover:text-white"
             >
               <a href="/admin/objednavky">Fronta objednávek</a>
             </Button>
             <Button
               variant="outline"
-              className="rounded-full text-base transition hover:border-[var(--brand-red)] hover:bg-[var(--brand-red)] hover:text-white"
+              className="h-12 rounded-full px-5 text-lg transition hover:border-[var(--brand-red)] hover:bg-[var(--brand-red)] hover:text-white"
               onClick={logout}
             >
               Odhlásit
             </Button>
-            <Button asChild variant="ghost" className="rounded-full text-base">
+            <Button asChild variant="ghost" className="h-12 rounded-full px-5 text-lg">
               <a href="/" target="_blank" rel="noreferrer">
                 Otevřít web
               </a>
@@ -1011,14 +1141,14 @@ export function AdminClient({ initial, authenticated }: Props) {
             <Button
               onClick={save}
               disabled={saving}
-              className="btn-green rounded-full text-base"
+              className="btn-green h-12 rounded-full px-6 text-lg font-extrabold"
             >
               {saving ? "Ukládám…" : "Uložit změny"}
             </Button>
           </div>
         </div>
         {(status || error) && (
-          <div className="border-t border-[var(--line)] px-4 py-3 text-center text-base font-semibold">
+          <div className="border-t border-[var(--line)] px-4 py-3.5 text-center text-lg font-semibold">
             {status && (
               <span className="text-[var(--brand-green)]">{status}</span>
             )}
@@ -1027,19 +1157,25 @@ export function AdminClient({ initial, authenticated }: Props) {
         )}
       </header>
 
-      <div className="mx-auto grid max-w-6xl gap-6 px-4 py-8 md:grid-cols-[240px_1fr]">
-        <aside className="flex flex-row gap-2 overflow-x-auto md:flex-col md:overflow-visible md:rounded-[6.4px] md:border md:border-[var(--line)] md:bg-white md:p-2 md:shadow-sm">
+      <div className="mx-auto grid max-w-6xl gap-6 px-4 py-8 md:grid-cols-[280px_1fr]">
+        <aside className="flex flex-row gap-2 overflow-x-auto md:sticky md:top-28 md:flex-col md:self-start md:overflow-visible md:rounded-[8px] md:border md:border-[var(--line)] md:bg-white md:p-3 md:shadow-sm">
+          <p className="mb-1 hidden px-3 pt-1 text-sm font-extrabold uppercase tracking-wide text-[var(--muted)] md:block">
+            Sekce
+          </p>
           {SECTIONS.map((s) => {
             const active = section === s.key;
+            const isMenu = s.key === "menuCategories";
             return (
               <button
                 key={s.key}
                 type="button"
                 onClick={() => setSection(s.key)}
-                className={`whitespace-nowrap rounded-[6.4px] px-4 py-3 text-left text-base font-semibold transition ${
+                className={`whitespace-nowrap rounded-[8px] px-4 py-3.5 text-left text-lg font-bold transition ${
                   active
                     ? "bg-[var(--brand-green)] text-white shadow-sm"
-                    : "bg-white text-[var(--ink)] hover:bg-[#eef8f1] hover:text-[var(--brand-green)] md:bg-transparent"
+                    : isMenu
+                      ? "bg-[var(--brand-green)]/10 text-[var(--brand-green-deep)] hover:bg-[var(--brand-green)]/15 md:bg-[var(--brand-green)]/10"
+                      : "bg-white text-[var(--ink)] hover:bg-[#eef8f1] hover:text-[var(--brand-green)] md:bg-transparent"
                 }`}
               >
                 {s.label}
