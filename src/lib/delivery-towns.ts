@@ -65,6 +65,9 @@ export const DELIVERY_TOWN_COORDS: Record<string, [number, number]> = {
   ostrov: [14.67, 50.16],
   mstětice: [14.69, 50.14],
   mstetice: [14.69, 50.14],
+  // Roztoky u Prahy (Praha-západ)
+  roztoky: [14.3824, 50.1608],
+  "roztoky u prahy": [14.3824, 50.1608],
 };
 
 const ZONE_COLORS = ["#F6E27A", "#F5B041", "#F0A15C", "#F08A8A", "#E07070"];
