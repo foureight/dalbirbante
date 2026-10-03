@@ -72,9 +72,6 @@ function Field({
   return (
     <div className="space-y-2.5">
       <Label className="text-lg font-bold text-[var(--ink)]">{label}</Label>
-      {hint ? (
-        <p className="text-base leading-snug text-[var(--muted)]">{hint}</p>
-      ) : null}
       {multiline ? (
         <Textarea
           value={value}
@@ -89,6 +86,9 @@ function Field({
           className={`h-14 px-4 text-xl ${FIELD_CONTROL}`}
         />
       )}
+      {hint ? (
+        <p className="text-base leading-snug text-[var(--muted)]">{hint}</p>
+      ) : null}
     </div>
   );
 }
@@ -1367,7 +1367,7 @@ export function AdminClient({ initial, authenticated }: Props) {
               </>
             }
           >
-            <div className="grid gap-5 sm:grid-cols-2">
+            <div className="grid items-start gap-5 sm:grid-cols-2">
               <Field
                 label="Datum na webu"
                 value={d.date}
