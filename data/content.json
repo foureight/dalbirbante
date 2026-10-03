@@ -586,7 +586,7 @@
     "title": "DENNÍ MENU PŘES POLEDNE",
     "intro": "Polední nabídka v Dal Birbante mění chuť podle sezony a pece. Mezi 11:00 a 15:00 si vyberete z aktuálních jídel připravených na místě — ideální na rychlý oběd ve Vinoři, s sebou i s rozvozem.",
     "note": "Obědové menu úterý–sobota — objednejte telefonicky, online nebo přímo na místě.",
-    "date": "1. 10. 2026",
+    "date": "2. 10. 2026",
     "hours": "11–15 hod.",
     "items": [
       {
@@ -598,43 +598,43 @@
         "note": "(s italskou bagetou panozzo + 20 Kč)"
       },
       {
-        "id": "panozzo-caprese",
-        "name": "PANOZZO CAPRESE",
+        "id": "panozzo-prosciutto-e-stracchino",
+        "name": "PANOZZO PROSCIUTTO E STRACCHINO",
         "price": "109 Kč",
         "emoji": "🥖",
-        "description": "rajčata, mozzarella fior di latte, domácí bazalkové pesto, extra panenský olivový olej",
+        "description": "dušená šunka, sýr stracchino, bazalka, extra panenský olivový olej",
         "note": ""
       },
       {
-        "id": "spaghetti-ai-gamberetti",
-        "name": "SPAGHETTI AI GAMBERETTI",
+        "id": "trofie-al-pesto",
+        "name": "TROFIE AL PESTO, MOZZARELLA E POMODORINI",
         "price": "199 Kč",
         "emoji": "🍝",
-        "description": "těstoviny s krevetami na bílém víně, cherry rajčátky confit a čerstvou bazalkou",
+        "description": "tradiční čerstvé ligurské těstoviny s domácím bazalkovým pestem, mozzarellou, cherry rajčaty a Grana Padano",
         "note": ""
       },
       {
-        "id": "gnocchi-panna-e-prosciutto",
-        "name": "GNOCCHI PANNA E PROSCIUTTO",
-        "price": "189 Kč",
-        "emoji": "🥔",
-        "description": "krémové gnocchi ve smetanové omáčce s dušenou šunkou a Grana Padano",
+        "id": "lasagne-al-ragu",
+        "name": "LASAGNE AL RAGÙ",
+        "price": "209 Kč",
+        "emoji": "🍲",
+        "description": "tradiční čerstvé boloňské lasagne s hovězím ragú, bešamelem a Grana Padano",
         "note": ""
       },
       {
-        "id": "pizza-quattro-formaggi",
-        "name": "PIZZA QUATTRO FORMAGGI",
-        "price": "189 Kč",
-        "emoji": "🍕",
-        "description": "drcená rajčata, mozzarella fior di latte, gorgonzola, uzená scamorza, Grana Padano",
-        "note": ""
-      },
-      {
-        "id": "pizza-dolce-diavola",
-        "name": "PIZZA DOLCE DIAVOLA",
+        "id": "pizza-napoli",
+        "name": "PIZZA NAPOLI",
         "price": "199 Kč",
         "emoji": "🍕",
-        "description": "drcená rajčata, mozzarella fior di latte, pikantní kalábrijská klobása ’nduja, ricotta, bazalka, pepř",
+        "description": "drcená rajčata, mozzarella fior di latte, ančovičky, olivy taggiasche, kapary, oregano, extra panenský olivový olej",
+        "note": ""
+      },
+      {
+        "id": "pizza-crudo-e-rucola",
+        "name": "PIZZA CRUDO E RUCOLA",
+        "price": "229 Kč",
+        "emoji": "🍕",
+        "description": "drcená rajčata, mozzarella fior di latte, parmská šunka, rukola, hoblinky Grana Padano, extra panenský olivový olej",
         "note": ""
       }
     ],
@@ -646,6 +646,46 @@
         "emoji": "🍅",
         "description": "rajčatový krém, Grana Padano, bazalka, extra panenský olivový olej",
         "note": "(s italskou bagetou panozzo + 20 Kč)"
+      },
+      {
+        "id": "panozzo-prosciutto-e-stracchino",
+        "name": "PANOZZO PROSCIUTTO E STRACCHINO",
+        "price": "109 Kč",
+        "emoji": "🥖",
+        "description": "dušená šunka, sýr stracchino, bazalka, extra panenský olivový olej",
+        "note": ""
+      },
+      {
+        "id": "trofie-al-pesto",
+        "name": "TROFIE AL PESTO, MOZZARELLA E POMODORINI",
+        "price": "199 Kč",
+        "emoji": "🍝",
+        "description": "tradiční čerstvé ligurské těstoviny s domácím bazalkovým pestem, mozzarellou, cherry rajčaty a Grana Padano",
+        "note": ""
+      },
+      {
+        "id": "lasagne-al-ragu",
+        "name": "LASAGNE AL RAGÙ",
+        "price": "209 Kč",
+        "emoji": "🍲",
+        "description": "tradiční čerstvé boloňské lasagne s hovězím ragú, bešamelem a Grana Padano",
+        "note": ""
+      },
+      {
+        "id": "pizza-napoli",
+        "name": "PIZZA NAPOLI",
+        "price": "199 Kč",
+        "emoji": "🍕",
+        "description": "drcená rajčata, mozzarella fior di latte, ančovičky, olivy taggiasche, kapary, oregano, extra panenský olivový olej",
+        "note": ""
+      },
+      {
+        "id": "pizza-crudo-e-rucola",
+        "name": "PIZZA CRUDO E RUCOLA",
+        "price": "229 Kč",
+        "emoji": "🍕",
+        "description": "drcená rajčata, mozzarella fior di latte, parmská šunka, rukola, hoblinky Grana Padano, extra panenský olivový olej",
+        "note": ""
       },
       {
         "id": "panozzo-caprese",
@@ -730,11 +770,11 @@
     ],
     "todayIds": [
       "crema-al-pomodoro",
-      "panozzo-caprese",
-      "spaghetti-ai-gamberetti",
-      "gnocchi-panna-e-prosciutto",
-      "pizza-quattro-formaggi",
-      "pizza-dolce-diavola"
+      "panozzo-prosciutto-e-stracchino",
+      "trofie-al-pesto",
+      "lasagne-al-ragu",
+      "pizza-napoli",
+      "pizza-crudo-e-rucola"
     ]
   },
   "delivery": {
