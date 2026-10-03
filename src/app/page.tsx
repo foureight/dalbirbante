@@ -104,29 +104,50 @@ export default async function HomePage() {
         </section>
 
         <section className="band-green">
-          <div className="band-inner grid gap-14 md:grid-cols-3 md:gap-12 md:items-stretch">
+          <div className="band-inner grid gap-10 md:grid-cols-3 md:gap-10 md:items-stretch">
             {[
               {
                 t: home.pizzaWeekTitle,
                 d: home.pizzaWeekText,
+                image: home.pizzaWeekImage,
                 href: "/menu#pizza",
                 cta: "Pizza týdne",
+                imageAlt: "Pizza týdne Dal Birbante",
               },
               {
                 t: home.dailyMenuTitle,
                 d: home.dailyMenuText,
+                image: home.dailyMenuImage,
                 href: "/denni-nabidka",
                 cta: "Denní nabídka",
+                imageAlt: "Denní menu Dal Birbante",
               },
               {
                 t: home.glutenFreeTitle,
                 d: home.glutenFreeText,
+                image: home.glutenFreeImage,
                 href: "/bezlepkova-pizza-vinor",
                 cta: "Bezlepková nabídka",
+                imageAlt: "Bezlepková pizza Dal Birbante",
               },
             ].map((block, i) => (
               <Reveal key={block.t} delay={i * 100} className="h-full">
-                <div className="band-card flex h-full flex-col">
+                <article className="band-card flex h-full flex-col">
+                  {block.image ? (
+                    <Link
+                      href={block.href}
+                      className="band-card-media group relative mb-1 block overflow-hidden"
+                      aria-label={block.cta}
+                    >
+                      <Image
+                        src={block.image}
+                        alt={block.imageAlt}
+                        fill
+                        className="object-cover transition duration-500 group-hover:scale-[1.04]"
+                        sizes="(max-width:768px) 100vw, 33vw"
+                      />
+                    </Link>
+                  ) : null}
                   <h2 className="band-card-title">
                     <Link href={block.href} className="transition hover:opacity-90">
                       {block.t.split("\n").map((line, lineIndex) => (
@@ -137,16 +158,14 @@ export default async function HomePage() {
                       ))}
                     </Link>
                   </h2>
-                  <p className="band-card-text text-white/90">
-                    {block.d}
-                  </p>
+                  <p className="band-card-text text-white/90">{block.d}</p>
                   <Link
                     href={block.href}
                     className="btn-outline-light mt-auto inline-flex w-full sm:w-fit"
                   >
                     {block.cta}
                   </Link>
-                </div>
+                </article>
               </Reveal>
             ))}
           </div>

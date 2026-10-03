@@ -163,6 +163,110 @@ function isPizzaCategory(catId: string, catName: string): boolean {
   return categoryTypeLabel(catId, catName) === "Pizza";
 }
 
+function AdminImageField({
+  label,
+  value,
+  onChange,
+  onStatus,
+  onError,
+  hint = "PNG/JPG se při nahrání převedou do WebP.",
+}: {
+  label: string;
+  value: string;
+  onChange: (path: string) => void;
+  onStatus: (msg: string) => void;
+  onError: (msg: string | null) => void;
+  hint?: string;
+}) {
+  return (
+    <div className="space-y-3 rounded-[8px] border border-[var(--line)] bg-[var(--paper-soft)] p-4">
+      <p className="text-lg font-bold text-[var(--ink)]">{label}</p>
+      <div className="flex flex-wrap items-start gap-4">
+        <div className="relative h-24 w-36 shrink-0 overflow-hidden rounded-[6.4px] bg-white">
+          {value ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={value}
+              alt=""
+              className="h-full w-full object-cover"
+            />
+          ) : (
+            <span className="grid h-full place-items-center text-sm text-[var(--muted)]">
+              bez fotky
+            </span>
+          )}
+        </div>
+        <div className="min-w-0 flex-1 space-y-3">
+          <Field
+            label="Cesta k fotce"
+            value={value}
+            onChange={onChange}
+            hint={hint}
+          />
+          <div className="flex flex-wrap gap-2">
+            <label className="inline-flex cursor-pointer items-center rounded-full border border-[var(--line)] bg-white px-5 py-2.5 text-base font-semibold transition hover:border-[var(--brand-green)]">
+              Nahrát fotku (→ WebP)
+              <input
+                type="file"
+                accept="image/jpeg,image/png,image/webp,image/gif"
+                className="sr-only"
+                onChange={async (e) => {
+                  const file = e.target.files?.[0];
+                  e.target.value = "";
+                  if (!file) return;
+                  onError(null);
+                  const body = new FormData();
+                  body.append("file", file);
+                  const res = await fetch("/api/admin/upload", {
+                    method: "POST",
+                    body,
+                  });
+                  const data = (await res.json().catch(() => ({}))) as {
+                    path?: string;
+                    error?: string;
+                    converted?: boolean;
+                  };
+                  if (!res.ok || !data.path) {
+                    onError(data.error || "Nahrání fotky selhalo.");
+                    return;
+                  }
+                  onChange(data.path);
+                  onStatus(
+                    data.converted
+                      ? "Fotka převedena do WebP — uložte změny."
+                      : "Fotka nahrána — uložte změny.",
+                  );
+                }}
+              />
+            </label>
+            {value ? (
+              <button
+                type="button"
+                className="rounded-full border border-[var(--line)] px-5 py-2.5 text-base font-semibold text-[var(--muted)] transition hover:border-[var(--brand-red)] hover:text-[var(--brand-red)]"
+                onClick={() => onChange("")}
+              >
+                Odebrat fotku
+              </button>
+            ) : null}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+const HOME_SPOTLIGHT_KEYS = new Set([
+  "pizzaWeekTitle",
+  "pizzaWeekText",
+  "pizzaWeekImage",
+  "dailyMenuTitle",
+  "dailyMenuText",
+  "dailyMenuImage",
+  "glutenFreeTitle",
+  "glutenFreeText",
+  "glutenFreeImage",
+]);
+
 const NAV_LABELS: Record<string, string> = {
   menu: "Menu",
   daily: "Denní nabídka",
@@ -658,11 +762,81 @@ export function AdminClient({ initial, authenticated }: Props) {
 
     if (section === "home") {
       const h = content.home;
+      const spotlights = [
+        {
+          key: "pizzaWeek",
+          typeLabel: "Aktualita",
+          title: "Pizza týdne",
+          titlePath: "pizzaWeekTitle",
+          textPath: "pizzaWeekText",
+          imagePath: "pizzaWeekImage",
+          titleValue: h.pizzaWeekTitle,
+          textValue: h.pizzaWeekText,
+          imageValue: h.pizzaWeekImage || "",
+        },
+        {
+          key: "dailyMenu",
+          typeLabel: "Aktualita",
+          title: "Denní menu",
+          titlePath: "dailyMenuTitle",
+          textPath: "dailyMenuText",
+          imagePath: "dailyMenuImage",
+          titleValue: h.dailyMenuTitle,
+          textValue: h.dailyMenuText,
+          imageValue: h.dailyMenuImage || "",
+        },
+        {
+          key: "glutenFree",
+          typeLabel: "Aktualita",
+          title: "Bezlepková nabídka",
+          titlePath: "glutenFreeTitle",
+          textPath: "glutenFreeText",
+          imagePath: "glutenFreeImage",
+          titleValue: h.glutenFreeTitle,
+          textValue: h.glutenFreeText,
+          imageValue: h.glutenFreeImage || "",
+        },
+      ] as const;
       return (
         <div className="space-y-6">
-          <Panel title="Úvodní stránka — texty">
+          <Panel
+            badge="Zelený pruh"
+            title="Aktuality na úvodní stránce"
+            hint="Tři karty v zeleném pruhu — fotka nahoře, pod ní nadpis a text (jako krátká aktualita). Po úpravě uložte změny."
+          >
+            {spotlights.map((item) => (
+              <ItemCard
+                key={item.key}
+                typeLabel={item.typeLabel}
+                title={item.title}
+                accent="green"
+              >
+                <AdminImageField
+                  label="Fotka nad textem"
+                  value={item.imageValue}
+                  onChange={(v) => updateAt(["home", item.imagePath], v)}
+                  onStatus={setStatus}
+                  onError={setError}
+                />
+                <Field
+                  label="Nadpis"
+                  value={item.titleValue}
+                  onChange={(v) => updateAt(["home", item.titlePath], v)}
+                  multiline
+                  hint="Enter = nový řádek v nadpisu (např. NABÍDKA PIZZA / TÝDNE)."
+                />
+                <Field
+                  label="Text aktuality"
+                  value={item.textValue}
+                  onChange={(v) => updateAt(["home", item.textPath], v)}
+                  multiline
+                />
+              </ItemCard>
+            ))}
+          </Panel>
+          <Panel title="Úvodní stránka — ostatní texty">
             {Object.entries(h).map(([key, value]) =>
-              typeof value === "string" ? (
+              typeof value === "string" && !HOME_SPOTLIGHT_KEYS.has(key) ? (
                 <Field
                   key={key}
                   label={key}

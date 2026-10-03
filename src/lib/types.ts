@@ -82,15 +82,21 @@ export type SiteContent = {
     menuCta: string;
     pizzaWeekTitle: string;
     pizzaWeekText: string;
+    /** Photo above the pizza-of-the-week card in the green band */
+    pizzaWeekImage: string;
     storyTitle: string;
     storyText: string;
     dailyMenuTitle: string;
     dailyMenuText: string;
+    /** Photo above the daily-menu card in the green band */
+    dailyMenuImage: string;
     deliveryTitle: string;
     deliveryText: string;
     deliveryText2: string;
     glutenFreeTitle: string;
     glutenFreeText: string;
+    /** Photo above the gluten-free card in the green band */
+    glutenFreeImage: string;
     contactTitle: string;
     contactText: string;
     hoursTitle: string;

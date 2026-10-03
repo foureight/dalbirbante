@@ -521,7 +521,18 @@
 }
 
 .band-card {
-  gap: 1.5rem;
+  gap: 1.15rem;
+}
+
+.band-card-media {
+  aspect-ratio: 16 / 10;
+  width: 100%;
+  border-radius: 6.4px;
+  background: rgba(0, 0, 0, 0.18);
+}
+
+.band-card-media img {
+  object-fit: cover;
 }
 
 .band-card-title {
@@ -532,11 +543,11 @@
 .band-card-text {
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 6;
+  -webkit-line-clamp: 5;
   overflow: hidden;
   text-overflow: ellipsis;
   line-height: 1.45;
-  min-height: calc(1.45em * 6);
+  min-height: 0;
 }
 
 .band-link {
