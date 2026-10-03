@@ -233,6 +233,23 @@ export function AdminClient({ initial, authenticated }: Props) {
                           )
                         }
                       />
+                      <Field
+                        label="Štítek (volitelné)"
+                        value={item.badge || ""}
+                        onChange={(v) =>
+                          updateAt(
+                            [
+                              "menuCategories",
+                              String(ci),
+                              "items",
+                              String(ii),
+                              "badge",
+                            ],
+                            v,
+                          )
+                        }
+                        hint='Např. „Pizza týdne“ — zobrazí se nad názvem. Prázdné = bez štítku.'
+                      />
                       <div className="md:col-span-2">
                         <Field
                           label="Popis"

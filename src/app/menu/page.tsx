@@ -4,6 +4,7 @@ import { getContent } from "@/lib/content";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { AddToCartButton } from "@/components/add-to-cart-button";
+import { MenuCategoryNav } from "@/components/menu-category-nav";
 import { PageHero } from "@/components/page-hero";
 import { PageJsonLd } from "@/components/json-ld";
 import { FaqAccordion } from "@/components/faq-accordion";
@@ -52,7 +53,7 @@ export default async function MenuPage() {
           imageAlt="Neapolská pizza Dal Birbante"
         />
 
-        <section className="page-wrap space-y-5 pb-8 pt-10 md:space-y-6 md:pb-16 md:pt-24">
+        <section className="page-wrap space-y-5 pb-6 pt-10 md:space-y-6 md:pb-10 md:pt-24">
           <Reveal>
             <p className="max-w-none text-left text-base leading-relaxed text-[var(--muted)] sm:text-lg md:text-2xl md:leading-relaxed">
               {menuPage.intro}
@@ -71,10 +72,14 @@ export default async function MenuPage() {
           </Reveal>
         </section>
 
-        <div className="page-wrap space-y-14 pb-20 md:space-y-28 md:pb-28">
+        <MenuCategoryNav
+          categories={menuCategories.map((c) => ({ id: c.id, name: c.name }))}
+        />
+
+        <div className="page-wrap space-y-14 pb-20 pt-8 md:space-y-28 md:pb-28 md:pt-12">
           {menuCategories.map((cat, i) => (
             <Reveal key={cat.id} delay={(i % 3) * 60}>
-              <section id={cat.id}>
+              <section id={cat.id} className="menu-section scroll-mt-36 md:scroll-mt-44">
                 <h2 className="border-b border-[var(--line)] pb-3 text-[var(--brand-green)] md:pb-4">
                   {cat.name}
                 </h2>
@@ -124,6 +129,11 @@ export default async function MenuPage() {
                         />
                       )}
                       <div className="min-w-0 col-start-2">
+                        {item.badge ? (
+                          <p className="mb-1 text-xs font-bold uppercase tracking-[0.14em] text-[var(--brand-red)] sm:text-sm">
+                            {item.badge}
+                          </p>
+                        ) : null}
                         <h3 className="text-[1.35rem] leading-tight sm:text-[1.85rem] md:text-[2.35rem]">
                           {item.name}
                         </h3>

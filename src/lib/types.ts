@@ -3,6 +3,8 @@ export type MenuItem = {
   description: string;
   price: string;
   image?: string;
+  /** Optional label shown above the name, e.g. "Pizza týdne" */
+  badge?: string;
 };
 
 export type MenuCategory = {

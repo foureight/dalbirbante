@@ -236,6 +236,12 @@
       "name": "Pizza",
       "items": [
         {
+          "name": "Dolce Diavola",
+          "description": "drcená rajčata, mozzarella fior di latte, pikantní kalábrijská klobása ’nduja, ricotta, bazalka, pepř",
+          "price": "269 Kč",
+          "badge": "Pizza týdne"
+        },
+        {
           "name": "Marinara",
           "description": "drcená rajčata, česnek, oregano, bazalka, extra panenský olivový olej",
           "price": "189 Kč",

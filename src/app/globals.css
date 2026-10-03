@@ -831,6 +831,17 @@
   border-color: #fff !important;
 }
 
+.menu-cat-nav {
+  /* Sit just under the sticky site header + announcement bar */
+  top: 5.25rem;
+}
+
+@media (min-width: 768px) {
+  .menu-cat-nav {
+    top: 6.75rem;
+  }
+}
+
 .delivery-map {
   position: relative;
   width: 100%;
