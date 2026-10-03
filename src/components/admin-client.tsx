@@ -503,11 +503,11 @@ export function AdminClient({ initial, authenticated }: Props) {
                                     v,
                                   )
                                 }
-                                hint="Po nahrání se vyplní samo."
+                                hint="PNG/JPG se při nahrání automaticky převedou do WebP."
                               />
                               <div className="flex flex-wrap items-center gap-2">
                                 <label className="inline-flex cursor-pointer items-center rounded-full border border-[var(--line)] bg-white px-5 py-2.5 text-base font-semibold transition hover:border-[var(--brand-green)]">
-                                  Nahrát fotku
+                                  Nahrát fotku (→ WebP)
                                   <input
                                     type="file"
                                     accept="image/jpeg,image/png,image/webp,image/gif"
@@ -531,6 +531,7 @@ export function AdminClient({ initial, authenticated }: Props) {
                                         .catch(() => ({}))) as {
                                         path?: string;
                                         error?: string;
+                                        converted?: boolean;
                                       };
                                       if (!res.ok || !data.path) {
                                         setError(
@@ -549,7 +550,9 @@ export function AdminClient({ initial, authenticated }: Props) {
                                         data.path,
                                       );
                                       setStatus(
-                                        "Fotka nahrána — uložte změny, aby se projevila v menu.",
+                                        data.converted
+                                          ? "Fotka převedena do WebP — uložte změny."
+                                          : "Fotka nahrána jako WebP — uložte změny.",
                                       );
                                     }}
                                   />
